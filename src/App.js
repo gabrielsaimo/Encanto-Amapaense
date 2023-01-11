@@ -44,7 +44,7 @@ function App() {
         <img
           src={require("./assets/logo_pricipal.jpeg")}
           alt="logo-principal"
-          style={{ width: "25%", borderRadius: "100%" }}
+          style={{ width: "50%", borderRadius: "100%" }}
         />
         <div style={{ marginBottom: 145 }}>
           <h1 style={{ color: "white" }}>Pratos a la carte</h1>
