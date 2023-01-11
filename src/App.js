@@ -1,3 +1,4 @@
+import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
       </Carousel>
       */
   return (
-   /* <div
+    <div
       className="App"
       style={{
         backgroundImage: `url(${require("./assets/fundo_site.jpg")})`,
@@ -37,18 +38,18 @@ function App() {
         backgroundSize: "cover",
         display: "flex",
         justifyContent: "center",
-      }}<img
+      }}
+    >
+      <div>
+        <h1 style={{ color: "white" }}>Cardápio</h1>
+        <img
           src={require("./assets/logo_pricipal.jpeg")}
           alt="logo-principal"
           style={{ width: "25%", borderRadius: "100%" }}
         />
-    >*/
-      <div>
-        <h1 style={{ color: "white" }}>Cardápio</h1>
-        
         <div style={{ height: 5000 }}></div>
       </div>
-    
+    </div>
   );
 }
 
