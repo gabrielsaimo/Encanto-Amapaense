@@ -1,10 +1,56 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { DatePicker } from "antd";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function App() {
+  /* <Carousel showArrows={true}>
+        <div>
+          <img
+            style={{ width: 100, height: 100 }}
+            src={require("./assets/regional.jpeg")}
+            alt="c-encanto-regional"
+          />
+        </div>
+        <div>
+          <img
+            style={{ width: 100, height: 100 }}
+            src={require("./assets/regional.jpeg")}
+            alt="c-encanto-regional"
+          />
+        </div>
+        <div>
+          <img
+            style={{ width: 100, height: 100 }}
+            src={require("./assets/regional.jpeg")}
+            alt="c-encanto-regional"
+          />
+        </div>
+      </Carousel>
+      */
   return (
-    <div className="App">
-      <h1>helo word</h1>
+    <div
+      className="App"
+      style={{
+        backgroundImage: `url(${require("./assets/fundo_site.jpg")})`,
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "red",
+        width: "100%",
+        height: "100%",
+        backgroundSize: "cover",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div>
+        <h1 style={{ color: "white" }}>Cardápio</h1>
+        <img
+          src={require("./assets/logo_pricipal.jpeg")}
+          alt="logo-principal"
+          style={{ width: "25%", borderRadius: "100%" }}
+        />
+        <div style={{ height: 5000 }}></div>
+      </div>
     </div>
   );
 }
