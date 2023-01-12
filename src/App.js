@@ -1,6 +1,6 @@
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import { Analytics } from "@vercel/analytics/react";
 function App() {
   /* <Carousel showArrows={true}>
         <div>
@@ -39,6 +39,7 @@ function App() {
         justifyContent: "center",
       }}
     >
+      <Analytics />;
       <div style={{ width: 400 }}>
         <h1 style={{ color: "white" }}>Cardápio</h1>
         <img
@@ -79,7 +80,15 @@ function App() {
 
               <p style={{ color: "white", fontWeight: "bold" }}>R$ 90,00</p>
 
-              <p style={{ color: "white", fontWeight: "bold" }}>
+              <p
+                style={{
+                  color: "white",
+                  width: 380,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "bold",
+                }}
+              >
                 camarão com camarão
               </p>
             </div>
@@ -117,7 +126,15 @@ function App() {
 
             <p style={{ color: "white", fontWeight: "bold" }}>R$ 110,00</p>
 
-            <p style={{ color: "white", fontWeight: "bold" }}>
+            <p
+              style={{
+                color: "white",
+                width: 380,
+                marginLeft: "auto",
+                marginRight: "auto",
+                fontWeight: "bold",
+              }}
+            >
               Camarão com Peixe
             </p>
           </div>
@@ -197,7 +214,15 @@ function App() {
 
             <p style={{ color: "white", fontWeight: "bold" }}>R$ 80,00</p>
 
-            <p style={{ color: "white", fontWeight: "bold" }}>
+            <p
+              style={{
+                color: "white",
+                width: 380,
+                marginLeft: "auto",
+                marginRight: "auto",
+                fontWeight: "bold",
+              }}
+            >
               camarão com aroz
             </p>
           </div>
