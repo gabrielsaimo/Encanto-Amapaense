@@ -46,6 +46,7 @@ function App() {
           src={require("./assets/logo_pricipal.jpeg")}
           alt="logo-principal"
           style={{ width: "50%", borderRadius: "100%" }}
+          loading="lazy"
         />
         <div style={{ marginBottom: 145 }}>
           <h1 style={{ color: "white" }}>Pratos a la carte</h1>
@@ -73,6 +74,7 @@ function App() {
                   borderRadius: 10,
                   objectFit: "cover",
                 }}
+                loading="lazy"
               />
               <p style={{ color: "white", fontWeight: "bold" }}>
                 Encanto Regional
@@ -119,6 +121,7 @@ function App() {
                 borderRadius: 10,
                 objectFit: "cover",
               }}
+              loading="lazy"
             />
             <p style={{ color: "white", fontWeight: "bold" }}>
               Peixe na Crosta da Castanha
@@ -164,6 +167,7 @@ function App() {
                 borderRadius: 10,
                 objectFit: "cover",
               }}
+              loading="lazy"
             />
             <p style={{ color: "white", fontWeight: "bold" }}>Sabor do Norte</p>
 
@@ -209,6 +213,7 @@ function App() {
                 borderRadius: 10,
                 objectFit: "cover",
               }}
+              loading="lazy"
             />
             <p style={{ color: "white", fontWeight: "bold" }}>Mistura Tucuju</p>
 
