@@ -1,6 +1,7 @@
+
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Analytics } from "@vercel/analytics/react";
+
 function App() {
   /* <Carousel showArrows={true}>
         <div>
@@ -30,7 +31,7 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundImage: `url(${require("./assets/fundo_site.jpg")})`,
+        backgroundImage: `url(${require("./assets/fundo_site.jpg")}) `,
         backgroundRepeat: "no-repeat",
         width: "100%",
         height: "100%",
@@ -39,7 +40,7 @@ function App() {
         justifyContent: "center",
       }}
     >
-      <Analytics />;
+      
       <div style={{ width: 400 }}>
         <h1 style={{ color: "white" }}>Cardápio</h1>
         <img
