@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     setTargetOffset(topRef.current?.clientHeight);
   }, []);
-
+  console.log("bem vindo");
   return (
     <div
       className="App"
