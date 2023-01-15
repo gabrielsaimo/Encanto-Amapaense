@@ -258,7 +258,7 @@ export const peixe_frito = [
     id: 1,
     ativo: "S",
     name: "Peixe Recheado",
-    sub: "(Cantmño Reónal / Caranguejo)",
+    sub: "(com Camarão Regional / Caranguejo)",
     price: "R$ 99,00",
     description: "Acomp. Arroz, Purê, Farofa, Tucupi",
   },
@@ -472,7 +472,7 @@ export const carnes = [
     name: "Filé Grehado",
     sub: null,
     price: "R$ 89,00",
-    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
+    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi",
   },
   {
     id: 2,
@@ -480,7 +480,7 @@ export const carnes = [
     name: "Filé c/ fritas",
     sub: null,
     price: "R$ 92,00",
-    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
+    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi",
   },
   {
     id: 3,
