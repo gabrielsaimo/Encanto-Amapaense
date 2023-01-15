@@ -190,7 +190,7 @@ export const peixe_ao_molho = [
   {
     id: 1,
     ativo: "S",
-    name: "Peixe ao molho de camarão",
+    name: "Peixe ao molho de camarão Regional",
     sub: null,
     price: "R$ 95,00",
     description: "Acomp. Arroz, Purê. Farofa, Tucupi",
@@ -198,7 +198,7 @@ export const peixe_ao_molho = [
   {
     id: 2,
     ativo: "S",
-    name: "Peixe Encanto amapaense",
+    name: "Peixe Encanto Amapaense",
     sub: null,
     price: "R$ 95,00",
     description: "Acomp. Arroz, Purê. Farofa, Tucupi",
@@ -231,7 +231,7 @@ export const peixe_ao_molho = [
   {
     id: 6,
     ativo: "S",
-    name: "Peixe ao molho de camarão c/ camarão rosa",
+    name: "Peixe ao molho de alcaparra c/ camarão rosa",
     sub: null,
     price: "R$ 110,00",
     description: "Acomp. Arroz, Purê. Farofa, Tucupi",
