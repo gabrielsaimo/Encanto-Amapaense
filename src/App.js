@@ -15,7 +15,7 @@ import {
   Sobremesas,
   Bebidas,
 } from "./json/data";
-import { Affix, Anchor, Button, Carousel, Collapse, Drawer, theme } from "antd";
+import { Affix, Anchor, Button, Carousel, Collapse, Drawer } from "antd";
 import React, { useEffect, useState } from "react";
 import { CaretRightOutlined } from "@ant-design/icons";
 function App() {
@@ -23,7 +23,7 @@ function App() {
   const [targetOffset, setTargetOffset] = useState(undefined);
   const { Panel } = Collapse;
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("bottom");
+  const placement = "bottom";
   const showDrawer = () => {
     setOpen(true);
   };
