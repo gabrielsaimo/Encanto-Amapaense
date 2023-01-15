@@ -52,6 +52,7 @@ function App() {
         height: "100%",
         backgroundSize: "cover",
         justifyContent: "center",
+        marginBottom: -50,
       }}
     >
       <img
@@ -696,6 +697,7 @@ function App() {
           </div>
         </div>
       ))}
+      <div style={{ height: 30 }}></div>
     </div>
   );
 }
