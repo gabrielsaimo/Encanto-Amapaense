@@ -15,32 +15,17 @@ import {
   Sobremesas,
   Bebidas,
 } from "./json/data";
-import { Carousel } from "antd";
+import { Anchor, Carousel, Collapse, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { CaretRightOutlined } from "@ant-design/icons";
 function App() {
-  /* <Carousel showArrows={true}>
-        <div>
-          <img
-            style={{ width: 100, height: 100 }}
-            src={require("./assets/regional.jpeg")}
-            alt="c-encanto-regional"
-          />
-        <;objectFit:"cover"/div>
-        <div>
-          <img
-            style={{ width: 100, height: 100 }}
-            src={require("./assets/regional.jpeg")}
-            alt="c-encanto-regional"
-          />
-        <;objectFit:"cover"/div>
-        <div>
-          <img
-            style={{ width: 100, height: 100 }}
-            src={require("./assets/regional.jpeg")}
-            alt="c-encanto-regional"
-          />
-        <;objectFit:"cover"/div>
-      </Carousel>
-      */
+  const topRef = React.useRef(null);
+  const [targetOffset, setTargetOffset] = useState(undefined);
+  const { Panel } = Collapse;
+  const { token } = theme.useToken();
+  useEffect(() => {
+    setTargetOffset(topRef.current?.clientHeight);
+  }, []);
 
   return (
     <div
@@ -61,52 +46,190 @@ function App() {
         style={{ width: "70%", borderRadius: "10%", marginTop: 20 }}
         loading="lazy"
       />
-      <div
+      <div style={{ display: "flex" , width:"100%",overflow:"scroll"}}>
+
+      <Anchor
+        targetOffset={targetOffset}
+        items={[
+        {
+          key: "part-1",
+          href: "#part-1",
+          title: "Entradas",
+        }
+        ]}
+        />
+
+        <Anchor
+        targetOffset={targetOffset}
+        items={[
+        {
+          key: "part-2",
+          href: "#part-2",
+          title: "Mujicas e Caldos",
+        }
+        ]}
+        />
+
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-3",
+              href: "#part-3",
+              title: "Peixe ao molho",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-4",
+              href: "#part-4",
+              title: "Peixe frito",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-5",
+              href: "#part-5",
+              title: "Peixe na chapa",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-6",
+              href: "#part-6",
+              title: "Camarão",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-7",
+              href: "#part-7",
+              title: "Carnes",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-8",
+              href: "#part-8",
+              title: "Frango",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-9",
+              href: "#part-9",
+              title: "Moquecas",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-10",
+              href: "#part-10",
+              title: "Caldeiradas",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-11",
+              href: "#part-11",
+              title: "Porções extras",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-12",
+              href: "#part-12",
+              title: "Sobremesas",
+            },
+          ]}
+        />
+        <Anchor
+          targetOffset={targetOffset}
+          items={[
+            {
+              key: "part-13",
+              href: "#part-13",
+              title: "Bebidas",
+            },
+          ]}
+        />
+      </div>
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "black",
         }}
       >
-        Entradas
-      </div>
-      {Entradas.map((Entrada) => (
-        <div
-          style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
-          }}
-        >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Entrada.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Entrada.price}
-            </p>
-          </div>
+        <Panel id="part-1" header="Entradas" key="1">
+          {Entradas.map((Entrada) => (
+            <div
+              id="part-1"
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Entrada.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Entrada.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Entrada.sub} {Entrada.description}
-          </div>
-        </div>
-      ))}
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Entrada.sub} {Entrada.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
       <div style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
           <div>
@@ -149,6 +272,7 @@ function App() {
           backgroundSize: 150,
           backgroundPosition: "center",
         }}
+        id="part-2"
       >
         Mujicas e Caldos
       </div>

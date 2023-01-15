@@ -66,7 +66,7 @@ export const Entradas = [
   {
     id: 9,
     ativo: "S",
-    name: "Isca defilé c/ fritas",
+    name: "Isca de filé c/ fritas",
     sub: null,
     price: "R$ 63,00",
     description: null,
@@ -98,7 +98,7 @@ export const Entradas = [
   {
     id: 13,
     ativo: "S",
-    name: "Emtrtada de Encanto",
+    name: "Emtrada de Encanto",
     sub: null,
     price: "R$ 177,00",
     description: null,
