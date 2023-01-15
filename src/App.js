@@ -1007,7 +1007,7 @@ function App() {
           ))}
         </Panel>
       </Collapse>
-      <div style={{ margin: 5 }}>
+      <div id="part-12" style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
           <div>
             <img
@@ -1039,7 +1039,6 @@ function App() {
         }}
       >
         <Panel
-          id="part-12"
           style={{
             padding: 25,
             color: "#7a4827",
@@ -1097,7 +1096,7 @@ function App() {
         </Panel>
       </Collapse>
 
-      <div style={{ margin: 5 }}>
+      <div id="part-13" style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
           <div>
             <img
@@ -1163,7 +1162,6 @@ function App() {
         }}
       >
         <Panel
-          id="part-13"
           style={{
             padding: 25,
             color: "#7a4827",
