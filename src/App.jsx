@@ -55,7 +55,6 @@ function App() {
         style={{
           width: "95%",
           marginTop: 20,
-          userSelect: "none",
         }}
         loading="lazy"
       />
