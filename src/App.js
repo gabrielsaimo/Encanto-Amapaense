@@ -45,12 +45,18 @@ function App() {
         backgroundSize: "cover",
         justifyContent: "center",
         marginBottom: -50,
+        userSelect: "none",
       }}
     >
       <img
-        src={require("./assets/logo_pricipal.jpeg")}
+        src={require("./assets/logo.png")}
         alt="logo-principal"
-        style={{ width: "70%", borderRadius: "10%", marginTop: 20 }}
+        style={{
+          width: "70%",
+          borderRadius: "10%",
+          marginTop: 20,
+          userSelect: "none",
+        }}
         loading="lazy"
       />
       <Affix offsetTop={10} style={{ marginLeft: "80%" }}>
@@ -153,6 +159,86 @@ function App() {
         </div>
       </Drawer>
 
+      <div style={{ margin: 5 }}>
+        <Carousel showArrows={true} autoplay={true}>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/regional.jpeg")}
+              alt="c-encanto-regional"
+            />
+            <div style={{ fontWeight: "bold" }}>Encanto Regional</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/p_crosta_castanha.jpg")}
+              alt="p_crosta_castanha"
+            />
+            <div style={{ fontWeight: "bold" }}>
+              Peixe na crosta da castanha
+            </div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/tucuju.jpg")}
+              alt="tucuju"
+            />
+            <div style={{ fontWeight: "bold" }}>Mistura tucuju</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/camarao_no_bafo.jpg")}
+              alt="cararao_no_bafo"
+            />
+            <div style={{ fontWeight: "bold" }}>Cararão no bafo</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/calderada.jpg")}
+              alt="caldeirada"
+            />
+            <div style={{ fontWeight: "bold" }}>Caldeirada</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/isca_de_file.jpg")}
+              alt="isca_de_file"
+            />
+            <div style={{ fontWeight: "bold" }}>Isca de file</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/peixe_a_delicia.jpg")}
+              alt="peixe_a_delicia"
+            />
+            <div style={{ fontWeight: "bold" }}>Peixe a delícia</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/peixe_ao_molho_camarao_regional.jpg")}
+              alt="peixe_ao_molho_caramarao_regional"
+            />
+            <div style={{ fontWeight: "bold" }}>
+              Peixe ao molho de camarão regional
+            </div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/pirao.jpg")}
+              alt="pirao"
+            />
+            <div style={{ fontWeight: "bold" }}>Pirão</div>
+          </div>
+        </Carousel>
+      </div>
       <Collapse
         bordered={false}
         defaultActiveKey={["1"]}
@@ -162,6 +248,7 @@ function App() {
         style={{
           background: "transparent",
           color: "red",
+          userSelect: "none",
         }}
       >
         <Panel
@@ -175,6 +262,8 @@ function App() {
             backgroundSize: 150,
             backgroundPositionX: "55%",
             backgroundPositionY: 22,
+            userSelect: "none",
+            outline: "none",
           }}
           header="Entradas"
           key="1"
@@ -208,44 +297,20 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Entrada.sub} {Entrada.description}
               </div>
             </div>
           ))}
         </Panel>
       </Collapse>
-
-      <div style={{ margin: 5 }}>
-        <Carousel showArrows={true} autoplay={true}>
-          <div>
-            <img
-              style={{ width: "100%", height: 400, borderRadius: 10 }}
-              src={require("./assets/regional.jpeg")}
-              alt="c-encanto-regional"
-            />
-            <div style={{ fontWeight: "bold" }}>Encanto Regional</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 400, borderRadius: 10 }}
-              src={require("./assets/p_crosta_castanha.jpg")}
-              alt="p_crosta_castanha"
-            />
-            <div style={{ fontWeight: "bold" }}>
-              Peixe na crosta da castanha
-            </div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 400, borderRadius: 10 }}
-              src={require("./assets/tucuju.jpg")}
-              alt="tucuju"
-            />
-            <div style={{ fontWeight: "bold" }}>Mistura tucuju</div>
-          </div>
-        </Carousel>
-      </div>
 
       <Collapse
         bordered={false}
@@ -302,7 +367,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Mujica.sub} {Mujica.description}
               </div>
             </div>
@@ -365,7 +437,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Peixe.sub} {Peixe.description}
               </div>
             </div>
@@ -428,7 +507,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Peixe.sub} {Peixe.description}
               </div>
             </div>
@@ -490,7 +576,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Peixe.sub} {Peixe.description}
               </div>
             </div>
@@ -553,7 +646,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Camarao.sub} {Camarao.description}
               </div>
             </div>
@@ -616,7 +716,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Carnes.sub} {Carnes.description}
               </div>
             </div>
@@ -679,7 +786,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Frango.sub} {Frango.description}
               </div>
             </div>
@@ -741,7 +855,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {moquecas.sub} {moquecas.description}
               </div>
             </div>
@@ -803,7 +924,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {caldeiradas.sub} {caldeiradas.description}
               </div>
             </div>
@@ -865,14 +993,40 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Porcoes_extras.sub} {Porcoes_extras.description}
               </div>
             </div>
           ))}
         </Panel>
       </Collapse>
-
+      <div style={{ margin: 5 }}>
+        <Carousel showArrows={true} autoplay={true}>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/musse.jpg")}
+              alt="musse"
+            />
+            <div style={{ fontWeight: "bold" }}>Musse</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/pudim.jpg")}
+              alt="pudim"
+            />
+            <div style={{ fontWeight: "bold" }}>Pudim</div>
+          </div>
+        </Carousel>
+      </div>
       <Collapse
         bordered={false}
         defaultActiveKey={["1"]}
@@ -928,13 +1082,74 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Sobremesa.sub} {Sobremesa.description}
               </div>
             </div>
           ))}
         </Panel>
       </Collapse>
+
+      <div style={{ margin: 5 }}>
+        <Carousel showArrows={true} autoplay={true}>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink1.jpg")}
+              alt="drink1"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink2.jpg")}
+              alt="drink2"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink3.jpg")}
+              alt="drink3"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink4.jpg")}
+              alt="drink4"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink5.jpg")}
+              alt="drink5"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink6.jpg")}
+              alt="drink6"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 600, borderRadius: 10 }}
+              src={require("./assets/drink7.jpg")}
+              alt="drink7"
+            />
+          </div>
+        </Carousel>
+      </div>
 
       <Collapse
         bordered={false}
@@ -991,7 +1206,14 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              <div
+                style={{
+                  color: "#7a4827",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 10,
+                }}
+              >
                 {Bebida.sub} {Bebida.description}
               </div>
             </div>
