@@ -337,7 +337,7 @@ function App() {
           backgroundPosition: "center",
         }}
       >
-        Camarao
+        Camarão
       </div>
 
       {camarao.map((Camarao) => (
