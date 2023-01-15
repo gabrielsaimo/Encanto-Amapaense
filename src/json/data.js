@@ -193,7 +193,7 @@ export const peixe_ao_molho = [
     name: "Peixe ao molho de camarão Regional",
     sub: null,
     price: "R$ 95,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 2,
@@ -201,7 +201,7 @@ export const peixe_ao_molho = [
     name: "Peixe Encanto Amapaense",
     sub: null,
     price: "R$ 95,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 3,
@@ -209,7 +209,7 @@ export const peixe_ao_molho = [
     name: "Peixe Escabeche",
     sub: null,
     price: "R$ 90,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 4,
@@ -217,7 +217,7 @@ export const peixe_ao_molho = [
     name: "Peixe ao molho branco",
     sub: "(c/ camarão rosa)",
     price: "R$ 108,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 5,
@@ -226,7 +226,7 @@ export const peixe_ao_molho = [
     sub: null,
     price: "R$ 89,00",
     description:
-      "Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi",
+      "Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
   },
   {
     id: 6,
@@ -234,7 +234,7 @@ export const peixe_ao_molho = [
     name: "Peixe ao molho de alcaparra",
     sub: "(c/ camarão rosa)",
     price: "R$ 110,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 7,
@@ -242,7 +242,7 @@ export const peixe_ao_molho = [
     name: "Peixe ao molho de castanha",
     sub: null,
     price: "R$ 100,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 8,
@@ -250,7 +250,7 @@ export const peixe_ao_molho = [
     name: "Peixe ao molho de taperebá",
     sub: null,
     price: "R$ 88,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
 ];
 export const peixe_frito = [
@@ -260,7 +260,7 @@ export const peixe_frito = [
     name: "Peixe Recheado",
     sub: "(com Camarão Regional / Caranguejo)",
     price: "R$ 99,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 2,
@@ -268,7 +268,7 @@ export const peixe_frito = [
     name: "Peixe Recheado com camarão rosa",
     sub: null,
     price: "R$ 105,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 3,
@@ -276,7 +276,7 @@ export const peixe_frito = [
     name: "Peixe Crocante",
     sub: null,
     price: "R$ 86,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 4,
@@ -284,7 +284,7 @@ export const peixe_frito = [
     name: "Peixe na crosta de castanha",
     sub: null,
     price: "R$ 95,00",
-    description: "Acomp. Arroz à grega, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
   },
   {
     id: 5,
@@ -293,7 +293,7 @@ export const peixe_frito = [
     sub: null,
     price: "R$ 00,00",
     description:
-      "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi",
+      "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
   },
   {
     id: 6,
@@ -302,7 +302,7 @@ export const peixe_frito = [
     sub: null,
     price: "R$ 00,00",
     description:
-      "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi",
+      "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
   },
   {
     id: 7,
@@ -310,7 +310,7 @@ export const peixe_frito = [
     name: "Peixe Frito",
     sub: null,
     price: "R$ 82,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
 ];
 export const peixe_na_chapa = [
@@ -320,7 +320,7 @@ export const peixe_na_chapa = [
     name: "Peixe na chapa c/ legumes",
     sub: null,
     price: "R$ 90,00",
-    description: "Acomp. Arroz , Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz , Purê, Farofa, Tucupi)",
   },
   {
     id: 2,
@@ -328,7 +328,7 @@ export const peixe_na_chapa = [
     name: "Peixe na chapa c/ camarão rosa",
     sub: null,
     price: "R$ 98,00",
-    description: "Acomp. Legumes , Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Legumes , Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 3,
@@ -336,7 +336,7 @@ export const peixe_na_chapa = [
     name: "Mistura Tucuju",
     sub: null,
     price: "R$ 125,00",
-    description: "Acomp. Arroz , Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz , Purê, Farofa, Tucupi)",
   },
   {
     id: 4,
@@ -344,7 +344,7 @@ export const peixe_na_chapa = [
     name: "Prato do cheff ",
     sub: "(Camarão Rosa e Pitu)",
     price: "R$ 140,00",
-    description: "Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi)",
   },
   {
     id: 5,
@@ -353,7 +353,7 @@ export const peixe_na_chapa = [
     sub: "(com Camarão Rosa)",
     price: "R$ 105,00",
     description:
-      "Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi",
+      "Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
   },
   {
     id: 6,
@@ -361,7 +361,7 @@ export const peixe_na_chapa = [
     name: "Encanto Regional",
     sub: null,
     price: "R$ 115,00",
-    description: "Acomp. Arroz Paraense, Purê, Farofa e Banana",
+    description: "(Acomp. Arroz Paraense, Purê, Farofa e Banana)",
   },
 ];
 export const camarao = [
@@ -371,7 +371,7 @@ export const camarao = [
     name: "Camarão Regional",
     sub: null,
     price: "R$ 84,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 2,
@@ -379,7 +379,7 @@ export const camarao = [
     name: "Camarão Regional empanado",
     sub: null,
     price: "R$ 86,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 3,
@@ -387,7 +387,7 @@ export const camarao = [
     name: "Camarão Rosa ao molho branco",
     sub: null,
     price: "R$ 93,00",
-    description: "Acomp. Arroz, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz, Purê, Farofa, Tucupi)",
   },
   {
     id: 4,
@@ -395,7 +395,7 @@ export const camarao = [
     name: "Camarão Rosa empanado",
     sub: null,
     price: "R$ 92,00",
-    description: "Acomp. Arroz à grega, Purê, Farofa, Tucupi",
+    description: "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
   },
   {
     id: 5,
@@ -404,7 +404,7 @@ export const camarao = [
     sub: null,
     price: "R$ 95,00",
     description:
-      "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi",
+      "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
   },
   {
     id: 6,
@@ -413,7 +413,7 @@ export const camarao = [
     sub: null,
     price: "R$ 92,00",
     description:
-      "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi",
+      "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
   },
   {
     id: 7,
@@ -421,7 +421,7 @@ export const camarao = [
     name: "Camarão Encanto ",
     sub: "(Empanado na Castanha)",
     price: "R$ 96,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 8,
@@ -429,7 +429,7 @@ export const camarao = [
     name: "Camarão Pitú ao alho e óleo",
     sub: null,
     price: "R$ 142,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 9,
@@ -437,7 +437,7 @@ export const camarao = [
     name: "Strogonoffde Camarão Rosa",
     sub: null,
     price: "R$ 92,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 10,
@@ -445,7 +445,7 @@ export const camarao = [
     name: "Camarão Rosa no queijo e manteiga",
     sub: null,
     price: "R$ 92,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 11,
@@ -453,7 +453,7 @@ export const camarao = [
     name: "Camarão Tropical",
     sub: null,
     price: "R$ 98,00",
-    description: "Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 12,
@@ -472,7 +472,7 @@ export const carnes = [
     name: "Filé Grehado",
     sub: null,
     price: "R$ 89,00",
-    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi",
+    description: "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
   },
   {
     id: 2,
@@ -480,7 +480,7 @@ export const carnes = [
     name: "Filé c/ fritas",
     sub: null,
     price: "R$ 92,00",
-    description: "Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi",
+    description: "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
   },
   {
     id: 3,
@@ -504,7 +504,7 @@ export const carnes = [
     name: "Medalhão de Filé",
     sub: null,
     price: "R$ 98,00",
-    description: "Acomp. Arroz Farofa de ovo",
+    description: "(Acomp. Arroz Farofa de ovo)",
   },
   {
     id: 6,
@@ -512,7 +512,7 @@ export const carnes = [
     name: "Filé ao molho catupiry",
     sub: null,
     price: "R$ 98,00",
-    description: "Acomp. Arroz, Puré ,Farofa de ovo, Tucupi",
+    description: "(Acomp. Arroz, Puré ,Farofa de ovo, Tucupi)",
   },
   {
     id: 7,
@@ -520,7 +520,8 @@ export const carnes = [
     name: "Picanha c/ macaxeira",
     sub: "(Maturada)",
     price: "R$ 130,00",
-    description: "Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi",
+    description:
+      "(Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi)",
   },
   {
     id: 9,
@@ -536,7 +537,7 @@ export const carnes = [
     name: "Picanha c/ abacaxi e legumes",
     sub: "(Maturada)",
     price: "R$ 127,00",
-    description: "Acomp. Arroz, Puré ,Farofa. Tucupi",
+    description: "(Acomp. Arroz, Puré ,Farofa. Tucupi)",
   },
   {
     id: 11,
@@ -563,7 +564,7 @@ export const frango = [
     name: "Frango grelhado",
     sub: null,
     price: "R$ 69,00",
-    description: "Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 2,
@@ -571,7 +572,7 @@ export const frango = [
     name: "Frango crocante",
     sub: null,
     price: "R$ 75,00",
-    description: "Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi",
+    description: "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
   },
   {
     id: 3,
@@ -579,7 +580,7 @@ export const frango = [
     name: "strogonoff",
     sub: null,
     price: "R$ 72,00",
-    description: "Acomp. Arroz,batata palha, puré, Farofa, Tucupi",
+    description: "(Acomp. Arroz,batata palha, puré, Farofa, Tucupi)",
   },
 ];
 
@@ -590,7 +591,7 @@ export const moquecas = [
     name: "Filhote",
     sub: null,
     price: "R$ 100,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 2,
@@ -598,7 +599,7 @@ export const moquecas = [
     name: "Camarão",
     sub: null,
     price: "R$ 110,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 3,
@@ -606,7 +607,7 @@ export const moquecas = [
     name: "Mista ",
     sub: "(Filhote, Camarão Rosa)",
     price: "R$ 125,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 4,
@@ -614,7 +615,7 @@ export const moquecas = [
     name: "Completa",
     sub: "(Filhote, Camarão Rosa, Pitú)",
     price: "R$ 145,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 5,
@@ -622,7 +623,7 @@ export const moquecas = [
     name: "Pirarucu",
     sub: null,
     price: "R$ 100,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 7,
@@ -630,7 +631,7 @@ export const moquecas = [
     name: "Baiana",
     sub: null,
     price: "R$ 105,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
 ];
 
@@ -641,7 +642,7 @@ export const caldeiradas = [
     name: "Filhote",
     sub: null,
     price: "R$ 100,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 2,
@@ -649,7 +650,7 @@ export const caldeiradas = [
     name: "Misra",
     sub: "(Filhote, Camarão Rosa)",
     price: "R$ 125,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 3,
@@ -657,7 +658,7 @@ export const caldeiradas = [
     name: "Completa",
     sub: "(Filhote, Camarão Rosa, Pitú)",
     price: "R$ 145,00",
-    description: "Acomp. Arroz, Pirão, Tucupi",
+    description: "(Acomp. Arroz, Pirão, Tucupi)",
   },
   {
     id: 4,
@@ -665,7 +666,7 @@ export const caldeiradas = [
     name: "Encanto Amapaense",
     sub: null,
     price: "R$ 135,00",
-    description: "Acomp. Arroz, Pirão,Tucupi",
+    description: "(Acomp. Arroz, Pirão,Tucupi)",
   },
   {
     id: 5,
@@ -673,7 +674,7 @@ export const caldeiradas = [
     name: "Pirarucu",
     sub: null,
     price: "R$ 100,00",
-    description: "Acomp. Arroz, Pirão,Tucupi",
+    description: "(Acomp. Arroz, Pirão,Tucupi)",
   },
   {
     id: 6,
@@ -681,7 +682,7 @@ export const caldeiradas = [
     name: "Tucunaré",
     sub: null,
     price: "R$ 150,00",
-    description: "Acomp. Arroz, Pirão,Tucupi",
+    description: "(Acomp. Arroz, Pirão,Tucupi)",
   },
 ];
 
@@ -831,7 +832,7 @@ export const Sobremesas = [
     name: "Mouse",
     sub: null,
     price: "R$ 17,00",
-    description: "cupuaçu,Maracuja e Morango",
+    description: "(cupuaçu,Maracuja e Morango)",
   },
   {
     id: 2,
@@ -847,7 +848,7 @@ export const Sobremesas = [
     name: "Açaí",
     sub: null,
     price: "R$ 15,00",
-    description: "porçao 350 ml",
+    description: "(porçao 350 ml)",
   },
   {
     id: 4,
@@ -882,7 +883,7 @@ export const Bebidas = [
     name: "Sucos diversos",
     sub: null,
     price: "R$ 8,00",
-    description: "+ 1 reais adicional de leite",
+    description: "(+ 1 reais adicional de leite)",
   },
   {
     id: 4,
@@ -890,7 +891,7 @@ export const Bebidas = [
     name: "Jarra",
     sub: null,
     price: "R$ 28,00",
-    description: "+ 5 reais adiconal de leite",
+    description: "(+ 5 reais adiconal de leite)",
   },
   {
     id: 5,
@@ -898,7 +899,7 @@ export const Bebidas = [
     name: "Jarra de laranja",
     sub: null,
     price: "R$ 35,00",
-    description: "1,2 litros ",
+    description: "(1,2 litros )",
   },
   {
     id: 6,
