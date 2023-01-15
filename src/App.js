@@ -52,8 +52,7 @@ function App() {
         src={require("./assets/logo.png")}
         alt="logo-principal"
         style={{
-          width: "70%",
-          borderRadius: "10%",
+          width: "95%",
           marginTop: 20,
           userSelect: "none",
         }}
