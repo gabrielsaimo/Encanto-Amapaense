@@ -1,7 +1,21 @@
-
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import {
+  Entradas,
+  mujicas_caldos,
+  peixe_ao_molho,
+  peixe_frito,
+  peixe_na_chapa,
+  camarao,
+  carnes,
+  frango,
+  moquecas,
+  caldeiradas,
+  Porcoes_extras,
+  Sobremesas,
+  Bebidas,
+} from "./json/data";
+import { Carousel } from "antd";
 function App() {
   /* <Carousel showArrows={true}>
         <div>
@@ -27,213 +41,661 @@ function App() {
         <;objectFit:"cover"/div>
       </Carousel>
       */
+
   return (
     <div
       className="App"
       style={{
-        backgroundImage: `url(${require("./assets/fundo_site.jpg")}) `,
-        backgroundRepeat: "no-repeat",
+        background:
+          " linear-gradient(90deg, rgba(178,125,64,1) 0%, rgba(251,247,244,1) 100%)",
         width: "100%",
         height: "100%",
         backgroundSize: "cover",
-        display: "flex",
         justifyContent: "center",
       }}
     >
-      
-      <div style={{ width: 400 }}>
-        <h1 style={{ color: "white" }}>Cardápio</h1>
-        <img
-          src={require("./assets/logo_pricipal.jpeg")}
-          alt="logo-principal"
-          style={{ width: "50%", borderRadius: "100%" }}
-          loading="lazy"
-        />
-        <div style={{ marginBottom: 145 }}>
-          <h1 style={{ color: "white" }}>Pratos a la carte</h1>
-
-          <div>
-            <div
-              style={{
-                display: "flex",
-                width: 380,
-                height: 600,
-                backgroundColor: "#d4d4d4",
-                opacity: 0.1,
-                borderRadius: 10,
-                zIndex: 1,
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            ></div>
-            <div style={{ marginTop: "-590px", zIndex: 2 }}>
-              <img
-                src={require("./assets/regional.jpeg")}
-                alt="c-encanto-regional"
-                style={{
-                  height: 350,
-                  borderRadius: 10,
-                  objectFit: "cover",
-                }}
-                loading="lazy"
-              />
-              <p style={{ color: "white", fontWeight: "bold" }}>
-                Encanto Regional
-              </p>
-
-              <p style={{ color: "white", fontWeight: "bold" }}>R$ 90,00</p>
-
-              <p
-                style={{
-                  color: "white",
-                  width: 380,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  fontWeight: "bold",
-                }}
-              >
-                camarão com camarão
-              </p>
-            </div>
-          </div>
-        </div>
-        <div style={{ marginBottom: 145 }}>
+      <img
+        src={require("./assets/logo_pricipal.jpeg")}
+        alt="logo-principal"
+        style={{ width: "70%", borderRadius: "10%", marginTop: 20 }}
+        loading="lazy"
+      />
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Entradas
+      </div>
+      {Entradas.map((Entrada) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
           <div
             style={{
-              display: "flex",
-              width: 380,
-              height: 600,
               justifyContent: "space-between",
-              backgroundColor: "#d4d4d4",
-              opacity: 0.1,
-              borderRadius: 10,
-              zIndex: 1,
+              display: "flex",
+              width: "90%",
               marginLeft: "auto",
               marginRight: "auto",
             }}
-          ></div>
-          <div style={{ marginTop: "-590px", marginLeft: "00px", zIndex: 2 }}>
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Entrada.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Entrada.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Entrada.description}
+          </div>
+        </div>
+      ))}
+      <div style={{ margin: 5 }}>
+        <Carousel showArrows={true} autoplay={true}>
+          <div>
             <img
+              style={{ width: "100%", height: 400, borderRadius: 10 }}
+              src={require("./assets/regional.jpeg")}
+              alt="c-encanto-regional"
+            />
+            <div style={{ fontWeight: "bold" }}>Encanto Regional</div>
+          </div>
+          <div>
+            <img
+              style={{ width: "100%", height: 400, borderRadius: 10 }}
               src={require("./assets/p_crosta_castanha.jpg")}
               alt="p_crosta_castanha"
-              style={{
-                width: 350,
-                height: 350,
-                borderRadius: 10,
-                objectFit: "cover",
-              }}
-              loading="lazy"
             />
-            <p style={{ color: "white", fontWeight: "bold" }}>
-              Peixe na Crosta da Castanha
-            </p>
-
-            <p style={{ color: "white", fontWeight: "bold" }}>R$ 110,00</p>
-
-            <p
-              style={{
-                color: "white",
-                width: 380,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "bold",
-              }}
-            >
-              Camarão com Peixe
-            </p>
+            <div style={{ fontWeight: "bold" }}>
+              Peixe na crosta da castanha
+            </div>
           </div>
-        </div>
-        <div style={{ marginBottom: 145 }}>
-          <div
-            style={{
-              display: "flex",
-              width: 380,
-              height: 600,
-              justifyContent: "space-between",
-              backgroundColor: "#d4d4d4",
-              opacity: 0.1,
-              borderRadius: 10,
-              zIndex: 1,
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          ></div>
-          <div style={{ marginTop: "-590px", zIndex: 2 }}>
+          <div>
             <img
-              src={require("./assets/sabor_norte.jpg")}
-              alt="c-encanto-regional"
-              style={{
-                width: 350,
-                height: 350,
-                borderRadius: 10,
-                objectFit: "cover",
-              }}
-              loading="lazy"
-            />
-            <p style={{ color: "white", fontWeight: "bold" }}>Sabor do Norte</p>
-
-            <p style={{ color: "white", fontWeight: "bold" }}>R$ 20,00</p>
-
-            <p
-              style={{
-                color: "white",
-                width: 380,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "bold",
-              }}
-            >
-              Posta de filhote grelhado em azeite e especiarias, com patas de
-              caranguejo e camarão rosa na crosta de castanha do Brasil,
-              acompanhados de arroz com brócolis e queijo regional, farofa e
-              molho de tucupi com pimenta.
-            </p>
-          </div>
-        </div>
-        <div style={{ marginBottom: 145 }}>
-          <div
-            style={{
-              display: "flex",
-              width: 380,
-              height: 600,
-              backgroundColor: "#d4d4d4",
-              opacity: 0.1,
-              borderRadius: 10,
-              zIndex: 1,
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          ></div>
-          <div style={{ marginTop: "-590px", zIndex: 2 }}>
-            <img
+              style={{ width: "100%", height: 400, borderRadius: 10 }}
               src={require("./assets/tucuju.jpg")}
-              alt="c-encanto-regional"
-              style={{
-                width: 350,
-                height: 350,
-                borderRadius: 10,
-                objectFit: "cover",
-              }}
-              loading="lazy"
+              alt="tucuju"
             />
-            <p style={{ color: "white", fontWeight: "bold" }}>Mistura Tucuju</p>
+            <div style={{ fontWeight: "bold" }}>Mistura tucuju</div>
+          </div>
+        </Carousel>
+      </div>
 
-            <p style={{ color: "white", fontWeight: "bold" }}>R$ 80,00</p>
-
-            <p
-              style={{
-                color: "white",
-                width: 380,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "bold",
-              }}
-            >
-              camarão com aroz
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Mujicas e Caldos
+      </div>
+      {mujicas_caldos.map((Mujica) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Mujica.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Mujica.price}
             </p>
           </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Mujica.description}
+          </div>
         </div>
+      ))}
+
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Peixe ao Molho
       </div>
+      {peixe_ao_molho.map((Peixe_ao_molho) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Peixe_ao_molho.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Peixe_ao_molho.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Peixe_ao_molho.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Peixe Frito
+      </div>
+      {peixe_frito.map((Peixe_frito) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Peixe_frito.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Peixe_frito.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Peixe_frito.description}
+          </div>
+        </div>
+      ))}
+
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Peixe na Chapa
+      </div>
+      {peixe_na_chapa.map((Peixe_na_chapa) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Peixe_na_chapa.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Peixe_na_chapa.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Peixe_na_chapa.description}
+          </div>
+        </div>
+      ))}
+
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Camarao
+      </div>
+
+      {camarao.map((Camarao) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Camarao.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Camarao.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Camarao.description}
+          </div>
+        </div>
+      ))}
+
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Carnes
+      </div>
+      {carnes.map((Carnes) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Carnes.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Carnes.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Carnes.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Frango
+      </div>
+
+      {frango.map((Frango) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Frango.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Frango.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Frango.description}
+          </div>
+        </div>
+      ))}
+
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Moquecas
+      </div>
+      {moquecas.map((Moquecas) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Moquecas.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Moquecas.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Moquecas.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Caldeiradas
+      </div>
+      {caldeiradas.map((Caldeiradas) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Caldeiradas.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Caldeiradas.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Caldeiradas.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Porcoes Extras
+      </div>
+      {Porcoes_extras.map((Porcoes_extras) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Porcoes_extras.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Porcoes_extras.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Porcoes_extras.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Sobremesas
+      </div>
+      {Sobremesas.map((Sobremesas) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Sobremesas.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Sobremesas.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Sobremesas.description}
+          </div>
+        </div>
+      ))}
+      <div
+        style={{
+          padding: 25,
+          color: "white",
+          fontWeight: "bold",
+          backgroundImage: `url(${require("./assets/tinta.png")}) `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundSize: 150,
+          backgroundPosition: "center",
+        }}
+      >
+        Bebidas
+      </div>
+      {Bebidas.map((Bebidas) => (
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: 10,
+            borderColor: "#7a4827",
+            margin: 10,
+            marginBottom: 45,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              width: "90%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
+              {Bebidas.name}
+            </p>
+            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+              {Bebidas.price}
+            </p>
+          </div>
+
+          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+            {Bebidas.description}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
