@@ -102,7 +102,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Entrada.description}
+            {Entrada.sub} {Entrada.description}
           </div>
         </div>
       ))}
@@ -179,7 +179,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Mujica.description}
+            {Mujica.sub} {Mujica.description}
           </div>
         </div>
       ))}
@@ -226,7 +226,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_ao_molho.description}
+            {Peixe_ao_molho.sub} {Peixe_ao_molho.description}
           </div>
         </div>
       ))}
@@ -272,7 +272,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_frito.description}
+            {Peixe_frito.sub} {Peixe_frito.description}
           </div>
         </div>
       ))}
@@ -319,7 +319,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_na_chapa.description}
+            {Peixe_na_chapa.sub} {Peixe_na_chapa.description}
           </div>
         </div>
       ))}
@@ -367,7 +367,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Camarao.description}
+            {Camarao.sub} {Camarao.description}
           </div>
         </div>
       ))}
@@ -414,7 +414,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Carnes.description}
+            {Carnes.sub} {Carnes.description}
           </div>
         </div>
       ))}
@@ -461,7 +461,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Frango.description}
+            {Frango.sub} {Frango.description}
           </div>
         </div>
       ))}
@@ -508,7 +508,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Moquecas.description}
+            {Moquecas.sub} {Moquecas.description}
           </div>
         </div>
       ))}
@@ -554,7 +554,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Caldeiradas.description}
+            {Caldeiradas.sub} {Caldeiradas.description}
           </div>
         </div>
       ))}
@@ -600,7 +600,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Porcoes_extras.description}
+            {Porcoes_extras.sub} {Porcoes_extras.description}
           </div>
         </div>
       ))}
@@ -646,7 +646,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Sobremesas.description}
+            {Sobremesas.sub} {Sobremesas.description}
           </div>
         </div>
       ))}
@@ -692,7 +692,7 @@ function App() {
           </div>
 
           <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Bebidas.description}
+            {Bebidas.sub} {Bebidas.description}
           </div>
         </div>
       ))}
