@@ -100,7 +100,7 @@ export const Entradas = [
     ativo: "S",
     name: "Emtrada de Encanto",
     sub: null,
-    price: "R$ 177,00",
+    price: "R$ 170,00",
     description: null,
   },
   {
