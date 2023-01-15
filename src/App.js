@@ -15,14 +15,21 @@ import {
   Sobremesas,
   Bebidas,
 } from "./json/data";
-import { Anchor, Carousel, Collapse, theme } from "antd";
+import { Affix, Anchor, Button, Carousel, Collapse, Drawer, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { CaretRightOutlined } from "@ant-design/icons";
 function App() {
   const topRef = React.useRef(null);
   const [targetOffset, setTargetOffset] = useState(undefined);
   const { Panel } = Collapse;
-  const { token } = theme.useToken();
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState("bottom");
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     setTargetOffset(topRef.current?.clientHeight);
   }, []);
@@ -46,141 +53,106 @@ function App() {
         style={{ width: "70%", borderRadius: "10%", marginTop: 20 }}
         loading="lazy"
       />
-      <div style={{ display: "flex" , width:"100%",overflow:"scroll"}}>
+      <Affix offsetTop={10} style={{ marginLeft: "80%" }}>
+        <Button
+          type="primary"
+          style={{
+            width: 70,
+            height: 70,
+            borderRadius: 50,
+          }}
+          onClick={showDrawer}
+        >
+          Menu
+        </Button>
+      </Affix>
 
-      <Anchor
-        targetOffset={targetOffset}
-        items={[
-        {
-          key: "part-1",
-          href: "#part-1",
-          title: "Entradas",
-        }
-        ]}
-        />
+      <Drawer
+        title="Selecionar categoria"
+        placement={placement}
+        closable={false}
+        onClose={onClose}
+        open={open}
+        key={placement}
+      >
+        <div style={{ display: "flex", width: "100%", overflow: "scroll" }}>
+          <Anchor
+            targetOffset={targetOffset}
+            items={[
+              {
+                key: "part-1",
+                href: "#part-1",
+                title: "Entradas",
+              },
+              {
+                key: "part-2",
+                href: "#part-2",
+                title: "Mujicas e Caldos",
+              },
+              {
+                key: "part-3",
+                href: "#part-3",
+                title: "Peixe ao molho",
+              },
+              {
+                key: "part-4",
+                href: "#part-4",
+                title: "Peixe frito",
+              },
+              {
+                key: "part-5",
+                href: "#part-5",
+                title: "Peixe na chapa",
+              },
+              {
+                key: "part-6",
+                href: "#part-6",
+                title: "Camarão",
+              },
+              {
+                key: "part-7",
+                href: "#part-7",
+                title: "Carnes",
+              },
+              {
+                key: "part-8",
+                href: "#part-8",
+                title: "Frango",
+              },
+              {
+                key: "part-9",
+                href: "#part-9",
+                title: "Moquecas",
+              },
 
-        <Anchor
-        targetOffset={targetOffset}
-        items={[
-        {
-          key: "part-2",
-          href: "#part-2",
-          title: "Mujicas e Caldos",
-        }
-        ]}
-        />
+              {
+                key: "part-10",
+                href: "#part-10",
+                title: "Caldeiradas",
+              },
 
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-3",
-              href: "#part-3",
-              title: "Peixe ao molho",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-4",
-              href: "#part-4",
-              title: "Peixe frito",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-5",
-              href: "#part-5",
-              title: "Peixe na chapa",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-6",
-              href: "#part-6",
-              title: "Camarão",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-7",
-              href: "#part-7",
-              title: "Carnes",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-8",
-              href: "#part-8",
-              title: "Frango",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-9",
-              href: "#part-9",
-              title: "Moquecas",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-10",
-              href: "#part-10",
-              title: "Caldeiradas",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-11",
-              href: "#part-11",
-              title: "Porções extras",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-12",
-              href: "#part-12",
-              title: "Sobremesas",
-            },
-          ]}
-        />
-        <Anchor
-          targetOffset={targetOffset}
-          items={[
-            {
-              key: "part-13",
-              href: "#part-13",
-              title: "Bebidas",
-            },
-          ]}
-        />
-      </div>
+              {
+                key: "part-11",
+                href: "#part-11",
+                title: "Porções extras",
+              },
+
+              {
+                key: "part-12",
+                href: "#part-12",
+                title: "Sobremesas",
+              },
+
+              {
+                key: "part-13",
+                href: "#part-13",
+                title: "Bebidas",
+              },
+            ]}
+          />
+        </div>
+      </Drawer>
+
       <Collapse
         bordered={false}
         defaultActiveKey={["1"]}
@@ -189,13 +161,26 @@ function App() {
         )}
         style={{
           background: "transparent",
-          color: "black",
+          color: "red",
         }}
       >
-        <Panel id="part-1" header="Entradas" key="1">
+        <Panel
+          id="part-1"
+          style={{
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
+          }}
+          header="Entradas"
+          key="1"
+        >
           {Entradas.map((Entrada) => (
             <div
-              id="part-1"
               style={{
                 border: "2px solid white",
                 borderRadius: 10,
@@ -230,6 +215,7 @@ function App() {
           ))}
         </Panel>
       </Collapse>
+
       <div style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
           <div>
@@ -261,566 +247,758 @@ function App() {
         </Carousel>
       </div>
 
-      <div
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
-        }}
-        id="part-2"
-      >
-        Mujicas e Caldos
-      </div>
-      {mujicas_caldos.map((Mujica) => (
-        <div
-          style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
-          }}
-        >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Mujica.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Mujica.price}
-            </p>
-          </div>
-
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Mujica.sub} {Mujica.description}
-          </div>
-        </div>
-      ))}
-
-      <div
-        style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Peixe ao Molho
-      </div>
-      {peixe_ao_molho.map((Peixe_ao_molho) => (
-        <div
+        <Panel
+          id="part-2"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Mujicas e Caldos"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Peixe_ao_molho.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Peixe_ao_molho.price}
-            </p>
-          </div>
+          {mujicas_caldos.map((Mujica) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Mujica.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Mujica.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_ao_molho.sub} {Peixe_ao_molho.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Mujica.sub} {Mujica.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Peixe Frito
-      </div>
-      {peixe_frito.map((Peixe_frito) => (
-        <div
+        <Panel
+          id="part-3"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Peixe ao molho"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Peixe_frito.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Peixe_frito.price}
-            </p>
-          </div>
+          {peixe_ao_molho.map((Peixe) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "95%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Peixe.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Peixe.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_frito.sub} {Peixe_frito.description}
-          </div>
-        </div>
-      ))}
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Peixe.sub} {Peixe.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
 
-      <div
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Peixe na Chapa
-      </div>
-      {peixe_na_chapa.map((Peixe_na_chapa) => (
-        <div
+        <Panel
+          id="part-4"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Peixe frito"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Peixe_na_chapa.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Peixe_na_chapa.price}
-            </p>
-          </div>
+          {peixe_frito.map((Peixe) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Peixe.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Peixe.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Peixe_na_chapa.sub} {Peixe_na_chapa.description}
-          </div>
-        </div>
-      ))}
-
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Peixe.sub} {Peixe.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Camarão
-      </div>
-
-      {camarao.map((Camarao) => (
-        <div
+        <Panel
+          id="part-5"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Peixe na chapa"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Camarao.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Camarao.price}
-            </p>
-          </div>
+          {peixe_na_chapa.map((Peixe) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Peixe.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Peixe.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Camarao.sub} {Camarao.description}
-          </div>
-        </div>
-      ))}
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Peixe.sub} {Peixe.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
 
-      <div
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Carnes
-      </div>
-      {carnes.map((Carnes) => (
-        <div
+        <Panel
+          id="part-6"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Camarão"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Carnes.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Carnes.price}
-            </p>
-          </div>
+          {camarao.map((Camarao) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Camarao.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Camarao.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Carnes.sub} {Carnes.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Camarao.sub} {Camarao.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Frango
-      </div>
-
-      {frango.map((Frango) => (
-        <div
+        <Panel
+          id="part-7"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Carnes"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Frango.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Frango.price}
-            </p>
-          </div>
+          {carnes.map((Carnes) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Carnes.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Carnes.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Frango.sub} {Frango.description}
-          </div>
-        </div>
-      ))}
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Carnes.sub} {Carnes.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
 
-      <div
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Moquecas
-      </div>
-      {moquecas.map((Moquecas) => (
-        <div
+        <Panel
+          id="part-8"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Frango"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Moquecas.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Moquecas.price}
-            </p>
-          </div>
+          {frango.map((Frango) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Frango.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Frango.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Moquecas.sub} {Moquecas.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Frango.sub} {Frango.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Caldeiradas
-      </div>
-      {caldeiradas.map((Caldeiradas) => (
-        <div
+        <Panel
+          id="part-9"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Moquecas"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Caldeiradas.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Caldeiradas.price}
-            </p>
-          </div>
+          {moquecas.map((moquecas) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {moquecas.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {moquecas.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Caldeiradas.sub} {Caldeiradas.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {moquecas.sub} {moquecas.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Porcoes Extras
-      </div>
-      {Porcoes_extras.map((Porcoes_extras) => (
-        <div
+        <Panel
+          id="part-10"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Caldeiradas"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Porcoes_extras.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Porcoes_extras.price}
-            </p>
-          </div>
+          {caldeiradas.map((caldeiradas) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {caldeiradas.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {caldeiradas.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Porcoes_extras.sub} {Porcoes_extras.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {caldeiradas.sub} {caldeiradas.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Sobremesas
-      </div>
-      {Sobremesas.map((Sobremesas) => (
-        <div
+        <Panel
+          id="part-11"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Porções extras"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Sobremesas.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Sobremesas.price}
-            </p>
-          </div>
+          {Porcoes_extras.map((Porcoes_extras) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Porcoes_extras.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Porcoes_extras.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Sobremesas.sub} {Sobremesas.description}
-          </div>
-        </div>
-      ))}
-      <div
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Porcoes_extras.sub} {Porcoes_extras.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
         style={{
-          padding: 25,
-          color: "white",
-          fontWeight: "bold",
-          backgroundImage: `url(${require("./assets/tinta.png")}) `,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundSize: 150,
-          backgroundPosition: "center",
+          background: "transparent",
+          color: "red",
         }}
       >
-        Bebidas
-      </div>
-      {Bebidas.map((Bebidas) => (
-        <div
+        <Panel
+          id="part-12"
           style={{
-            border: "2px solid white",
-            borderRadius: 10,
-            borderColor: "#7a4827",
-            margin: 10,
-            marginBottom: 45,
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
           }}
+          header="Sobremesas"
+          key="1"
         >
-          <div
-            style={{
-              justifyContent: "space-between",
-              display: "flex",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <p style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}>
-              {Bebidas.name}
-            </p>
-            <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-              {Bebidas.price}
-            </p>
-          </div>
+          {Sobremesas.map((Sobremesa) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Sobremesa.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Sobremesa.price}
+                </p>
+              </div>
 
-          <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
-            {Bebidas.sub} {Bebidas.description}
-          </div>
-        </div>
-      ))}
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Sobremesa.sub} {Sobremesa.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+
+      <Collapse
+        bordered={false}
+        defaultActiveKey={["1"]}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} />
+        )}
+        style={{
+          background: "transparent",
+          color: "red",
+        }}
+      >
+        <Panel
+          id="part-13"
+          style={{
+            padding: 25,
+            color: "#7a4827",
+            fontWeight: "bold",
+            backgroundImage: `url(${require("./assets/tinta.png")}) `,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 150,
+            backgroundPositionX: "55%",
+            backgroundPositionY: 22,
+          }}
+          header="Bebidas"
+          key="1"
+        >
+          {Bebidas.map((Bebida) => (
+            <div
+              style={{
+                border: "2px solid white",
+                borderRadius: 10,
+                borderColor: "#7a4827",
+                margin: 10,
+                marginBottom: 45,
+              }}
+            >
+              <div
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  width: "90%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <p
+                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                >
+                  {Bebida.name}
+                </p>
+                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                  {Bebida.price}
+                </p>
+              </div>
+
+              <div style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                {Bebida.sub} {Bebida.description}
+              </div>
+            </div>
+          ))}
+        </Panel>
+      </Collapse>
+
       <div style={{ height: 30 }}></div>
     </div>
   );
