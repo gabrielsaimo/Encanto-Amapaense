@@ -214,8 +214,8 @@ export const peixe_ao_molho = [
   {
     id: 4,
     ativo: "S",
-    name: "Peixe ao molho branco c/ camarão rosa",
-    sub: null,
+    name: "Peixe ao molho branco",
+    sub: "(c/ camarão rosa)",
     price: "R$ 108,00",
     description: "Acomp. Arroz, Purê, Farofa, Tucupi",
   },
@@ -231,8 +231,8 @@ export const peixe_ao_molho = [
   {
     id: 6,
     ativo: "S",
-    name: "Peixe ao molho de alcaparra c/ camarão rosa",
-    sub: null,
+    name: "Peixe ao molho de alcaparra",
+    sub: "(c/ camarão rosa)",
     price: "R$ 110,00",
     description: "Acomp. Arroz, Purê, Farofa, Tucupi",
   },
