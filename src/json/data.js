@@ -34,7 +34,7 @@ export const Entradas = [
   {
     id: 5,
     ativo: "S",
-    name: "Canarão Rosa crocante",
+    name: "Camarão Rosa crocante",
     sub: null,
     price: "R$ 76,00",
     description: null,
@@ -98,7 +98,7 @@ export const Entradas = [
   {
     id: 13,
     ativo: "S",
-    name: "Emtrada de Encanto",
+    name: "Entrada de Encanto",
     sub: null,
     price: "R$ 170,00",
     description: null,
@@ -226,7 +226,7 @@ export const peixe_ao_molho = [
     sub: null,
     price: "R$ 89,00",
     description:
-      "Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
+      "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
   },
   {
     id: 6,
@@ -298,7 +298,7 @@ export const peixe_frito = [
   {
     id: 6,
     ativo: "N",
-    name: "Tucunaré do chef",
+    name: "Tucunaré do cheff",
     sub: null,
     price: "R$ 00,00",
     description:
@@ -746,7 +746,7 @@ export const Porcoes_extras = [
   {
     id: 8,
     ativo: "S",
-    name: "Salada de Cmnarão Regional",
+    name: "Salada de Camarão Regional",
     sub: null,
     price: "R$ 40,00",
     description: null,
@@ -770,7 +770,7 @@ export const Porcoes_extras = [
   {
     id: 11,
     ativo: "S",
-    name: "Farofa de oro",
+    name: "Farofa de ovo",
     sub: null,
     price: "R$ 15,00",
     description: null,
@@ -786,7 +786,7 @@ export const Porcoes_extras = [
   {
     id: 13,
     ativo: "S",
-    name: "Legunzes refogados",
+    name: "Legumes refogados",
     sub: null,
     price: "R$ 20,00",
     description: null,
@@ -992,7 +992,7 @@ export const Bebidas = [
   {
     id: 17,
     ativo: "S",
-    name: "KS 1 litro",
+    name: "Ks 1 litro",
     sub: null,
     price: "R$ 14,00",
     description: null,
