@@ -837,7 +837,7 @@ export const Sobremesas = [
   {
     id: 2,
     ativo: "S",
-    name: "Banana smbada c sorvete",
+    name: "Banana flambada c sorvete",
     sub: null,
     price: "R$ 20,00",
     description: null,

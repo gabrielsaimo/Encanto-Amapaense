@@ -254,14 +254,13 @@ function App() {
         <Panel
           id="part-1"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
             userSelect: "none",
             outline: "none",
           }}
@@ -326,14 +325,13 @@ function App() {
         <Panel
           id="part-2"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Mujicas e Caldos"
           key="1"
@@ -396,14 +394,13 @@ function App() {
         <Panel
           id="part-3"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Peixe ao molho"
           key="1"
@@ -466,14 +463,13 @@ function App() {
         <Panel
           id="part-4"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Peixe frito"
           key="1"
@@ -535,14 +531,13 @@ function App() {
         <Panel
           id="part-5"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Peixe na chapa"
           key="1"
@@ -605,14 +600,13 @@ function App() {
         <Panel
           id="part-6"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Camarão"
           key="1"
@@ -675,14 +669,13 @@ function App() {
         <Panel
           id="part-7"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Carnes"
           key="1"
@@ -745,14 +738,13 @@ function App() {
         <Panel
           id="part-8"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Frango"
           key="1"
@@ -814,14 +806,13 @@ function App() {
         <Panel
           id="part-9"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Moquecas"
           key="1"
@@ -883,14 +874,13 @@ function App() {
         <Panel
           id="part-10"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Caldeiradas"
           key="1"
@@ -952,14 +942,13 @@ function App() {
         <Panel
           id="part-11"
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Porções extras"
           key="1"
@@ -1040,14 +1029,13 @@ function App() {
       >
         <Panel
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Sobremesas"
           key="1"
@@ -1163,14 +1151,13 @@ function App() {
       >
         <Panel
           style={{
-            padding: 25,
             color: "#7a4827",
             fontWeight: "bold",
             backgroundImage: `url(${require("./assets/tinta.png")}) `,
             backgroundRepeat: "no-repeat",
             backgroundSize: 150,
             backgroundPositionX: "55%",
-            backgroundPositionY: 22,
+            backgroundPositionY: -8,
           }}
           header="Bebidas"
           key="1"
