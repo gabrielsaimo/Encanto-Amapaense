@@ -41,6 +41,7 @@ function App() {
         background:
           " linear-gradient(90deg, rgba(178,125,64,1) 0%, rgba(251,247,244,1) 100%)",
         width: "100%",
+        maxWidth: 768,
         height: "100%",
         backgroundSize: "cover",
         justifyContent: "center",
