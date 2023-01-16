@@ -47,6 +47,8 @@ function App() {
         justifyContent: "center",
         marginBottom: -50,
         userSelect: "none",
+        marginLeft: "auto",
+        marginRight: "auto",
       }}
     >
       <img
