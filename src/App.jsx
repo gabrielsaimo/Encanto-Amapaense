@@ -17,7 +17,7 @@ import {
 } from "./json/data";
 import { Affix, Anchor, Button, Carousel, Collapse, Drawer } from "antd";
 import React, { useEffect, useState } from "react";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, UnorderedListOutlined } from "@ant-design/icons";
 function App() {
   const topRef = React.useRef(null);
   const [targetOffset, setTargetOffset] = useState(undefined);
@@ -64,13 +64,13 @@ function App() {
         <Button
           type="primary"
           style={{
-            width: 70,
-            height: 70,
+            width: 60,
+            height: 60,
             borderRadius: 50,
           }}
           onClick={showDrawer}
         >
-          Menu
+          <UnorderedListOutlined style={{ fontSize: 30 }} />
         </Button>
       </Affix>
 
