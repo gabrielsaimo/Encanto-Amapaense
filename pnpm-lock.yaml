@@ -3795,7 +3795,7 @@ packages:
       boolbase: 1.0.0
       css-what: 3.4.2
       domutils: 1.7.0
-      nth-check: 1.0.2
+      nth-check: 2.0.1
     dev: false
 
   /css-select/4.3.0:
