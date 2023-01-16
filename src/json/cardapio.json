@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Mouse",
+    "sub": null,
+    "descrption": "descrption 1",
+    "ativo": true,
+    "price": "R$ 17,00",
+    "id": "1",
+    "description": "(cupuaçu,Maracuja e Morango)",
+    "category": "Sobremesas"
+  },
+  {
+    "name": "Banana flambada c sorvete",
+    "sub": null,
+    "descrption": "descrption 2",
+    "ativo": true,
+    "price": "R$ 20,00",
+    "id": "2",
+    "description": null,
+    "category": "Sobremesas"
+  },
+  {
+    "name": "Açaí",
+    "sub": null,
+    "descrption": "descrption 3",
+    "ativo": true,
+    "price": "R$ 15,00",
+    "id": "3",
+    "description": "(porçao 350 ml)",
+    "category": "Sobremesas"
+  },
+  {
+    "name": "Pudim",
+    "sub": null,
+    "descrption": "descrption 4",
+    "ativo": true,
+    "price": "R$ 15,00",
+    "id": "4",
+    "description": null,
+    "category": "Sobremesas"
+  },
+  {
+    "name": "Laranja ou Laranja c/ morango",
+    "sub": null,
+    "descrption": "descrption 5",
+    "ativo": true,
+    "price": "R$ 10,00",
+    "id": "5",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Limonada ou Limonada suíça",
+    "sub": null,
+    "descrption": "descrption 6",
+    "ativo": true,
+    "price": "R$ 8,00",
+    "id": "6",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Sucos diversos",
+    "sub": null,
+    "descrption": "descrption 7",
+    "ativo": true,
+    "price": "R$ 8,00",
+    "id": "7",
+    "description": "(+ 1 reais adicional de leite)",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Jarra",
+    "sub": null,
+    "descrption": "descrption 8",
+    "ativo": true,
+    "price": "R$ 28,00",
+    "id": "8",
+    "description": "(+ 5 reais adiconal de leite)",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Jarra de laranja",
+    "sub": null,
+    "descrption": "descrption 9",
+    "ativo": true,
+    "price": "R$ 35,00",
+    "id": "9",
+    "description": "(1,2 litros )",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Refrigerante lata",
+    "sub": null,
+    "descrption": "descrption 10",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "10",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Refrigerante 1 litro",
+    "sub": null,
+    "descrption": "descrption 11",
+    "ativo": true,
+    "price": "R$ 12,00",
+    "id": "11",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Aguás s/gás",
+    "sub": null,
+    "descrption": "descrption 12",
+    "ativo": true,
+    "price": "R$ 4,50",
+    "id": "12",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Aguác c/ gás",
+    "sub": null,
+    "descrption": "descrption 13",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "13",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Água tônica",
+    "sub": null,
+    "descrption": "descrption 14",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "14",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Água de coco",
+    "sub": null,
+    "descrption": "descrption 15",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "15",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "H2o",
+    "sub": null,
+    "descrption": "descrption 16",
+    "ativo": true,
+    "price": "R$ 6,50",
+    "id": "16",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Red bull",
+    "sub": null,
+    "descrption": "descrption 17",
+    "ativo": true,
+    "price": "R$ 15,00",
+    "id": "17",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Schweppes citrus",
+    "sub": null,
+    "descrption": "descrption 18",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "18",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Schweppes tônica",
+    "sub": null,
+    "descrption": "descrption 19",
+    "ativo": true,
+    "price": "R$ 6,00",
+    "id": "19",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Ks 350ml",
+    "sub": null,
+    "descrption": "descrption 20",
+    "ativo": true,
+    "price": "R$ 7,00",
+    "id": "20",
+    "description": null,
+    "category": "Bebidas"
+  },
+  {
+    "name": "Ks 1 litro",
+    "sub": null,
+    "descrption": "descrption 21",
+    "ativo": true,
+    "price": "R$ 14,00",
+    "id": "21",
+    "description": null,
+    "category": "Bebidas"
+  }
+]
