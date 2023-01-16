@@ -158,7 +158,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "18"
   },
   {
@@ -167,7 +167,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "19"
   },
   {
@@ -176,7 +176,7 @@
     "description": null,
     "sub": "(Camarão Regional / Caranguejo)",
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "20"
   },
   {
@@ -185,7 +185,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "21"
   },
   {
@@ -194,7 +194,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "22"
   },
   {
@@ -203,7 +203,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "mujicas_caldos",
+    "category": "Mujicas e caldos",
     "id": "23"
   },
   {
@@ -212,7 +212,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "24"
   },
   {
@@ -221,7 +221,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "25"
   },
   {
@@ -230,7 +230,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "26"
   },
   {
@@ -239,7 +239,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(c/ camarão rosa)",
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "27"
   },
   {
@@ -248,7 +248,7 @@
     "description": "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "28"
   },
   {
@@ -257,7 +257,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(c/ camarão rosa)",
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "29"
   },
   {
@@ -266,7 +266,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "30"
   },
   {
@@ -275,7 +275,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_ao_molho",
+    "category": "Peixe ao molho",
     "id": "31"
   },
   {
@@ -284,7 +284,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(com Camarão Regional / Caranguejo)",
     "ativo": true,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "32"
   },
   {
@@ -293,7 +293,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "33"
   },
   {
@@ -302,7 +302,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "34"
   },
   {
@@ -311,7 +311,7 @@
     "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "35"
   },
   {
@@ -320,7 +320,7 @@
     "description": "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
     "sub": null,
     "ativo": false,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "36"
   },
   {
@@ -329,7 +329,7 @@
     "description": "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
     "sub": null,
     "ativo": false,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "37"
   },
   {
@@ -338,7 +338,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_frito",
+    "category": "Peixe Frito",
     "id": "38"
   },
   {
@@ -347,7 +347,7 @@
     "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "39"
   },
   {
@@ -356,7 +356,7 @@
     "description": "(Acomp. Legumes , Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "40"
   },
   {
@@ -365,7 +365,7 @@
     "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "41"
   },
   {
@@ -374,7 +374,7 @@
     "description": "(Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi)",
     "sub": "(Camarão Rosa e Pitu)",
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "42"
   },
   {
@@ -383,7 +383,7 @@
     "description": "Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
     "sub": "(com Camarão Rosa)",
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "43"
   },
   {
@@ -392,7 +392,7 @@
     "description": "(Acomp. Arroz Paraense, Purê, Farofa e Banana)",
     "sub": null,
     "ativo": true,
-    "category": "peixe_na_chapa",
+    "category": "Peixe na chapa",
     "id": "44"
   },
   {
@@ -401,7 +401,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "45"
   },
   {
@@ -410,7 +410,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "46"
   },
   {
@@ -419,7 +419,7 @@
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "47"
   },
   {
@@ -428,7 +428,7 @@
     "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "48"
   },
   {
@@ -437,7 +437,7 @@
     "description": "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "49"
   },
   {
@@ -446,7 +446,7 @@
     "description": "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "50"
   },
   {
@@ -455,7 +455,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": "(Empanado na Castanha)",
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "51"
   },
   {
@@ -464,7 +464,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "52"
   },
   {
@@ -473,7 +473,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "53"
   },
   {
@@ -482,7 +482,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "54"
   },
   {
@@ -491,7 +491,7 @@
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "55"
   },
   {
@@ -500,7 +500,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "camarao",
+    "category": "Camarao",
     "id": "56"
   },
   {
@@ -509,7 +509,7 @@
     "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "57"
   },
   {
@@ -518,7 +518,7 @@
     "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "58"
   },
   {
@@ -527,7 +527,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "59"
   },
   {
@@ -536,7 +536,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "60"
   },
   {
@@ -545,7 +545,7 @@
     "description": "(Acomp. Arroz Farofa de ovo)",
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "61"
   },
   {
@@ -554,7 +554,7 @@
     "description": "(Acomp. Arroz, Puré ,Farofa de ovo, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "62"
   },
   {
@@ -563,7 +563,7 @@
     "description": "(Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi)",
     "sub": "(Maturada)",
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "63"
   },
   {
@@ -572,7 +572,7 @@
     "description": null,
     "sub": "(Maturada)",
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "64"
   },
   {
@@ -581,7 +581,7 @@
     "description": "(Acomp. Arroz, Puré ,Farofa. Tucupi)",
     "sub": "(Maturada)",
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "65"
   },
   {
@@ -590,7 +590,7 @@
     "description": null,
     "sub": "(Maturada)",
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "66"
   },
   {
@@ -599,7 +599,7 @@
     "description": null,
     "sub": "(Peixe,Frango,Camarão rosa, Calabresa, Maminha)",
     "ativo": true,
-    "category": "carnes",
+    "category": "Carnes",
     "id": "67"
   },
   {
@@ -608,7 +608,7 @@
     "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "frango",
+    "category": "Frango",
     "id": "68"
   },
   {
@@ -617,7 +617,7 @@
     "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "frango",
+    "category": "Frango",
     "id": "69"
   },
   {
@@ -626,7 +626,7 @@
     "description": "(Acomp. Arroz,batata palha, puré, Farofa, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "frango",
+    "category": "Frango",
     "id": "70"
   },
   {
@@ -635,7 +635,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "71"
   },
   {
@@ -644,7 +644,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "72"
   },
   {
@@ -653,7 +653,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa)",
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "73"
   },
   {
@@ -662,7 +662,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa, Pitú)",
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "74"
   },
   {
@@ -671,7 +671,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "75"
   },
   {
@@ -680,7 +680,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "moquecas",
+    "category": "Moquecas",
     "id": "76"
   },
   {
@@ -689,7 +689,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "77"
   },
   {
@@ -698,7 +698,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa)",
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "78"
   },
   {
@@ -707,7 +707,7 @@
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa, Pitú)",
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "79"
   },
   {
@@ -716,7 +716,7 @@
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "80"
   },
   {
@@ -725,7 +725,7 @@
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "81"
   },
   {
@@ -734,7 +734,7 @@
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
     "ativo": true,
-    "category": "caldeiradas",
+    "category": "Caldeiradas",
     "id": "82"
   },
   {
@@ -743,7 +743,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "83"
   },
   {
@@ -752,7 +752,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "84"
   },
   {
@@ -761,7 +761,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "85"
   },
   {
@@ -770,7 +770,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "86"
   },
   {
@@ -779,7 +779,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "87"
   },
   {
@@ -788,7 +788,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "88"
   },
   {
@@ -797,7 +797,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "89"
   },
   {
@@ -806,7 +806,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "90"
   },
   {
@@ -815,7 +815,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "91"
   },
   {
@@ -824,7 +824,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "92"
   },
   {
@@ -833,7 +833,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "93"
   },
   {
@@ -842,7 +842,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "94"
   },
   {
@@ -851,7 +851,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "95"
   },
   {
@@ -860,7 +860,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "96"
   },
   {
@@ -869,7 +869,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "97"
   },
   {
@@ -878,7 +878,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "98"
   },
   {
@@ -887,7 +887,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porcoes_extras",
+    "category": "Porcoes Extras",
     "id": "99"
   },
   {
