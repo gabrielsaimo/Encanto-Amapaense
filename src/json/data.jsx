@@ -1,7 +1,7 @@
 export const Entradas = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Camarão no Bafo",
     sub: null,
     price: "R$ 60,00",
@@ -9,7 +9,7 @@ export const Entradas = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Pitú no bafo",
     sub: null,
     price: "R$ 150,00",
@@ -17,7 +17,7 @@ export const Entradas = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Pitú na chapa",
     sub: null,
     price: "R$ 165,00",
@@ -25,7 +25,7 @@ export const Entradas = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Conarão Rosa empanado",
     sub: null,
     price: "R$ 70,00",
@@ -33,7 +33,7 @@ export const Entradas = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa crocante",
     sub: null,
     price: "R$ 76,00",
@@ -41,7 +41,7 @@ export const Entradas = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa ao alho e óleo",
     sub: null,
     price: "R$ 68,00",
@@ -49,7 +49,7 @@ export const Entradas = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Isca de peixe à milanesa",
     sub: null,
     price: "R$ 59,00",
@@ -57,7 +57,7 @@ export const Entradas = [
   },
   {
     id: 8,
-    ativo: "S",
+    ativo: true,
     name: "Isca de peixe",
     sub: null,
     price: "R$ 59,00",
@@ -65,7 +65,7 @@ export const Entradas = [
   },
   {
     id: 9,
-    ativo: "S",
+    ativo: true,
     name: "Isca de filé c/ fritas",
     sub: null,
     price: "R$ 63,00",
@@ -73,7 +73,7 @@ export const Entradas = [
   },
   {
     id: 10,
-    ativo: "S",
+    ativo: true,
     name: "Isca de maminha c/ macaxeira",
     sub: null,
     price: "R$ 65,00",
@@ -81,7 +81,7 @@ export const Entradas = [
   },
   {
     id: 11,
-    ativo: "S",
+    ativo: true,
     name: "Isca de picanha c/ macaxeira",
     sub: null,
     price: "R$ 71,00",
@@ -89,7 +89,7 @@ export const Entradas = [
   },
   {
     id: 12,
-    ativo: "S",
+    ativo: true,
     name: "Charque c/ macaxeira",
     sub: null,
     price: "R$ 55,00",
@@ -97,7 +97,7 @@ export const Entradas = [
   },
   {
     id: 13,
-    ativo: "S",
+    ativo: true,
     name: "Entrada de Encanto",
     sub: null,
     price: "R$ 170,00",
@@ -105,7 +105,7 @@ export const Entradas = [
   },
   {
     id: 14,
-    ativo: "S",
+    ativo: true,
     name: "Tábua de frios",
     sub: null,
     price: "R$ 52,00",
@@ -113,7 +113,7 @@ export const Entradas = [
   },
   {
     id: 15,
-    ativo: "S",
+    ativo: true,
     name: "Batata ou Macaxeira",
     sub: null,
     price: "R$ 23,00",
@@ -121,7 +121,7 @@ export const Entradas = [
   },
   {
     id: 16,
-    ativo: "S",
+    ativo: true,
     name: "Bolinho de Bacalhau",
     sub: null,
     price: "R$ 50,00",
@@ -129,7 +129,7 @@ export const Entradas = [
   },
   {
     id: 17,
-    ativo: "S",
+    ativo: true,
     name: "Casquinha de Caranguejo",
     sub: null,
     price: "R$ 40,00",
@@ -139,7 +139,7 @@ export const Entradas = [
 export const mujicas_caldos = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Caldo de Peixe",
     sub: null,
     price: "R$ 30,00",
@@ -147,7 +147,7 @@ export const mujicas_caldos = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Regional",
     sub: null,
     price: "R$ 35,00",
@@ -155,7 +155,7 @@ export const mujicas_caldos = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Mista",
     sub: "(Camarão Regional / Caranguejo)",
     price: "R$ 55,00",
@@ -163,7 +163,7 @@ export const mujicas_caldos = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa",
     sub: null,
     price: "R$ 52,00",
@@ -171,7 +171,7 @@ export const mujicas_caldos = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Caldo de Carne",
     sub: null,
     price: "R$ 30,00",
@@ -179,7 +179,7 @@ export const mujicas_caldos = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Caldo de Frango",
     sub: null,
     price: "R$ 30,00",
@@ -189,7 +189,7 @@ export const mujicas_caldos = [
 export const peixe_ao_molho = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Peixe ao molho de camarão Regional",
     sub: null,
     price: "R$ 95,00",
@@ -197,7 +197,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Encanto Amapaense",
     sub: null,
     price: "R$ 95,00",
@@ -205,7 +205,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Escabeche",
     sub: null,
     price: "R$ 90,00",
@@ -213,7 +213,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Peixe ao molho branco",
     sub: "(c/ camarão rosa)",
     price: "R$ 108,00",
@@ -221,7 +221,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Peixe à delícia",
     sub: null,
     price: "R$ 89,00",
@@ -230,7 +230,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Peixe ao molho de alcaparra",
     sub: "(c/ camarão rosa)",
     price: "R$ 110,00",
@@ -238,7 +238,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Peixe ao molho de castanha",
     sub: null,
     price: "R$ 100,00",
@@ -246,7 +246,7 @@ export const peixe_ao_molho = [
   },
   {
     id: 8,
-    ativo: "S",
+    ativo: true,
     name: "Peixe ao molho de taperebá",
     sub: null,
     price: "R$ 88,00",
@@ -256,7 +256,7 @@ export const peixe_ao_molho = [
 export const peixe_frito = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Recheado",
     sub: "(com Camarão Regional / Caranguejo)",
     price: "R$ 99,00",
@@ -264,7 +264,7 @@ export const peixe_frito = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Recheado com camarão rosa",
     sub: null,
     price: "R$ 105,00",
@@ -272,7 +272,7 @@ export const peixe_frito = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Crocante",
     sub: null,
     price: "R$ 86,00",
@@ -280,7 +280,7 @@ export const peixe_frito = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Peixe na crosta de castanha",
     sub: null,
     price: "R$ 95,00",
@@ -288,7 +288,7 @@ export const peixe_frito = [
   },
   {
     id: 5,
-    ativo: "N",
+    ativo: false,
     name: "Tucunaré na manteiga",
     sub: null,
     price: "R$ 00,00",
@@ -297,7 +297,7 @@ export const peixe_frito = [
   },
   {
     id: 6,
-    ativo: "N",
+    ativo: false,
     name: "Tucunaré do cheff",
     sub: null,
     price: "R$ 00,00",
@@ -306,7 +306,7 @@ export const peixe_frito = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Peixe Frito",
     sub: null,
     price: "R$ 82,00",
@@ -316,7 +316,7 @@ export const peixe_frito = [
 export const peixe_na_chapa = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Peixe na chapa c/ legumes",
     sub: null,
     price: "R$ 90,00",
@@ -324,7 +324,7 @@ export const peixe_na_chapa = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Peixe na chapa c/ camarão rosa",
     sub: null,
     price: "R$ 98,00",
@@ -332,7 +332,7 @@ export const peixe_na_chapa = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Mistura Tucuju",
     sub: null,
     price: "R$ 125,00",
@@ -340,7 +340,7 @@ export const peixe_na_chapa = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Prato do cheff ",
     sub: "(Camarão Rosa e Pitu)",
     price: "R$ 140,00",
@@ -348,7 +348,7 @@ export const peixe_na_chapa = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Peixe pai-d' égua",
     sub: "(com Camarão Rosa)",
     price: "R$ 105,00",
@@ -357,7 +357,7 @@ export const peixe_na_chapa = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Encanto Regional",
     sub: null,
     price: "R$ 115,00",
@@ -367,7 +367,7 @@ export const peixe_na_chapa = [
 export const camarao = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Regional",
     sub: null,
     price: "R$ 84,00",
@@ -375,7 +375,7 @@ export const camarao = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Regional empanado",
     sub: null,
     price: "R$ 86,00",
@@ -383,7 +383,7 @@ export const camarao = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa ao molho branco",
     sub: null,
     price: "R$ 93,00",
@@ -391,7 +391,7 @@ export const camarao = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa empanado",
     sub: null,
     price: "R$ 92,00",
@@ -399,7 +399,7 @@ export const camarao = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa ao alho e óleo",
     sub: null,
     price: "R$ 95,00",
@@ -408,7 +408,7 @@ export const camarao = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa crocante",
     sub: null,
     price: "R$ 92,00",
@@ -417,7 +417,7 @@ export const camarao = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Encanto ",
     sub: "(Empanado na Castanha)",
     price: "R$ 96,00",
@@ -425,7 +425,7 @@ export const camarao = [
   },
   {
     id: 8,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Pitú ao alho e óleo",
     sub: null,
     price: "R$ 142,00",
@@ -433,7 +433,7 @@ export const camarao = [
   },
   {
     id: 9,
-    ativo: "S",
+    ativo: true,
     name: "Strogonoffde Camarão Rosa",
     sub: null,
     price: "R$ 92,00",
@@ -441,7 +441,7 @@ export const camarao = [
   },
   {
     id: 10,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Rosa no queijo e manteiga",
     sub: null,
     price: "R$ 92,00",
@@ -449,7 +449,7 @@ export const camarao = [
   },
   {
     id: 11,
-    ativo: "S",
+    ativo: true,
     name: "Camarão Tropical",
     sub: null,
     price: "R$ 98,00",
@@ -457,7 +457,7 @@ export const camarao = [
   },
   {
     id: 12,
-    ativo: "S",
+    ativo: true,
     name: "Risoto de cantarão Rosa",
     sub: null,
     price: "R$ 125,00",
@@ -468,7 +468,7 @@ export const camarao = [
 export const carnes = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Filé Grehado",
     sub: null,
     price: "R$ 89,00",
@@ -476,7 +476,7 @@ export const carnes = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Filé c/ fritas",
     sub: null,
     price: "R$ 92,00",
@@ -484,7 +484,7 @@ export const carnes = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Filé à Parmegiana",
     sub: null,
     price: "R$ 93,00",
@@ -492,7 +492,7 @@ export const carnes = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Filé à Rolê",
     sub: null,
     price: "R$ 100,00",
@@ -500,7 +500,7 @@ export const carnes = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Medalhão de Filé",
     sub: null,
     price: "R$ 98,00",
@@ -508,7 +508,7 @@ export const carnes = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Filé ao molho catupiry",
     sub: null,
     price: "R$ 98,00",
@@ -516,7 +516,7 @@ export const carnes = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Picanha c/ macaxeira",
     sub: "(Maturada)",
     price: "R$ 130,00",
@@ -525,7 +525,7 @@ export const carnes = [
   },
   {
     id: 9,
-    ativo: "S",
+    ativo: true,
     name: "Picanha na cerveja",
     sub: "(Maturada)",
     price: "R$ 138,00",
@@ -533,7 +533,7 @@ export const carnes = [
   },
   {
     id: 10,
-    ativo: "S",
+    ativo: true,
     name: "Picanha c/ abacaxi e legumes",
     sub: "(Maturada)",
     price: "R$ 127,00",
@@ -541,7 +541,7 @@ export const carnes = [
   },
   {
     id: 11,
-    ativo: "S",
+    ativo: true,
     name: "Mmninha c/ macaxeira",
     sub: "(Maturada)",
     price: "R$ 100,00",
@@ -549,7 +549,7 @@ export const carnes = [
   },
   {
     id: 12,
-    ativo: "S",
+    ativo: true,
     name: "Mista ",
     sub: "(Peixe,Frango,Camarão rosa, Calabresa, Maminha)",
     price: "R$ 125,00",
@@ -560,7 +560,7 @@ export const carnes = [
 export const frango = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Frango grelhado",
     sub: null,
     price: "R$ 69,00",
@@ -568,7 +568,7 @@ export const frango = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Frango crocante",
     sub: null,
     price: "R$ 75,00",
@@ -576,7 +576,7 @@ export const frango = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "strogonoff",
     sub: null,
     price: "R$ 72,00",
@@ -587,7 +587,7 @@ export const frango = [
 export const moquecas = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Filhote",
     sub: null,
     price: "R$ 100,00",
@@ -595,7 +595,7 @@ export const moquecas = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Camarão",
     sub: null,
     price: "R$ 110,00",
@@ -603,7 +603,7 @@ export const moquecas = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Mista ",
     sub: "(Filhote, Camarão Rosa)",
     price: "R$ 125,00",
@@ -611,7 +611,7 @@ export const moquecas = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Completa",
     sub: "(Filhote, Camarão Rosa, Pitú)",
     price: "R$ 145,00",
@@ -619,7 +619,7 @@ export const moquecas = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Pirarucu",
     sub: null,
     price: "R$ 100,00",
@@ -627,7 +627,7 @@ export const moquecas = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Baiana",
     sub: null,
     price: "R$ 105,00",
@@ -638,7 +638,7 @@ export const moquecas = [
 export const caldeiradas = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Filhote",
     sub: null,
     price: "R$ 100,00",
@@ -646,7 +646,7 @@ export const caldeiradas = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Misra",
     sub: "(Filhote, Camarão Rosa)",
     price: "R$ 125,00",
@@ -654,7 +654,7 @@ export const caldeiradas = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Completa",
     sub: "(Filhote, Camarão Rosa, Pitú)",
     price: "R$ 145,00",
@@ -662,7 +662,7 @@ export const caldeiradas = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Encanto Amapaense",
     sub: null,
     price: "R$ 135,00",
@@ -670,7 +670,7 @@ export const caldeiradas = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Pirarucu",
     sub: null,
     price: "R$ 100,00",
@@ -678,7 +678,7 @@ export const caldeiradas = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Tucunaré",
     sub: null,
     price: "R$ 150,00",
@@ -689,7 +689,7 @@ export const caldeiradas = [
 export const Porcoes_extras = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Arroz baião",
     sub: null,
     price: "R$ 10,00",
@@ -697,7 +697,7 @@ export const Porcoes_extras = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Arroz à grega",
     sub: null,
     price: "R$ 9,00",
@@ -705,7 +705,7 @@ export const Porcoes_extras = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Arroz branco",
     sub: null,
     price: "R$ 6,00",
@@ -713,7 +713,7 @@ export const Porcoes_extras = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Arroz paraense",
     sub: null,
     price: "R$ 20,00",
@@ -721,7 +721,7 @@ export const Porcoes_extras = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Arroz piamontes",
     sub: null,
     price: "R$ 12,00",
@@ -729,7 +729,7 @@ export const Porcoes_extras = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Salada de maionese",
     sub: null,
     price: "R$ 5,00",
@@ -737,7 +737,7 @@ export const Porcoes_extras = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Salada de pirarucu",
     sub: null,
     price: "R$ 40,00",
@@ -745,7 +745,7 @@ export const Porcoes_extras = [
   },
   {
     id: 8,
-    ativo: "S",
+    ativo: true,
     name: "Salada de Camarão Regional",
     sub: null,
     price: "R$ 40,00",
@@ -753,7 +753,7 @@ export const Porcoes_extras = [
   },
   {
     id: 9,
-    ativo: "S",
+    ativo: true,
     name: "Purê",
     sub: null,
     price: "R$ 5,00",
@@ -761,7 +761,7 @@ export const Porcoes_extras = [
   },
   {
     id: 10,
-    ativo: "S",
+    ativo: true,
     name: "Vinagrete",
     sub: null,
     price: "R$ 5,00",
@@ -769,7 +769,7 @@ export const Porcoes_extras = [
   },
   {
     id: 11,
-    ativo: "S",
+    ativo: true,
     name: "Farofa de ovo",
     sub: null,
     price: "R$ 15,00",
@@ -777,7 +777,7 @@ export const Porcoes_extras = [
   },
   {
     id: 12,
-    ativo: "S",
+    ativo: true,
     name: "Farofa de camarão",
     sub: null,
     price: "R$ 30,00",
@@ -785,7 +785,7 @@ export const Porcoes_extras = [
   },
   {
     id: 13,
-    ativo: "S",
+    ativo: true,
     name: "Legumes refogados",
     sub: null,
     price: "R$ 20,00",
@@ -793,7 +793,7 @@ export const Porcoes_extras = [
   },
   {
     id: 14,
-    ativo: "S",
+    ativo: true,
     name: "Pirão",
     sub: null,
     price: "R$ 20,00",
@@ -801,7 +801,7 @@ export const Porcoes_extras = [
   },
   {
     id: 15,
-    ativo: "S",
+    ativo: true,
     name: "Filé kids",
     sub: null,
     price: "R$ 30,00",
@@ -809,7 +809,7 @@ export const Porcoes_extras = [
   },
   {
     id: 16,
-    ativo: "S",
+    ativo: true,
     name: "Frango kids",
     sub: null,
     price: "R$ 25,00",
@@ -817,7 +817,7 @@ export const Porcoes_extras = [
   },
   {
     id: 17,
-    ativo: "S",
+    ativo: true,
     name: "Peixe kids",
     sub: null,
     price: "R$ 30,00",
@@ -828,7 +828,7 @@ export const Porcoes_extras = [
 export const Sobremesas = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Mouse",
     sub: null,
     price: "R$ 17,00",
@@ -836,7 +836,7 @@ export const Sobremesas = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Banana flambada c sorvete",
     sub: null,
     price: "R$ 20,00",
@@ -844,7 +844,7 @@ export const Sobremesas = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Açaí",
     sub: null,
     price: "R$ 15,00",
@@ -852,7 +852,7 @@ export const Sobremesas = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Pudim",
     sub: null,
     price: "R$ 15,00",
@@ -863,7 +863,7 @@ export const Sobremesas = [
 export const Bebidas = [
   {
     id: 1,
-    ativo: "S",
+    ativo: true,
     name: "Laranja ou Laranja c/ morango",
     sub: null,
     price: "R$ 10,00",
@@ -871,7 +871,7 @@ export const Bebidas = [
   },
   {
     id: 2,
-    ativo: "S",
+    ativo: true,
     name: "Limonada ou Limonada suíça",
     sub: null,
     price: "R$ 8,00",
@@ -879,7 +879,7 @@ export const Bebidas = [
   },
   {
     id: 3,
-    ativo: "S",
+    ativo: true,
     name: "Sucos diversos",
     sub: null,
     price: "R$ 8,00",
@@ -887,7 +887,7 @@ export const Bebidas = [
   },
   {
     id: 4,
-    ativo: "S",
+    ativo: true,
     name: "Jarra",
     sub: null,
     price: "R$ 28,00",
@@ -895,7 +895,7 @@ export const Bebidas = [
   },
   {
     id: 5,
-    ativo: "S",
+    ativo: true,
     name: "Jarra de laranja",
     sub: null,
     price: "R$ 35,00",
@@ -903,7 +903,7 @@ export const Bebidas = [
   },
   {
     id: 6,
-    ativo: "S",
+    ativo: true,
     name: "Refrigerante lata",
     sub: null,
     price: "R$ 6,00",
@@ -911,7 +911,7 @@ export const Bebidas = [
   },
   {
     id: 7,
-    ativo: "S",
+    ativo: true,
     name: "Refrigerante 1 litro",
     sub: null,
     price: "R$ 12,00",
@@ -919,7 +919,7 @@ export const Bebidas = [
   },
   {
     id: 8,
-    ativo: "S",
+    ativo: true,
     name: "Aguás s/gás",
     sub: null,
     price: "R$ 4,50",
@@ -927,7 +927,7 @@ export const Bebidas = [
   },
   {
     id: 9,
-    ativo: "S",
+    ativo: true,
     name: "Aguác c/ gás",
     sub: null,
     price: "R$ 6,00",
@@ -935,7 +935,7 @@ export const Bebidas = [
   },
   {
     id: 10,
-    ativo: "S",
+    ativo: true,
     name: "Água tônica",
     sub: null,
     price: "R$ 6,00",
@@ -943,7 +943,7 @@ export const Bebidas = [
   },
   {
     id: 11,
-    ativo: "S",
+    ativo: true,
     name: "Água de coco",
     sub: null,
     price: "R$ 6,00",
@@ -951,7 +951,7 @@ export const Bebidas = [
   },
   {
     id: 12,
-    ativo: "S",
+    ativo: true,
     name: "H2o",
     sub: null,
     price: "R$ 6,50",
@@ -959,7 +959,7 @@ export const Bebidas = [
   },
   {
     id: 13,
-    ativo: "S",
+    ativo: true,
     name: "Red bull",
     sub: null,
     price: "R$ 15,00",
@@ -967,7 +967,7 @@ export const Bebidas = [
   },
   {
     id: 14,
-    ativo: "S",
+    ativo: true,
     name: "Schweppes citrus",
     sub: null,
     price: "R$ 6,00",
@@ -975,7 +975,7 @@ export const Bebidas = [
   },
   {
     id: 15,
-    ativo: "S",
+    ativo: true,
     name: "Schweppes tônica",
     sub: null,
     price: "R$ 6,00",
@@ -983,7 +983,7 @@ export const Bebidas = [
   },
   {
     id: 16,
-    ativo: "S",
+    ativo: true,
     name: "Ks 350ml",
     sub: null,
     price: "R$ 7,00",
@@ -991,7 +991,7 @@ export const Bebidas = [
   },
   {
     id: 17,
-    ativo: "S",
+    ativo: true,
     name: "Ks 1 litro",
     sub: null,
     price: "R$ 14,00",
