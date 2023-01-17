@@ -19,6 +19,56 @@ import { Affix, Anchor, Button, Carousel, Collapse, Drawer } from "antd";
 import React, { useEffect, useState } from "react";
 import { CaretRightOutlined, UnorderedListOutlined } from "@ant-design/icons";
 function App() {
+  const Slide1 = [
+    {
+      id: 1,
+      src: require("./assets/regional.jpeg"),
+      caption: "Encanto Redional",
+    },
+    {
+      id: 2,
+      src: require("./assets/p_crosta_castanha.jpg"),
+      caption: "Peixe na Crosta da Castanha",
+    },
+    { id: 3, src: require("./assets/tucuju.jpg"), caption: "Mistura tucuju" },
+    {
+      id: 4,
+      src: require("./assets/camarao_no_bafo.jpg"),
+      caption: "Camarão no bafo",
+    },
+    { id: 5, src: require("./assets/calderada.jpg"), caption: "Calderada" },
+    {
+      id: 6,
+      src: require("./assets/isca_de_file.jpg"),
+      caption: "Peixe frito",
+    },
+    {
+      id: 7,
+      src: require("./assets/peixe_a_delicia.jpg"),
+      caption: "Peixe a delicia",
+    },
+    {
+      id: 8,
+      src: require("./assets/peixe_ao_molho_camarao_regional.jpg"),
+      caption: "Peixe ao molho de camarão",
+    },
+    { id: 9, src: require("./assets/pirao.jpg"), caption: "Pirão" },
+    // ...
+  ];
+  const Slide2 = [
+    { id: 1, src: require("./assets/musse.jpg"), caption: "Musse" },
+    { id: 2, src: require("./assets/pudim.jpg"), caption: "Pudim" },
+  ];
+  const Slide3 = [
+    { id: 1, src: require("./assets/drink1.jpg"), caption: "Bebidas" },
+    { id: 2, src: require("./assets/drink2.jpg"), caption: "Bebidas" },
+    { id: 3, src: require("./assets/drink3.jpg"), caption: "Bebidas" },
+    { id: 4, src: require("./assets/drink4.jpg"), caption: "Bebidas" },
+    { id: 5, src: require("./assets/drink5.jpg"), caption: "Bebidas" },
+    { id: 6, src: require("./assets/drink6.jpg"), caption: "Bebidas" },
+    { id: 7, src: require("./assets/drink7.jpg"), caption: "Bebidas" },
+  ];
+
   const topRef = React.useRef(null);
   const [targetOffset, setTargetOffset] = useState(undefined);
   const { Panel } = Collapse;
@@ -33,7 +83,6 @@ function App() {
   useEffect(() => {
     setTargetOffset(topRef.current?.clientHeight);
   }, []);
-  console.log("bem vindo");
   return (
     <div
       className="App"
@@ -161,83 +210,17 @@ function App() {
       </Drawer>
 
       <div style={{ margin: 5 }}>
-        <Carousel showArrows={true} autoplay={true}>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/regional.jpeg")}
-              alt="c-encanto-regional"
-            />
-            <div style={{ fontWeight: "bold" }}>Encanto Regional</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/p_crosta_castanha.jpg")}
-              alt="p_crosta_castanha"
-            />
-            <div style={{ fontWeight: "bold" }}>
-              Peixe na crosta da castanha
+        <Carousel showArrows={true} autoplay={true} effect={"fade"}>
+          {Slide1.map((item) => (
+            <div key={item.id}>
+              <img
+                src={item.src}
+                alt={item.caption}
+                style={{ width: "100%", height: 600, borderRadius: 10 }}
+              />
+              <div>{item.caption}</div>
             </div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/tucuju.jpg")}
-              alt="tucuju"
-            />
-            <div style={{ fontWeight: "bold" }}>Mistura tucuju</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/camarao_no_bafo.jpg")}
-              alt="cararao_no_bafo"
-            />
-            <div style={{ fontWeight: "bold" }}>Cararão no bafo</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/calderada.jpg")}
-              alt="caldeirada"
-            />
-            <div style={{ fontWeight: "bold" }}>Caldeirada</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/isca_de_file.jpg")}
-              alt="isca_de_file"
-            />
-            <div style={{ fontWeight: "bold" }}>Isca de file</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/peixe_a_delicia.jpg")}
-              alt="peixe_a_delicia"
-            />
-            <div style={{ fontWeight: "bold" }}>Peixe a delícia</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/peixe_ao_molho_camarao_regional.jpg")}
-              alt="peixe_ao_molho_caramarao_regional"
-            />
-            <div style={{ fontWeight: "bold" }}>
-              Peixe ao molho de camarão regional
-            </div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/pirao.jpg")}
-              alt="pirao"
-            />
-            <div style={{ fontWeight: "bold" }}>Pirão</div>
-          </div>
+          ))}
         </Carousel>
       </div>
       <Collapse
@@ -999,22 +982,16 @@ function App() {
       </Collapse>
       <div id="part-12" style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/musse.jpg")}
-              alt="musse"
-            />
-            <div style={{ fontWeight: "bold" }}>Musse</div>
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/pudim.jpg")}
-              alt="pudim"
-            />
-            <div style={{ fontWeight: "bold" }}>Pudim</div>
-          </div>
+          {Slide2.map((item) => (
+            <div key={item.id}>
+              <img
+                src={item.src}
+                alt={item.caption}
+                style={{ width: "100%", height: 600, borderRadius: 10 }}
+              />
+              <div>{item.caption}</div>
+            </div>
+          ))}
         </Carousel>
       </div>
       <Collapse
@@ -1087,55 +1064,15 @@ function App() {
 
       <div id="part-13" style={{ margin: 5 }}>
         <Carousel showArrows={true} autoplay={true}>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink1.jpg")}
-              alt="drink1"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink2.jpg")}
-              alt="drink2"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink3.jpg")}
-              alt="drink3"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink4.jpg")}
-              alt="drink4"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink5.jpg")}
-              alt="drink5"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink6.jpg")}
-              alt="drink6"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%", height: 600, borderRadius: 10 }}
-              src={require("./assets/drink7.jpg")}
-              alt="drink7"
-            />
-          </div>
+          {Slide3.map((item) => (
+            <div key={item.id}>
+              <img
+                src={item.src}
+                alt={item.caption}
+                style={{ width: "100%", height: 600, borderRadius: 10 }}
+              />
+            </div>
+          ))}
         </Carousel>
       </div>
 
