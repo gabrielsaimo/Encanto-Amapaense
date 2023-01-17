@@ -90,11 +90,6 @@ function App() {
         background:
           " linear-gradient(90deg, rgba(178,125,64,1) 0%, rgba(251,247,244,1) 100%)",
         width: "100%",
-        backgroundImage: `url(${require("./assets/fundo_site.jpeg")})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
         maxWidth: 768,
         height: "100%",
         backgroundSize: "cover",
@@ -236,7 +231,7 @@ function App() {
                   fontSize: 15,
                   color: "transparent",
                   backgroundClip: "text",
-                  backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                 }}
               >
                 {item.caption}
@@ -278,7 +273,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -301,7 +296,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Entrada.name}
@@ -313,7 +308,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Entrada.price}
@@ -365,7 +360,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -388,7 +383,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Mujica.name}
@@ -400,7 +395,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Mujica.price}
@@ -452,7 +447,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -475,7 +470,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Peixe.name}
@@ -487,7 +482,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Peixe.price}
@@ -539,7 +534,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -562,7 +557,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Peixe.name}
@@ -574,7 +569,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Peixe.price}
@@ -625,7 +620,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -648,7 +643,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Peixe.name}
@@ -660,7 +655,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Peixe.price}
@@ -712,7 +707,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -735,7 +730,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Camarao.name}
@@ -747,7 +742,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Camarao.price}
@@ -799,7 +794,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -822,7 +817,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Carnes.name}
@@ -834,7 +829,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Carnes.price}
@@ -886,7 +881,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -909,7 +904,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Frango.name}
@@ -921,7 +916,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Frango.price}
@@ -972,7 +967,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -995,7 +990,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {moquecas.name}
@@ -1007,7 +1002,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {moquecas.price}
@@ -1058,7 +1053,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -1081,7 +1076,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {caldeiradas.name}
@@ -1093,7 +1088,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {caldeiradas.price}
@@ -1144,7 +1139,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -1167,7 +1162,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Porcoes_extras.name}
@@ -1179,7 +1174,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Porcoes_extras.price}
@@ -1222,7 +1217,7 @@ function App() {
                   fontSize: 15,
                   color: "transparent",
                   backgroundClip: "text",
-                  backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                 }}
               >
                 {item.caption}
@@ -1260,7 +1255,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -1283,7 +1278,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Sobremesa.name}
@@ -1295,7 +1290,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Sobremesa.price}
@@ -1365,7 +1360,7 @@ function App() {
               style={{
                 border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#f36e3e",
+                borderColor: "#7a4827",
                 margin: 10,
                 marginBottom: 45,
                 padding: 5,
@@ -1388,7 +1383,7 @@ function App() {
                     fontSize: 15,
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                    backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
                   }}
                 >
                   {Bebida.name}
@@ -1400,7 +1395,7 @@ function App() {
                     flex: "none",
                     color: "transparent",
                     backgroundClip: "text",
-                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                    backgroundImage: "linear-gradient(60deg, #000,#000 )",
                   }}
                 >
                   {Bebida.price}
