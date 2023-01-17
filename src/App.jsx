@@ -90,6 +90,11 @@ function App() {
         background:
           " linear-gradient(90deg, rgba(178,125,64,1) 0%, rgba(251,247,244,1) 100%)",
         width: "100%",
+        backgroundImage: `url(${require("./assets/fundo_site.jpeg")})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
         maxWidth: 768,
         height: "100%",
         backgroundSize: "cover",
@@ -223,7 +228,19 @@ function App() {
                   objectFit: "fill",
                 }}
               />
-              <div>{item.caption}</div>
+              <div
+                style={{
+                  WebkitBackgroundClip: "text",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 15,
+                  color: "transparent",
+                  backgroundClip: "text",
+                  backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                }}
+              >
+                {item.caption}
+              </div>
             </div>
           ))}
         </Carousel>
@@ -259,28 +276,46 @@ function App() {
           {Entradas.map((Entrada) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Entrada.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Entrada.price}
                 </p>
               </div>
@@ -328,28 +363,46 @@ function App() {
           {mujicas_caldos.map((Mujica) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Mujica.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Mujica.price}
                 </p>
               </div>
@@ -397,11 +450,12 @@ function App() {
           {peixe_ao_molho.map((Peixe) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
@@ -414,11 +468,28 @@ function App() {
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Peixe.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Peixe.price}
                 </p>
               </div>
@@ -466,28 +537,46 @@ function App() {
           {peixe_frito.map((Peixe) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Peixe.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Peixe.price}
                 </p>
               </div>
@@ -534,28 +623,46 @@ function App() {
           {peixe_na_chapa.map((Peixe) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Peixe.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Peixe.price}
                 </p>
               </div>
@@ -603,28 +710,46 @@ function App() {
           {camarao.map((Camarao) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Camarao.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Camarao.price}
                 </p>
               </div>
@@ -672,28 +797,46 @@ function App() {
           {carnes.map((Carnes) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Carnes.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Carnes.price}
                 </p>
               </div>
@@ -741,28 +884,46 @@ function App() {
           {frango.map((Frango) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Frango.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Frango.price}
                 </p>
               </div>
@@ -809,28 +970,46 @@ function App() {
           {moquecas.map((moquecas) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {moquecas.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {moquecas.price}
                 </p>
               </div>
@@ -877,28 +1056,46 @@ function App() {
           {caldeiradas.map((caldeiradas) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {caldeiradas.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {caldeiradas.price}
                 </p>
               </div>
@@ -945,28 +1142,46 @@ function App() {
           {Porcoes_extras.map((Porcoes_extras) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Porcoes_extras.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Porcoes_extras.price}
                 </p>
               </div>
@@ -999,7 +1214,19 @@ function App() {
                   objectFit: "fill",
                 }}
               />
-              <div>{item.caption}</div>
+              <div
+                style={{
+                  WebkitBackgroundClip: "text",
+                  fontWeight: "bold",
+                  flex: "none",
+                  fontSize: 15,
+                  color: "transparent",
+                  backgroundClip: "text",
+                  backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                }}
+              >
+                {item.caption}
+              </div>
             </div>
           ))}
         </Carousel>
@@ -1031,28 +1258,46 @@ function App() {
           {Sobremesas.map((Sobremesa) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Sobremesa.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Sobremesa.price}
                 </p>
               </div>
@@ -1118,28 +1363,46 @@ function App() {
           {Bebidas.map((Bebida) => (
             <div
               style={{
-                border: "2px solid white",
+                border: "3px solid white",
                 borderRadius: 10,
-                borderColor: "#7a4827",
+                borderColor: "#f36e3e",
                 margin: 10,
                 marginBottom: 45,
+                padding: 5,
               }}
             >
               <div
                 style={{
                   justifyContent: "space-between",
                   display: "flex",
-                  width: "90%",
+                  width: "95%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
               >
                 <p
-                  style={{ color: "#7a4827", fontWeight: "bold", flex: "none" }}
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    fontSize: 15,
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg, #E21143, #FFB03A)",
+                  }}
                 >
                   {Bebida.name}
                 </p>
-                <p style={{ color: "black", fontWeight: "bold", flex: "none" }}>
+                <p
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    fontWeight: "bold",
+                    flex: "none",
+                    color: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(60deg,#FFB03A ,#E21143 )",
+                  }}
+                >
                   {Bebida.price}
                 </p>
               </div>
