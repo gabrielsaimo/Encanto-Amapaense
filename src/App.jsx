@@ -40,7 +40,7 @@ function App() {
     {
       id: 6,
       src: require("./assets/isca_de_file.jpg"),
-      caption: "Peixe frito",
+      caption: "Isca de file",
     },
     {
       id: 7,
