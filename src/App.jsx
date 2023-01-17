@@ -216,7 +216,12 @@ function App() {
               <img
                 src={item.src}
                 alt={item.caption}
-                style={{ width: "100%", height: 600, borderRadius: 10 }}
+                style={{
+                  width: "100%",
+                  height: 600,
+                  borderRadius: 10,
+                  objectFit: "fill",
+                }}
               />
               <div>{item.caption}</div>
             </div>
@@ -987,7 +992,12 @@ function App() {
               <img
                 src={item.src}
                 alt={item.caption}
-                style={{ width: "100%", height: 600, borderRadius: 10 }}
+                style={{
+                  width: "100%",
+                  height: 600,
+                  borderRadius: 10,
+                  objectFit: "fill",
+                }}
               />
               <div>{item.caption}</div>
             </div>
@@ -1063,13 +1073,18 @@ function App() {
       </Collapse>
 
       <div id="part-13" style={{ margin: 5 }}>
-        <Carousel showArrows={true} autoplay={true}>
+        <Carousel showArrows={true} autoplay={true} effect={"fade"}>
           {Slide3.map((item) => (
             <div key={item.id}>
               <img
                 src={item.src}
                 alt={item.caption}
-                style={{ width: "100%", height: 600, borderRadius: 10 }}
+                style={{
+                  width: "100%",
+                  height: 600,
+                  borderRadius: 10,
+                  objectFit: "fill",
+                }}
               />
             </div>
           ))}
