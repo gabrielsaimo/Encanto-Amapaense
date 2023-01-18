@@ -17,7 +17,7 @@ function App() {
         <Menu />
       </Affix>
       <CollapseMenu />
-      <div style={{ height: 30 }}></div>
+      <div style={{ height: 30 }} />
     </div>
   );
 }
