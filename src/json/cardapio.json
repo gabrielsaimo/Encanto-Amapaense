@@ -443,7 +443,7 @@
   {
     "price": "R$ 92,00",
     "name": "Camarão Rosa crocante",
-    "description": "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
+    "description": "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
     "sub": null,
     "ativo": true,
     "category": "Camarão",
@@ -743,7 +743,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "83"
   },
   {
@@ -752,7 +752,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "84"
   },
   {
@@ -761,7 +761,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "85"
   },
   {
@@ -770,7 +770,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "86"
   },
   {
@@ -779,7 +779,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "87"
   },
   {
@@ -788,7 +788,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "88"
   },
   {
@@ -797,7 +797,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "89"
   },
   {
@@ -806,7 +806,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "90"
   },
   {
@@ -815,7 +815,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "91"
   },
   {
@@ -824,7 +824,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "92"
   },
   {
@@ -833,7 +833,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "93"
   },
   {
@@ -842,7 +842,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "94"
   },
   {
@@ -851,7 +851,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "95"
   },
   {
@@ -860,7 +860,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "96"
   },
   {
@@ -869,7 +869,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "97"
   },
   {
@@ -878,7 +878,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "98"
   },
   {
@@ -887,7 +887,7 @@
     "description": null,
     "sub": null,
     "ativo": true,
-    "category": "Porçôes Extras",
+    "category": "Porções Extras",
     "id": "99"
   },
   {

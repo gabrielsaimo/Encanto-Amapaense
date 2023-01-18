@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
-
+import "../../css/Slide.css";
 const SlidesBebidas = () => {
   const Slide = [
     { id: 1, src: require("../../assets/drink1.jpg"), caption: "Bebidas" },
@@ -17,16 +17,7 @@ const SlidesBebidas = () => {
       <Carousel showArrows={true} autoplay={true} effect={"fade"}>
         {Slide.map((item) => (
           <div key={item.id}>
-            <img
-              src={item.src}
-              alt={item.caption}
-              style={{
-                width: "100%",
-                height: 600,
-                borderRadius: 10,
-                objectFit: "fill",
-              }}
-            />
+            <img className="img-fluid" src={item.src} alt={item.caption} />
           </div>
         ))}
       </Carousel>

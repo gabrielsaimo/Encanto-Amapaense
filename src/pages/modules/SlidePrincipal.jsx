@@ -1,5 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
+import "../../css/Slide.css";
 const SlidesPrincipal = () => {
   const Slide = [
     {
@@ -46,29 +47,8 @@ const SlidesPrincipal = () => {
       <Carousel showArrows={true} autoplay={true} effect={"fade"}>
         {Slide.map((item) => (
           <div key={item.id}>
-            <img
-              src={item.src}
-              alt={item.caption}
-              style={{
-                width: "100%",
-                height: 600,
-                borderRadius: 10,
-                objectFit: "fill",
-              }}
-            />
-            <div
-              style={{
-                WebkitBackgroundClip: "text",
-                fontWeight: "bold",
-                flex: "none",
-                fontSize: 15,
-                color: "transparent",
-                backgroundClip: "text",
-                backgroundImage: "linear-gradient(60deg,#7a4827,#000)",
-              }}
-            >
-              {item.caption}
-            </div>
+            <img src={item.src} alt={item.caption} className="img-fluid" />
+            <div className="text-center">{item.caption}</div>
           </div>
         ))}
       </Carousel>

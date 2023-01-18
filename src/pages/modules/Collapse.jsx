@@ -1,5 +1,6 @@
 import React from "react";
 import { Collapse } from "antd";
+import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import cardapio from "../../json/cardapio.json";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -47,7 +48,6 @@ const CollapseMenu = () => {
             "10",
             "11",
             "12",
-            "13",
           ]}
           destroyInactivePanel={true}
           expandIcon={({ isActive }) => (
@@ -55,18 +55,17 @@ const CollapseMenu = () => {
           )}
           style={{
             background: "transparent",
-            color: "red",
           }}
         >
           <Panel
-            id={key === "part-12" ? "part-13" : key}
+            id={key}
             style={{
               color: "#7a4827",
               fontWeight: "bold",
               backgroundImage: `url(${require("../../assets/tinta.png")}) `,
               backgroundRepeat: "no-repeat",
               backgroundSize: 150,
-              backgroundPositionX: "55%",
+              backgroundPositionX: "53%",
               backgroundPositionY: -8,
             }}
             header={item1}
@@ -75,62 +74,13 @@ const CollapseMenu = () => {
               <div>
                 {categotia.category == item1 ? (
                   <>
-                    <div
-                      style={{
-                        border: "3px solid white",
-                        borderRadius: 10,
-                        borderColor: "#7a4827",
-                        margin: 10,
-                        marginBottom: 45,
-                        padding: 5,
-                      }}
-                    >
-                      <div
-                        style={{
-                          justifyContent: "space-between",
-                          display: "flex",
-                          width: "95%",
-                          marginLeft: "auto",
-                          marginRight: "auto",
-                        }}
-                      >
-                        <p
-                          style={{
-                            WebkitBackgroundClip: "text",
-                            fontWeight: "bold",
-                            flex: "none",
-                            fontSize: 15,
-                            color: "transparent",
-                            backgroundClip: "text",
-                            backgroundImage:
-                              "linear-gradient(60deg,#7a4827,#000)",
-                          }}
-                        >
-                          {categotia.name}
-                        </p>
-                        <p
-                          style={{
-                            WebkitBackgroundClip: "text",
-                            fontWeight: "bold",
-                            flex: "none",
-                            color: "transparent",
-                            backgroundClip: "text",
-                            backgroundImage:
-                              "linear-gradient(60deg, #000,#000 )",
-                          }}
-                        >
-                          {categotia.price}
-                        </p>
+                    <div className="border">
+                      <div className="flex">
+                        <p className="p_1 name">{categotia.name}</p>
+                        <p className="p_1 price">{categotia.price}</p>
                       </div>
 
-                      <div
-                        style={{
-                          color: "#7a4827",
-                          fontWeight: "bold",
-                          flex: "none",
-                          fontSize: 10,
-                        }}
-                      >
+                      <div className="sub">
                         {categotia.sub} {categotia.description}
                       </div>
                     </div>
@@ -144,11 +94,7 @@ const CollapseMenu = () => {
     );
   });
 
-  return (
-    <div id="part-12" style={{ margin: 5 }}>
-      {items}
-    </div>
-  );
+  return <div style={{ margin: 5 }}>{items}</div>;
 };
 
 export default CollapseMenu;

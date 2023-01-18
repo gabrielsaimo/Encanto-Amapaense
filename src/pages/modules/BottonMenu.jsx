@@ -52,7 +52,7 @@ const Menu = ({ open }) => {
             <Anchor.Link href="#part-9" title="Caldeiradas" />
             <Anchor.Link href="#part-10" title="Porções extras" />
             <Anchor.Link href="#part-11" title="Sobremesas" />
-            <Anchor.Link href="#part-13" title="Bebidas" />
+            <Anchor.Link href="#part-12" title="Bebidas" />
           </Anchor>
         </Drawer>
       </div>

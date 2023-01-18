@@ -1,0 +1,46 @@
+.painel {
+  color: #7a4827;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-size: 150;
+  background-position-x: 53%;
+  background-position-y: -8;
+}
+
+.border {
+  border: 3px solid white;
+  border-radius: 10px;
+  border-color: #7a4827;
+  margin: 10px;
+  margin-bottom: 25px;
+  padding: 5px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.p_1 {
+  -webkit-background-clip: text;
+  font-weight: bold;
+  flex: none;
+  color: transparent;
+  background-clip: text;
+}
+.name {
+  background-image: linear-gradient(60deg, #7a4827, #000);
+  font-size: 15;
+}
+.price {
+  background-image: linear-gradient(60deg, #000, #000);
+}
+.sub {
+  color: #7a4827;
+  font-weight: bold;
+  flex: none;
+  font-size: 10;
+}
