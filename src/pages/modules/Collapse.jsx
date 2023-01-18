@@ -33,7 +33,23 @@ const CollapseMenu = () => {
         <Collapse
           key={index}
           bordered={false}
-          defaultActiveKey={["1"]}
+          defaultActiveKey={[
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+          ]}
+          destroyInactivePanel={true}
           expandIcon={({ isActive }) => (
             <CaretRightOutlined rotate={isActive ? 90 : 0} />
           )}
@@ -43,7 +59,7 @@ const CollapseMenu = () => {
           }}
         >
           <Panel
-            id={key}
+            id={key === "part-12" ? "part-13" : key}
             style={{
               color: "#7a4827",
               fontWeight: "bold",
@@ -54,7 +70,6 @@ const CollapseMenu = () => {
               backgroundPositionY: -8,
             }}
             header={item1}
-            key={index}
           >
             {cardapio.map((categotia) => (
               <div>
