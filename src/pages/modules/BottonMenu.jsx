@@ -1,6 +1,6 @@
 import React from "react";
-import { Anchor, Button, Drawer } from "antd";
-import { UnorderedListOutlined } from "@ant-design/icons";
+import { Anchor, Button, Drawer, Tooltip } from "antd";
+import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 
 const Menu = () => {
   const [visible, setVisible] = React.useState(false);
@@ -21,17 +21,16 @@ const Menu = () => {
   return (
     <div id="part-14" style={{ margin: 5 }}>
       <div style={{ margin: 5 }}>
-        <Button
-          type="primary"
-          style={{
-            width: 60,
-            height: 60,
-            borderRadius: 50,
-          }}
-          onClick={showDrawer}
-        >
-          <UnorderedListOutlined style={{ fontSize: 30 }} />
-        </Button>
+        <Tooltip title="search">
+          <Button
+            type="primary"
+            onClick={showDrawer}
+            shape="circle"
+            size="large"
+            icon={<SearchOutlined />}
+          />
+        </Tooltip>
+
         <Drawer
           title="Menu"
           placement={placement}

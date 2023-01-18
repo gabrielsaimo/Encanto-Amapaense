@@ -1,6 +1,6 @@
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Affix } from "antd";
+import { Affix, FloatButton } from "antd";
 import React from "react";
 import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
@@ -24,6 +24,7 @@ function App() {
           <Menu />
         </Affix>
         <CollapseMenu />
+        <FloatButton.BackTop />
         <div style={{ height: 30 }} />
       </div>
     </div>
