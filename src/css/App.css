@@ -41,8 +41,17 @@
   color: white;
 }
 .logo {
-  width: 95%;
-  margin-top: 20px;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: -65px;
+}
+.fundo {
+  height: 160px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .background_fundo {
   width: 100%;
