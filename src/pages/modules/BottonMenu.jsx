@@ -1,8 +1,8 @@
 import React from "react";
-import { Anchor, Button, Collapse, Drawer } from "antd";
+import { Anchor, Button, Drawer } from "antd";
 import { UnorderedListOutlined } from "@ant-design/icons";
 
-const Menu = ({ open }) => {
+const Menu = () => {
   const [visible, setVisible] = React.useState(false);
   const [placement, setPlacement] = React.useState("bottom");
 
