@@ -4,7 +4,7 @@ import { UnorderedListOutlined } from "@ant-design/icons";
 
 const Menu = ({ open }) => {
   const [visible, setVisible] = React.useState(false);
-  const [placement, setPlacement] = React.useState("left");
+  const [placement, setPlacement] = React.useState("bottom");
 
   const showDrawer = () => {
     setVisible(true);
