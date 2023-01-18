@@ -65,7 +65,7 @@ const CollapseMenu = () => {
               backgroundImage: `url(${require("../../assets/tinta.png")}) `,
               backgroundRepeat: "no-repeat",
               backgroundSize: 150,
-              backgroundPositionX: "53%",
+              backgroundPositionX: "55%",
               backgroundPositionY: -8,
             }}
             header={item1}
