@@ -56,13 +56,16 @@ function App() {
               <button onClick={acessar}>Acessar</button>
             </>
           ) : null}
-          <CardSlide />
+
           <CollapseMenu />
           <FloatButton.BackTop />
-          <div style={{ height: 30 }} />{" "}
+          <div style={{ height: 30 }} />
         </div>
       ) : (
-        <Dashboard />
+        <>
+          <CardSlide />
+          <Dashboard />
+        </>
       )}
     </div>
   );

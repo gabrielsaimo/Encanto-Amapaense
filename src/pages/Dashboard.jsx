@@ -227,7 +227,7 @@ export default function Dashboard() {
     },
   ];
   return (
-    <div>
+    <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
       <Row gutter={8}>
         <Col span={24}>
           <Card bordered={false}>
