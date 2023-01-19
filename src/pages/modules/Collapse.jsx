@@ -46,18 +46,13 @@ const CollapseMenu = () => {
   const db = getFirestore(firebaseConfig);
   const colletionRef = collection(db, "cardapio");
   useEffect(() => {
-    console.log("useEffect");
     const getCardapio = async () => {
       const cardapioCollection = await getDocs(colletionRef);
-      setCardapio(cardapioCollection.docs.map((doc) => doc.data()));
-      console.log(cardapioCollection.docs.map((doc) => doc.data()));
-
-      /*  setCardapio(
-        cardapioCollection.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );*/
+      setCardapio(
+        cardapioCollection.docs
+          .map((doc) => doc.data())
+          .sort((a, b) => a.id - b.id)
+      );
     };
     getCardapio();
   }, []);

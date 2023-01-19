@@ -10,7 +10,6 @@ function App() {
   const [visible, setVisible] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
   const [contar, setContar] = React.useState(0);
-  console.log("🚀 ~ file: App.jsx:13 ~ App ~ contar", contar);
   const senha = "saimolindo";
   const [senhaDigitada, setSenhaDigitada] = React.useState("");
   const acessar = () => {
@@ -21,7 +20,7 @@ function App() {
     }
   };
   React.useEffect(() => {
-    if (contar > 5) {
+    if (contar > 30 && contar < 40) {
       setVisible2(true);
     }
   }, [contar]);
@@ -42,7 +41,7 @@ function App() {
             alt="logo-principal"
             loading="lazy"
             onClick={() => {
-              setContar(contar+1);
+              setContar(contar + 1);
             }}
           />
           <Affix offsetTop={10} style={{ marginLeft: "80%" }}>

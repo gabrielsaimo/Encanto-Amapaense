@@ -68,12 +68,11 @@ export default function Dashboard() {
     console.log("useEffect");
     const getCardapio = async () => {
       const cardapioCollection = await getDocs(colletionRef);
-      setCardapio(
-        cardapioCollection.docs.map((doc) => ({ ...doc.data(), key: doc.id }))
-      );
-      console.log(
-        cardapioCollection.docs.map((doc) => ({ ...doc.data(), key: doc.id }))
-      );
+      const cardapios = cardapioCollection.docs.map((doc) => ({
+        ...doc.data(),
+        key: doc.id,
+      }));
+      setCardapio(cardapios.sort((a, b) => a.id - b.id));
     };
     getCardapio();
   }, [action]);
