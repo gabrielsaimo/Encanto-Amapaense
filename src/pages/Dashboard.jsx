@@ -22,13 +22,6 @@ import {
   FilterOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 import {
   collection,
   getDocs,
@@ -65,7 +58,6 @@ export default function Dashboard() {
   const db = getFirestore(firebaseConfig);
   const colletionRef = collection(db, "cardapio");
   useEffect(() => {
-    console.log("useEffect");
     const getCardapio = async () => {
       const cardapioCollection = await getDocs(colletionRef);
       const cardapios = cardapioCollection.docs.map((doc) => ({
