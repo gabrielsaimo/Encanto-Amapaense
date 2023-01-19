@@ -13,7 +13,7 @@ const SlidesBebidas = () => {
   ];
 
   return (
-    <div style={{ margin: 5 }}>
+    <div id={"part-12"} style={{ margin: 5 }}>
       <Carousel showArrows={true} autoplay={true} effect={"fade"}>
         {Slide.map((item) => (
           <div key={item.id}>

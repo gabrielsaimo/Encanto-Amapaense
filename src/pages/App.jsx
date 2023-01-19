@@ -4,6 +4,7 @@ import { Affix, FloatButton } from "antd";
 import React from "react";
 import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
+import CardSlide from "./modules/CardSlide";
 function App() {
   return (
     <div>
@@ -23,6 +24,7 @@ function App() {
         <Affix offsetTop={10} style={{ marginLeft: "80%" }}>
           <Menu />
         </Affix>
+        <CardSlide />
         <CollapseMenu />
         <FloatButton.BackTop />
         <div style={{ height: 30 }} />

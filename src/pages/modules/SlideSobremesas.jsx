@@ -8,7 +8,7 @@ const SlidesSobemesas = () => {
   ];
 
   return (
-    <div style={{ margin: 5 }}>
+    <div id={"part-11"} style={{ margin: 5 }}>
       <Carousel showArrows={true} autoplay={true}>
         {Slide.map((item) => (
           <div key={item.id}>
