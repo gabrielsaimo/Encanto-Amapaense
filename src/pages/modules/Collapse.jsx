@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Collapse } from "antd";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
@@ -6,8 +6,26 @@ import cardapio from "../../json/cardapio.json";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
-const { Panel } = Collapse;
+import firebase, { initializeApp } from "firebase/app";
+import "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+const { Panel } = Collapse;
+const firebaseConfig = initializeApp({
+  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
+  authDomain: "encanto-amapaense.firebaseapp.com",
+  projectId: "encanto-amapaense",
+  storageBucket: "encanto-amapaense.appspot.com",
+  messagingSenderId: "66845466662",
+  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
+  measurementId: "G-T9LP3T7QBB",
+});
 const CollapseMenu = () => {
   const Array = [
     "Entrada",
@@ -24,6 +42,25 @@ const CollapseMenu = () => {
     "Sobremesas",
     "Bebidas",
   ];
+  const [cardapio, setCardapio] = useState([]);
+  const db = getFirestore(firebaseConfig);
+  const colletionRef = collection(db, "cardapio");
+  useEffect(() => {
+    console.log("useEffect");
+    const getCardapio = async () => {
+      const cardapioCollection = await getDocs(colletionRef);
+      setCardapio(cardapioCollection.docs.map((doc) => doc.data()));
+      console.log(cardapioCollection.docs.map((doc) => doc.data()));
+
+      /*  setCardapio(
+        cardapioCollection.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      );*/
+    };
+    getCardapio();
+  }, []);
   const items = Array.map((item1, index) => {
     const key = "part-" + index;
     return (
@@ -72,12 +109,12 @@ const CollapseMenu = () => {
           >
             {cardapio.map((categotia) => (
               <div>
-                {categotia.category == item1 ? (
+                {categotia.category == item1 && categotia.active === true ? (
                   <>
                     <div className="border">
                       <div className="flex">
                         <p className="p_1 name">{categotia.name}</p>
-                        <p className="p_1 price">{categotia.price}</p>
+                        <p className="p_1 price">R$ {categotia.price},00</p>
                       </div>
 
                       <div className="sub">

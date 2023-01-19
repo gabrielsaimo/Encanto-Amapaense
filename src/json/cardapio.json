@@ -4,7 +4,7 @@
     "name": "Camarão no Bafo",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "1"
   },
@@ -13,7 +13,7 @@
     "name": "Camarão Pitú no bafo",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "2"
   },
@@ -22,7 +22,7 @@
     "name": "Camarão Pitú na chapa",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "3"
   },
@@ -31,7 +31,7 @@
     "name": "Conarão Rosa empanado",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "4"
   },
@@ -40,7 +40,7 @@
     "name": "Camarão Rosa crocante",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "5"
   },
@@ -49,7 +49,7 @@
     "name": "Camarão Rosa ao alho e óleo",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "6"
   },
@@ -58,7 +58,7 @@
     "name": "Isca de peixe à milanesa",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "7"
   },
@@ -67,7 +67,7 @@
     "name": "Isca de peixe",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "8"
   },
@@ -76,7 +76,7 @@
     "name": "Isca de filé c/ fritas",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "9"
   },
@@ -85,7 +85,7 @@
     "name": "Isca de maminha c/ macaxeira",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "10"
   },
@@ -94,7 +94,7 @@
     "name": "Isca de picanha c/ macaxeira",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "11"
   },
@@ -103,7 +103,7 @@
     "name": "Charque c/ macaxeira",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "12"
   },
@@ -112,7 +112,7 @@
     "name": "Entrada de Encanto",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "13"
   },
@@ -121,7 +121,7 @@
     "name": "Tábua de frios",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "14"
   },
@@ -130,7 +130,7 @@
     "name": "Batata ou Macaxeira",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "15"
   },
@@ -139,7 +139,7 @@
     "name": "Bolinho de Bacalhau",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "16"
   },
@@ -148,7 +148,7 @@
     "name": "Casquinha de Caranguejo",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Entrada",
     "id": "17"
   },
@@ -157,7 +157,7 @@
     "name": "Caldo de Peixe",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "18"
   },
@@ -166,7 +166,7 @@
     "name": "Camarão Regional",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "19"
   },
@@ -175,7 +175,7 @@
     "name": "Mista",
     "description": null,
     "sub": "(Camarão Regional / Caranguejo)",
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "20"
   },
@@ -184,7 +184,7 @@
     "name": "Camarão Rosa",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "21"
   },
@@ -193,7 +193,7 @@
     "name": "Caldo de Carne",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "22"
   },
@@ -202,7 +202,7 @@
     "name": "Caldo de Frango",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Mujicas e caldos",
     "id": "23"
   },
@@ -211,7 +211,7 @@
     "name": "Peixe ao molho de camarão Regional",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "24"
   },
@@ -220,7 +220,7 @@
     "name": "Peixe Encanto Amapaense",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "25"
   },
@@ -229,7 +229,7 @@
     "name": "Peixe Escabeche",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "26"
   },
@@ -238,7 +238,7 @@
     "name": "Peixe ao molho branco",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(c/ camarão rosa)",
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "27"
   },
@@ -247,7 +247,7 @@
     "name": "Peixe à delícia",
     "description": "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "28"
   },
@@ -256,7 +256,7 @@
     "name": "Peixe ao molho de alcaparra",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(c/ camarão rosa)",
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "29"
   },
@@ -265,7 +265,7 @@
     "name": "Peixe ao molho de castanha",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "30"
   },
@@ -274,7 +274,7 @@
     "name": "Peixe ao molho de taperebá",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe ao molho",
     "id": "31"
   },
@@ -283,7 +283,7 @@
     "name": "Peixe Recheado",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": "(com Camarão Regional / Caranguejo)",
-    "ativo": true,
+    "active": true,
     "category": "Peixe Frito",
     "id": "32"
   },
@@ -292,7 +292,7 @@
     "name": "Peixe Recheado com camarão rosa",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe Frito",
     "id": "33"
   },
@@ -301,7 +301,7 @@
     "name": "Peixe Crocante",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe Frito",
     "id": "34"
   },
@@ -310,7 +310,7 @@
     "name": "Peixe na crosta de castanha",
     "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe Frito",
     "id": "35"
   },
@@ -319,7 +319,7 @@
     "name": "Tucunaré na manteiga",
     "description": "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
     "sub": null,
-    "ativo": false,
+    "active": false,
     "category": "Peixe Frito",
     "id": "36"
   },
@@ -328,7 +328,7 @@
     "name": "Tucunaré do cheff",
     "description": "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
     "sub": null,
-    "ativo": false,
+    "active": false,
     "category": "Peixe Frito",
     "id": "37"
   },
@@ -337,7 +337,7 @@
     "name": "Peixe Frito",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe Frito",
     "id": "38"
   },
@@ -346,7 +346,7 @@
     "name": "Peixe na chapa c/ legumes",
     "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "39"
   },
@@ -355,7 +355,7 @@
     "name": "Peixe na chapa c/ camarão rosa",
     "description": "(Acomp. Legumes , Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "40"
   },
@@ -364,7 +364,7 @@
     "name": "Mistura Tucuju",
     "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "41"
   },
@@ -373,16 +373,16 @@
     "name": "Prato do cheff ",
     "description": "(Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi)",
     "sub": "(Camarão Rosa e Pitu)",
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "42"
   },
   {
     "price": "R$ 105,00",
     "name": "Peixe pai-d' égua",
-    "description": "Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
+    "description": "(Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
     "sub": "(com Camarão Rosa)",
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "43"
   },
@@ -391,7 +391,7 @@
     "name": "Encanto Regional",
     "description": "(Acomp. Arroz Paraense, Purê, Farofa e Banana)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Peixe na chapa",
     "id": "44"
   },
@@ -400,7 +400,7 @@
     "name": "Camarão Regional",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "45"
   },
@@ -409,7 +409,7 @@
     "name": "Camarão Regional empanado",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "46"
   },
@@ -418,7 +418,7 @@
     "name": "Camarão Rosa ao molho branco",
     "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "47"
   },
@@ -427,16 +427,16 @@
     "name": "Camarão Rosa empanado",
     "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "48"
   },
   {
     "price": "R$ 95,00",
     "name": "Camarão Rosa ao alho e óleo",
-    "description": "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
+    "description": "(Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "49"
   },
@@ -445,7 +445,7 @@
     "name": "Camarão Rosa crocante",
     "description": "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "50"
   },
@@ -454,7 +454,7 @@
     "name": "Camarão Encanto ",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": "(Empanado na Castanha)",
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "51"
   },
@@ -463,7 +463,7 @@
     "name": "Camarão Pitú ao alho e óleo",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "52"
   },
@@ -472,7 +472,7 @@
     "name": "Strogonoffde Camarão Rosa",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "53"
   },
@@ -481,7 +481,7 @@
     "name": "Camarão Rosa no queijo e manteiga",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "54"
   },
@@ -490,7 +490,7 @@
     "name": "Camarão Tropical",
     "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "55"
   },
@@ -499,7 +499,7 @@
     "name": "Risoto de cantarão Rosa",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Camarão",
     "id": "56"
   },
@@ -508,7 +508,7 @@
     "name": "Filé Grehado",
     "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "57"
   },
@@ -517,7 +517,7 @@
     "name": "Filé c/ fritas",
     "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "58"
   },
@@ -526,7 +526,7 @@
     "name": "Filé à Parmegiana",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "59"
   },
@@ -535,7 +535,7 @@
     "name": "Filé à Rolê",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "60"
   },
@@ -544,7 +544,7 @@
     "name": "Medalhão de Filé",
     "description": "(Acomp. Arroz Farofa de ovo)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "61"
   },
@@ -553,7 +553,7 @@
     "name": "Filé ao molho catupiry",
     "description": "(Acomp. Arroz, Puré ,Farofa de ovo, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "62"
   },
@@ -562,7 +562,7 @@
     "name": "Picanha c/ macaxeira",
     "description": "(Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi)",
     "sub": "(Maturada)",
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "63"
   },
@@ -571,7 +571,7 @@
     "name": "Picanha na cerveja",
     "description": null,
     "sub": "(Maturada)",
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "64"
   },
@@ -580,7 +580,7 @@
     "name": "Picanha c/ abacaxi e legumes",
     "description": "(Acomp. Arroz, Puré ,Farofa. Tucupi)",
     "sub": "(Maturada)",
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "65"
   },
@@ -589,7 +589,7 @@
     "name": "Mmninha c/ macaxeira",
     "description": null,
     "sub": "(Maturada)",
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "66"
   },
@@ -598,7 +598,7 @@
     "name": "Mista ",
     "description": null,
     "sub": "(Peixe,Frango,Camarão rosa, Calabresa, Maminha)",
-    "ativo": true,
+    "active": true,
     "category": "Carnes",
     "id": "67"
   },
@@ -607,7 +607,7 @@
     "name": "Frango grelhado",
     "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Frango",
     "id": "68"
   },
@@ -616,7 +616,7 @@
     "name": "Frango crocante",
     "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Frango",
     "id": "69"
   },
@@ -625,7 +625,7 @@
     "name": "strogonoff",
     "description": "(Acomp. Arroz,batata palha, puré, Farofa, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Frango",
     "id": "70"
   },
@@ -634,7 +634,7 @@
     "name": "Filhote",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "71"
   },
@@ -643,7 +643,7 @@
     "name": "Camarão",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "72"
   },
@@ -652,7 +652,7 @@
     "name": "Mista ",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa)",
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "73"
   },
@@ -661,7 +661,7 @@
     "name": "Completa",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa, Pitú)",
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "74"
   },
@@ -670,7 +670,7 @@
     "name": "Pirarucu",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "75"
   },
@@ -679,7 +679,7 @@
     "name": "Baiana",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Moquecas",
     "id": "76"
   },
@@ -688,7 +688,7 @@
     "name": "Filhote",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "77"
   },
@@ -697,7 +697,7 @@
     "name": "Misra",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa)",
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "78"
   },
@@ -706,7 +706,7 @@
     "name": "Completa",
     "description": "(Acomp. Arroz, Pirão, Tucupi)",
     "sub": "(Filhote, Camarão Rosa, Pitú)",
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "79"
   },
@@ -715,7 +715,7 @@
     "name": "Encanto Amapaense",
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "80"
   },
@@ -724,7 +724,7 @@
     "name": "Pirarucu",
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "81"
   },
@@ -733,7 +733,7 @@
     "name": "Tucunaré",
     "description": "(Acomp. Arroz, Pirão,Tucupi)",
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Caldeiradas",
     "id": "82"
   },
@@ -742,7 +742,7 @@
     "name": "Arroz baião",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "83"
   },
@@ -751,7 +751,7 @@
     "name": "Arroz à grega",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "84"
   },
@@ -760,7 +760,7 @@
     "name": "Arroz branco",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "85"
   },
@@ -769,7 +769,7 @@
     "name": "Arroz paraense",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "86"
   },
@@ -778,7 +778,7 @@
     "name": "Arroz piamontes",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "87"
   },
@@ -787,7 +787,7 @@
     "name": "Salada de maionese",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "88"
   },
@@ -796,7 +796,7 @@
     "name": "Salada de pirarucu",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "89"
   },
@@ -805,7 +805,7 @@
     "name": "Salada de Camarão Regional",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "90"
   },
@@ -814,7 +814,7 @@
     "name": "Purê",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "91"
   },
@@ -823,7 +823,7 @@
     "name": "Vinagrete",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "92"
   },
@@ -832,7 +832,7 @@
     "name": "Farofa de ovo",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "93"
   },
@@ -841,7 +841,7 @@
     "name": "Farofa de camarão",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "94"
   },
@@ -850,7 +850,7 @@
     "name": "Legumes refogados",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "95"
   },
@@ -859,7 +859,7 @@
     "name": "Pirão",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "96"
   },
@@ -868,7 +868,7 @@
     "name": "Filé kids",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "97"
   },
@@ -877,7 +877,7 @@
     "name": "Frango kids",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "98"
   },
@@ -886,7 +886,7 @@
     "name": "Peixe kids",
     "description": null,
     "sub": null,
-    "ativo": true,
+    "active": true,
     "category": "Porções Extras",
     "id": "99"
   },
@@ -894,9 +894,9 @@
     "name": "Mouse",
     "sub": null,
     "descrption": "descrption 1",
-    "ativo": true,
+    "active": true,
     "price": "R$ 17,00",
-    "id": "1",
+    "id": "100",
     "description": "(cupuaçu,Maracuja e Morango)",
     "category": "Sobremesas"
   },
@@ -904,9 +904,9 @@
     "name": "Banana flambada c sorvete",
     "sub": null,
     "descrption": "descrption 2",
-    "ativo": true,
+    "active": true,
     "price": "R$ 20,00",
-    "id": "2",
+    "id": "102",
     "description": null,
     "category": "Sobremesas"
   },
@@ -914,9 +914,9 @@
     "name": "Açaí",
     "sub": null,
     "descrption": "descrption 3",
-    "ativo": true,
+    "active": true,
     "price": "R$ 15,00",
-    "id": "3",
+    "id": "103",
     "description": "(porçao 350 ml)",
     "category": "Sobremesas"
   },
@@ -924,9 +924,9 @@
     "name": "Pudim",
     "sub": null,
     "descrption": "descrption 4",
-    "ativo": true,
+    "active": true,
     "price": "R$ 15,00",
-    "id": "4",
+    "id": "104",
     "description": null,
     "category": "Sobremesas"
   },
@@ -934,9 +934,9 @@
     "name": "Laranja ou Laranja c/ morango",
     "sub": null,
     "descrption": "descrption 5",
-    "ativo": true,
+    "active": true,
     "price": "R$ 10,00",
-    "id": "5",
+    "id": "105",
     "description": null,
     "category": "Bebidas"
   },
@@ -944,9 +944,9 @@
     "name": "Limonada ou Limonada suíça",
     "sub": null,
     "descrption": "descrption 6",
-    "ativo": true,
+    "active": true,
     "price": "R$ 8,00",
-    "id": "6",
+    "id": "106",
     "description": null,
     "category": "Bebidas"
   },
@@ -954,9 +954,9 @@
     "name": "Sucos diversos",
     "sub": null,
     "descrption": "descrption 7",
-    "ativo": true,
+    "active": true,
     "price": "R$ 8,00",
-    "id": "7",
+    "id": "107",
     "description": "(+ 1 reais adicional de leite)",
     "category": "Bebidas"
   },
@@ -964,9 +964,9 @@
     "name": "Jarra",
     "sub": null,
     "descrption": "descrption 8",
-    "ativo": true,
+    "active": true,
     "price": "R$ 28,00",
-    "id": "8",
+    "id": "108",
     "description": "(+ 5 reais adiconal de leite)",
     "category": "Bebidas"
   },
@@ -974,9 +974,9 @@
     "name": "Jarra de laranja",
     "sub": null,
     "descrption": "descrption 9",
-    "ativo": true,
+    "active": true,
     "price": "R$ 35,00",
-    "id": "9",
+    "id": "109",
     "description": "(1,2 litros )",
     "category": "Bebidas"
   },
@@ -984,9 +984,9 @@
     "name": "Refrigerante lata",
     "sub": null,
     "descrption": "descrption 10",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "10",
+    "id": "110",
     "description": null,
     "category": "Bebidas"
   },
@@ -994,9 +994,9 @@
     "name": "Refrigerante 1 litro",
     "sub": null,
     "descrption": "descrption 11",
-    "ativo": true,
+    "active": true,
     "price": "R$ 12,00",
-    "id": "11",
+    "id": "111",
     "description": null,
     "category": "Bebidas"
   },
@@ -1004,9 +1004,9 @@
     "name": "Aguás s/gás",
     "sub": null,
     "descrption": "descrption 12",
-    "ativo": true,
+    "active": true,
     "price": "R$ 4,50",
-    "id": "12",
+    "id": "112",
     "description": null,
     "category": "Bebidas"
   },
@@ -1014,9 +1014,9 @@
     "name": "Aguác c/ gás",
     "sub": null,
     "descrption": "descrption 13",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "13",
+    "id": "113",
     "description": null,
     "category": "Bebidas"
   },
@@ -1024,9 +1024,9 @@
     "name": "Água tônica",
     "sub": null,
     "descrption": "descrption 14",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "14",
+    "id": "114",
     "description": null,
     "category": "Bebidas"
   },
@@ -1034,9 +1034,9 @@
     "name": "Água de coco",
     "sub": null,
     "descrption": "descrption 15",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "15",
+    "id": "115",
     "description": null,
     "category": "Bebidas"
   },
@@ -1044,9 +1044,9 @@
     "name": "H2o",
     "sub": null,
     "descrption": "descrption 16",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,50",
-    "id": "16",
+    "id": "116",
     "description": null,
     "category": "Bebidas"
   },
@@ -1054,9 +1054,9 @@
     "name": "Red bull",
     "sub": null,
     "descrption": "descrption 17",
-    "ativo": true,
+    "active": true,
     "price": "R$ 15,00",
-    "id": "17",
+    "id": "117",
     "description": null,
     "category": "Bebidas"
   },
@@ -1064,9 +1064,9 @@
     "name": "Schweppes citrus",
     "sub": null,
     "descrption": "descrption 18",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "18",
+    "id": "118",
     "description": null,
     "category": "Bebidas"
   },
@@ -1074,9 +1074,9 @@
     "name": "Schweppes tônica",
     "sub": null,
     "descrption": "descrption 19",
-    "ativo": true,
+    "active": true,
     "price": "R$ 6,00",
-    "id": "19",
+    "id": "119",
     "description": null,
     "category": "Bebidas"
   },
@@ -1084,9 +1084,9 @@
     "name": "Ks 350ml",
     "sub": null,
     "descrption": "descrption 20",
-    "ativo": true,
+    "active": true,
     "price": "R$ 7,00",
-    "id": "20",
+    "id": "120",
     "description": null,
     "category": "Bebidas"
   },
@@ -1094,9 +1094,9 @@
     "name": "Ks 1 litro",
     "sub": null,
     "descrption": "descrption 21",
-    "ativo": true,
+    "active": true,
     "price": "R$ 14,00",
-    "id": "21",
+    "id": "121",
     "description": null,
     "category": "Bebidas"
   }
