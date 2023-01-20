@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "antd";
+import { Carousel, Image } from "antd";
 import "../../css/Slide.css";
 const SlidesSobemesas = () => {
   const Slide = [
@@ -12,7 +12,12 @@ const SlidesSobemesas = () => {
       <Carousel showArrows={true} autoplay={true}>
         {Slide.map((item) => (
           <div key={item.id}>
-            <img src={item.src} alt={item.caption} className="img-fluid" />
+            <Image
+              src={item.src}
+              alt={item.caption}
+              height={600}
+              className="img-fluid"
+            />
             <div className="text-center">{item.caption}</div>
           </div>
         ))}
