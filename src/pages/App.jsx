@@ -5,7 +5,7 @@ import React from "react";
 import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
 import CardSlide from "./modules/CardSlide";
-import Dashboard from "../pages/Dashboard";
+import Config from "./Configs";
 function App() {
   const [visible, setVisible] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
@@ -64,7 +64,7 @@ function App() {
       ) : (
         <>
           <CardSlide />
-          <Dashboard />
+          <Config />
         </>
       )}
     </div>
