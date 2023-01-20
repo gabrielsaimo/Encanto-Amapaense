@@ -1,5 +1,6 @@
+/* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
-import firebase, { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   Button,
   Card,
@@ -360,7 +361,7 @@ export default function Dashboard({ atualizar }) {
                       Bebidas
                     </Radio.Button>
 
-                    {filteredStatus !== null ? (
+                    {filteredStatus != null ? (
                       <Button
                         style={{
                           backgroundColor: "#fc5f5f",

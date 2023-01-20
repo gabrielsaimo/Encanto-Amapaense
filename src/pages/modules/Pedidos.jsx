@@ -17,7 +17,6 @@ export default function Pedidos(atualizar) {
     appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
     measurementId: "G-T9LP3T7QBB",
   });
-  const [actionPedidos, setActionPedidos] = useState(true);
   const db = getFirestore(firebaseConfig);
   const [pedidos, setPedido] = useState([]);
   const colletionRefPedido = collection(db, "pedidos");
@@ -50,7 +49,7 @@ export default function Pedidos(atualizar) {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [actionPedidos, atualizar]);
+  }, [atualizar]);
 
   return (
     <>

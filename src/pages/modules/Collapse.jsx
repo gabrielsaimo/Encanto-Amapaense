@@ -1,20 +1,13 @@
+/* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
 import { Collapse } from "antd";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
-import cardapio from "../../json/cardapio.json";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
-import firebase, { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import "firebase/database";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 const { Panel } = Collapse;
 const firebaseConfig = initializeApp({
@@ -60,9 +53,9 @@ const CollapseMenu = () => {
     const key = "part-" + index;
     return (
       <div>
-        {index === 0 ? <SlidesPrincipal /> : null}
-        {index === 11 ? <SlidesSobemesas /> : null}
-        {index === 12 ? <SlidesBebidas /> : null}
+        {index == 0 ? <SlidesPrincipal /> : null}
+        {index == 11 ? <SlidesSobemesas /> : null}
+        {index == 12 ? <SlidesBebidas /> : null}
         <Collapse
           key={index}
           bordered={false}
@@ -104,7 +97,7 @@ const CollapseMenu = () => {
           >
             {cardapio.map((categotia) => (
               <div>
-                {categotia.category == item1 && categotia.active === true ? (
+                {categotia.category == item1 && categotia.active == true ? (
                   <>
                     <div className="border">
                       <div className="flex">

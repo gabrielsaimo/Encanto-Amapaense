@@ -7,6 +7,7 @@ import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import { sendToVercelAnalytics } from "./vitals";
 import { Analytics } from "@vercel/analytics/react";
+
 ReactDOM.render(
   <React.StrictMode>
     <Analytics />

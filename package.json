@@ -8,6 +8,7 @@
     "@vercel/analytics": "^0.1.7",
     "antd": "^5.1.4",
     "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
     "firebase": "^9.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
