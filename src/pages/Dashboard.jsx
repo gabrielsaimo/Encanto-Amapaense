@@ -55,6 +55,9 @@ export default function Dashboard() {
   const [active, setActive] = useState("");
   const [category, setCategory] = useState("");
   const [action, setAction] = useState(true);
+  const [filteredStatus, setFilteredStatus] = useState(null);
+  const [searchData, setSearchData] = useState([]);
+
   const db = getFirestore(firebaseConfig);
   const colletionRef = collection(db, "cardapio");
   useEffect(() => {
@@ -68,9 +71,29 @@ export default function Dashboard() {
     };
     getCardapio();
   }, [action]);
+  useEffect(() => {
+    filterTable();
+
+    function filterTable() {
+      if (!search && !filteredStatus) {
+        setSearchData(cardapio);
+      } else {
+        const array = cardapio.filter(
+          (record) =>
+            (!filteredStatus ||
+              (record["category"] &&
+                record["category"]
+                  ?.toUpperCase()
+                  .indexOf(filteredStatus.toUpperCase()) > -1)) &&
+            (!search ||
+              record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1)
+        );
+        setSearchData(array);
+      }
+    }
+  }, [search, cardapio, filteredStatus]);
 
   function handleClickEdit(task) {
-    console.log(task);
     setSelectedTaskId(task.key);
     setId(task.id);
     setName(task.name);
@@ -82,7 +105,6 @@ export default function Dashboard() {
     handleShowModalNewAction();
   }
   async function confirmDelete(record) {
-    console.log(record);
     const docRef = doc(db, "cardapio", record);
     await deleteDoc(docRef);
     message.success("Item deletado com sucesso!");
@@ -93,7 +115,6 @@ export default function Dashboard() {
   }
   async function handleSave() {
     if (selectedTaskId) {
-      console.log("update");
       const docRef = doc(db, "cardapio", selectedTaskId);
       await updateDoc(docRef, {
         id,
@@ -104,10 +125,8 @@ export default function Dashboard() {
         active,
         category,
       });
-      console.log(docRef);
       message.success("Item atualizado com sucesso!");
     } else {
-      console.log("add");
       const novo = await addDoc(colletionRef, {
         id,
         name,
@@ -117,7 +136,6 @@ export default function Dashboard() {
         active,
         category,
       });
-      console.log(novo);
       message.success("Item salvo com sucesso!");
     }
     setAction(!action);
@@ -174,11 +192,11 @@ export default function Dashboard() {
       title: "Ativo",
       dataIndex: "active",
       key: "active",
-      render: (_, text) => {
-        return <p>{text.active ? "Sim" : "Não"}</p>;
-      },
       sorter: {
         compare: (a, b) => a.active - b.active,
+      },
+      render: (_, text) => {
+        return <p>{text.active ? "Sim" : "Não"}</p>;
       },
     },
     {
@@ -218,18 +236,30 @@ export default function Dashboard() {
       },
     },
   ];
+
+  function handleChangeStatus(e) {
+    const { value } = e.target;
+    if (value === filteredStatus) {
+      setFilteredStatus(null);
+    } else {
+      setFilteredStatus(value);
+    }
+  }
+  function handleRemoveStatus() {
+    setFilteredStatus(null);
+  }
+
   return (
     <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
       <Row gutter={8}>
         <Col span={24}>
           <Card bordered={false}>
             <Row justify="space-between" gutter={[16, 16]}>
-              <Col span={8}>
+              <Col span={12}>
                 <div
                   style={{
                     width: "100%",
                     display: "flex",
-                    justifyContent: "space-around",
                   }}
                 >
                   <Button
@@ -239,7 +269,16 @@ export default function Dashboard() {
                   >
                     Novo
                   </Button>
-
+                </div>
+              </Col>
+              <Col span={12}>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
                   <Input
                     allowClear
                     value={search}
@@ -250,11 +289,98 @@ export default function Dashboard() {
                   />
                 </div>
               </Col>
+              <Col span={2} />
+              <Col>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Radio.Group buttonStyle="solid" value={filteredStatus}>
+                    <Radio.Button onClick={handleChangeStatus} value="Entrada">
+                      Entrada
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Mujicas e caldos"
+                    >
+                      Mujicas e caldos
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Peixe ao molho"
+                    >
+                      Peixe ao molho
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Peixe Frito"
+                    >
+                      Peixe Frito
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Peixe na chapa"
+                    >
+                      Peixe na chapa
+                    </Radio.Button>
+                    <Radio.Button onClick={handleChangeStatus} value="Camarão">
+                      Camarão
+                    </Radio.Button>
+                    <Radio.Button onClick={handleChangeStatus} value="Carnes">
+                      Carnes
+                    </Radio.Button>
+                    <Radio.Button onClick={handleChangeStatus} value="Frango">
+                      Frango
+                    </Radio.Button>
+                    <Radio.Button onClick={handleChangeStatus} value="Moquecas">
+                      Moquecas
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Caldeiradas"
+                    >
+                      Caldeiradas
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Porções Extras"
+                    >
+                      Porções Extras
+                    </Radio.Button>
+                    <Radio.Button
+                      onClick={handleChangeStatus}
+                      value="Sobremesas"
+                    >
+                      Sobremesas
+                    </Radio.Button>
+                    <Radio.Button onClick={handleChangeStatus} value="Bebidas">
+                      Bebidas
+                    </Radio.Button>
+
+                    {filteredStatus !== null ? (
+                      <Button
+                        style={{
+                          backgroundColor: "#fc5f5f",
+                          color: "#000",
+                        }}
+                        onClick={handleRemoveStatus}
+                      >
+                        X
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                  </Radio.Group>
+                </div>
+              </Col>
             </Row>
           </Card>
         </Col>
       </Row>
-      <Table dataSource={cardapio} columns={columns} />;
+      <Table dataSource={searchData} columns={columns} />
       <Modal
         visible={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
