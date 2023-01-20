@@ -26,7 +26,6 @@ export default function Pedidos(atualizar) {
   const [actionPedidos, setActionPedidos] = useState(true);
   const db = getFirestore(firebaseConfig);
   const [pedidos, setPedido] = useState([]);
-  console.log("🚀 ~ file: Pedidos.jsx:29 ~ Pedidos ~ pedidos", pedidos);
   const colletionRefPedido = collection(db, "pedidos");
   const colletionRefListaPedido = collection(db, "listaPedidos");
   const [listapedidos, setListaPedido] = useState([]);
@@ -40,16 +39,13 @@ export default function Pedidos(atualizar) {
       }));
       setPedido(pedido.sort((a, b) => b.id - a.id));
     };
+    getPedido();
     const getListaPedido = async () => {
       const Collection = await getDocs(colletionRefListaPedido);
       const listapedido = Collection.docs.map((doc) => ({
         ...doc.data(),
         key: doc.id,
       }));
-      console.log(
-        "🚀 ~ file: Pedidos.jsx:49 ~ listapedido ~ listapedido",
-        listapedido
-      );
       setListaPedido(listapedido.sort((a, b) => b.id - a.id));
     };
     getListaPedido();
