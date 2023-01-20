@@ -6,6 +6,7 @@ import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
 import CardSlide from "./modules/CardSlide";
 import Config from "./Configs";
+import Msn from "./modules/Msn";
 function App() {
   const [visible, setVisible] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
@@ -59,6 +60,7 @@ function App() {
 
           <CollapseMenu />
           <FloatButton.BackTop />
+          <Msn />
           <div style={{ height: 30 }} />
         </div>
       ) : (

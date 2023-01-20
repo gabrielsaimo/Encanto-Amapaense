@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { Button, Card, Col, message, Modal, Row } from "antd";
+import { Button, Card, Col, Divider, message, Modal, Row } from "antd";
 import "firebase/database";
 import {
   collection,
@@ -21,7 +21,7 @@ const firebaseConfig = initializeApp({
 });
 export default function Menssagem({ atualizar }) {
   const [menssagens, setMenssagens] = useState([]);
-  const [actionMensagem, setActionMensagem] = useState(true);
+  const [actionMensagem, setActionMensagem] = useState(false);
   const db = getFirestore(firebaseConfig);
   const colletionRefMensagens = collection(db, "mensagens");
   const [count, setCount] = useState(0);
@@ -35,19 +35,13 @@ export default function Menssagem({ atualizar }) {
       setMenssagens(messagen.sort((a, b) => b.id - a.id));
     };
     getMensagen();
-    const interval = setInterval(() => {
-      setCount(count + 1);
-      getMensagen();
-    }, 5000);
-
-    return () => clearInterval(interval);
   }, [actionMensagem, atualizar]);
 
   async function DeletarMensagem(record) {
     const docRef = doc(db, "mensagens", record);
     await deleteDoc(docRef);
     message.success("Mensagem deletada com sucesso!");
-    setActionMensagem(!menssagens);
+    setActionMensagem(!actionMensagem);
   }
   async function handleDelete(record) {
     Modal.confirm({
@@ -60,20 +54,25 @@ export default function Menssagem({ atualizar }) {
       },
     });
   }
+
   return (
     <>
       <Card>
         <Row justify="start" gutter={20}>
-          <Col span={12}>
-            <div className="site-card-border-less-wrapper">
-              {menssagens.map((item) => (
+          <Col span={24}>
+            <div
+              className="site-card-border-less-wrapper"
+              style={{ display: "flex", flexWrap: "wrap" }}
+            >
+              {menssagens.map((item, index) => (
                 <>
+                  {index % 4 === 0 ? <Divider /> : null}
                   <Card
-                    title={"by: " + item.name}
+                    title={item.motivo}
                     bordered={true}
-                    style={{ width: 300 }}
+                    style={{ width: 400, height: 300, marginLeft: 20 }}
                   >
-                    <p>{item.titulo}</p>
+                    <h3>{"by: " + item.name}</h3>
                     <p>{item.menssagem}</p>
                     <Button onClick={() => handleDelete(item.key)}>
                       Deletar
