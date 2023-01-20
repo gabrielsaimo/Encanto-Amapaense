@@ -1,6 +1,6 @@
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Affix, FloatButton } from "antd";
+import { Affix, Button, FloatButton, Input } from "antd";
 import React from "react";
 import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
@@ -50,11 +50,11 @@ function App() {
           </Affix>
           {visible2 ? (
             <>
-              <input
+              <Input
                 type="password"
                 onChange={(e) => setSenhaDigitada(e.target.value)}
               />
-              <button onClick={acessar}>Acessar</button>
+              <Button onClick={acessar}>Acessar</Button>
             </>
           ) : null}
 
