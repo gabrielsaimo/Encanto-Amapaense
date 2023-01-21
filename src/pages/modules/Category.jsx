@@ -247,7 +247,7 @@ export default function Category() {
         okText={"Salvar"}
         onOk={handleSave}
         onCancel={closeModal}
-        title={selectedTaskId ? "Atualizar Ação" : "Nova Ação"}
+        title={selectedTaskId ? "Atualizar Categoria" : "Nova Categoria"}
       >
         <Row justify="center" gutter={20}>
           <Col span={12}>

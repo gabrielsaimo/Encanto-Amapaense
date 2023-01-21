@@ -349,7 +349,7 @@ export default function Dashboard({ atualizar }) {
         okText={"Salvar"}
         onOk={handleSave}
         onCancel={closeModal}
-        title={selectedTaskId ? "Atualizar Ação" : "Nova Ação"}
+        title={selectedTaskId ? "Atualizar Item" : "Novo Item"}
       >
         <Row justify="center" gutter={20}>
           <Col span={12}>
