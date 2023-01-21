@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs } from "antd";
+import { Button, Divider, Input, Modal, Tabs } from "antd";
 import "firebase/database";
 import Dashboard from "./modules/Dasboard";
 import Menssagem from "./modules/Menssagem";
@@ -9,6 +9,18 @@ export default function Config() {
   const [actionCardapio, setActionCardapio] = useState(true);
   const [actionMensagem, setActionMensagem] = useState(true);
   const [actionPeido, setActionPedido] = useState(true);
+  const senha = "saimolindo";
+  const [senhaDigitada, setSenhaDigitada] = React.useState("");
+  const [visible, setVisible] = React.useState(true);
+  const [acessable, setAcessable] = React.useState(false);
+  const acessar = () => {
+    if (senhaDigitada === senha) {
+      setAcessable(true);
+      close();
+    } else {
+      alert("Senha incorreta");
+    }
+  };
 
   const onChange = (key) => {
     console.log(key);
@@ -19,6 +31,13 @@ export default function Config() {
     } else {
       setActionPedido(!actionPeido);
     }
+  };
+
+  const close = () => {
+    setVisible(false);
+  };
+  const open = () => {
+    setVisible(true);
   };
 
   const items = [
@@ -40,8 +59,36 @@ export default function Config() {
   ];
 
   return (
-    <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-      <Tabs onChange={onChange} type="card" items={items} />
-    </div>
+    <>
+      {!acessable ? (
+        <Modal
+          title="Acesso Restrito para Administradores"
+          visible={visible}
+          footer={null}
+          onCancel={() => setVisible(false)}
+        >
+          <div
+            style={{
+              width: "95%",
+              marginLeft: "auto",
+              marginRight: "auto",
+              display: "grid",
+              gridGap: "10px",
+            }}
+          >
+            <Input
+              type="password"
+              onChange={(e) => setSenhaDigitada(e.target.value)}
+            />
+            <Divider />
+            <Button onClick={acessar}>Acessar</Button>
+          </div>
+        </Modal>
+      ) : (
+        <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
+          <Tabs onChange={onChange} type="card" items={items} />
+        </div>
+      )}
+    </>
   );
 }

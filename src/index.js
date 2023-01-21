@@ -1,18 +1,18 @@
 /* eslint-disable react/jsx-no-undef */
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "../src/Routes/Rotas";
 import ReactDOM from "react-dom";
 import "../src/css/index.css";
-import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import { sendToVercelAnalytics } from "./vitals";
 import { Analytics } from "@vercel/analytics/react";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <Analytics />
-    <App />
-  </React.StrictMode>,
+    <Routes />
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
