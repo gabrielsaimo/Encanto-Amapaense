@@ -55,11 +55,13 @@ export default function Dashboard({ atualizar }) {
   const [active, setActive] = useState("");
   const [category, setCategory] = useState("");
   const [actionCardapio, setActionCardapio] = useState(true);
+  const [cardapioCategory, setCardapioCategory] = useState([]);
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
 
   const db = getFirestore(firebaseConfig);
   const colletionRefCardapio = collection(db, "cardapio");
+  const colletionCategory = collection(db, "categorias_cardapio");
   //! Cardapio
   useEffect(() => {
     const getCardapio = async () => {
@@ -69,8 +71,19 @@ export default function Dashboard({ atualizar }) {
         key: doc.id,
       }));
       setCardapio(cardapios.sort((a, b) => a.id - b.id));
+      console.log(cardapio.length + 1);
     };
     getCardapio();
+    const getCardapiocategory = async () => {
+      const cardapioCollection = await getDocs(colletionCategory);
+      const cardapios = cardapioCollection.docs.map((doc) => ({
+        ...doc.data(),
+        key: doc.id,
+      }));
+      setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
+    };
+
+    getCardapiocategory();
   }, [actionCardapio, atualizar]);
 
   useEffect(() => {
@@ -129,8 +142,8 @@ export default function Dashboard({ atualizar }) {
       });
       message.success("Item atualizado com sucesso!");
     } else {
-      const novo = await addDoc(colletionRefCardapio, {
-        id,
+      await addDoc(colletionRefCardapio, {
+        id: cardapio.length + 1,
         name,
         price,
         description,
@@ -145,7 +158,7 @@ export default function Dashboard({ atualizar }) {
   }
 
   function disableSave() {
-    return !id || !name || !price || active === "" || active === null;
+    return !name || !price || active === "" || active === null;
   }
   function clearSelecteds() {
     setSelectedTaskId(null);
@@ -392,14 +405,17 @@ export default function Dashboard({ atualizar }) {
       >
         <Row justify="center" gutter={20}>
           <Col span={12}>
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Id"
-              type="number"
-              value={id != "" ? id : undefined}
-              onChange={(e) => setId(e.target.value)}
-            />
+            {selectedTaskId ? (
+              <Input
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                placeholder="Id"
+                type="number"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+            ) : null}
+
             <Input
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
@@ -453,20 +469,23 @@ export default function Dashboard({ atualizar }) {
               onChange={(value) => setActive(value)}
               value={active != "" ? active : undefined}
             >
-              <Option value={true}>sim</Option>
-              <Option value={false}>não</Option>
+              <Option value={true}>Sim</Option>
+              <Option value={false}>Não</Option>
             </Select>
-            <Input
+            <Select
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
+              dropdownMatchSelectWidth={false}
+              showSearch
               placeholder="Categoria"
-              value={
-                category != ""
-                  ? category[0].toUpperCase() + category.slice(1)
-                  : undefined
-              }
-              onChange={(e) => setCategory(e.target.value)}
-            />
+              optionFilterProp="children"
+              onChange={(value) => setCategory(value)}
+              value={category}
+            >
+              {cardapioCategory.map((category) => (
+                <Option value={category.name}>{category.name}</Option>
+              ))}
+            </Select>
           </Col>
         </Row>
       </Modal>

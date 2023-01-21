@@ -20,25 +20,21 @@ const firebaseConfig = initializeApp({
   measurementId: "G-T9LP3T7QBB",
 });
 const CollapseMenu = () => {
-  const Array = [
-    "Entrada",
-    "Mujicas e caldos",
-    "Peixe ao molho",
-    "Peixe Frito",
-    "Peixe na chapa",
-    "Camarão",
-    "Carnes",
-    "Frango",
-    "Moquecas",
-    "Caldeiradas",
-    "Porções Extras",
-    "Sobremesas",
-    "Bebidas",
-  ];
   const [cardapio, setCardapio] = useState([]);
+  const [cardapioCategory, setCardapioCategory] = useState([]);
   const db = getFirestore(firebaseConfig);
   const colletionRef = collection(db, "cardapio");
+  const colletionCategory = collection(db, "categorias_cardapio");
   useEffect(() => {
+    const getCardapioCategory = async () => {
+      const cardapioCollection = await getDocs(colletionCategory);
+      setCardapioCategory(
+        cardapioCollection.docs
+          .map((doc) => doc.data())
+          .sort((a, b) => a.id - b.id)
+      );
+    };
+    getCardapioCategory();
     const getCardapio = async () => {
       const cardapioCollection = await getDocs(colletionRef);
       setCardapio(
@@ -49,7 +45,7 @@ const CollapseMenu = () => {
     };
     getCardapio();
   }, []);
-  const items = Array.map((item1, index) => {
+  const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
     return (
       <div>
@@ -73,6 +69,14 @@ const CollapseMenu = () => {
             "10",
             "11",
             "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
           ]}
           destroyInactivePanel={true}
           expandIcon={({ isActive }) => (
@@ -93,11 +97,12 @@ const CollapseMenu = () => {
               backgroundPositionX: "55%",
               backgroundPositionY: -8,
             }}
-            header={item1}
+            header={item1.name}
           >
             {cardapio.map((categotia) => (
               <div>
-                {categotia.category == item1 && categotia.active == true ? (
+                {categotia.category == item1.name &&
+                categotia.active == true ? (
                   <>
                     <div className="border">
                       <div className="flex">

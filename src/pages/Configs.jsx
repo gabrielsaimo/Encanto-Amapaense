@@ -4,6 +4,7 @@ import "firebase/database";
 import Dashboard from "./modules/Dasboard";
 import Menssagem from "./modules/Menssagem";
 import Pedidos from "./modules/Pedidos";
+import Category from "./modules/Category";
 
 export default function Config() {
   const [actionCardapio, setActionCardapio] = useState(true);
@@ -48,11 +49,16 @@ export default function Config() {
     },
     {
       key: "2",
+      label: "Categoria",
+      children: <Category atualizar={actionMensagem} />,
+    },
+    {
+      key: "3",
       label: "Messagens",
       children: <Menssagem atualizar={actionMensagem} />,
     },
     {
-      key: "3",
+      key: "4",
       label: "Pedidos",
       children: <Pedidos atualizar={actionPeido} />,
     },
