@@ -313,66 +313,14 @@ export default function Dashboard({ atualizar }) {
                   }}
                 >
                   <Radio.Group buttonStyle="solid" value={filteredStatus}>
-                    <Radio.Button onClick={handleChangeStatus} value="Entrada">
-                      Entrada
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Mujicas e caldos"
-                    >
-                      Mujicas e caldos
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Peixe ao molho"
-                    >
-                      Peixe ao molho
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Peixe Frito"
-                    >
-                      Peixe Frito
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Peixe na chapa"
-                    >
-                      Peixe na chapa
-                    </Radio.Button>
-                    <Radio.Button onClick={handleChangeStatus} value="Camarão">
-                      Camarão
-                    </Radio.Button>
-                    <Radio.Button onClick={handleChangeStatus} value="Carnes">
-                      Carnes
-                    </Radio.Button>
-                    <Radio.Button onClick={handleChangeStatus} value="Frango">
-                      Frango
-                    </Radio.Button>
-                    <Radio.Button onClick={handleChangeStatus} value="Moquecas">
-                      Moquecas
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Caldeiradas"
-                    >
-                      Caldeiradas
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Porções Extras"
-                    >
-                      Porções Extras
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={handleChangeStatus}
-                      value="Sobremesas"
-                    >
-                      Sobremesas
-                    </Radio.Button>
-                    <Radio.Button onClick={handleChangeStatus} value="Bebidas">
-                      Bebidas
-                    </Radio.Button>
+                    {cardapioCategory.map((category) => (
+                      <Radio.Button
+                        onClick={handleChangeStatus}
+                        value={category.name}
+                      >
+                        {category.name}
+                      </Radio.Button>
+                    ))}
 
                     {filteredStatus != null ? (
                       <Button

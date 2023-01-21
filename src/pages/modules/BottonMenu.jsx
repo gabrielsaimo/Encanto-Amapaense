@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Anchor, Button, Drawer, Tooltip } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+const firebaseConfig = initializeApp({
+  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
+  authDomain: "encanto-amapaense.firebaseapp.com",
+  projectId: "encanto-amapaense",
+  storageBucket: "encanto-amapaense.appspot.com",
+  messagingSenderId: "66845466662",
+  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
+  measurementId: "G-T9LP3T7QBB",
+});
 
 const Menu = () => {
+  const db = getFirestore(firebaseConfig);
+  const colletionCategory = collection(db, "categorias_cardapio");
+  const [cardapioCategory, setCardapioCategory] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
   const [placement, setPlacement] = React.useState("bottom");
 
@@ -17,11 +31,22 @@ const Menu = () => {
   const onChange = (e) => {
     setPlacement(e.target.value);
   };
+  useEffect(() => {
+    const getCardapiocategory = async () => {
+      const cardapioCollection = await getDocs(colletionCategory);
+      const cardapios = cardapioCollection.docs.map((doc) => ({
+        ...doc.data(),
+        key: doc.id,
+      }));
+      setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
+    };
 
+    getCardapiocategory();
+  }, []);
   return (
-    <div id="part-14" style={{ margin: 5 }}>
+    <div style={{ margin: 5 }}>
       <div style={{ margin: 5 }}>
-        <Tooltip title="search">
+        <Tooltip title="Pesquisar">
           <Button
             type="primary"
             onClick={showDrawer}
@@ -38,20 +63,10 @@ const Menu = () => {
           onClose={onClose}
           visible={visible}
         >
-          <Anchor>
-            <Anchor.Link href="#part-0" title="Entradas" />
-            <Anchor.Link href="#part-1" title="Mujicas e Caldos" />
-            <Anchor.Link href="#part-2" title="Peixe ao molho" />
-            <Anchor.Link href="#part-3" title="Peixe frito" />
-            <Anchor.Link href="#part-4" title="Peixe na chapa" />
-            <Anchor.Link href="#part-5" title="Camarão" />
-            <Anchor.Link href="#part-6" title="Carnes" />
-            <Anchor.Link href="#part-7" title="Frango" />
-            <Anchor.Link href="#part-8" title="Moquecas" />
-            <Anchor.Link href="#part-9" title="Caldeiradas" />
-            <Anchor.Link href="#part-10" title="Porções extras" />
-            <Anchor.Link href="#part-11" title="Sobremesas" />
-            <Anchor.Link href="#part-12" title="Bebidas" />
+          <Anchor affix={false} showInkInFixed>
+            {cardapioCategory.map((item, index) => (
+              <Anchor.Link href={`#part-${index}`} title={item.name} />
+            ))}
           </Anchor>
         </Drawer>
       </div>
