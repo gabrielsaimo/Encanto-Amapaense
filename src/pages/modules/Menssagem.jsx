@@ -72,7 +72,7 @@ export default function Menssagem({ atualizar }) {
                     bordered={true}
                     style={{ width: 400, height: 300, marginLeft: 20 }}
                   >
-                    <h3>{"by: " + item.name}</h3>
+                    <h3>{"By: " + item.name}</h3>
                     <p>{item.menssagem}</p>
                     <Button onClick={() => handleDelete(item.key)}>
                       Deletar
