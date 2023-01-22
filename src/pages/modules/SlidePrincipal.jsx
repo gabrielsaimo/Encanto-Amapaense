@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, Image } from "antd";
 import "../../css/Slide.css";
-import { storage } from "../../services/firebase.ws";
+import { service, storage } from "../../services/firebase.ws";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const SlidesPrincipal = () => {
   const [files, setFiles] = useState([]);
+  const [ordem, setOrdem] = useState([]);
+  const db = getFirestore(service);
+  const colletionRef = collection(db, "SlidePrincipal");
+
   useEffect(() => {
+    const getCardapio = async () => {
+      const cardapioCollection = await getDocs(colletionRef);
+      setOrdem(
+        cardapioCollection.docs
+          .map((doc) => doc.data())
+          .sort((a, b) => a.id - b.id)
+      );
+    };
+    getCardapio();
     const fetchImages = async () => {
       let result = await storage.ref().child("SlidePrincipal/").listAll();
       let urlPromises = result.items.map((imageRef) =>
@@ -22,38 +36,6 @@ const SlidesPrincipal = () => {
     loadImages();
   }, []);
 
-  const Slide = [
-    {
-      id: 1,
-      caption: "Encanto Redional",
-    },
-    {
-      id: 2,
-      caption: "Peixe na Crosta da Castanha",
-    },
-    {
-      id: 3,
-      caption: "Mistura tucuju",
-    },
-    {
-      id: 4,
-      caption: "Camarão no bafo",
-    },
-    {
-      id: 6,
-      caption: "Isca de file",
-    },
-    {
-      id: 7,
-      caption: "Peixe a delicia",
-    },
-    {
-      id: 8,
-      caption: "Peixe ao molho de camarão",
-    },
-    { id: 9, caption: "Pirão" },
-    // ...
-  ];
   return (
     <div style={{ margin: 5 }}>
       <Carousel showArrows={true} autoplay={true}>
@@ -65,7 +47,7 @@ const SlidesPrincipal = () => {
               alt={item.caption}
               className="img-fluid"
             />
-            <div className="text-center">{item.caption}</div>
+            <div className="text-center">{ordem[index]?.name}</div>
           </div>
         ))}
       </Carousel>
