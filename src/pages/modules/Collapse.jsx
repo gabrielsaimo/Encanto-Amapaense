@@ -6,23 +6,15 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
-import { initializeApp } from "firebase/app";
 import "firebase/database";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
+
 const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
-  const db = getFirestore(firebaseConfig);
+  const db = getFirestore(service);
   const colletionRef = collection(db, "cardapio");
   const colletionCategory = collection(db, "categorias_cardapio");
   useEffect(() => {

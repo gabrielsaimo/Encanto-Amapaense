@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { initializeApp } from "firebase/app";
+import { service } from "../../services/firebase.ws";
 import { Button, Card, Col, Divider, message, Modal, Row } from "antd";
 import "firebase/database";
 import {
@@ -10,19 +10,10 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
 export default function Menssagem({ atualizar }) {
   const [menssagens, setMenssagens] = useState([]);
   const [actionMensagem, setActionMensagem] = useState(false);
-  const db = getFirestore(firebaseConfig);
+  const db = getFirestore(service);
   const colletionRefMensagens = collection(db, "mensagens");
   const [count, setCount] = useState(0);
   useEffect(() => {

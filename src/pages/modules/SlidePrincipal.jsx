@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, Image } from "antd";
 import "../../css/Slide.css";
+
 const SlidesPrincipal = () => {
   const Slide = [
     {

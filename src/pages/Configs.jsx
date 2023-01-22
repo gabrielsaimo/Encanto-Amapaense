@@ -49,16 +49,11 @@ export default function Config() {
     },
     {
       key: "2",
-      label: "Categoria",
-      children: <Category atualizar={actionMensagem} />,
-    },
-    {
-      key: "3",
       label: "Messagens",
       children: <Menssagem atualizar={actionMensagem} />,
     },
     {
-      key: "4",
+      key: "3",
       label: "Pedidos",
       children: <Pedidos atualizar={actionPeido} />,
     },

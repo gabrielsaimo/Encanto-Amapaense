@@ -1,6 +1,5 @@
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
-import { initializeApp } from "firebase/app";
 import {
   Button,
   Card,
@@ -31,16 +30,9 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import { service } from "../../services/firebase.ws";
+import Category from "./Category";
 
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
 const { Option } = Select;
 export default function Dashboard({ atualizar }) {
   const [cardapio, setCardapio] = useState([]);
@@ -58,8 +50,8 @@ export default function Dashboard({ atualizar }) {
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
-
-  const db = getFirestore(firebaseConfig);
+  const [modalCategory, setModalCategory] = useState(false);
+  const db = getFirestore(service);
   const colletionRefCardapio = collection(db, "cardapio");
   const colletionCategory = collection(db, "categorias_cardapio");
   //! Cardapio
@@ -171,8 +163,12 @@ export default function Dashboard({ atualizar }) {
     setCategory("");
   }
   function closeModal() {
-    setModalNewAction(false);
-    clearSelecteds();
+    if (modalCategory) {
+      setModalCategory(false);
+    } else {
+      setModalNewAction(false);
+      clearSelecteds();
+    }
   }
   const columns = [
     {
@@ -233,8 +229,13 @@ export default function Dashboard({ atualizar }) {
           <div>
             <EditOutlined
               size={24}
-              color="#00CC66"
-              style={{ marginRight: 15 }}
+              style={{
+                marginLeft: 5,
+                backgroundColor: "#fbff29",
+                borderRadius: 5,
+                padding: 5,
+                color: "#000",
+              }}
               onClick={() => handleClickEdit(record)}
             />
             <Popconfirm
@@ -244,7 +245,16 @@ export default function Dashboard({ atualizar }) {
               okButtonProps={{ danger: true }}
               cancelText="Cancelar"
             >
-              <DeleteOutlined size={24} color="#00CC66" />
+              <DeleteOutlined
+                size={24}
+                style={{
+                  marginLeft: 5,
+                  backgroundColor: "#cc0000",
+                  borderRadius: 5,
+                  padding: 5,
+                  color: "#fff",
+                }}
+              />
             </Popconfirm>
           </div>
         );
@@ -420,22 +430,44 @@ export default function Dashboard({ atualizar }) {
               <Option value={true}>Sim</Option>
               <Option value={false}>Não</Option>
             </Select>
-            <Select
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              dropdownMatchSelectWidth={false}
-              showSearch
-              placeholder="Categoria"
-              optionFilterProp="children"
-              onChange={(value) => setCategory(value)}
-              value={category}
-            >
-              {cardapioCategory.map((category) => (
-                <Option value={category.name}>{category.name}</Option>
-              ))}
-            </Select>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Select
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                dropdownMatchSelectWidth={false}
+                showSearch
+                placeholder="Categoria"
+                optionFilterProp="children"
+                onChange={(value) => setCategory(value)}
+                value={category}
+              >
+                {cardapioCategory.map((category) => (
+                  <Option value={category.name}>{category.name}</Option>
+                ))}
+              </Select>
+              <EditOutlined
+                size={24}
+                style={{
+                  marginLeft: 5,
+                  backgroundColor: " #fbff29",
+                  borderRadius: 5,
+                  padding: 5,
+                  color: "#000",
+                }}
+                onClick={() => setModalCategory(!modalCategory)}
+              />
+            </div>
           </Col>
         </Row>
+      </Modal>
+      <Modal
+        visible={modalCategory}
+        okText={"Ok"}
+        onOk={closeModal}
+        onCancel={closeModal}
+        title={"Categoria"}
+      >
+        <Category />
       </Modal>
     </>
   );

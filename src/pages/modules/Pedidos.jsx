@@ -1,23 +1,15 @@
 import { Badge, Descriptions } from "antd";
-import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { service } from "../../services/firebase.ws";
 
 export default function Pedidos(atualizar) {
   const data = new Date();
   const hora = data.getHours();
   const dataFormatada =
     hora + ":" + data.getMinutes() + ":" + data.getSeconds();
-  const firebaseConfig = initializeApp({
-    apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-    authDomain: "encanto-amapaense.firebaseapp.com",
-    projectId: "encanto-amapaense",
-    storageBucket: "encanto-amapaense.appspot.com",
-    messagingSenderId: "66845466662",
-    appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-    measurementId: "G-T9LP3T7QBB",
-  });
-  const db = getFirestore(firebaseConfig);
+
+  const db = getFirestore(service);
   const [pedidos, setPedido] = useState([]);
   const colletionRefPedido = collection(db, "pedidos");
   const colletionRefListaPedido = collection(db, "listaPedidos");
@@ -46,7 +38,7 @@ export default function Pedidos(atualizar) {
       setCount(count + 1);
       getPedido();
       getListaPedido();
-    }, 10000);
+    }, 1000000000);
 
     return () => clearInterval(interval);
   }, [atualizar]);

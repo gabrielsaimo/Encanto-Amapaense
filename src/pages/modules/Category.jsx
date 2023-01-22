@@ -21,10 +21,7 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import SlidesPrincipal from "./SlidePrincipal";
-import SlidesSobemesas from "./SlideSobremesas";
-import SlidesBebidas from "./SlideBebidas";
-import { initializeApp } from "firebase/app";
+
 import "firebase/database";
 import {
   addDoc,
@@ -35,16 +32,7 @@ import {
   getFirestore,
   updateDoc,
 } from "firebase/firestore";
-const { Panel } = Collapse;
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
+import { service } from "../../services/firebase.ws";
 const { Option } = Select;
 export default function Category() {
   const [cardapioCategory, setCardapioCategory] = useState([]);
@@ -56,7 +44,7 @@ export default function Category() {
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
-  const db = getFirestore(firebaseConfig);
+  const db = getFirestore(service);
   const colletionCategory = collection(db, "categorias_cardapio");
 
   useEffect(() => {

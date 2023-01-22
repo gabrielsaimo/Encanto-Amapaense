@@ -2,17 +2,7 @@ import React from "react";
 import { Button, Divider, Input, message, Modal, Select } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
+import { service } from "../../services/firebase.ws";
 
 export default function Msn() {
   const [ok, setOk] = React.useState(false);
@@ -20,7 +10,7 @@ export default function Msn() {
   const [motivo, setMotivo] = React.useState("");
   const [menssagem, setMensagem] = React.useState("");
   const [visible, setVisible] = React.useState(false);
-  const db = getFirestore(firebaseConfig);
+  const db = getFirestore(service);
   const colletionRefMensagens = collection(db, "mensagens");
   const motivos = ["Dúvida", "Sugestão", "Reclamação", "Elogio", "Outros"];
   async function handleSave() {

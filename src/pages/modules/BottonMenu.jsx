@@ -2,19 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Anchor, Button, Drawer, Tooltip } from "antd";
 import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
-  authDomain: "encanto-amapaense.firebaseapp.com",
-  projectId: "encanto-amapaense",
-  storageBucket: "encanto-amapaense.appspot.com",
-  messagingSenderId: "66845466662",
-  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
-  measurementId: "G-T9LP3T7QBB",
-});
+import { service } from "../../services/firebase.ws";
 
 const Menu = () => {
-  const db = getFirestore(firebaseConfig);
+  const db = getFirestore(service);
   const colletionCategory = collection(db, "categorias_cardapio");
   const [cardapioCategory, setCardapioCategory] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
