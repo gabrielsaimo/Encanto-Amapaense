@@ -21,8 +21,8 @@ const SlidesSobemesas = () => {
     loadImages();
   }, []);
   const Slide = [
-    { id: 1, src: require("../../assets/musse.jpg"), caption: "Musse" },
-    { id: 2, src: require("../../assets/pudim.jpg"), caption: "Pudim" },
+    { id: 1, caption: "Musse" },
+    { id: 2, caption: "Pudim" },
   ];
 
   return (
