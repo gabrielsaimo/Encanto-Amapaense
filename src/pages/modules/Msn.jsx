@@ -33,13 +33,16 @@ export default function Msn() {
             border: "2px solid",
             marginLeft: "auto",
             marginRight: "auto",
-            width: 300,
+            width: "90%",
             height: 150,
             borderRadius: 10,
           }}
         >
           <h3>Relate aqui como foi sua experiência!</h3>
-          <Button onClick={() => setVisible(true)}>
+          <Button
+            style={{ width: 200, height: 60 }}
+            onClick={() => setVisible(true)}
+          >
             <MessageOutlined />
           </Button>
           <Modal
