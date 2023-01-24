@@ -1,5 +1,6 @@
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Affix, Button, FloatButton } from "antd";
 import React from "react";
 import CollapseMenu from "./modules/Collapse";
@@ -19,16 +20,16 @@ function App() {
   return (
     <div>
       <div className="App background_fundo">
-        <img
-          className="fundo"
+        <LazyLoadImage
           src={require("../assets/fundo.png")}
+          className="fundo"
           alt="fundo"
           decoding="async"
           loading="eager"
         />
-        <img
-          className="logo"
+        <LazyLoadImage
           src={require("../assets/logo.png")}
+          className="logo"
           alt="logo-principal"
           loading="eager"
           decoding="async"
