@@ -23,13 +23,15 @@ function App() {
           className="fundo"
           src={require("../assets/fundo.png")}
           alt="fundo"
-          loading="lazy"
+          decoding="async"
+          loading="eager"
         />
         <img
           className="logo"
           src={require("../assets/logo.png")}
           alt="logo-principal"
-          loading="lazy"
+          loading="eager"
+          decoding="async"
           onClick={() => {
             setContar(contar + 1);
           }}
