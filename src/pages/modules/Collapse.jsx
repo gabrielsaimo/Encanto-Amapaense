@@ -70,7 +70,8 @@ const CollapseMenu = () => {
             "19",
             "20",
           ]}
-          destroyInactivePanel={true}
+          destroyInactivePanel={false}
+          expandIconPosition="right"
           expandIcon={({ isActive }) => (
             <CaretRightOutlined rotate={isActive ? 90 : 0} />
           )}
