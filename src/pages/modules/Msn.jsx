@@ -55,7 +55,7 @@ export default function Msn() {
           >
             <Divider />
             <Input
-              placeholder="Nome"
+              placeholder="seu nome"
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -63,6 +63,7 @@ export default function Msn() {
             <Divider />
             <Select
               placeholder="Selecione o Motivo"
+              aria-required
               onChange={(e) => setMotivo(e)}
             >
               {motivos.map((motivo) => (
@@ -72,6 +73,7 @@ export default function Msn() {
             <Divider />
             <Input.TextArea
               placeholder="Mensagem"
+              required
               onChange={(e) => {
                 setMensagem(e.target.value);
               }}

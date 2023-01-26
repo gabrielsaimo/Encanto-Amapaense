@@ -55,6 +55,7 @@ export default function Config() {
     {
       key: "3",
       label: "Pedidos",
+      disabled: true,
       children: <Pedidos atualizar={actionPeido} />,
     },
   ];
@@ -66,7 +67,7 @@ export default function Config() {
           title="Acesso Restrito para Administradores"
           visible={visible}
           footer={null}
-          onCancel={() => setVisible(false)}
+          onCancel={() => open()}
         >
           <div
             style={{

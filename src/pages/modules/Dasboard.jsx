@@ -66,7 +66,7 @@ export default function Dashboard({ atualizar }) {
   const steps = [
     {
       title: "Bem vindo",
-      description: "Bem vindo ao Dashboard do Restaurante.",
+      description: "Bem vindo ao Dashboard do Encanto Amapaense.",
     },
     {
       title: "Adicionar Item",
@@ -94,53 +94,51 @@ export default function Dashboard({ atualizar }) {
       target: () => ref5.current,
     },
   ];
-
-  //! Cardapio
   useEffect(() => {
-    const getCardapio = async () => {
-      const cardapioCollection = await getDocs(colletionRefCardapio);
-      const cardapios = cardapioCollection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setCardapio(cardapios.sort((a, b) => a.id - b.id));
-      console.log(cardapio.length + 1);
-    };
     getCardapio();
-    const getCardapiocategory = async () => {
-      const cardapioCollection = await getDocs(colletionCategory);
-      const cardapios = cardapioCollection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
-    };
-
     getCardapiocategory();
   }, [actionCardapio, atualizar]);
-
   useEffect(() => {
     filterTable();
-
-    function filterTable() {
-      if (!search && !filteredStatus) {
-        setSearchData(cardapio);
-      } else {
-        const array = cardapio.filter(
-          (record) =>
-            (!filteredStatus ||
-              (record["category"] &&
-                record["category"]
-                  ?.toUpperCase()
-                  .indexOf(filteredStatus.toUpperCase()) > -1)) &&
-            (!search ||
-              record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1)
-        );
-        setSearchData(array);
-      }
-    }
   }, [search, cardapio, filteredStatus]);
+  //! Cardapio
 
+  const getCardapio = async () => {
+    const cardapioCollection = await getDocs(colletionRefCardapio);
+    const cardapios = cardapioCollection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setCardapio(cardapios.sort((a, b) => a.id - b.id));
+    console.log(cardapio.length + 1);
+  };
+
+  const getCardapiocategory = async () => {
+    const cardapioCollection = await getDocs(colletionCategory);
+    const cardapios = cardapioCollection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
+  };
+
+  function filterTable() {
+    if (!search && !filteredStatus) {
+      setSearchData(cardapio);
+    } else {
+      const array = cardapio.filter(
+        (record) =>
+          (!filteredStatus ||
+            (record["category"] &&
+              record["category"]
+                ?.toUpperCase()
+                .indexOf(filteredStatus.toUpperCase()) > -1)) &&
+          (!search ||
+            record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1)
+      );
+      setSearchData(array);
+    }
+  }
   function handleClickEdit(task) {
     setSelectedTaskId(task.key);
     setId(task.id);
@@ -244,9 +242,6 @@ export default function Dashboard({ atualizar }) {
       title: "Ativo",
       dataIndex: "active",
       key: "active",
-      sorter: {
-        compare: (a, b) => a.active - b.active,
-      },
       render: (_, text) => {
         return <p>{text.active ? "Sim" : "Não"}</p>;
       },
