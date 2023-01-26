@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Button,
   Card,
@@ -12,6 +12,9 @@ import {
   Row,
   Select,
   Table,
+  Divider,
+  Space,
+  Tour,
 } from "antd";
 import "firebase/database";
 import {
@@ -44,7 +47,7 @@ export default function Dashboard({ atualizar }) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [sub, setSub] = useState("");
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState(true);
   const [category, setCategory] = useState("");
   const [actionCardapio, setActionCardapio] = useState(true);
   const [cardapioCategory, setCardapioCategory] = useState([]);
@@ -54,6 +57,44 @@ export default function Dashboard({ atualizar }) {
   const db = getFirestore(service);
   const colletionRefCardapio = collection(db, "cardapio");
   const colletionCategory = collection(db, "categorias_cardapio");
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const ref5 = useRef(null);
+  const [open, setOpen] = useState(false);
+  const steps = [
+    {
+      title: "Bem vindo",
+      description: "Bem vindo ao Dashboard do Restaurante.",
+    },
+    {
+      title: "Adicionar Item",
+      description: "Clique para adicionar um novo item.",
+      target: () => ref1.current,
+    },
+    {
+      title: "Pesquisar",
+      description: "Pesquise por um item do cardápio.",
+      target: () => ref2.current,
+    },
+    {
+      title: "Categorias",
+      description: "Filtre por categoria.",
+      target: () => ref3.current,
+    },
+    {
+      title: "Editar Item ",
+      description: "Clique para Editar.",
+      target: () => ref4.current,
+    },
+    {
+      title: "Deletar Item",
+      description: "Clique para Deletar um item.",
+      target: () => ref5.current,
+    },
+  ];
+
   //! Cardapio
   useEffect(() => {
     const getCardapio = async () => {
@@ -150,7 +191,7 @@ export default function Dashboard({ atualizar }) {
   }
 
   function disableSave() {
-    return !name || !price || active === "" || active === null;
+    return !name || !price || active === "" || active === null || !category;
   }
   function clearSelecteds() {
     setSelectedTaskId(null);
@@ -159,7 +200,7 @@ export default function Dashboard({ atualizar }) {
     setPrice("");
     setDescription("");
     setSub("");
-    setActive("");
+    setActive(true);
     setCategory("");
   }
   function closeModal() {
@@ -226,18 +267,22 @@ export default function Dashboard({ atualizar }) {
       align: "center",
       render: (_, record) => {
         return (
-          <div>
-            <EditOutlined
-              size={24}
-              style={{
-                marginLeft: 5,
-                backgroundColor: "#fbff29",
-                borderRadius: 5,
-                padding: 5,
-                color: "#000",
-              }}
+          <Space>
+            <Button
+              ref={ref4}
+              style={{ backgroundColor: "yellow" }}
               onClick={() => handleClickEdit(record)}
-            />
+            >
+              <EditOutlined
+                size={24}
+                style={{
+                  borderRadius: 5,
+                  padding: 5,
+                  color: "#000",
+                }}
+              />
+            </Button>
+
             <Popconfirm
               title="Tem certeza que deseja excluir essa tarefa?"
               onConfirm={() => confirmDelete(record.key)}
@@ -245,18 +290,18 @@ export default function Dashboard({ atualizar }) {
               okButtonProps={{ danger: true }}
               cancelText="Cancelar"
             >
-              <DeleteOutlined
-                size={24}
-                style={{
-                  marginLeft: 5,
-                  backgroundColor: "#cc0000",
-                  borderRadius: 5,
-                  padding: 5,
-                  color: "#fff",
-                }}
-              />
+              <Button ref={ref5} style={{ backgroundColor: "red" }}>
+                <DeleteOutlined
+                  size={24}
+                  style={{
+                    borderRadius: 5,
+                    padding: 5,
+                    color: "#fff",
+                  }}
+                />
+              </Button>
             </Popconfirm>
-          </div>
+          </Space>
         );
       },
     },
@@ -276,8 +321,20 @@ export default function Dashboard({ atualizar }) {
   return (
     <>
       <Row gutter={8}>
+        <Button type="primary" onClick={() => setOpen(true)}>
+          Tour
+        </Button>
+        <Divider />
         <Col span={24}>
           <Card bordered={false}>
+            <>
+              <Tour
+                open={open}
+                onClose={() => setOpen(false)}
+                steps={steps}
+                animated
+              />
+            </>
             <Row justify="space-between" gutter={[16, 16]}>
               <Col span={12}>
                 <div
@@ -290,12 +347,13 @@ export default function Dashboard({ atualizar }) {
                     icon={<PlusOutlined />}
                     type="primary"
                     onClick={handleShowModalNewAction}
+                    ref={ref1}
                   >
                     Novo
                   </Button>
                 </div>
               </Col>
-              <Col span={12}>
+              <Col ref={ref2} span={12}>
                 <div
                   style={{
                     width: "100%",
@@ -314,7 +372,7 @@ export default function Dashboard({ atualizar }) {
                 </div>
               </Col>
               <Col span={2} />
-              <Col>
+              <Col ref={ref3}>
                 <div
                   style={{
                     width: "100%",
@@ -352,7 +410,7 @@ export default function Dashboard({ atualizar }) {
           </Card>
         </Col>
       </Row>
-      <Table dataSource={searchData} columns={columns} />
+      <Table dataSource={searchData} columns={columns} size="small" />
       <Modal
         visible={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
@@ -425,7 +483,7 @@ export default function Dashboard({ atualizar }) {
               placeholder="Ativo"
               optionFilterProp="children"
               onChange={(value) => setActive(value)}
-              value={active != "" ? active : undefined}
+              value={active}
             >
               <Option value={true}>Sim</Option>
               <Option value={false}>Não</Option>
@@ -445,17 +503,19 @@ export default function Dashboard({ atualizar }) {
                   <Option value={category.name}>{category.name}</Option>
                 ))}
               </Select>
-              <EditOutlined
-                size={24}
-                style={{
-                  marginLeft: 5,
-                  backgroundColor: " #fbff29",
-                  borderRadius: 5,
-                  padding: 5,
-                  color: "#000",
-                }}
+              <Button
+                ref={ref4}
+                style={{ backgroundColor: "yellow", width: 20 }}
                 onClick={() => setModalCategory(!modalCategory)}
-              />
+              >
+                <EditOutlined
+                  size={24}
+                  style={{
+                    color: "#000",
+                    marginLeft: -7,
+                  }}
+                />
+              </Button>
             </div>
           </Col>
         </Row>

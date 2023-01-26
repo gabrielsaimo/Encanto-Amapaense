@@ -893,7 +893,6 @@
   {
     "name": "Mouse",
     "sub": null,
-    "descrption": "descrption 1",
     "active": true,
     "price": "R$ 17,00",
     "id": "100",
@@ -903,7 +902,6 @@
   {
     "name": "Banana flambada c sorvete",
     "sub": null,
-    "descrption": "descrption 2",
     "active": true,
     "price": "R$ 20,00",
     "id": "102",
@@ -913,7 +911,6 @@
   {
     "name": "Açaí",
     "sub": null,
-    "descrption": "descrption 3",
     "active": true,
     "price": "R$ 15,00",
     "id": "103",
@@ -923,7 +920,6 @@
   {
     "name": "Pudim",
     "sub": null,
-    "descrption": "descrption 4",
     "active": true,
     "price": "R$ 15,00",
     "id": "104",
@@ -933,7 +929,6 @@
   {
     "name": "Laranja ou Laranja c/ morango",
     "sub": null,
-    "descrption": "descrption 5",
     "active": true,
     "price": "R$ 10,00",
     "id": "105",
@@ -943,7 +938,6 @@
   {
     "name": "Limonada ou Limonada suíça",
     "sub": null,
-    "descrption": "descrption 6",
     "active": true,
     "price": "R$ 8,00",
     "id": "106",
@@ -953,7 +947,6 @@
   {
     "name": "Sucos diversos",
     "sub": null,
-    "descrption": "descrption 7",
     "active": true,
     "price": "R$ 8,00",
     "id": "107",
@@ -963,7 +956,6 @@
   {
     "name": "Jarra",
     "sub": null,
-    "descrption": "descrption 8",
     "active": true,
     "price": "R$ 28,00",
     "id": "108",
@@ -973,17 +965,15 @@
   {
     "name": "Jarra de laranja",
     "sub": null,
-    "descrption": "descrption 9",
     "active": true,
     "price": "R$ 35,00",
     "id": "109",
-    "description": "(1,2 litros )",
+    "description": "(1,2 litros)",
     "category": "Bebidas"
   },
   {
     "name": "Refrigerante lata",
     "sub": null,
-    "descrption": "descrption 10",
     "active": true,
     "price": "R$ 6,00",
     "id": "110",
@@ -993,7 +983,6 @@
   {
     "name": "Refrigerante 1 litro",
     "sub": null,
-    "descrption": "descrption 11",
     "active": true,
     "price": "R$ 12,00",
     "id": "111",
@@ -1003,7 +992,6 @@
   {
     "name": "Aguás s/gás",
     "sub": null,
-    "descrption": "descrption 12",
     "active": true,
     "price": "R$ 4,50",
     "id": "112",
@@ -1013,7 +1001,6 @@
   {
     "name": "Aguác c/ gás",
     "sub": null,
-    "descrption": "descrption 13",
     "active": true,
     "price": "R$ 6,00",
     "id": "113",
@@ -1023,7 +1010,6 @@
   {
     "name": "Água tônica",
     "sub": null,
-    "descrption": "descrption 14",
     "active": true,
     "price": "R$ 6,00",
     "id": "114",
@@ -1033,7 +1019,6 @@
   {
     "name": "Água de coco",
     "sub": null,
-    "descrption": "descrption 15",
     "active": true,
     "price": "R$ 6,00",
     "id": "115",
@@ -1043,7 +1028,6 @@
   {
     "name": "H2o",
     "sub": null,
-    "descrption": "descrption 16",
     "active": true,
     "price": "R$ 6,50",
     "id": "116",
@@ -1053,7 +1037,6 @@
   {
     "name": "Red bull",
     "sub": null,
-    "descrption": "descrption 17",
     "active": true,
     "price": "R$ 15,00",
     "id": "117",
@@ -1063,7 +1046,6 @@
   {
     "name": "Schweppes citrus",
     "sub": null,
-    "descrption": "descrption 18",
     "active": true,
     "price": "R$ 6,00",
     "id": "118",
@@ -1073,7 +1055,6 @@
   {
     "name": "Schweppes tônica",
     "sub": null,
-    "descrption": "descrption 19",
     "active": true,
     "price": "R$ 6,00",
     "id": "119",
@@ -1083,7 +1064,6 @@
   {
     "name": "Ks 350ml",
     "sub": null,
-    "descrption": "descrption 20",
     "active": true,
     "price": "R$ 7,00",
     "id": "120",
@@ -1093,7 +1073,6 @@
   {
     "name": "Ks 1 litro",
     "sub": null,
-    "descrption": "descrption 21",
     "active": true,
     "price": "R$ 14,00",
     "id": "121",

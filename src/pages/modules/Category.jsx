@@ -149,12 +149,13 @@ export default function Category() {
       render: (_, record) => {
         return (
           <div>
-            <EditOutlined
-              size={24}
-              color="#00CC66"
-              style={{ marginRight: 15 }}
+            <Button
+              style={{ backgroundColor: "yellow" }}
               onClick={() => handleClickEdit(record)}
-            />
+            >
+              <EditOutlined size={24} color="#00CC66" />
+            </Button>
+
             <Popconfirm
               title="Tem certeza que deseja excluir essa tarefa?"
               onConfirm={() => confirmDelete(record.key)}
@@ -162,7 +163,14 @@ export default function Category() {
               okButtonProps={{ danger: true }}
               cancelText="Cancelar"
             >
-              <DeleteOutlined size={24} color="#00CC66" />
+              <Button style={{ backgroundColor: "red" }}>
+                <DeleteOutlined
+                  size={24}
+                  style={{
+                    color: "#fff",
+                  }}
+                />
+              </Button>
             </Popconfirm>
           </div>
         );
