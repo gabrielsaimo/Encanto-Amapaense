@@ -100,7 +100,11 @@ const CollapseMenu = () => {
                     <div className="border">
                       <div className="flex">
                         <p className="p_1 name">{categotia.name}</p>
-                        <p className="p_1 price">R$ {categotia.price},00</p>
+                        <p className="p_1 price">
+                          {categotia.price % 1 != 0
+                            ? "R$ " + categotia.price.replace(".", ",")
+                            : "R$ " + categotia.price + ",00"}
+                        </p>
                       </div>
 
                       <div className="sub">
