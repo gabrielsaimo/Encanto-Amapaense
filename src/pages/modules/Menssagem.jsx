@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { service } from "../../services/firebase.ws";
-import { Button, Card, Col, Divider, message, Modal, Row } from "antd";
+import { Button, Card, Col, Divider, message, Modal, Row, Space } from "antd";
 import "firebase/database";
 import {
   collection,
@@ -56,8 +56,8 @@ export default function Menssagem({ atualizar }) {
               style={{ display: "flex", flexWrap: "wrap" }}
             >
               {menssagens.map((item, index) => (
-                <>
-                  {index % 4 === 0 ? <Divider /> : null}
+                <Space key={item.key}>
+                  {index % 4 === 0 ? <Divider key={index} /> : null}
                   <Card
                     title={item.motivo}
                     bordered={true}
@@ -69,7 +69,7 @@ export default function Menssagem({ atualizar }) {
                       Deletar
                     </Button>
                   </Card>
-                </>
+                </Space>
               ))}
             </div>
           </Col>

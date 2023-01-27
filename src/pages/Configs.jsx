@@ -65,7 +65,7 @@ export default function Config() {
       {!acessable ? (
         <Modal
           title="Acesso Restrito para Administradores"
-          visible={visible}
+          open={visible}
           footer={null}
           onCancel={() => open()}
         >
@@ -88,7 +88,7 @@ export default function Config() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <Tabs onChange={onChange} type="card" items={items} />
+          <Tabs onChange={onChange} key={items} type="card" items={items} />
         </div>
       )}
     </>

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//! Inativo
 const api = axios.create({
   baseURL: "https://63c4ae2ff80fabd877d96ecf.mockapi.io",
 });

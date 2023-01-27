@@ -376,8 +376,9 @@ export default function Dashboard({ atualizar }) {
                   }}
                 >
                   <Radio.Group buttonStyle="solid" value={filteredStatus}>
-                    {cardapioCategory.map((category) => (
+                    {cardapioCategory.map((category, index) => (
                       <Radio.Button
+                        key={index}
                         onClick={handleChangeStatus}
                         value={category.name}
                       >
@@ -407,7 +408,7 @@ export default function Dashboard({ atualizar }) {
       </Row>
       <Table dataSource={searchData} columns={columns} size="small" />
       <Modal
-        visible={modalNewAction}
+        open={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
         okText={"Salvar"}
         onOk={handleSave}
@@ -480,8 +481,12 @@ export default function Dashboard({ atualizar }) {
               onChange={(value) => setActive(value)}
               value={active}
             >
-              <Option value={true}>Sim</Option>
-              <Option value={false}>Não</Option>
+              <Option key={1} value={true}>
+                Sim
+              </Option>
+              <Option key={2} value={false}>
+                Não
+              </Option>
             </Select>
             <div style={{ display: "flex", alignItems: "center" }}>
               <Select
@@ -494,8 +499,10 @@ export default function Dashboard({ atualizar }) {
                 onChange={(value) => setCategory(value)}
                 value={category}
               >
-                {cardapioCategory.map((category) => (
-                  <Option value={category.name}>{category.name}</Option>
+                {cardapioCategory.map((category, index) => (
+                  <Option key={index} value={category.name}>
+                    {category.name}
+                  </Option>
                 ))}
               </Select>
               <Button
@@ -516,7 +523,7 @@ export default function Dashboard({ atualizar }) {
         </Row>
       </Modal>
       <Modal
-        visible={modalCategory}
+        open={modalCategory}
         okText={"Ok"}
         onOk={closeModal}
         onCancel={closeModal}

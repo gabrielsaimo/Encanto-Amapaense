@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Divider, Input, message, Modal, Select } from "antd";
+import { Button, Card, Divider, Input, message, Modal, Select } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
@@ -27,7 +27,7 @@ export default function Msn() {
   return (
     <>
       {!ok ? (
-        <div
+        <Card
           id="part-13"
           style={{
             border: "2px solid",
@@ -36,6 +36,7 @@ export default function Msn() {
             width: "90%",
             height: 150,
             borderRadius: 10,
+            backgroundColor: "transparent",
           }}
         >
           <h3>Relate aqui como foi sua experiência!</h3>
@@ -47,7 +48,7 @@ export default function Msn() {
           </Button>
           <Modal
             title="Mensagem"
-            visible={visible}
+            open={visible}
             onOk={handleSave}
             onCancel={() => setVisible(false)}
             okText="Enviar"
@@ -66,8 +67,10 @@ export default function Msn() {
               aria-required
               onChange={(e) => setMotivo(e)}
             >
-              {motivos.map((motivo) => (
-                <Select.Option value={motivo}>{motivo}</Select.Option>
+              {motivos.map((motivo, index) => (
+                <Select.Option key={index} value={motivo}>
+                  {motivo}
+                </Select.Option>
               ))}
             </Select>
             <Divider />
@@ -80,9 +83,9 @@ export default function Msn() {
             />
             <Divider />
           </Modal>
-        </div>
+        </Card>
       ) : (
-        <div
+        <Card
           style={{
             backgroundColor: "white",
             borderRadius: 10,
@@ -93,7 +96,7 @@ export default function Msn() {
           }}
         >
           Obrigado pelo seu Seu feedback!
-        </div>
+        </Card>
       )}
     </>
   );

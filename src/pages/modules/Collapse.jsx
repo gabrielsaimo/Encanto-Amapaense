@@ -40,7 +40,7 @@ const CollapseMenu = () => {
   const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
     return (
-      <div>
+      <div key={index}>
         {index == 0 ? <SlidesPrincipal /> : null}
         {index == 11 ? <SlidesSobemesas /> : null}
         {index == 12 ? <SlidesBebidas /> : null}
@@ -71,7 +71,7 @@ const CollapseMenu = () => {
             "20",
           ]}
           destroyInactivePanel={false}
-          expandIconPosition="right"
+          expandIconPosition="end"
           expandIcon={({ isActive }) => (
             <CaretRightOutlined rotate={isActive ? 90 : 0} />
           )}
@@ -92,26 +92,24 @@ const CollapseMenu = () => {
             }}
             header={item1.name}
           >
-            {cardapio.map((categotia) => (
-              <div>
+            {cardapio.map((categotia, index) => (
+              <div key={index}>
                 {categotia.category == item1.name &&
                 categotia.active == true ? (
-                  <>
-                    <div className="border">
-                      <div className="flex">
-                        <p className="p_1 name">{categotia.name}</p>
-                        <p className="p_1 price">
-                          {categotia.price % 1 != 0
-                            ? "R$ " + categotia.price.replace(".", ",")
-                            : "R$ " + categotia.price + ",00"}
-                        </p>
-                      </div>
-
-                      <div className="sub">
-                        {categotia.sub} {categotia.description}
-                      </div>
+                  <div className="border">
+                    <div className="flex">
+                      <p className="p_1 name">{categotia.name}</p>
+                      <p className="p_1 price">
+                        {categotia.price % 1 != 0
+                          ? "R$ " + categotia.price.replace(".", ",")
+                          : "R$ " + categotia.price + ",00"}
+                      </p>
                     </div>
-                  </>
+
+                    <div className="sub">
+                      {categotia.sub} {categotia.description}
+                    </div>
+                  </div>
                 ) : null}
               </div>
             ))}

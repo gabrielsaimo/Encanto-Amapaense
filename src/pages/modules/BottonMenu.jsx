@@ -52,13 +52,17 @@ const Menu = () => {
           placement={placement}
           closable={false}
           onClose={onClose}
-          visible={visible}
+          open={visible}
         >
-          <Anchor affix={false} showInkInFixed>
-            {cardapioCategory.map((item, index) => (
-              <Anchor.Link href={`#part-${index}`} title={item.name} />
-            ))}
-          </Anchor>
+          <Anchor
+            affix={false}
+            showInkInFixed
+            items={cardapioCategory.map((item, index) => ({
+              href: `#part-${index}`,
+              key: `${index}`,
+              title: `${item.name}`,
+            }))}
+          />
         </Drawer>
       </div>
     </div>

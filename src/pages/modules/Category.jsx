@@ -238,7 +238,7 @@ export default function Category() {
       </Row>
       <Table dataSource={searchData} columns={columns} />
       <Modal
-        visible={modalNewAction}
+        open={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
         okText={"Salvar"}
         onOk={handleSave}
