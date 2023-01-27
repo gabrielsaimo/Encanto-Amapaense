@@ -11,31 +11,31 @@ const SlidesPrincipal = () => {
   const colletionRef = collection(db, "SlidePrincipal");
 
   useEffect(() => {
-    const getCardapio = async () => {
-      const cardapioCollection = await getDocs(colletionRef);
-      setOrdem(
-        cardapioCollection.docs
-          .map((doc) => doc.data())
-          .sort((a, b) => a.id - b.id)
-      );
-    };
-    getCardapio();
-    const fetchImages = async () => {
-      let result = await storage.ref().child("SlidePrincipal/").listAll();
-      let urlPromises = result.items.map((imageRef) =>
-        imageRef.getDownloadURL()
-      );
-
-      return Promise.all(urlPromises);
-    };
-
-    const loadImages = async () => {
-      const urls = await fetchImages();
-      setFiles(urls);
-    };
-    loadImages();
+    if (files.length === 0) {
+      loadImages();
+    }
+    if (ordem.length === 0) {
+      getCardapio();
+    }
   }, []);
+  const getCardapio = async () => {
+    const cardapioCollection = await getDocs(colletionRef);
+    setOrdem(
+      cardapioCollection.docs
+        .map((doc) => doc.data())
+        .sort((a, b) => a.id - b.id)
+    );
+  };
+  const loadImages = async () => {
+    const urls = await fetchImages();
+    setFiles(urls);
+  };
+  const fetchImages = async () => {
+    let result = await storage.ref().child("SlidePrincipal/").listAll();
+    let urlPromises = result.items.map((imageRef) => imageRef.getDownloadURL());
 
+    return Promise.all(urlPromises);
+  };
   return (
     <div style={{ margin: 5 }}>
       <Carousel showArrows={true} autoplay={true}>

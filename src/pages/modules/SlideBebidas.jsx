@@ -5,21 +5,21 @@ import { storage } from "../../services/firebase.ws";
 const SlidesBebidas = () => {
   const [files, setFiles] = useState([]);
   useEffect(() => {
-    const fetchImages = async () => {
-      let result = await storage.ref().child("SlideTerciario/").listAll();
-      let urlPromises = result.items.map((imageRef) =>
-        imageRef.getDownloadURL()
-      );
-
-      return Promise.all(urlPromises);
-    };
-
-    const loadImages = async () => {
-      const urls = await fetchImages();
-      setFiles(urls);
-    };
-    loadImages();
+    if (files.length === 0) {
+      loadImages();
+    }
   }, []);
+  const fetchImages = async () => {
+    let result = await storage.ref().child("SlideTerciario/").listAll();
+    let urlPromises = result.items.map((imageRef) => imageRef.getDownloadURL());
+
+    return Promise.all(urlPromises);
+  };
+
+  const loadImages = async () => {
+    const urls = await fetchImages();
+    setFiles(urls);
+  };
   const Slide = [
     { id: 1, caption: "Bebidas" },
     { id: 2, caption: "Bebidas" },
