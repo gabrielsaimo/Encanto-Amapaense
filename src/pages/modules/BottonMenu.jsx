@@ -19,21 +19,17 @@ const Menu = () => {
     setVisible(false);
   };
 
-  const onChange = (e) => {
-    setPlacement(e.target.value);
-  };
   useEffect(() => {
-    const getCardapiocategory = async () => {
-      const cardapioCollection = await getDocs(colletionCategory);
-      const cardapios = cardapioCollection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
-    };
-
-    getCardapiocategory();
+    cardapioCategory.length == 0 && getCardapiocategory();
   }, []);
+  const getCardapiocategory = async () => {
+    const cardapioCollection = await getDocs(colletionCategory);
+    const cardapios = cardapioCollection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
+  };
   return (
     <div style={{ margin: 5 }}>
       <div style={{ margin: 5 }}>

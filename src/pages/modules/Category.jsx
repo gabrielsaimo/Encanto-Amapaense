@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   Col,
-  Collapse,
   Input,
   message,
   Modal,
@@ -48,33 +47,31 @@ export default function Category() {
   const colletionCategory = collection(db, "categorias_cardapio");
 
   useEffect(() => {
-    const getCardapioCategory = async () => {
-      const cardapioCollection = await getDocs(colletionCategory);
-      const cardapiosCategory = cardapioCollection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setCardapioCategory(cardapiosCategory.sort((a, b) => a.id - b.id));
-    };
-    getCardapioCategory();
-  }, [action]);
+    cardapioCategory.length == 0 && getCardapioCategory();
+  }, []);
+  const getCardapioCategory = async () => {
+    const cardapioCollection = await getDocs(colletionCategory);
+    const cardapiosCategory = cardapioCollection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setCardapioCategory(cardapiosCategory.sort((a, b) => a.id - b.id));
+  };
   useEffect(() => {
     filterTable();
-
-    function filterTable() {
-      if (!search) {
-        setSearchData(cardapioCategory);
-      } else {
-        const array = cardapioCategory.filter(
-          (record) =>
-            !search ||
-            record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1
-        );
-        setSearchData(array);
-      }
-    }
   }, [search, cardapioCategory]);
-
+  function filterTable() {
+    if (!search) {
+      setSearchData(cardapioCategory);
+    } else {
+      const array = cardapioCategory.filter(
+        (record) =>
+          !search ||
+          record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1
+      );
+      setSearchData(array);
+    }
+  }
   async function handleSave() {
     console.log("handleSave");
     if (selectedTaskId) {

@@ -15,19 +15,18 @@ export default function Menssagem({ atualizar }) {
   const [actionMensagem, setActionMensagem] = useState(false);
   const db = getFirestore(service);
   const colletionRefMensagens = collection(db, "mensagens");
-  const [count, setCount] = useState(0);
+
   useEffect(() => {
-    const getMensagen = async () => {
-      const messagenCollection = await getDocs(colletionRefMensagens);
-      const messagen = messagenCollection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setMenssagens(messagen.sort((a, b) => b.id - a.id));
-    };
     getMensagen();
   }, [actionMensagem, atualizar]);
-
+  const getMensagen = async () => {
+    const messagenCollection = await getDocs(colletionRefMensagens);
+    const messagen = messagenCollection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setMenssagens(messagen.sort((a, b) => b.id - a.id));
+  };
   async function DeletarMensagem(record) {
     const docRef = doc(db, "mensagens", record);
     await deleteDoc(docRef);

@@ -16,23 +16,8 @@ export default function Pedidos(atualizar) {
   const [listapedidos, setListaPedido] = useState([]);
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const getPedido = async () => {
-      const Collection = await getDocs(colletionRefPedido);
-      const pedido = Collection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setPedido(pedido.sort((a, b) => b.id - a.id));
-    };
     getPedido();
-    const getListaPedido = async () => {
-      const Collection = await getDocs(colletionRefListaPedido);
-      const listapedido = Collection.docs.map((doc) => ({
-        ...doc.data(),
-        key: doc.id,
-      }));
-      setListaPedido(listapedido.sort((a, b) => b.id - a.id));
-    };
+
     getListaPedido();
     const interval = setInterval(() => {
       setCount(count + 1);
@@ -42,7 +27,22 @@ export default function Pedidos(atualizar) {
 
     return () => clearInterval(interval);
   }, [atualizar]);
-
+  const getPedido = async () => {
+    const Collection = await getDocs(colletionRefPedido);
+    const pedido = Collection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setPedido(pedido.sort((a, b) => b.id - a.id));
+  };
+  const getListaPedido = async () => {
+    const Collection = await getDocs(colletionRefListaPedido);
+    const listapedido = Collection.docs.map((doc) => ({
+      ...doc.data(),
+      key: doc.id,
+    }));
+    setListaPedido(listapedido.sort((a, b) => b.id - a.id));
+  };
   return (
     <>
       <h1>Atualizado as {dataFormatada}</h1>

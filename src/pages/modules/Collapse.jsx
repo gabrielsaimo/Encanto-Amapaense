@@ -18,25 +18,25 @@ const CollapseMenu = () => {
   const colletionRef = collection(db, "cardapio");
   const colletionCategory = collection(db, "categorias_cardapio");
   useEffect(() => {
-    const getCardapioCategory = async () => {
-      const cardapioCollection = await getDocs(colletionCategory);
-      setCardapioCategory(
-        cardapioCollection.docs
-          .map((doc) => doc.data())
-          .sort((a, b) => a.id - b.id)
-      );
-    };
-    getCardapioCategory();
-    const getCardapio = async () => {
-      const cardapioCollection = await getDocs(colletionRef);
-      setCardapio(
-        cardapioCollection.docs
-          .map((doc) => doc.data())
-          .sort((a, b) => a.id - b.id)
-      );
-    };
-    getCardapio();
+    cardapio.length == 0 && getCardapio();
+    cardapioCategory.length == 0 && getCardapioCategory();
   }, []);
+  const getCardapio = async () => {
+    const cardapioCollection = await getDocs(colletionRef);
+    setCardapio(
+      cardapioCollection.docs
+        .map((doc) => doc.data())
+        .sort((a, b) => a.id - b.id)
+    );
+  };
+  const getCardapioCategory = async () => {
+    const cardapioCollection = await getDocs(colletionCategory);
+    setCardapioCategory(
+      cardapioCollection.docs
+        .map((doc) => doc.data())
+        .sort((a, b) => a.id - b.id)
+    );
+  };
   const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
     return (
