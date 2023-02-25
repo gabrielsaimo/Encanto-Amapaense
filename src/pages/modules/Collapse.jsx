@@ -32,7 +32,7 @@ const CollapseMenu = () => {
         .map((doc) => doc.data())
         .sort((a, b) => a.id - b.id)
     );
-    if (cardapio == null) {
+    if (cardapio.length == 0) {
       setCardapio(cardapios);
     }
   };
@@ -43,7 +43,7 @@ const CollapseMenu = () => {
         .map((doc) => doc.data())
         .sort((a, b) => a.id - b.id)
     );
-    if (cardapioCategory == null) {
+    if (cardapioCategory.length == 0) {
       setCardapioCategory(category);
     }
   };
