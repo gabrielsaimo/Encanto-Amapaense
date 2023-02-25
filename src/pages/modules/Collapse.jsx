@@ -6,12 +6,16 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
+import cardapios from "../../json/cardapio.json";
+import category from "../../json/cartegory.json";
 import "firebase/database";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {
+  //  console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
+  //  console.log("🚀 ~ file: Collapse.jsx:18 ~ Category:", category);
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const db = getFirestore(service);
@@ -28,6 +32,9 @@ const CollapseMenu = () => {
         .map((doc) => doc.data())
         .sort((a, b) => a.id - b.id)
     );
+    if (cardapio == null) {
+      setCardapio(cardapios);
+    }
   };
   const getCardapioCategory = async () => {
     const cardapioCollection = await getDocs(colletionCategory);
@@ -36,6 +43,9 @@ const CollapseMenu = () => {
         .map((doc) => doc.data())
         .sort((a, b) => a.id - b.id)
     );
+    if (cardapioCategory == null) {
+      setCardapioCategory(category);
+    }
   };
   const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
@@ -69,6 +79,16 @@ const CollapseMenu = () => {
             "18",
             "19",
             "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
           ]}
           destroyInactivePanel={false}
           expandIconPosition="end"

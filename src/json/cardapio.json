@@ -1,1082 +1,1126 @@
 [
   {
-    "price": "R$ 60,00",
-    "name": "Camarão no Bafo",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "1"
-  },
-  {
-    "price": "R$ 150,00",
-    "name": "Camarão Pitú no bafo",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "2"
-  },
-  {
-    "price": "R$ 165,00",
-    "name": "Camarão Pitú na chapa",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "3"
-  },
-  {
-    "price": "R$ 70,00",
-    "name": "Conarão Rosa empanado",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "4"
-  },
-  {
-    "price": "R$ 76,00",
-    "name": "Camarão Rosa crocante",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "5"
-  },
-  {
-    "price": "R$ 68,00",
-    "name": "Camarão Rosa ao alho e óleo",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "6"
-  },
-  {
-    "price": "R$ 59,00",
-    "name": "Isca de peixe à milanesa",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "7"
-  },
-  {
-    "price": "R$ 59,00",
-    "name": "Isca de peixe",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "8"
-  },
-  {
-    "price": "R$ 63,00",
-    "name": "Isca de filé c/ fritas",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "9"
-  },
-  {
-    "price": "R$ 65,00",
-    "name": "Isca de maminha c/ macaxeira",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "10"
-  },
-  {
-    "price": "R$ 71,00",
-    "name": "Isca de picanha c/ macaxeira",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "11"
-  },
-  {
-    "price": "R$ 55,00",
-    "name": "Charque c/ macaxeira",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "12"
-  },
-  {
-    "price": "R$ 170,00",
-    "name": "Entrada de Encanto",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "13"
-  },
-  {
-    "price": "R$ 52,00",
-    "name": "Tábua de frios",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "14"
-  },
-  {
-    "price": "R$ 23,00",
-    "name": "Batata ou Macaxeira",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "15"
-  },
-  {
-    "price": "R$ 50,00",
-    "name": "Bolinho de Bacalhau",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "16"
-  },
-  {
-    "price": "R$ 40,00",
-    "name": "Casquinha de Caranguejo",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Entrada",
-    "id": "17"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Caldo de Peixe",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "18"
-  },
-  {
-    "price": "R$ 35,00",
-    "name": "Camarão Regional",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "19"
-  },
-  {
-    "price": "R$ 55,00",
-    "name": "Mista",
-    "description": null,
-    "sub": "(Camarão Regional / Caranguejo)",
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "20"
-  },
-  {
-    "price": "R$ 52,00",
-    "name": "Camarão Rosa",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "21"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Caldo de Carne",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "22"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Caldo de Frango",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Mujicas e caldos",
-    "id": "23"
-  },
-  {
-    "price": "R$ 95,00",
-    "name": "Peixe ao molho de camarão Regional",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "24"
-  },
-  {
-    "price": "R$ 95,00",
-    "name": "Peixe Encanto Amapaense",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "25"
-  },
-  {
-    "price": "R$ 90,00",
-    "name": "Peixe Escabeche",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "26"
-  },
-  {
-    "price": "R$ 108,00",
-    "name": "Peixe ao molho branco",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": "(c/ camarão rosa)",
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "27"
-  },
-  {
-    "price": "R$ 89,00",
-    "name": "Peixe à delícia",
-    "description": "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "28"
-  },
-  {
-    "price": "R$ 110,00",
-    "name": "Peixe ao molho de alcaparra",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": "(c/ camarão rosa)",
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "29"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Peixe ao molho de castanha",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "30"
-  },
-  {
-    "price": "R$ 88,00",
-    "name": "Peixe ao molho de taperebá",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe ao molho",
-    "id": "31"
-  },
-  {
-    "price": "R$ 99,00",
-    "name": "Peixe Recheado",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": "(com Camarão Regional / Caranguejo)",
-    "active": true,
-    "category": "Peixe Frito",
-    "id": "32"
-  },
-  {
-    "price": "R$ 105,00",
-    "name": "Peixe Recheado com camarão rosa",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe Frito",
-    "id": "33"
-  },
-  {
-    "price": "R$ 86,00",
-    "name": "Peixe Crocante",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe Frito",
-    "id": "34"
-  },
-  {
-    "price": "R$ 95,00",
-    "name": "Peixe na crosta de castanha",
-    "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe Frito",
-    "id": "35"
-  },
-  {
-    "price": "R$ 00,00",
-    "name": "Tucunaré na manteiga",
-    "description": "Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
-    "sub": null,
-    "active": false,
-    "category": "Peixe Frito",
-    "id": "36"
-  },
-  {
-    "price": "R$ 00,00",
-    "name": "Tucunaré do cheff",
-    "description": "Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
-    "sub": null,
-    "active": false,
-    "category": "Peixe Frito",
-    "id": "37"
-  },
-  {
-    "price": "R$ 82,00",
-    "name": "Peixe Frito",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe Frito",
-    "id": "38"
-  },
-  {
-    "price": "R$ 90,00",
-    "name": "Peixe na chapa c/ legumes",
-    "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "39"
-  },
-  {
-    "price": "R$ 98,00",
-    "name": "Peixe na chapa c/ camarão rosa",
-    "description": "(Acomp. Legumes , Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "40"
-  },
-  {
-    "price": "R$ 125,00",
-    "name": "Mistura Tucuju",
-    "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "41"
-  },
-  {
-    "price": "R$ 140,00",
-    "name": "Prato do cheff ",
-    "description": "(Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi)",
-    "sub": "(Camarão Rosa e Pitu)",
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "42"
-  },
-  {
-    "price": "R$ 105,00",
-    "name": "Peixe pai-d' égua",
-    "description": "(Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
-    "sub": "(com Camarão Rosa)",
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "43"
-  },
-  {
-    "price": "R$ 115,00",
-    "name": "Encanto Regional",
-    "description": "(Acomp. Arroz Paraense, Purê, Farofa e Banana)",
-    "sub": null,
-    "active": true,
-    "category": "Peixe na chapa",
-    "id": "44"
-  },
-  {
-    "price": "R$ 84,00",
-    "name": "Camarão Regional",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "45"
-  },
-  {
-    "price": "R$ 86,00",
-    "name": "Camarão Regional empanado",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "46"
-  },
-  {
-    "price": "R$ 93,00",
-    "name": "Camarão Rosa ao molho branco",
-    "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "47"
-  },
-  {
-    "price": "R$ 92,00",
-    "name": "Camarão Rosa empanado",
-    "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "48"
-  },
-  {
-    "price": "R$ 95,00",
-    "name": "Camarão Rosa ao alho e óleo",
-    "description": "(Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "49"
-  },
-  {
-    "price": "R$ 92,00",
-    "name": "Camarão Rosa crocante",
-    "description": "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "50"
-  },
-  {
-    "price": "R$ 96,00",
-    "name": "Camarão Encanto ",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": "(Empanado na Castanha)",
-    "active": true,
-    "category": "Camarão",
-    "id": "51"
-  },
-  {
-    "price": "R$ 142,00",
-    "name": "Camarão Pitú ao alho e óleo",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "52"
-  },
-  {
-    "price": "R$ 92,00",
-    "name": "Strogonoffde Camarão Rosa",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "53"
-  },
-  {
-    "price": "R$ 92,00",
-    "name": "Camarão Rosa no queijo e manteiga",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "54"
-  },
-  {
-    "price": "R$ 98,00",
-    "name": "Camarão Tropical",
-    "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "55"
-  },
-  {
-    "price": "R$ 125,00",
-    "name": "Risoto de cantarão Rosa",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Camarão",
-    "id": "56"
-  },
-  {
-    "price": "R$ 89,00",
-    "name": "Filé Grehado",
-    "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "57"
-  },
-  {
-    "price": "R$ 92,00",
-    "name": "Filé c/ fritas",
-    "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "58"
-  },
-  {
-    "price": "R$ 93,00",
-    "name": "Filé à Parmegiana",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "59"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Filé à Rolê",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "60"
-  },
-  {
-    "price": "R$ 98,00",
-    "name": "Medalhão de Filé",
-    "description": "(Acomp. Arroz Farofa de ovo)",
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "61"
-  },
-  {
-    "price": "R$ 98,00",
-    "name": "Filé ao molho catupiry",
-    "description": "(Acomp. Arroz, Puré ,Farofa de ovo, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Carnes",
-    "id": "62"
-  },
-  {
-    "price": "R$ 130,00",
-    "name": "Picanha c/ macaxeira",
-    "description": "(Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi)",
-    "sub": "(Maturada)",
-    "active": true,
-    "category": "Carnes",
-    "id": "63"
-  },
-  {
-    "price": "R$ 138,00",
-    "name": "Picanha na cerveja",
-    "description": null,
-    "sub": "(Maturada)",
-    "active": true,
-    "category": "Carnes",
-    "id": "64"
-  },
-  {
-    "price": "R$ 127,00",
-    "name": "Picanha c/ abacaxi e legumes",
-    "description": "(Acomp. Arroz, Puré ,Farofa. Tucupi)",
-    "sub": "(Maturada)",
-    "active": true,
-    "category": "Carnes",
-    "id": "65"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Mmninha c/ macaxeira",
-    "description": null,
-    "sub": "(Maturada)",
-    "active": true,
-    "category": "Carnes",
-    "id": "66"
-  },
-  {
-    "price": "R$ 125,00",
-    "name": "Mista ",
-    "description": null,
-    "sub": "(Peixe,Frango,Camarão rosa, Calabresa, Maminha)",
-    "active": true,
-    "category": "Carnes",
-    "id": "67"
-  },
-  {
-    "price": "R$ 69,00",
-    "name": "Frango grelhado",
-    "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Frango",
-    "id": "68"
-  },
-  {
-    "price": "R$ 75,00",
-    "name": "Frango crocante",
-    "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Frango",
-    "id": "69"
-  },
-  {
-    "price": "R$ 72,00",
-    "name": "strogonoff",
-    "description": "(Acomp. Arroz,batata palha, puré, Farofa, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Frango",
-    "id": "70"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Filhote",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Moquecas",
-    "id": "71"
-  },
-  {
-    "price": "R$ 110,00",
-    "name": "Camarão",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Moquecas",
-    "id": "72"
-  },
-  {
-    "price": "R$ 125,00",
-    "name": "Mista ",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": "(Filhote, Camarão Rosa)",
-    "active": true,
-    "category": "Moquecas",
-    "id": "73"
-  },
-  {
-    "price": "R$ 145,00",
-    "name": "Completa",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": "(Filhote, Camarão Rosa, Pitú)",
-    "active": true,
-    "category": "Moquecas",
-    "id": "74"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Pirarucu",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Moquecas",
-    "id": "75"
-  },
-  {
-    "price": "R$ 105,00",
-    "name": "Baiana",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Moquecas",
-    "id": "76"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Filhote",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "77"
-  },
-  {
-    "price": "R$ 125,00",
-    "name": "Misra",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": "(Filhote, Camarão Rosa)",
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "78"
-  },
-  {
-    "price": "R$ 145,00",
-    "name": "Completa",
-    "description": "(Acomp. Arroz, Pirão, Tucupi)",
-    "sub": "(Filhote, Camarão Rosa, Pitú)",
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "79"
-  },
-  {
-    "price": "R$ 135,00",
-    "name": "Encanto Amapaense",
-    "description": "(Acomp. Arroz, Pirão,Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "80"
-  },
-  {
-    "price": "R$ 100,00",
-    "name": "Pirarucu",
-    "description": "(Acomp. Arroz, Pirão,Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "81"
-  },
-  {
-    "price": "R$ 150,00",
-    "name": "Tucunaré",
-    "description": "(Acomp. Arroz, Pirão,Tucupi)",
-    "sub": null,
-    "active": true,
-    "category": "Caldeiradas",
-    "id": "82"
-  },
-  {
-    "price": "R$ 10,00",
-    "name": "Arroz baião",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "83"
-  },
-  {
-    "price": "R$ 9,00",
-    "name": "Arroz à grega",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "84"
-  },
-  {
-    "price": "R$ 6,00",
-    "name": "Arroz branco",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "85"
-  },
-  {
-    "price": "R$ 20,00",
-    "name": "Arroz paraense",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "86"
-  },
-  {
-    "price": "R$ 12,00",
-    "name": "Arroz piamontes",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "87"
-  },
-  {
-    "price": "R$ 5,00",
-    "name": "Salada de maionese",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "88"
-  },
-  {
-    "price": "R$ 40,00",
-    "name": "Salada de pirarucu",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "89"
-  },
-  {
-    "price": "R$ 40,00",
-    "name": "Salada de Camarão Regional",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "90"
-  },
-  {
-    "price": "R$ 5,00",
-    "name": "Purê",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "91"
-  },
-  {
-    "price": "R$ 5,00",
-    "name": "Vinagrete",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "92"
-  },
-  {
-    "price": "R$ 15,00",
-    "name": "Farofa de ovo",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "93"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Farofa de camarão",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "94"
-  },
-  {
-    "price": "R$ 20,00",
-    "name": "Legumes refogados",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "95"
-  },
-  {
-    "price": "R$ 20,00",
-    "name": "Pirão",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "96"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Filé kids",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "97"
-  },
-  {
-    "price": "R$ 25,00",
-    "name": "Frango kids",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "98"
-  },
-  {
-    "price": "R$ 30,00",
-    "name": "Peixe kids",
-    "description": null,
-    "sub": null,
-    "active": true,
-    "category": "Porções Extras",
-    "id": "99"
-  },
-  {
-    "name": "Mouse",
-    "sub": null,
-    "active": true,
-    "price": "R$ 17,00",
-    "id": "100",
-    "description": "(cupuaçu,Maracuja e Morango)",
-    "category": "Sobremesas"
-  },
-  {
-    "name": "Banana flambada c sorvete",
-    "sub": null,
-    "active": true,
-    "price": "R$ 20,00",
-    "id": "102",
-    "description": null,
-    "category": "Sobremesas"
-  },
-  {
-    "name": "Açaí",
-    "sub": null,
-    "active": true,
-    "price": "R$ 15,00",
-    "id": "103",
-    "description": "(porçao 350 ml)",
-    "category": "Sobremesas"
-  },
-  {
-    "name": "Pudim",
-    "sub": null,
-    "active": true,
-    "price": "R$ 15,00",
-    "id": "104",
-    "description": null,
-    "category": "Sobremesas"
-  },
-  {
-    "name": "Laranja ou Laranja c/ morango",
-    "sub": null,
-    "active": true,
-    "price": "R$ 10,00",
-    "id": "105",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Limonada ou Limonada suíça",
-    "sub": null,
-    "active": true,
-    "price": "R$ 8,00",
-    "id": "106",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Sucos diversos",
-    "sub": null,
-    "active": true,
-    "price": "R$ 8,00",
-    "id": "107",
-    "description": "(+ 1 reais adicional de leite)",
-    "category": "Bebidas"
-  },
-  {
-    "name": "Jarra",
-    "sub": null,
-    "active": true,
-    "price": "R$ 28,00",
-    "id": "108",
-    "description": "(+ 5 reais adiconal de leite)",
-    "category": "Bebidas"
-  },
-  {
-    "name": "Jarra de laranja",
-    "sub": null,
-    "active": true,
-    "price": "R$ 35,00",
-    "id": "109",
-    "description": "(1,2 litros)",
-    "category": "Bebidas"
-  },
-  {
-    "name": "Refrigerante lata",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "110",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Refrigerante 1 litro",
-    "sub": null,
-    "active": true,
-    "price": "R$ 12,00",
-    "id": "111",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Aguás s/gás",
-    "sub": null,
-    "active": true,
-    "price": "R$ 4,50",
-    "id": "112",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Aguác c/ gás",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "113",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Água tônica",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "114",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Água de coco",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "115",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "H2o",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,50",
-    "id": "116",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Red bull",
-    "sub": null,
-    "active": true,
-    "price": "R$ 15,00",
-    "id": "117",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Schweppes citrus",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "118",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Schweppes tônica",
-    "sub": null,
-    "active": true,
-    "price": "R$ 6,00",
-    "id": "119",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Ks 350ml",
-    "sub": null,
-    "active": true,
-    "price": "R$ 7,00",
-    "id": "120",
-    "description": null,
-    "category": "Bebidas"
-  },
-  {
-    "name": "Ks 1 litro",
-    "sub": null,
-    "active": true,
-    "price": "R$ 14,00",
-    "id": "121",
-    "description": null,
-    "category": "Bebidas"
+      "price": 50,
+      "name": "Camarão no bafo",
+      "id": 1,
+      "description": "",
+      "active": true,
+      "sub": "",
+      "category": "Entrada"
+  },
+  {
+      "price": 150,
+      "description": "",
+      "category": "Entrada",
+      "sub": "",
+      "id": 2,
+      "active": true,
+      "name": "Camarão Pitú no bafo"
+  },
+  {
+      "name": "Camarão Pitú na chapa",
+      "price": 165,
+      "id": 3,
+      "description": "",
+      "category": "Entrada",
+      "sub": "",
+      "active": true
+  },
+  {
+      "description": "",
+      "active": true,
+      "category": "Entrada",
+      "name": "Comarão rosa empanado",
+      "sub": "",
+      "price": "72",
+      "id": 4
+  },
+  {
+      "sub": "",
+      "name": "Camarão Rosa crocante",
+      "category": "Entrada",
+      "description": "",
+      "price": "78",
+      "active": true,
+      "id": 5
+  },
+  {
+      "sub": "",
+      "name": "Camarão Rosa ao alho e óleo",
+      "price": 68,
+      "id": 6,
+      "category": "Entrada",
+      "description": "",
+      "active": true
+  },
+  {
+      "id": 7,
+      "description": "",
+      "price": 59,
+      "category": "Entrada",
+      "active": true,
+      "sub": "",
+      "name": "Isca de peixe à milanesa"
+  },
+  {
+      "price": "60",
+      "active": true,
+      "id": 8,
+      "category": "Entrada",
+      "name": "Isca de peixe",
+      "sub": "",
+      "description": ""
+  },
+  {
+      "id": 9,
+      "active": true,
+      "sub": "",
+      "category": "Entrada",
+      "description": "",
+      "name": "Isca de filé c/ fritas",
+      "price": "68"
+  },
+  {
+      "description": "",
+      "name": "Isca de maminha c/ macaxeira",
+      "active": true,
+      "price": 65,
+      "id": 10,
+      "sub": "",
+      "category": "Entrada"
+  },
+  {
+      "active": true,
+      "sub": "",
+      "name": "Isca de picanha c/ macaxeira",
+      "description": "",
+      "category": "Entrada",
+      "id": 11,
+      "price": 71
+  },
+  {
+      "id": 12,
+      "active": true,
+      "description": "",
+      "category": "Entrada",
+      "sub": "",
+      "name": "Charque c/ macaxeira",
+      "price": "58"
+  },
+  {
+      "active": true,
+      "name": "Entrada de Encanto",
+      "id": 13,
+      "description": "",
+      "price": 170,
+      "sub": "",
+      "category": "Entrada"
+  },
+  {
+      "price": 52,
+      "active": true,
+      "id": 14,
+      "description": "",
+      "name": "Tábua de frios",
+      "category": "Entrada",
+      "sub": ""
+  },
+  {
+      "description": "",
+      "category": "Entrada",
+      "price": 23,
+      "name": "Batata ou Macaxeira",
+      "id": 15,
+      "sub": "",
+      "active": true
+  },
+  {
+      "sub": "",
+      "price": 50,
+      "category": "Entrada",
+      "active": true,
+      "description": "",
+      "name": "Bolinho de Bacalhau",
+      "id": 16
+  },
+  {
+      "active": true,
+      "price": 40,
+      "id": 17,
+      "name": "Casquinha de Caranguejo",
+      "description": "",
+      "sub": "",
+      "category": "Entrada"
+  },
+  {
+      "category": "Mujicas e caldos",
+      "description": "",
+      "price": 30,
+      "id": 18,
+      "name": "Caldo de Peixe",
+      "active": true,
+      "sub": ""
+  },
+  {
+      "active": true,
+      "category": "Mujicas e caldos",
+      "id": 19,
+      "name": "Camarão Regional",
+      "description": "",
+      "price": 35,
+      "sub": ""
+  },
+  {
+      "sub": "(Camarão Regional / Caranguejo)",
+      "active": true,
+      "description": "",
+      "name": "Mista",
+      "category": "Mujicas e caldos",
+      "id": 20,
+      "price": 55
+  },
+  {
+      "active": true,
+      "sub": "",
+      "price": 52,
+      "category": "Mujicas e caldos",
+      "name": "Camarão Rosa",
+      "description": "",
+      "id": 21
+  },
+  {
+      "sub": "",
+      "id": 22,
+      "name": "Caldo de Carne",
+      "price": 30,
+      "category": "Mujicas e caldos",
+      "description": ""
+  },
+  {
+      "category": "Mujicas e caldos",
+      "active": true,
+      "description": "",
+      "id": 23,
+      "price": 30,
+      "name": "Caldo de Frango",
+      "sub": ""
+  },
+  {
+      "active": true,
+      "price": "99",
+      "name": "Peixe ao molho de camarão Regional",
+      "category": "Peixe ao molho",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "id": 24,
+      "sub": ""
+  },
+  {
+      "id": 25,
+      "sub": "",
+      "name": "Peixe Encanto Amapaense",
+      "category": "Peixe ao molho",
+      "active": true,
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "price": "99"
+  },
+  {
+      "id": 26,
+      "active": true,
+      "name": "Peixe Escabeche",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "category": "Peixe ao molho",
+      "sub": "",
+      "price": "92"
+  },
+  {
+      "price": "112",
+      "category": "Peixe ao molho",
+      "name": "Peixe ao molho branco",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "sub": "(c/ camarão rosa)",
+      "active": true,
+      "id": 27
+  },
+  {
+      "name": "Peixe à delícia",
+      "price": "95",
+      "id": 28,
+      "sub": "",
+      "description": "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)",
+      "category": "Peixe ao molho",
+      "active": true
+  },
+  {
+      "price": "115",
+      "id": 29,
+      "name": "Peixe ao molho de alcaparra",
+      "sub": "(c/ camarão rosa)",
+      "category": "Peixe ao molho",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "active": true
+  },
+  {
+      "name": "Peixe ao molho de castanha",
+      "id": 30,
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "active": true,
+      "category": "Peixe ao molho",
+      "sub": "",
+      "price": "110"
+  },
+  {
+      "category": "Peixe ao molho",
+      "name": "Peixe ao molho de taperebá",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "price": "93",
+      "active": true,
+      "sub": "",
+      "id": 31
+  },
+  {
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "category": "Peixe Frito",
+      "name": "Peixe Recheado",
+      "price": 99,
+      "sub": "(com Camarão Regional / Caranguejo)",
+      "active": true,
+      "id": 32
+  },
+  {
+      "sub": "",
+      "price": 105,
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "category": "Peixe Frito",
+      "name": "Peixe Recheado com camarão rosa",
+      "id": 33,
+      "active": true
+  },
+  {
+      "sub": "",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "id": 34,
+      "category": "Peixe Frito",
+      "price": "90",
+      "name": "Peixe Crocante",
+      "active": true
+  },
+  {
+      "active": true,
+      "price": "110",
+      "category": "Peixe Frito",
+      "sub": "",
+      "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
+      "name": "Peixe na crosta de castanha",
+      "id": 35
+  },
+  {
+      "sub": "",
+      "active": false,
+      "description": "(Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
+      "category": "Peixe Frito",
+      "name": "Tucunaré na manteiga",
+      "price": 0,
+      "id": 36
+  },
+  {
+      "price": 0,
+      "description": "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
+      "category": "Peixe Frito",
+      "active": false,
+      "id": 37,
+      "sub": "",
+      "name": "Tucunaré do cheff"
+  },
+  {
+      "category": "Peixe Frito",
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
+      "active": true,
+      "id": 38,
+      "price": 82,
+      "name": "Peixe Frito",
+      "sub": ""
+  },
+  {
+      "category": "Peixe na chapa",
+      "name": "Peixe na chapa c/ legumes",
+      "sub": "",
+      "price": "95",
+      "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)",
+      "id": 39,
+      "active": true
+  },
+  {
+      "sub": "",
+      "price": "100",
+      "active": true,
+      "description": "(Acomp. Legumes , Arroz, Purê, Farofa, Tucupi)",
+      "category": "Peixe na chapa",
+      "id": 40,
+      "name": "Peixe na chapa c/ camarão rosa"
+  },
+  {
+      "category": "Peixe na chapa",
+      "name": "Mistura Tucuju",
+      "active": true,
+      "id": 41,
+      "sub": "",
+      "price": "125",
+      "description": "(Acomp. Arroz , Purê, Farofa, Tucupi)"
+  },
+  {
+      "id": 42,
+      "name": "Prato do cheff",
+      "active": true,
+      "sub": "(Camarão Rosa e Pitu)",
+      "description": "(Acomp. Arroz Paraense, Legumes, Purê, Farofa, Tucupi)",
+      "category": "Peixe na chapa",
+      "price": 140
+  },
+  {
+      "sub": "(com Camarão Rosa)",
+      "active": true,
+      "id": 43,
+      "description": "(Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)",
+      "name": "Peixe pai-d' égua",
+      "price": "115",
+      "category": "Peixe na chapa"
+  },
+  {
+      "name": "Encanto Regional",
+      "description": "(Acomp. Arroz Paraense, Purê, Farofa e Banana)",
+      "category": "Peixe na chapa",
+      "price": "118",
+      "sub": "",
+      "active": true,
+      "id": 44
+  },
+  {
+      "sub": "",
+      "name": "Camarão Regional",
+      "active": true,
+      "category": "Camarão",
+      "id": 45,
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "price": 84
+  },
+  {
+      "price": 86,
+      "sub": "",
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "active": true,
+      "name": "Camarão Regional empanado",
+      "category": "Camarão",
+      "id": 46
+  },
+  {
+      "price": "99",
+      "active": true,
+      "id": 47,
+      "description": "(Acomp. Arroz, Purê, Farofa, Tucupi)",
+      "category": "Camarão",
+      "name": "Camarão Rosa ao molho branco",
+      "sub": ""
+  },
+  {
+      "category": "Camarão",
+      "price": "96",
+      "name": "Camarão Rosa empanado",
+      "description": "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)",
+      "id": 48,
+      "sub": "",
+      "active": true
+  },
+  {
+      "id": 49,
+      "sub": "",
+      "description": "(Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)",
+      "name": "Camarão Rosa ao alho e óleo",
+      "price": "99",
+      "active": true,
+      "category": "Camarão"
+  },
+  {
+      "name": "Camarão Rosa crocante",
+      "id": 50,
+      "active": true,
+      "price": "98",
+      "description": "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)",
+      "category": "Camarão",
+      "sub": ""
+  },
+  {
+      "sub": "(Empanado na Castanha)",
+      "price": "100",
+      "active": true,
+      "id": "51",
+      "name": "Camarão Encanto ",
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
+      "category": "Camarão"
+  },
+  {
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
+      "sub": "",
+      "id": "52",
+      "active": true,
+      "name": "Camarão Pitú ao alho e óleo",
+      "category": "Camarão",
+      "price": "142"
+  },
+  {
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
+      "sub": "",
+      "name": "Estrogonofe de camarão rosa",
+      "price": "95",
+      "id": "53",
+      "active": true,
+      "category": "Camarão"
+  },
+  {
+      "category": "Camarão",
+      "sub": "",
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)",
+      "name": "Camarão Rosa no queijo e manteiga",
+      "active": true,
+      "price": "97",
+      "id": "54"
+  },
+  {
+      "name": "Camarão Tropical",
+      "active": true,
+      "sub": "",
+      "price": "98",
+      "category": "Camarão",
+      "id": "55",
+      "description": "(Acomp. Arroz Baião, Salada de maionese, Farofa, Tucupi)"
+  },
+  {
+      "name": "Risoto de cantarão Rosa",
+      "sub": "",
+      "description": "",
+      "category": "Camarão",
+      "active": true,
+      "price": "130",
+      "id": "56"
+  },
+  {
+      "id": 57,
+      "sub": "",
+      "price": "92",
+      "name": "Filé Grehado",
+      "category": "Carnes",
+      "active": true,
+      "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)"
+  },
+  {
+      "sub": "",
+      "category": "Carnes",
+      "active": true,
+      "price": "97",
+      "name": "Filé c/ fritas",
+      "id": 58,
+      "description": "(Acomp. Arroz. Sabda de maionese, Tropeiro, Tucupi)"
+  },
+  {
+      "category": "Carnes",
+      "active": true,
+      "description": "",
+      "name": "Filé à Parmegiana",
+      "id": 59,
+      "sub": "",
+      "price": "99"
+  },
+  {
+      "id": 60,
+      "active": true,
+      "description": "",
+      "category": "Carnes",
+      "sub": "",
+      "name": "Filé à Rolê",
+      "price": "100"
+  },
+  {
+      "price": "100",
+      "description": "(Acomp. Arroz Farofa de ovo)",
+      "id": 61,
+      "name": "Medalhão de Filé",
+      "active": true,
+      "category": "Carnes",
+      "sub": ""
+  },
+  {
+      "category": "Carnes",
+      "sub": "",
+      "active": true,
+      "id": 62,
+      "name": "Filé ao molho catupiry",
+      "price": "98",
+      "description": "(Acomp. arroz, puré, farofa de ovo, tucupi)"
+  },
+  {
+      "category": "Carnes",
+      "sub": "(Maturada)",
+      "active": true,
+      "name": "Picanha c/ macaxeira",
+      "description": "(Acomp. Arroz Baião, Puré ,Salada de Maionese, farofa, Tucupi)",
+      "price": "130",
+      "id": 63
+  },
+  {
+      "description": "(Maturada)",
+      "id": 64,
+      "price": "138",
+      "sub": "",
+      "active": true,
+      "name": "Picanha na cerveja",
+      "category": "Carnes"
+  },
+  {
+      "id": 65,
+      "sub": "(Maturada)",
+      "price": "127",
+      "description": "",
+      "category": "Carnes",
+      "name": "Picanha c/ abacaxi e legumes",
+      "active": true
+  },
+  {
+      "price": "105",
+      "active": true,
+      "name": "Maninha c/ macaxeira",
+      "sub": "(Maturada)",
+      "category": "Carnes",
+      "description": "",
+      "id": 66
+  },
+  {
+      "category": "Carnes",
+      "sub": "(peixe, frango, camarão rosa, calabresa, maminha)",
+      "description": "",
+      "price": "128",
+      "id": 67,
+      "name": "MistA",
+      "active": true
+  },
+  {
+      "id": 68,
+      "sub": "",
+      "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
+      "category": "Frango",
+      "name": "Frango grelhado",
+      "active": true,
+      "price": "70"
+  },
+  {
+      "active": true,
+      "price": "75",
+      "name": "Frango crocante",
+      "category": "Frango",
+      "description": "(Acomp. Arroz à grega, Salada de maionese, Farofa, Tucupi)",
+      "id": 69,
+      "sub": ""
+  },
+  {
+      "active": true,
+      "sub": "",
+      "name": "Strogonoff",
+      "price": "72",
+      "description": "(acomp. arroz, batata palha, puré, farofa, tucupi)",
+      "id": 70,
+      "category": "Frango"
+  },
+  {
+      "sub": "",
+      "name": "Filhote",
+      "id": 71,
+      "price": "105",
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "active": true,
+      "category": "Moquecas"
+  },
+  {
+      "active": true,
+      "name": "Camarão",
+      "sub": "",
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "price": "110",
+      "id": 72,
+      "category": "Moquecas"
+  },
+  {
+      "price": "125",
+      "category": "Moquecas",
+      "id": 73,
+      "active": true,
+      "sub": "(Filhote, Camarão Rosa)",
+      "name": "Mista",
+      "description": "(Acomp. Arroz, Pirão, Tucupi)"
+  },
+  {
+      "id": 74,
+      "sub": "(filhote, camarão rosa, Pitú)",
+      "name": "Completa",
+      "price": "145",
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "active": true,
+      "category": "Moquecas"
+  },
+  {
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "id": 75,
+      "price": "100",
+      "category": "Moquecas",
+      "name": "Pirarucu",
+      "sub": "",
+      "active": true
+  },
+  {
+      "id": 76,
+      "active": true,
+      "category": "Moquecas",
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "name": "Baiana",
+      "sub": "",
+      "price": "108"
+  },
+  {
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "category": "Caldeiradas",
+      "id": 77,
+      "price": "102",
+      "active": true,
+      "sub": "",
+      "name": "Filhote"
+  },
+  {
+      "active": true,
+      "description": "(Acomp. Arroz, Pirão, Tucupi)",
+      "sub": "(filhote, camarão rosa)",
+      "id": 78,
+      "name": "MisTa",
+      "price": "125",
+      "category": "Caldeiradas"
+  },
+  {
+      "price": "145",
+      "name": "Completa",
+      "category": "Caldeiradas",
+      "active": true,
+      "sub": "(Filhote, Camarão Rosa, Pitú)",
+      "id": 79,
+      "description": "(Acomp. Arroz, Pirão, Tucupi)"
+  },
+  {
+      "description": "(acomp. arroz, pirão, tucupi)",
+      "name": "Encanto amapaense",
+      "category": "Caldeiradas",
+      "id": 80,
+      "active": true,
+      "price": "135",
+      "sub": ""
+  },
+  {
+      "id": 81,
+      "name": "Pirarucu",
+      "category": "Caldeiradas",
+      "sub": "",
+      "description": "(acomp. arroz, pirão, tucupi)",
+      "price": "100",
+      "active": true
+  },
+  {
+      "id": 82,
+      "price": "150",
+      "description": "(acomp. arroz, pirão, tucupi)(Acomp. Arroz, Pirão,Tucupi)",
+      "name": "Tucunaré",
+      "sub": "",
+      "category": "Caldeiradas",
+      "active": true
+  },
+  {
+      "description": "",
+      "id": 83,
+      "category": "Porções Extras",
+      "price": "10",
+      "active": true,
+      "name": "Arroz baião",
+      "sub": ""
+  },
+  {
+      "category": "Porções Extras",
+      "name": "Arroz à grega ",
+      "sub": "",
+      "description": "",
+      "id": 84,
+      "active": true,
+      "price": "9"
+  },
+  {
+      "description": "",
+      "price": "6",
+      "active": true,
+      "category": "Porções Extras",
+      "id": 85,
+      "sub": "",
+      "name": "Arroz branco"
+  },
+  {
+      "category": "Porções Extras",
+      "price": "20",
+      "description": "",
+      "name": "Arroz paraense",
+      "sub": "",
+      "id": 86,
+      "active": true
+  },
+  {
+      "price": "12",
+      "name": "Arroz piamontes",
+      "category": "Porções Extras",
+      "sub": "",
+      "description": "",
+      "active": true,
+      "id": 87
+  },
+  {
+      "id": 88,
+      "price": "5",
+      "description": "",
+      "sub": "",
+      "name": "Salada de maionese",
+      "active": true,
+      "category": "Porções Extras"
+  },
+  {
+      "sub": "",
+      "description": "",
+      "id": 89,
+      "name": "Salada de pirarucu",
+      "category": "Porções Extras",
+      "price": "40",
+      "active": true
+  },
+  {
+      "description": "",
+      "category": "Porções Extras",
+      "name": "Salada de Camarão Regional",
+      "sub": "",
+      "id": 90,
+      "active": true,
+      "price": "40"
+  },
+  {
+      "price": "5",
+      "description": "",
+      "category": "Porções Extras",
+      "id": 91,
+      "sub": "",
+      "name": "Purê",
+      "active": true
+  },
+  {
+      "active": true,
+      "description": "",
+      "name": "Vinagrete",
+      "sub": "",
+      "price": "5",
+      "category": "Porções Extras",
+      "id": 92
+  },
+  {
+      "sub": "",
+      "active": true,
+      "description": "",
+      "name": "Farofa de ovo",
+      "id": 93,
+      "category": "Porções Extras",
+      "price": "15"
+  },
+  {
+      "sub": "",
+      "category": "Porções Extras",
+      "description": "",
+      "id": 94,
+      "price": "35",
+      "name": "Farofa de camarão",
+      "active": true
+  },
+  {
+      "active": true,
+      "category": "Porções Extras",
+      "sub": "",
+      "price": "20",
+      "description": "",
+      "name": "Legumes refogados",
+      "id": 95
+  },
+  {
+      "name": "Pirão",
+      "category": "Porções Extras",
+      "active": true,
+      "price": "20",
+      "sub": "",
+      "id": 96,
+      "description": ""
+  },
+  {
+      "active": true,
+      "sub": "",
+      "description": "",
+      "price": "35",
+      "id": 97,
+      "category": "Porções Extras",
+      "name": "Filé kids"
+  },
+  {
+      "name": "Frango kids",
+      "id": 98,
+      "category": "Porções Extras",
+      "description": "",
+      "sub": "",
+      "active": true,
+      "price": "25"
+  },
+  {
+      "id": 99,
+      "price": "35",
+      "name": "Peixe kids",
+      "category": "Porções Extras",
+      "active": true,
+      "description": "",
+      "sub": ""
+  },
+  {
+      "description": "(cupuaçu, maracujá e morango)",
+      "id": 100,
+      "sub": "",
+      "name": "Mouse",
+      "active": true,
+      "price": "17",
+      "category": "Sobremesas"
+  },
+  {
+      "name": "Banana flambada c sorvete",
+      "description": "",
+      "active": true,
+      "sub": "",
+      "category": "Sobremesas",
+      "price": "20",
+      "id": 101
+  },
+  {
+      "description": "(porção 350 ml)",
+      "price": "15",
+      "category": "Sobremesas",
+      "sub": "",
+      "active": true,
+      "id": 102,
+      "name": "Açaí"
+  },
+  {
+      "description": "",
+      "name": "Pudim",
+      "category": "Sobremesas",
+      "price": "15",
+      "id": 103,
+      "active": true,
+      "sub": ""
+  },
+  {
+      "description": "",
+      "active": true,
+      "price": "10",
+      "category": "Bebidas",
+      "sub": "",
+      "name": "Laranja ou Laranja c/ morango",
+      "id": 104
+  },
+  {
+      "id": 105,
+      "price": "8",
+      "active": true,
+      "category": "Bebidas",
+      "description": "",
+      "name": "Limonada ou Limonada suíça",
+      "sub": ""
+  },
+  {
+      "sub": "(+ 1 real adicional de leite)",
+      "description": "",
+      "id": 106,
+      "price": "8",
+      "category": "Bebidas",
+      "name": "Sucos diversos",
+      "active": true
+  },
+  {
+      "price": "28",
+      "sub": "(+ 5 reais adicional de leite)",
+      "category": "Bebidas",
+      "id": 107,
+      "active": true,
+      "description": "",
+      "name": "Jarra"
+  },
+  {
+      "active": true,
+      "id": 108,
+      "price": "35",
+      "sub": "",
+      "name": "Jarra de laranja",
+      "description": "(1,2 litros)",
+      "category": "Bebidas"
+  },
+  {
+      "description": "",
+      "price": "6",
+      "name": "Refrigerante lata",
+      "active": true,
+      "category": "Bebidas",
+      "sub": "",
+      "id": 109
+  },
+  {
+      "category": "Bebidas",
+      "id": 110,
+      "active": true,
+      "price": "12",
+      "sub": "",
+      "name": "Refrigerante 1 litro",
+      "description": ""
+  },
+  {
+      "sub": "",
+      "price": "4.50",
+      "category": "Bebidas",
+      "description": "",
+      "active": true,
+      "name": "Água s/gás",
+      "id": 111
+  },
+  {
+      "active": true,
+      "price": "6",
+      "category": "Bebidas",
+      "sub": "",
+      "name": "Água c/ gás",
+      "id": 112,
+      "description": ""
+  },
+  {
+      "description": "",
+      "active": true,
+      "id": 113,
+      "price": "6",
+      "sub": "",
+      "name": "Água tônica",
+      "category": "Bebidas"
+  },
+  {
+      "name": "Água de coco",
+      "price": "6",
+      "active": true,
+      "id": 114,
+      "sub": "",
+      "category": "Bebidas",
+      "description": ""
+  },
+  {
+      "price": "6.50",
+      "active": true,
+      "category": "Bebidas",
+      "description": "",
+      "id": 115,
+      "name": "H2O",
+      "sub": ""
+  },
+  {
+      "sub": "",
+      "category": "Bebidas",
+      "price": "15",
+      "id": 116,
+      "name": "Red bull",
+      "description": "",
+      "active": true
+  },
+  {
+      "description": "",
+      "category": "Bebidas",
+      "active": true,
+      "sub": "",
+      "name": "Schweppes citrus",
+      "id": 117,
+      "price": "6"
+  },
+  {
+      "sub": "",
+      "category": "Bebidas",
+      "name": "Schweppes tônica",
+      "active": true,
+      "price": "6",
+      "id": 118,
+      "description": ""
+  },
+  {
+      "id": 119,
+      "description": "",
+      "sub": "",
+      "category": "Bebidas",
+      "name": "Ks 350ml",
+      "price": "7",
+      "active": true
+  },
+  {
+      "category": "Bebidas",
+      "sub": "",
+      "id": 120,
+      "name": "Ks 1 litro",
+      "active": true,
+      "price": "14",
+      "description": ""
+  },
+  {
+      "active": true,
+      "category": "Sucos exóticos",
+      "price": "15",
+      "id": 121,
+      "name": "Suco sacaca",
+      "description": "Limão taiti, couve, gengibre e açúcar",
+      "sub": ""
+  },
+  {
+      "sub": "",
+      "active": true,
+      "description": "Suco de laranja, limão e abacaxi, beterraba e açúcar branco ",
+      "price": "15",
+      "name": "Suco marabaixo",
+      "category": "Sucos exóticos",
+      "id": 122
+  },
+  {
+      "name": "Suco meio do mundo",
+      "sub": "",
+      "id": 123,
+      "active": true,
+      "description": "Suco de laranja, limão, mel e cenoura",
+      "category": "Sucos exóticos",
+      "price": "15"
+  },
+  {
+      "price": "15",
+      "description": "Abacaxi, gengibre, mel e hortelã",
+      "category": "Sucos exóticos",
+      "name": "Suco doce desejo",
+      "active": true,
+      "id": 124,
+      "sub": ""
+  },
+  {
+      "description": "Maracuja, mel, gengibre e açucar",
+      "sub": "",
+      "id": 125,
+      "active": true,
+      "category": "Sucos exóticos",
+      "name": "Suco mãe luzia",
+      "price": "15"
   }
 ]
