@@ -14,7 +14,7 @@ import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {
-  //  console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
+    console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
   //  console.log("🚀 ~ file: Collapse.jsx:18 ~ Category:", category);
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
