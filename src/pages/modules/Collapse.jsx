@@ -53,7 +53,7 @@ const CollapseMenu = () => {
       <div key={index}>
         {index == 0 ? <SlidesPrincipal /> : null}
         {index == 11 ? <SlidesSobemesas /> : null}
-        {index == 12 ? <SlidesBebidas /> : null}
+        {index == 14 ? <SlidesBebidas /> : null}
         <Collapse
           key={index}
           bordered={false}
