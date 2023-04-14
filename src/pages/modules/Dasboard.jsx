@@ -432,11 +432,7 @@ export default function Dashboard({ atualizar }) {
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
               placeholder="Nome"
-              value={
-                name != ""
-                  ? name[0].toUpperCase() + name.slice(1).toLowerCase()
-                  : undefined
-              }
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Input
@@ -451,23 +447,14 @@ export default function Dashboard({ atualizar }) {
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
               placeholder="Descrição"
-              value={
-                description != ""
-                  ? description[0].toUpperCase() +
-                    description.slice(1).toLowerCase()
-                  : undefined
-              }
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <Input
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
               placeholder="Sub Descrição"
-              value={
-                sub != ""
-                  ? sub[0].toUpperCase() + sub.slice(1).toLowerCase()
-                  : undefined
-              }
+              value={sub}
               onChange={(e) => setSub(e.target.value)}
             />
 
