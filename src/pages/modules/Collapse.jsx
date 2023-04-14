@@ -14,7 +14,7 @@ import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {
-  console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
+//  console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
   console.log("🚀 ~ file: Collapse.jsx:18 ~ Category:", category);
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
@@ -44,7 +44,7 @@ const CollapseMenu = () => {
         .sort((a, b) => a.id - b.id)
     );
     if (cardapioCategory.length == 0) {
-      setCardapioCategory(category);
+    //  setCardapioCategory(category);
     }
   };
   const items = cardapioCategory.map((item1, index) => {
