@@ -60,11 +60,29 @@ export default function Menssagem({ atualizar }) {
                   <Card
                     title={item.motivo}
                     bordered={true}
-                    style={{ width: 400, height: 300, marginLeft: 20 }}
+                    style={{
+                      width: 400,
+                      height: 300,
+                      marginLeft: 20,
+                      marginTop: 20,
+                      backgroundColor:
+                        item.motivo === "Sugestão"
+                          ? "#f9fc65"
+                          : item.motivo === "Reclamação"
+                          ? "#ff8c8c"
+                          : item.motivo === "Elogio"
+                          ? "#83fc73"
+                          : item.motivo === "Duvida"
+                          ? "#ffbb7b"
+                          : "#f5f5f5",
+                    }}
                   >
                     <h3>{"By: " + item.name}</h3>
                     <p>{item.menssagem}</p>
-                    <Button onClick={() => handleDelete(item.key)}>
+                    <Button
+                      style={{ backgroundColor: "red" }}
+                      onClick={() => handleDelete(item.key)}
+                    >
                       Deletar
                     </Button>
                   </Card>

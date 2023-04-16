@@ -35,6 +35,7 @@ import {
 } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 import Category from "./Category";
+import { getCardapio, postCardapio } from "../../services/cardapio.ws";
 
 const { Option } = Select;
 export default function Dashboard({ atualizar }) {
@@ -95,7 +96,7 @@ export default function Dashboard({ atualizar }) {
     },
   ];
   useEffect(() => {
-    getCardapio();
+    gtCardapio();
     getCardapiocategory();
   }, [actionCardapio, atualizar]);
   useEffect(() => {
@@ -103,14 +104,10 @@ export default function Dashboard({ atualizar }) {
   }, [search, cardapio, filteredStatus]);
   //! Cardapio
 
-  const getCardapio = async () => {
-    const cardapioCollection = await getDocs(colletionRefCardapio);
-    const cardapios = cardapioCollection.docs.map((doc) => ({
-      ...doc.data(),
-      key: doc.id,
-    }));
+  const gtCardapio = async () => {
+    const cardapioCollection = await getCardapio();
+    const cardapios = cardapioCollection;
     setCardapio(cardapios.sort((a, b) => a.id - b.id));
-    console.log(cardapio.length + 1);
   };
 
   const getCardapiocategory = async () => {
@@ -140,7 +137,7 @@ export default function Dashboard({ atualizar }) {
     }
   }
   function handleClickEdit(task) {
-    setSelectedTaskId(task.key);
+    setSelectedTaskId(task.id);
     setId(task.id);
     setName(task.name);
     setPrice(task.price);
@@ -161,8 +158,7 @@ export default function Dashboard({ atualizar }) {
   }
   async function handleSave() {
     if (selectedTaskId) {
-      const docRef = doc(db, "cardapio", selectedTaskId);
-      await updateDoc(docRef, {
+      await postCardapio({
         id,
         name,
         price,
@@ -173,7 +169,7 @@ export default function Dashboard({ atualizar }) {
       });
       message.success("Item atualizado com sucesso!");
     } else {
-      await addDoc(colletionRefCardapio, {
+      await postCardapio({
         id: cardapio.length + 1,
         name,
         price,
@@ -417,17 +413,6 @@ export default function Dashboard({ atualizar }) {
       >
         <Row justify="center" gutter={20}>
           <Col span={12}>
-            {selectedTaskId ? (
-              <Input
-                style={{ width: "100%", margin: "10px 0" }}
-                size="large"
-                placeholder="Id"
-                type="number"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-              />
-            ) : null}
-
             <Input
               style={{ width: "100%", margin: "10px 0" }}
               size="large"

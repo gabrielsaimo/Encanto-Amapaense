@@ -1,7 +1,7 @@
 import axios from "axios";
 //! Inativo
 const api = axios.create({
-  baseURL: "https://63c4ae2ff80fabd877d96ecf.mockapi.io",
+  baseURL: "http://vps45770.publiccloud.com.br:8080/",
 });
 
 interface Cardapio {
@@ -10,7 +10,7 @@ interface Cardapio {
   sub: string;
   price: string;
   description: string;
-  ativo: boolean;
+  active: boolean;
   category: string;
 }
 
@@ -19,7 +19,7 @@ export const getCardapio = async (): Promise<Cardapio[]> => {
   return response.data;
 };
 
-export const createCardapio = async (data: Cardapio): Promise<Cardapio> => {
+export const postCardapio = async (data: Cardapio): Promise<Cardapio> => {
   const response = await api.post<Cardapio>("/cardapio", data);
   return response.data;
 };

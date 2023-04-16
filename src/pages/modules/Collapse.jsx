@@ -6,32 +6,25 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
-import cardapios from "../../json/cardapio.json";
-import category from "../../json/cartegory.json";
+import { getCardapio } from "../../services/cardapio.ws";
 import "firebase/database";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {
-  //  console.log("🚀 ~ file: Collapse.jsx:17 ~ cardapio:", cardapios);
- // console.log("🚀 ~ file: Collapse.jsx:18 ~ Category:", category);
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const db = getFirestore(service);
   const colletionRef = collection(db, "cardapio");
   const colletionCategory = collection(db, "categorias_cardapio");
   useEffect(() => {
-    cardapio.length == 0 && getCardapio();
+    cardapio.length == 0 && gtCardapio();
     cardapioCategory.length == 0 && getCardapioCategory();
   }, []);
-  const getCardapio = async () => {
-    const cardapioCollection = await getDocs(colletionRef);
-    setCardapio(
-      cardapioCollection.docs
-        .map((doc) => doc.data())
-        .sort((a, b) => a.id - b.id)
-    );
+  const gtCardapio = async () => {
+    const cardapioCollection = await getCardapio();
+    setCardapio(cardapioCollection);
     if (cardapio.length == 0) {
       //  setCardapio(cardapios);
     }
@@ -47,7 +40,6 @@ const CollapseMenu = () => {
       //  setCardapioCategory(category);
     }
   };
-  console.log("🚀 ~ file: Collapse.jsx:36 ~ getCardapio ~ cardapio:", cardapio)
   const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
     return (
@@ -119,11 +111,9 @@ const CollapseMenu = () => {
                 categotia.active == true ? (
                   <div className="border">
                     <div className="flex">
-                      <p className="p_1 name">{categotia.name}</p>
-                      <p className="p_1 price">
-                        {categotia.price % 1 != 0
-                          ? "R$ " + categotia.price.replace(".", ",")
-                          : "R$ " + categotia.price + ",00"}
+                      <p className="p_1 name georgia-font">{categotia.name}</p>
+                      <p className="p_1 price georgia-bold-font">
+                        {"R$ " + categotia.price.toFixed(2).replace(".", ",")}
                       </p>
                     </div>
 
