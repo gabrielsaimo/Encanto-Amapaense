@@ -28,7 +28,7 @@ const CollapseMenu = () => {
 
     const cardapioCollection = await getDocs(colletionRef);
     setCardapio(
-      cardapioCollection.map((doc) => doc.data()).sort((a, b) => a.id - b.id)
+      cardapioCollection.docs.map((doc) => doc.data()).sort((a, b) => a.id - b.id) 
     );
     if (cardapio.length == 0) {
       //  setCardapio(cardapios);
@@ -118,7 +118,10 @@ const CollapseMenu = () => {
                     <div className="flex">
                       <p className="p_1 name georgia-font">{categotia.name}</p>
                       <p className="p_1 price georgia-bold-font">
-                        {"R$ " + categotia.price.toFixed(2).replace(".", ",")}
+                        {/*"R$ " + categotia.price.toFixed(2).replace(".", ",")*/}
+                        {categotia.price % 1 != 0
+                          ? "R$ " + categotia.price.replace(".", ",")
+                          : "R$ " + categotia.price + ",00"}
                       </p>
                     </div>
 
