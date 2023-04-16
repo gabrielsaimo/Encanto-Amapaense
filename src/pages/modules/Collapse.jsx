@@ -23,8 +23,13 @@ const CollapseMenu = () => {
     cardapioCategory.length == 0 && getCardapioCategory();
   }, []);
   const gtCardapio = async () => {
-    const cardapioCollection = await getCardapio();
-    setCardapio(cardapioCollection);
+    // const cardapioCollection = await getCardapio();
+    //setCardapio(cardapioCollection);
+
+    const cardapioCollection = await getDocs(colletionRef);
+    setCardapio(
+      cardapioCollection.map((doc) => doc.data()).sort((a, b) => a.id - b.id)
+    );
     if (cardapio.length == 0) {
       //  setCardapio(cardapios);
     }
