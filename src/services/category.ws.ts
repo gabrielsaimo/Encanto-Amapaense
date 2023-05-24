@@ -1,7 +1,7 @@
 import axios from "axios";
 //! Inativo
 const api = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://encanto-backend.vercel.app/",
 });
 
 interface category {
