@@ -1,7 +1,7 @@
 import axios from "axios";
 //! Inativo
 const api = axios.create({
-  baseURL: "http://vps45770.publiccloud.com.br:8080/",
+  baseURL: "http://localhost:3000/",
 });
 
 interface Cardapio {
@@ -19,19 +19,15 @@ export const getCardapio = async (): Promise<Cardapio[]> => {
   return response.data;
 };
 
+export const putCardapio = async (data: Cardapio): Promise<Cardapio> => {
+  const response = await api.put<Cardapio>("/cardapio", data);
+  return response.data;
+};
 export const postCardapio = async (data: Cardapio): Promise<Cardapio> => {
   const response = await api.post<Cardapio>("/cardapio", data);
   return response.data;
 };
 
-export const updateCardapio = async (
-  id: number,
-  data: Cardapio
-): Promise<Cardapio> => {
-  const response = await api.put<Cardapio>(`/cardapio/${id}`, data);
-  return response.data;
-};
-
-export const deleteCardapio = async (id: number): Promise<void> => {
-  await api.delete(`/cardapio/${id}`);
+export const deleteCardapio = async (data: Cardapio): Promise<void> => {
+  await api.delete<Cardapio>(`/cardapio/${data.id}`);
 };

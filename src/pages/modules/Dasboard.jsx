@@ -35,7 +35,13 @@ import {
 } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 import Category from "./Category";
-import { getCardapio, postCardapio } from "../../services/cardapio.ws";
+import {
+  deleteCardapio,
+  getCardapio,
+  postCardapio,
+  putCardapio,
+} from "../../services/cardapio.ws";
+import { getCategoty } from "../../services/category.ws";
 
 const { Option } = Select;
 export default function Dashboard({ atualizar }) {
@@ -111,13 +117,16 @@ export default function Dashboard({ atualizar }) {
   };
 
   const getCardapiocategory = async () => {
-    const cardapioCollection = await getDocs(colletionCategory);
-    const cardapios = cardapioCollection.docs.map((doc) => ({
-      ...doc.data(),
-      key: doc.id,
-    }));
-    setCardapioCategory(cardapios.sort((a, b) => a.id - b.id));
+    const cardapioCollection = await getCategoty();
+    const categoty = cardapioCollection;
+
+    setCardapioCategory(categoty.sort((a, b) => a.id - b.id));
   };
+  async function confirmDelete(record) {
+    await deleteCardapio(record);
+    message.success("Item deletado com sucesso!");
+    setActionCardapio(!actionCardapio);
+  }
 
   function filterTable() {
     if (!search && !filteredStatus) {
@@ -147,12 +156,7 @@ export default function Dashboard({ atualizar }) {
     setCategory(task.category);
     handleShowModalNewAction();
   }
-  async function confirmDelete(record) {
-    const docRef = doc(db, "cardapio", record);
-    await deleteDoc(docRef);
-    message.success("Item deletado com sucesso!");
-    setActionCardapio(!actionCardapio);
-  }
+
   function handleShowModalNewAction() {
     setModalNewAction(true);
   }
@@ -169,7 +173,7 @@ export default function Dashboard({ atualizar }) {
       });
       message.success("Item atualizado com sucesso!");
     } else {
-      await postCardapio({
+      await putCardapio({
         id: cardapio.length + 1,
         name,
         price,
@@ -276,7 +280,7 @@ export default function Dashboard({ atualizar }) {
 
             <Popconfirm
               title="Tem certeza que deseja excluir essa tarefa?"
-              onConfirm={() => confirmDelete(record.key)}
+              onConfirm={() => confirmDelete(record)}
               okText="Excluir"
               okButtonProps={{ danger: true }}
               cancelText="Cancelar"

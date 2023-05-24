@@ -32,6 +32,12 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
+import {
+  deleteCategoty,
+  getCategoty,
+  postCategoty,
+  putCategoty,
+} from "../../services/category.ws";
 const { Option } = Select;
 export default function Category() {
   const [cardapioCategory, setCardapioCategory] = useState([]);
@@ -47,15 +53,11 @@ export default function Category() {
   const colletionCategory = collection(db, "categorias_cardapio");
 
   useEffect(() => {
-    cardapioCategory.length == 0 && getCardapioCategory();
-  }, []);
+    getCardapioCategory();
+  }, [action]);
   const getCardapioCategory = async () => {
-    const cardapioCollection = await getDocs(colletionCategory);
-    const cardapiosCategory = cardapioCollection.docs.map((doc) => ({
-      ...doc.data(),
-      key: doc.id,
-    }));
-    setCardapioCategory(cardapiosCategory.sort((a, b) => a.id - b.id));
+    const cardapioCollection = await getCategoty();
+    setCardapioCategory(cardapioCollection.sort((a, b) => a.id - b.id));
   };
   useEffect(() => {
     filterTable();
@@ -73,18 +75,16 @@ export default function Category() {
     }
   }
   async function handleSave() {
-    console.log("handleSave");
     if (selectedTaskId) {
-      const docRef = doc(db, "categorias_cardapio", selectedTaskId);
-      await updateDoc(docRef, {
+      await postCategoty({
         id,
         name,
         active,
       });
       message.success("Item atualizado com sucesso!");
     } else {
-      await addDoc(colletionCategory, {
-        id,
+      await putCategoty({
+        id: cardapioCategory.length + 1,
         name,
         active,
       });
@@ -96,15 +96,14 @@ export default function Category() {
 
   function handleClickEdit(task) {
     console.log(task);
-    setSelectedTaskId(task.key);
+    setSelectedTaskId(task.id);
     setId(task.id);
     setName(task.name);
     setActive(task.active);
     handleShowModalNewAction();
   }
   async function confirmDelete(record) {
-    const docRef = doc(db, "categorias_cardapio", record);
-    await deleteDoc(docRef);
+    await deleteCategoty(record);
     message.success("Item deletado com sucesso!");
     setAction(!action);
   }
@@ -155,7 +154,7 @@ export default function Category() {
 
             <Popconfirm
               title="Tem certeza que deseja excluir essa tarefa?"
-              onConfirm={() => confirmDelete(record.key)}
+              onConfirm={() => confirmDelete(record)}
               okText="Excluir"
               okButtonProps={{ danger: true }}
               cancelText="Cancelar"
@@ -176,7 +175,7 @@ export default function Category() {
   ];
 
   function disableSave() {
-    return !id || !name || active === "" || active === null;
+    return !name || active === "" || active === null;
   }
   function clearSelecteds() {
     setSelectedTaskId(null);
@@ -244,14 +243,6 @@ export default function Category() {
       >
         <Row justify="center" gutter={20}>
           <Col span={12}>
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Ordem"
-              type="number"
-              value={id != "" ? id : undefined}
-              onChange={(e) => setId(e.target.value)}
-            />
             <Input
               style={{ width: "100%", margin: "10px 0" }}
               size="large"

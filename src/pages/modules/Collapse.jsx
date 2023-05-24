@@ -7,6 +7,7 @@ import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
 import { getCardapio } from "../../services/cardapio.ws";
+import { getCategoty } from "../../services/category.ws";
 import "firebase/database";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
@@ -23,26 +24,22 @@ const CollapseMenu = () => {
     cardapioCategory.length == 0 && getCardapioCategory();
   }, []);
   const gtCardapio = async () => {
-    // const cardapioCollection = await getCardapio();
-    //setCardapio(cardapioCollection);
+    const cardapioCollection = await getCardapio();
+    setCardapio(cardapioCollection);
 
-    const cardapioCollection = await getDocs(colletionRef);
+    /* const cardapioCollection = await getDocs(colletionRef);
     setCardapio(
       cardapioCollection.docs
         .map((doc) => doc.data())
         .sort((a, b) => a.id - b.id)
-    );
+    );*/
     if (cardapio.length == 0) {
       //  setCardapio(cardapios);
     }
   };
   const getCardapioCategory = async () => {
-    const cardapioCollection = await getDocs(colletionCategory);
-    setCardapioCategory(
-      cardapioCollection.docs
-        .map((doc) => doc.data())
-        .sort((a, b) => a.id - b.id)
-    );
+    const cardapioCollection = await getCategoty();
+    setCardapioCategory(cardapioCollection);
     if (cardapioCategory.length == 0) {
       //  setCardapioCategory(category);
     }
