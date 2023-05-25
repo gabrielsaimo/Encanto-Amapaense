@@ -7,6 +7,7 @@ import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import { Link } from "react-router-dom";
+import Footer from "./modules/footer";
 function App() {
   const [visible2, setVisible2] = React.useState(false);
   const [contar, setContar] = React.useState(0);
@@ -48,6 +49,7 @@ function App() {
         <CollapseMenu />
         <FloatButton.BackTop />
         <Msn />
+        <Footer />
         <div style={{ height: 30 }} />
       </div>
     </div>
