@@ -67,7 +67,15 @@ export default function Config() {
       if (JSON.parse(cachedData)[0].active == false) {
         alert("Usuário desativado");
         setAcessable(false);
-      } else setAcessable(true);
+      } else if (
+        JSON.parse(cachedData)[0].categoria == "admin" ||
+        JSON.parse(cachedData)[0].categoria == "gerente"
+      ) {
+        setAcessable(true);
+      } else {
+        alert("Usuário não tem permissão");
+        setAcessable(false);
+      }
     }
     return cachedData ? JSON.parse(cachedData) : null;
   };
