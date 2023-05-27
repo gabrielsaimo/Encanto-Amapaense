@@ -171,6 +171,8 @@ export default function Dashboard({ atualizar, user }) {
         sub,
         active,
         category,
+        update_at: new Date(),
+        update_by: userDate.name,
       });
       message.success("Item atualizado com sucesso!");
     } else {
@@ -182,6 +184,8 @@ export default function Dashboard({ atualizar, user }) {
         sub,
         active,
         category,
+        update_at: new Date(),
+        update_by: userDate.name,
       });
       message.success("Item salvo com sucesso!");
     }
