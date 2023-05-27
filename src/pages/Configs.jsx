@@ -20,10 +20,7 @@ export default function Config() {
 
   useEffect(() => {
     getCachedDateUser();
-    if (dateUser) {
-      console.log("ue", dateUser);
-    }
-  }, []);
+  }, [acessable]);
 
   const acessar = () => {
     GetUsuario();
@@ -42,11 +39,16 @@ export default function Config() {
 
       setDateUser(UserCollection);
       if (UserCollection[0].active == false) {
-        console.log("false");
         alert("Usuário desativado");
         setAcessable(false);
-      } else {
+      } else if (
+        UserCollection[0].categoria == "admin" ||
+        UserCollection[0].categoria == "gerente"
+      ) {
         setAcessable(true);
+      } else {
+        alert("Usuário não tem permissão");
+        setAcessable(false);
       }
 
       close();
