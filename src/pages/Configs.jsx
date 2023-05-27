@@ -20,7 +20,7 @@ export default function Config() {
 
   useEffect(() => {
     getCachedDateUser();
-  }, [acessable]);
+  }, []);
 
   const acessar = () => {
     GetUsuario();
