@@ -44,7 +44,8 @@ import {
 import { getCategoty } from "../../services/category.ws";
 
 const { Option } = Select;
-export default function Dashboard({ atualizar }) {
+export default function Dashboard({ atualizar, user }) {
+  const userDate = user[0];
   const [cardapio, setCardapio] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
