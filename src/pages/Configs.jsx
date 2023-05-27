@@ -68,8 +68,8 @@ export default function Config() {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData)[0].categoria == "admin" ||
-        JSON.parse(cachedData)[0].categoria == "gerente"
+        JSON.parse(cachedData)[0].categoria == "ADM" ||
+        JSON.parse(cachedData)[0].categoria == "Gerência"
       ) {
         setAcessable(true);
       } else {
