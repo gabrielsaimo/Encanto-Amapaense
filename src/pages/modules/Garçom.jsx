@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Divider, Input, Modal, Select } from "antd";
+import { Button, Card, Divider, Input, Modal, Select, Space } from "antd";
 import "firebase/database";
 import Dashboard from "../modules/Dasboard";
 import Menssagem from "../modules/Menssagem";
@@ -8,6 +8,12 @@ import { getUser } from "../../services/user.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getPedidos } from "../../services/Pedidos.ws";
 
+const { Option } = Select;
+
+const pedidoOptions = [
+  { id: 1, name: "agua", price: 5 },
+  { id: 2, name: "suco", price: 10 },
+];
 export default function Garçom() {
   const [actionCardapio, setActionCardapio] = useState(true);
   const [actionMensagem, setActionMensagem] = useState(true);
@@ -22,14 +28,21 @@ export default function Garçom() {
   const [password, setPassword] = useState("");
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
+  console.log("🚀 ~ file: Garçom.jsx:25 ~ Garçom ~ cardapio:", cardapio);
   const [valor, setValor] = useState(0);
-
+  const [pedidosTotais, setPedidosTotais] = useState([
+    { id: "", quantidade: "" },
+  ]);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     getCachedDateUser();
     getPedido();
     getCardapios();
   }, []);
 
+  useEffect(() => {
+    calcularTotal();
+  }, [pedidosTotais]);
   const acessar = () => {
     GetUsuario();
   };
@@ -137,6 +150,40 @@ export default function Garçom() {
     setShowModall(true);
   };
 
+  const handlePedidoChange = (index, name, value) => {
+    const newPedidos = [...pedidosTotais];
+    newPedidos[index][name] = value;
+    setPedidosTotais(newPedidos);
+  };
+
+  const adicionarNovoPedido = () => {
+    setPedidosTotais([...pedidosTotais, { id: "", quantidade: "" }]);
+  };
+
+  const removerPedido = (index) => {
+    const newPedidos = [...pedidosTotais];
+    newPedidos.splice(index, 1);
+    setPedidosTotais(newPedidos);
+  };
+
+  const calcularTotal = () => {
+    let newTotal = 0;
+    pedidosTotais.forEach((pedido) => {
+      const { id, quantidade } = pedido;
+      const item = cardapio.find((option) => option.id === Number(id));
+      if (item) {
+        newTotal += item.price * Number(quantidade);
+      }
+    });
+    setTotal(newTotal);
+  };
+
+  const enviarPedido = () => {
+    // Lógica para enviar o pedido
+    console.log(pedidosTotais);
+    console.log(total);
+  };
+
   return (
     <>
       {!acessable ? (
@@ -191,30 +238,52 @@ export default function Garçom() {
             ))}
           </div>
           <Modal title="Messa" open={showModall} footer={null}>
-            <div>
-              <label>Messa</label>
-              <Input type="number" />
-
-              <label>Pedido</label>
-              <div>
-                <Select
-                  allowClear
-                  style={{
-                    width: "80%",
-                  }}
-                  placeholder="Selecione aqui"
-                  onChange={handleChange}
-                  options={cardapio.map((item) => ({
-                    value: item.id,
-                    label: item.id + " - " + item.name,
-                  }))}
-                />
-                <Input style={{ width: "20%" }} type="number" placeholder="0" />
+            <div className="container">
+              <h2 className="title">Adicionar Pedidos</h2>
+              {pedidosTotais.map((pedido, index) => (
+                <div key={index} className="pedido-container">
+                  <Space>
+                    <Select
+                      value={pedido.id}
+                      style={{ width: 200 }}
+                      onChange={(value) =>
+                        handlePedidoChange(index, "id", value)
+                      }
+                    >
+                      <Option value="">Selecione um item</Option>
+                      {cardapio.map((option) => (
+                        <Option key={option.id} value={option.id}>
+                          {option.name}
+                        </Option>
+                      ))}
+                    </Select>
+                    <Input
+                      type="number"
+                      value={pedido.quantidade}
+                      style={{ width: 100 }}
+                      onChange={(event) =>
+                        handlePedidoChange(
+                          index,
+                          "quantidade",
+                          event.target.value
+                        )
+                      }
+                    />
+                    <Button onClick={() => removerPedido(index)}>
+                      Excluir
+                    </Button>
+                  </Space>
+                </div>
+              ))}
+              <Button type="primary" onClick={adicionarNovoPedido}>
+                Adicionar novo pedido
+              </Button>
+              <div className="total-container">
+                <Input value={total} readOnly />
               </div>
-
-              <label>Valor</label>
-              <Input type="number" prefix="R$" disabled value={valor} />
-              <Button>Enviar</Button>
+              <Button type="primary" onClick={enviarPedido}>
+                Enviar pedido
+              </Button>
             </div>
           </Modal>
         </div>
