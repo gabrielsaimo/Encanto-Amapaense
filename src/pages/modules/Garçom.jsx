@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Divider, Input, Modal, Tabs } from "antd";
 import "firebase/database";
-import Dashboard from "./modules/Dasboard";
-import Menssagem from "./modules/Menssagem";
-import Pedidos from "./modules/Pedidos";
-import { getUser } from "../services/user.ws";
+import Dashboard from "../modules/Dasboard";
+import Menssagem from "../modules/Menssagem";
+import Pedidos from "../modules/Pedidos";
+import { getUser } from "../../services/user.ws";
 
-export default function Config() {
+export default function Garçom() {
   const [actionCardapio, setActionCardapio] = useState(true);
   const [actionMensagem, setActionMensagem] = useState(true);
   const [actionPeido, setActionPedido] = useState(true);
@@ -43,7 +43,8 @@ export default function Config() {
         setAcessable(false);
       } else if (
         UserCollection[0].categoria == "ADM" ||
-        UserCollection[0].categoria == "Gerência"
+        UserCollection[0].categoria == "Gerência" ||
+        UserCollection[0].categoria == "Garçom"
       ) {
         setAcessable(true);
       } else {
@@ -69,7 +70,8 @@ export default function Config() {
         setAcessable(false);
       } else if (
         JSON.parse(cachedData)[0].categoria == "ADM" ||
-        JSON.parse(cachedData)[0].categoria == "Gerência"
+        JSON.parse(cachedData)[0].categoria == "Gerência" ||
+        JSON.parse(cachedData)[0].categoria == "Garçom"
       ) {
         setAcessable(true);
       } else {
@@ -104,25 +106,6 @@ export default function Config() {
     setDateUser(null);
   };
 
-  const items = [
-    {
-      key: "1",
-      label: "Cardápio",
-      children: <Dashboard atualizar={actionCardapio} user={dateUser} />,
-    },
-    {
-      key: "2",
-      label: "Messagens",
-      children: <Menssagem atualizar={actionMensagem} user={dateUser} />,
-    },
-    {
-      key: "3",
-      label: "Pedidos",
-      disabled: true,
-      children: <Pedidos atualizar={actionPeido} user={dateUser} />,
-    },
-  ];
-
   return (
     <>
       {!acessable ? (
@@ -155,13 +138,12 @@ export default function Config() {
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
           <div>
-            {userNome} - {UserCategoria}
+            {userNome}
             <div style={{ float: "right" }}>
               <Button onClick={() => logout()}>Sair</Button>
             </div>
           </div>
-
-          <Tabs onChange={onChange} key={items} type="card" items={items} />
+          
         </div>
       )}
     </>
