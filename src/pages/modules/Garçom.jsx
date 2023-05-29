@@ -302,7 +302,7 @@ export default function Garçom() {
             onCancel={() => close()}
             okText="Enviar Pedido"
             cancelText="Cancelar"
-            okButtonProps={{ disabled: total - desconto === 0 || mesa === "" }}
+            okButtonProps={{ disabled: total - desconto === 0 || mesa === "" || total - desconto < 0 }}
             onOk={() => enviarPedido()}
           >
             <div className="container">
@@ -323,7 +323,12 @@ export default function Garçom() {
                   className="pedido-container"
                   style={{ marginBottom: 10 }}
                 >
-                  <h3>Pedido {index + 1}</h3>
+                  <h3>
+                    Pedido {index + 1}{" "}
+                    <Button onClick={() => removerPedido(index)}>
+                      Excluir
+                    </Button>
+                  </h3>
 
                   <Space>
                     <Select
@@ -351,9 +356,6 @@ export default function Garçom() {
                         handlePedidoChange(index, "quantidade", event)
                       }
                     />
-                    <Button onClick={() => removerPedido(index)}>
-                      Excluir
-                    </Button>
                   </Space>
                 </div>
               ))}
