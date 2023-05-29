@@ -269,24 +269,28 @@ export default function Garçom() {
               >
                 <p>{item.status}</p>
 
-                {JSON.parse(item.pedidos).map((pedido) => (
-                  <>
-                    {pedido.id ==
-                    cardapio.find((option) => option.id === Number(pedido.id))
-                      .id ? (
-                      <p>
-                        x{pedido.quantidade}{" "}
-                        {
-                          cardapio.find(
-                            (option) => option.id === Number(pedido.id)
-                          ).name
-                        }
-                      </p>
-                    ) : (
-                      <p>Item Excluido</p>
-                    )}
-                  </>
-                ))}
+                {cardapio.length > 0 ? (
+                  JSON.parse(item.pedidos).map((pedido) => (
+                    <>
+                      {pedido.id ==
+                      cardapio.find((option) => option.id === Number(pedido.id))
+                        .id ? (
+                        <p>
+                          x{pedido.quantidade}{" "}
+                          {
+                            cardapio.find(
+                              (option) => option.id === Number(pedido.id)
+                            ).name
+                          }
+                        </p>
+                      ) : (
+                        <p>Item Excluido</p>
+                      )}
+                    </>
+                  ))
+                ) : (
+                  <p>Item Excluido</p>
+                )}
                 <p>Valor: R$ {item.valor}</p>
                 <p>Desconto: R$ {item.desconto}</p>
                 <p>Observações: {item.obs}</p>
@@ -298,7 +302,7 @@ export default function Garçom() {
             onCancel={() => close()}
             okText="Enviar Pedido"
             cancelText="Cancelar"
-            okButtonProps={{ disabled: total - desconto === 0 || mesa === '' }}
+            okButtonProps={{ disabled: total - desconto === 0 || mesa === "" }}
             onOk={() => enviarPedido()}
           >
             <div className="container">
