@@ -40,6 +40,11 @@ export const postPedidos = async (data: pedido): Promise<pedido> => {
   return response.data;
 };
 
+export const postPedidosStatus = async (data: pedido): Promise<pedido> => {
+  const response = await api.post<pedido>("/pedido/status", data);
+  return response.data;
+};
+
 export const putPedidos = async (data: pedido): Promise<pedido> => {
   const response = await api.put<pedido>("/pedido", data);
   return response.data;
