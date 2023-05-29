@@ -159,7 +159,7 @@ export default function Cozinha() {
                   {pedido.mesa}
                 </Descriptions.Item>
                 <Descriptions.Item label="Hora do pedido">
-                  {moment(pedido.data).format("HH:mm:ss")}
+                  {moment(pedido.created_at).format("HH:mm:ss")}
                 </Descriptions.Item>
                 <Descriptions.Item label="Status">
                   <Badge
