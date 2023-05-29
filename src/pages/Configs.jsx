@@ -118,7 +118,7 @@ export default function Config() {
     {
       key: "3",
       label: "Pedidos",
-      disabled: true,
+      disabled: false,
       children: <Pedidos atualizar={actionPeido} user={dateUser} />,
     },
   ];

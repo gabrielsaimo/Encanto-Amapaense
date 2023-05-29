@@ -24,7 +24,6 @@ export const getPedidos = async (): Promise<pedido[]> => {
   return response.data;
 };
 
-
 export const postPedidos = async (data: pedido): Promise<pedido> => {
   const response = await api.post<pedido>("/pedido", data);
   return response.data;

@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Divider, Input, Modal, Select, Space } from "antd";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  InputNumber,
+  Modal,
+  Select,
+  Space,
+} from "antd";
 import "firebase/database";
 import Dashboard from "../modules/Dasboard";
 import Menssagem from "../modules/Menssagem";
 import Pedidos from "../modules/Pedidos";
 import { getUser } from "../../services/user.ws";
 import { getCardapio } from "../../services/cardapio.ws";
-import { getPedidos } from "../../services/Pedidos.ws";
+import { getPedidos, putPedidos } from "../../services/Pedidos.ws";
+import { PlusOutlined } from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
 
 const { Option } = Select;
 
@@ -25,10 +36,13 @@ export default function Garçom() {
   const [userNome, setUserNome] = useState("");
   const [UserCategoria, setUserCategoria] = useState("");
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [mesa, setMesa] = useState("");
+  const [desconto, setDesconto] = useState(0);
+  const [obs, setObs] = useState("");
   const [password, setPassword] = useState("");
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
-  console.log("🚀 ~ file: Garçom.jsx:25 ~ Garçom ~ cardapio:", cardapio);
   const [valor, setValor] = useState(0);
   const [pedidosTotais, setPedidosTotais] = useState([
     { id: "", quantidade: "" },
@@ -38,7 +52,7 @@ export default function Garçom() {
     getCachedDateUser();
     getPedido();
     getCardapios();
-  }, []);
+  }, [showModall]);
 
   useEffect(() => {
     calcularTotal();
@@ -123,7 +137,6 @@ export default function Garçom() {
   };
 
   const onChange = (key) => {
-    console.log(key);
     if (key == 1) {
       setActionCardapio(!actionCardapio);
     } else if (key == 2) {
@@ -134,7 +147,8 @@ export default function Garçom() {
   };
 
   const close = () => {
-    setVisible(false);
+    setShowModall(false);
+    clear();
   };
   const open = () => {
     setVisible(true);
@@ -175,14 +189,33 @@ export default function Garçom() {
         newTotal += item.price * Number(quantidade);
       }
     });
+
     setTotal(newTotal);
   };
 
-  const enviarPedido = () => {
-    // Lógica para enviar o pedido
-    console.log(pedidosTotais);
-    console.log(total);
-  };
+  async function enviarPedido() {
+    await putPedidos({
+      id: pedidos.length + 1,
+      created_at: new Date(),
+      created_by: userNome,
+      desconto,
+      mesa,
+      pedidos: JSON.stringify(pedidosTotais),
+      obs,
+      status: "Em Analize",
+      valor: total,
+      update_at: new Date(),
+      update_by: userNome,
+    });
+    setShowModall(false);
+    clear();
+  }
+  function clear() {
+    setMesa("");
+    setPedidosTotais([{ id: "", quantidade: "" }]);
+    setDesconto(0);
+    setObs("");
+  }
 
   return (
     <>
@@ -215,14 +248,16 @@ export default function Garçom() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <div>
+          <div style={{ margin: 10 }}>
             {userNome}
             <div style={{ float: "right" }}>
               <Button onClick={() => logout()}>Sair</Button>
             </div>
           </div>
           <div>
-            <Button onClick={() => showModal()}>Adicionar Messa</Button>
+            <Button type="primary" onClick={() => showModal()}>
+              Novo Pedido
+            </Button>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             {pedidos.map((item) => (
@@ -233,18 +268,63 @@ export default function Garçom() {
                 onClick={() => console.log(item)}
               >
                 <p>{item.status}</p>
-                <p>Valor: {item.valor}</p>
+
+                {JSON.parse(item.pedidos).map((pedido) => (
+                  <>
+                    {pedido.id ==
+                    cardapio.find((option) => option.id === Number(pedido.id))
+                      .id ? (
+                      <p>
+                        x{pedido.quantidade}{" "}
+                        {
+                          cardapio.find(
+                            (option) => option.id === Number(pedido.id)
+                          ).name
+                        }
+                      </p>
+                    ) : (
+                      <p>Item Excluido</p>
+                    )}
+                  </>
+                ))}
+                <p>Valor: R$ {item.valor}</p>
+                <p>Desconto: R$ {item.desconto}</p>
+                <p>Observações: {item.obs}</p>
               </Card>
             ))}
           </div>
-          <Modal title="Messa" open={showModall} footer={null}>
+          <Modal
+            open={showModall}
+            onCancel={() => close()}
+            okText="Enviar Pedido"
+            cancelText="Cancelar"
+            okButtonProps={{ disabled: total - desconto === 0 || mesa === '' }}
+            onOk={() => enviarPedido()}
+          >
             <div className="container">
               <h2 className="title">Adicionar Pedidos</h2>
+              <h3>Mesa</h3>
+              <div>
+                <InputNumber
+                  value={mesa}
+                  style={{ width: 100 }}
+                  min={1}
+                  onChange={(event) => setMesa(event)}
+                />
+              </div>
+
               {pedidosTotais.map((pedido, index) => (
-                <div key={index} className="pedido-container">
+                <div
+                  key={index}
+                  className="pedido-container"
+                  style={{ marginBottom: 10 }}
+                >
+                  <h3>Pedido {index + 1}</h3>
+
                   <Space>
                     <Select
                       value={pedido.id}
+                      showSearch
                       style={{ width: 200 }}
                       onChange={(value) =>
                         handlePedidoChange(index, "id", value)
@@ -253,20 +333,18 @@ export default function Garçom() {
                       <Option value="">Selecione um item</Option>
                       {cardapio.map((option) => (
                         <Option key={option.id} value={option.id}>
-                          {option.name}
+                          {option.id} - {option.name}
                         </Option>
                       ))}
                     </Select>
-                    <Input
-                      type="number"
+                    <InputNumber
                       value={pedido.quantidade}
                       style={{ width: 100 }}
+                      prefix="x"
+                      min={1}
+                      defaultValue={0}
                       onChange={(event) =>
-                        handlePedidoChange(
-                          index,
-                          "quantidade",
-                          event.target.value
-                        )
+                        handlePedidoChange(index, "quantidade", event)
                       }
                     />
                     <Button onClick={() => removerPedido(index)}>
@@ -275,15 +353,36 @@ export default function Garçom() {
                   </Space>
                 </div>
               ))}
-              <Button type="primary" onClick={adicionarNovoPedido}>
-                Adicionar novo pedido
-              </Button>
-              <div className="total-container">
-                <Input value={total} readOnly />
+              <Button
+                type="primary"
+                style={{ marginBottom: 10 }}
+                icon={<PlusOutlined />}
+                onClick={adicionarNovoPedido}
+              />
+              <div style={{ marginBottom: 10 }}>
+                <label>Desconto</label>
+                <Input
+                  type="number"
+                  value={desconto}
+                  min={0}
+                  max={total}
+                  defaultValue={0}
+                  prefix="R$"
+                  onChange={(event) => setDesconto(event.target.value)}
+                />
               </div>
-              <Button type="primary" onClick={enviarPedido}>
-                Enviar pedido
-              </Button>
+              <div style={{ marginBottom: 10 }}>
+                <label>Valor Total</label>
+                <Input prefix="R$" value={total - desconto} readOnly />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Observações</label>
+                <TextArea
+                  value={obs}
+                  rows={3}
+                  onChange={(event) => setObs(event.target.value)}
+                />
+              </div>
             </div>
           </Modal>
         </div>
