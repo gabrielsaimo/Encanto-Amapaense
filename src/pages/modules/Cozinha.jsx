@@ -168,7 +168,7 @@ export default function Cozinha() {
                         ? "warning"
                         : pedido.status === "Cancelado"
                         ? "error"
-                        : pedido.status === "Confimar Cancelamento"
+                        : pedido.status === "Em Cancelamento"
                         ? "error"
                         : pedido.status === "Finalizado"
                         ? "success"
@@ -206,7 +206,7 @@ export default function Cozinha() {
 
                 <Descriptions.Item label="Ações">
                   {pedido.status !== "Cancelado" &&
-                  pedido.status !== "Confimar Cancelamento" ? (
+                  pedido.status !== "Em Cancelamento" ? (
                     <Button
                       onClick={() => {
                         StatusPedido(
@@ -236,7 +236,7 @@ export default function Cozinha() {
                         : "Finalizar"}
                     </Button>
                   ) : null}
-                  {pedido.status === "Confimar Cancelamento" ? (
+                  {pedido.status === "Em Cancelamento" ? (
                     <Button
                       style={{ marginLeft: 10, backgroundColor: "red" }}
                       type="primary"
