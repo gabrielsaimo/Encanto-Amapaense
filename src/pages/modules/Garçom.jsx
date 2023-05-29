@@ -13,7 +13,12 @@ import {
 import "firebase/database";
 import { getUser } from "../../services/user.ws";
 import { getCardapio } from "../../services/cardapio.ws";
-import { getMesas, getPedidos, putPedidos } from "../../services/Pedidos.ws";
+import {
+  getMesas,
+  getPedidos,
+  postPedidosStatus,
+  putPedidos,
+} from "../../services/Pedidos.ws";
 import { PlusOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 
@@ -173,6 +178,17 @@ export default function Garçom() {
     setPedidosTotais(newPedidos);
   };
 
+  const statusPedido = (id, status) => {
+    const data = {
+      id: id,
+      status: status,
+      update_at: new Date(),
+    };
+    postPedidosStatus(data);
+    getMesa();
+    getPedido();
+  };
+
   const calcularTotal = () => {
     let newTotal = 0;
     pedidosTotais.forEach((pedido) => {
@@ -277,7 +293,7 @@ export default function Garçom() {
                                 ? "#fbff00"
                                 : item.status == "Pronto"
                                 ? "#00ff00"
-                                : item.status == "Cancelado"
+                                : item.status == "Em Cancelamento"
                                 ? "#ff0000"
                                 : "#000000",
                             color: "#FFFFFF",
@@ -345,17 +361,23 @@ export default function Garçom() {
                                 Finalizar
                               </Button>
                             ) : (
-                              <Button
-                                type="primary"
-                                onClick={() => console.log(item)}
-                                style={{
-                                  marginRight: 10,
-                                  backgroundColor: "#FF0000",
-                                  color: "#FFFFFF",
-                                }}
-                              >
-                                Cancelar
-                              </Button>
+                              <>
+                                {item.status !== "Em Cancelamento" ? (
+                                  <Button
+                                    type="primary"
+                                    onClick={() =>
+                                      statusPedido(item.id, "Em Cancelamento")
+                                    }
+                                    style={{
+                                      marginRight: 10,
+                                      backgroundColor: "#FF0000",
+                                      color: "#FFFFFF",
+                                    }}
+                                  >
+                                    Cancelar
+                                  </Button>
+                                ) : null}
+                              </>
                             )}
                           </div>
                         </Panel>
