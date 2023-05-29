@@ -1,6 +1,7 @@
 import axios from "axios";
 const api = axios.create({
   baseURL: "https://encanto-backend.vercel.app/",
+  // baseURL: "http://localhost:3000/",
 });
 
 interface pedido {
@@ -21,6 +22,16 @@ interface pedido {
 
 export const getPedidos = async (): Promise<pedido[]> => {
   const response = await api.get<pedido[]>("/pedido");
+  return response.data;
+};
+
+export const getMesas = async (): Promise<any[]> => {
+  const response = await api.get<pedido[]>("/pedido/mesa");
+  return response.data;
+};
+
+export const getMesasbyId = async (id: number): Promise<pedido[]> => {
+  const response = await api.get<pedido[]>(`/pedido/mesa/${id}`);
   return response.data;
 };
 

@@ -8,19 +8,17 @@ import {
   Modal,
   Select,
   Space,
+  Collapse,
 } from "antd";
 import "firebase/database";
-import Dashboard from "../modules/Dasboard";
-import Menssagem from "../modules/Menssagem";
-import Pedidos from "../modules/Pedidos";
 import { getUser } from "../../services/user.ws";
 import { getCardapio } from "../../services/cardapio.ws";
-import { getPedidos, putPedidos } from "../../services/Pedidos.ws";
+import { getMesas, getPedidos, putPedidos } from "../../services/Pedidos.ws";
 import { PlusOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 
 const { Option } = Select;
-
+const { Panel } = Collapse;
 const pedidoOptions = [
   { id: 1, name: "agua", price: 5 },
   { id: 2, name: "suco", price: 10 },
@@ -36,8 +34,8 @@ export default function Garçom() {
   const [userNome, setUserNome] = useState("");
   const [UserCategoria, setUserCategoria] = useState("");
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
   const [mesa, setMesa] = useState("");
+  const [dateMesa, setDateMesa] = useState([]);
   const [desconto, setDesconto] = useState(0);
   const [obs, setObs] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +49,7 @@ export default function Garçom() {
   useEffect(() => {
     getCachedDateUser();
     getPedido();
+    getMesa();
     getCardapios();
   }, [showModall]);
 
@@ -69,15 +68,9 @@ export default function Garçom() {
     setCardapio(cardapio);
   };
 
-  const handleChange = (selectedValues) => {
-    let totalValor = 0;
-
-    const selectedItem = cardapio.find((item) => item.id === selectedValues);
-    if (selectedItem) {
-      totalValor += parseFloat(selectedItem.price);
-    }
-
-    setValor(totalValor);
+  const getMesa = async () => {
+    const mesas = await getMesas();
+    setDateMesa(mesas);
   };
 
   const GetUsuario = async () => {
@@ -248,52 +241,128 @@ export default function Garçom() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <div style={{ margin: 10 }}>
+          <Card style={{ margin: 10 }}>
             {userNome}
             <div style={{ float: "right" }}>
               <Button onClick={() => logout()}>Sair</Button>
             </div>
-          </div>
+          </Card>
           <div>
             <Button type="primary" onClick={() => showModal()}>
               Novo Pedido
             </Button>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {pedidos.map((item) => (
-              <Card
-                title={"Messa " + item.mesa}
-                style={{ width: "100%", marginTop: 16 }}
-                key={item.id}
-                onClick={() => console.log(item)}
-              >
-                <p>{item.status}</p>
 
-                {cardapio.length > 0 ? (
-                  JSON.parse(item.pedidos).map((pedido) => (
-                    <>
-                      {pedido.id ==
-                      cardapio.find((option) => option.id === Number(pedido.id))
-                        .id ? (
-                        <p>
-                          x{pedido.quantidade}{" "}
-                          {
-                            cardapio.find(
-                              (option) => option.id === Number(pedido.id)
-                            ).name
-                          }
-                        </p>
-                      ) : (
-                        <p>Item Excluido</p>
-                      )}
-                    </>
-                  ))
-                ) : (
-                  <p>Item Excluido</p>
-                )}
-                <p>Valor: R$ {item.valor}</p>
-                <p>Desconto: R$ {item.desconto}</p>
-                <p>Observações: {item.obs}</p>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {dateMesa.map((itemMesa, index) => (
+              <Card
+                title={"Messa " + itemMesa.mesa}
+                style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
+                key={index}
+                hoverable={true}
+              >
+                {pedidos.map((item, index) => (
+                  <>
+                    {itemMesa.mesa == item.mesa ? (
+                      <Collapse>
+                        <Panel
+                          header={item.status}
+                          key={index}
+                          style={{
+                            marginBottom: 10,
+                            backgroundColor:
+                              item.status == "Em Analize"
+                                ? "#ff8800"
+                                : item.status == "Em Preparo"
+                                ? "#fbff00"
+                                : item.status == "Pronto"
+                                ? "#00ff00"
+                                : item.status == "Cancelado"
+                                ? "#ff0000"
+                                : "#000000",
+                            color: "#FFFFFF",
+                          }}
+                        >
+                          <p> Status: {item.status}</p>
+                          <Card>
+                            {cardapio.length > 0 ? (
+                              JSON.parse(item.pedidos).map((pedido) => (
+                                <>
+                                  {pedido.id ==
+                                  cardapio.find(
+                                    (option) => option.id === Number(pedido.id)
+                                  ).id ? (
+                                    <p>
+                                      x{pedido.quantidade}{" "}
+                                      {
+                                        cardapio.find(
+                                          (option) =>
+                                            option.id === Number(pedido.id)
+                                        ).name
+                                      }
+                                    </p>
+                                  ) : (
+                                    <p>Item Excluido</p>
+                                  )}
+                                </>
+                              ))
+                            ) : (
+                              <p>Item Excluido</p>
+                            )}
+                          </Card>
+                          <p>Valor: R$ {item.valor}</p>
+                          <p>Desconto: R$ {item.desconto}</p>
+                          <p>Observações: {item.obs}</p>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                            }}
+                          >
+                            {item.status == "Em Analize" ? (
+                              <Button
+                                type="primary"
+                                onClick={() => console.log(item)}
+                                style={{
+                                  marginRight: 10,
+                                  backgroundColor: "#ffa600",
+                                  color: "#FFFFFF",
+                                }}
+                              >
+                                Editar
+                              </Button>
+                            ) : null}
+                            {item.status == "Pronto" ? (
+                              <Button
+                                type="primary"
+                                onClick={() => console.log(item)}
+                                style={{
+                                  marginRight: 10,
+                                  backgroundColor: "#00FF00",
+                                  color: "#FFFFFF",
+                                }}
+                              >
+                                Finalizar
+                              </Button>
+                            ) : (
+                              <Button
+                                type="primary"
+                                onClick={() => console.log(item)}
+                                style={{
+                                  marginRight: 10,
+                                  backgroundColor: "#FF0000",
+                                  color: "#FFFFFF",
+                                }}
+                              >
+                                Cancelar
+                              </Button>
+                            )}
+                          </div>
+                        </Panel>
+                      </Collapse>
+                    ) : null}
+                  </>
+                ))}
               </Card>
             ))}
           </div>
@@ -302,7 +371,10 @@ export default function Garçom() {
             onCancel={() => close()}
             okText="Enviar Pedido"
             cancelText="Cancelar"
-            okButtonProps={{ disabled: total - desconto === 0 || mesa === "" || total - desconto < 0 }}
+            okButtonProps={{
+              disabled:
+                total - desconto === 0 || mesa === "" || total - desconto < 0,
+            }}
             onOk={() => enviarPedido()}
           >
             <div className="container">
