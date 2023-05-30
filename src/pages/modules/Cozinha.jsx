@@ -4,6 +4,7 @@ import { service } from "../../services/firebase.ws";
 import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
+import { postEmail } from "../../services/email.ws";
 import moment from "moment/moment";
 export default function Cozinha() {
   const data = new Date();
@@ -66,6 +67,22 @@ export default function Cozinha() {
         status == "Pronto" || status == "Cancelado" ? new Date() : null,
       update_at: new Date(),
     };
+    if (status == "Cancelado") {
+      const email = {
+        destinatario: "gabrielsaimo68@gmail.com",
+        assunto: "Pedido Cancelado",
+        corpo: `Olá,
+
+        O pedido ${id} foi cancelado por ${userNome}.
+
+        motivo do cancelamento: 
+        ${obsCancelamento}.
+        
+        Atenciosamente,
+        Encando Amapaense`,
+      };
+      await postEmail(email);
+    }
     await postPedidosStatus(data);
     getPedido();
   };

@@ -53,13 +53,14 @@ export default function Garçom() {
     { id: "", quantidade: "" },
   ]);
   const [idPedido, setIdPedido] = useState();
+  const [status, setStatus] = useState();
   const [total, setTotal] = useState(0);
   useEffect(() => {
     getCachedDateUser();
-    getPedido();
-    getMesa();
     getCardapios();
-  }, [showModall, active, modalCancelamento]);
+    getMesa();
+    getPedido();
+  }, [showModall, active]);
 
   useEffect(() => {
     calcularTotal();
@@ -187,10 +188,14 @@ export default function Garçom() {
       status: "Em Cancelamento",
       update_at: new Date(),
       update_by: userNome,
-      obs_cancel: obsCancelamento,
+      obs_cancel: ` 
+      ${obsCancelamento} by : ${userNome}
+      Status : ${status} 
+      `,
     };
     postPedidosStatus(data);
     setObsCancelamento("");
+    setActive(!active);
   };
 
   const statusPedido = (id, status) => {
@@ -299,6 +304,7 @@ export default function Garçom() {
                     {itemMesa.mesa == item.mesa ? (
                       <Collapse>
                         <Panel
+                          onClick={() => setActive(!active)}
                           header={item.status}
                           key={index}
                           style={{
@@ -372,7 +378,9 @@ export default function Garçom() {
                             {item.status == "Pronto" ? (
                               <Button
                                 type="primary"
-                                onClick={() => console.log(item)}
+                                onClick={() =>
+                                  statusPedido(item.id, "Finalizado")
+                                }
                                 style={{
                                   marginRight: 10,
                                   backgroundColor: "#00FF00",
@@ -388,6 +396,7 @@ export default function Garçom() {
                                     type="primary"
                                     onClick={() => [
                                       setIdPedido(item.id),
+                                      setStatus(item.status),
                                       setModalCancelamento(true),
                                     ]}
                                     style={{
