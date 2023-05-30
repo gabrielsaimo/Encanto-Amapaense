@@ -349,7 +349,7 @@ export default function Garçom() {
                                   color: "#FFFFFF",
                                 }}
                               >
-                                Editar
+                                Excluir
                               </Button>
                             ) : null}
                             {item.status == "Pronto" ? (

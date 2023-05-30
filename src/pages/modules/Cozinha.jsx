@@ -59,9 +59,9 @@ export default function Cozinha() {
       acepted_by: status == "Em Preparo" ? userNome : null,
       acepted_at: status == "Em Preparo" ? new Date() : null,
       finished_by:
-        status == "Finalizado" || status == "Cancelado" ? userNome : null,
+        status == "Pronto" || status == "Cancelado" ? userNome : null,
       finished_at:
-        status == "Finalizado" || status == "Cancelado" ? new Date() : null,
+        status == "Pronto" || status == "Cancelado" ? new Date() : null,
       update_at: new Date(),
     };
     await postPedidosStatus(data);
@@ -85,7 +85,6 @@ export default function Cozinha() {
         setAcessable(false);
       } else if (
         UserCollection[0].categoria == "ADM" ||
-        UserCollection[0].categoria == "Gerência" ||
         UserCollection[0].categoria == "Cozinha"
       ) {
         setAcessable(true);
@@ -170,7 +169,7 @@ export default function Cozinha() {
                         ? "error"
                         : pedido.status === "Em Cancelamento"
                         ? "error"
-                        : pedido.status === "Finalizado"
+                        : pedido.status === "Pronto"
                         ? "success"
                         : pedido.status === "Em Preparo"
                         ? "processing"
@@ -211,7 +210,7 @@ export default function Cozinha() {
 
                 <Descriptions.Item label="Ações">
                   {pedido.status !== "Cancelado" &&
-                  pedido.status !== "Em Cancelamento" ? (
+                  pedido.status !== "Em Cancelamento" && pedido.status !== "Pronto"  ? (
                     <Button
                       onClick={() => {
                         StatusPedido(
@@ -219,7 +218,7 @@ export default function Cozinha() {
                           pedido.status === "Em Analize"
                             ? "Em Preparo"
                             : pedido.status === "Em Preparo"
-                            ? "Finalizado"
+                            ? "Pronto"
                             : "Finalizado"
                         );
                       }}
@@ -251,6 +250,9 @@ export default function Cozinha() {
                     >
                       Confimar Cancelamento
                     </Button>
+                  ) : null}
+                  {pedido.status === "Pronto" ? (
+                    <Button type="danger">Pronto!</Button>
                   ) : null}
                 </Descriptions.Item>
               </Descriptions>
