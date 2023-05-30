@@ -291,7 +291,7 @@ export default function Garçom() {
                               item.status == "Em Analize"
                                 ? "#ff8800"
                                 : item.status == "Em Preparo"
-                                ? "#fbff00"
+                                ? "#0a4bff"
                                 : item.status == "Pronto"
                                 ? "#00ff00"
                                 : item.status == "Em Cancelamento"

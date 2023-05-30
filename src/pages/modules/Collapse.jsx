@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq */
+/* eslint-disable  */
 import React, { useState, useEffect } from "react";
 import { Collapse } from "antd";
 import "../../css/Collapse.css";
