@@ -46,7 +46,6 @@ export default function Garçom() {
   const [password, setPassword] = useState("");
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
-  const [valor, setValor] = useState(0);
   const [active, setActive] = useState(false);
   const [pedidosTotais, setPedidosTotais] = useState([
     { id: "", quantidade: "" },
@@ -186,8 +185,8 @@ export default function Garçom() {
       update_at: new Date(),
       update_by: userNome,
     };
-    postPedidosStatus(data);
     setActive(!active);
+    postPedidosStatus(data);
   };
 
   const calcularTotal = () => {
