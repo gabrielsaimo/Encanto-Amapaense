@@ -26,6 +26,10 @@ export default function Cozinha() {
   const [modalCancelamento, setModalCancelamento] = React.useState(false);
   const [idPedido, setIdPedido] = React.useState("");
   const [obsCancelamento, setObsCancelamento] = React.useState("");
+  const text = obsCancelamento;
+  const statusIndex = text.indexOf("Status");
+  const beforeStatus = text.slice(0, statusIndex).trim();
+  const afterStatus = text.slice(statusIndex).trim();
   useEffect(() => {
     getPedido();
     const interval = setInterval(() => {
@@ -80,7 +84,7 @@ export default function Cozinha() {
         O pedido ${id} foi cancelado por ${userNome}.
 
         motivo do cancelamento: 
-        ${obsCancelamento}.
+        ${obsCancelamento}
         
         Atenciosamente,
         Encando Amapaense`,
@@ -303,7 +307,8 @@ export default function Cozinha() {
             cancelButtonProps={{ style: { display: "none" } }}
             onCancel={() => setModalCancelamento(false)}
           >
-            <h3>{obsCancelamento}</h3>
+            <h2>{beforeStatus}</h2>
+            <h3>{afterStatus}</h3>
           </Modal>
         </Card>
       )}
