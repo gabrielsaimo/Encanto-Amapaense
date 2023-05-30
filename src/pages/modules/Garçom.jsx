@@ -183,6 +183,7 @@ export default function Garçom() {
       id: id,
       status: status,
       update_at: new Date(),
+      update_by: userNome,
     };
     postPedidosStatus(data);
     getMesa();
@@ -308,15 +309,19 @@ export default function Garçom() {
                                   cardapio.find(
                                     (option) => option.id === Number(pedido.id)
                                   ).id ? (
-                                    <p>
-                                      x{pedido.quantidade}{" "}
-                                      {
-                                        cardapio.find(
-                                          (option) =>
-                                            option.id === Number(pedido.id)
-                                        ).name
-                                      }
-                                    </p>
+                                    <>
+                                      {pedido.quantidade > 0 ? (
+                                        <p>
+                                          x{pedido.quantidade}{" "}
+                                          {
+                                            cardapio.find(
+                                              (option) =>
+                                                option.id === Number(pedido.id)
+                                            ).name
+                                          }
+                                        </p>
+                                      ) : null}
+                                    </>
                                   ) : (
                                     <p>Item Excluido</p>
                                   )}

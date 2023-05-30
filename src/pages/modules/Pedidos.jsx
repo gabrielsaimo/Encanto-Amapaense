@@ -104,14 +104,18 @@ export default function Pedidos(atualizar) {
                     {pedido.id ==
                     cardapio.find((option) => option.id === Number(pedido.id))
                       .id ? (
-                      <p>
-                        x{pedido.quantidade}{" "}
-                        {
-                          cardapio.find(
-                            (option) => option.id === Number(pedido.id)
-                          ).name
-                        }
-                      </p>
+                      <>
+                        {pedido.quantidade > 0 ? (
+                          <p>
+                            x{pedido.quantidade}{" "}
+                            {
+                              cardapio.find(
+                                (option) => option.id === Number(pedido.id)
+                              ).name
+                            }
+                          </p>
+                        ) : null}
+                      </>
                     ) : (
                       <p>Item Excluido</p>
                     )}
