@@ -59,7 +59,7 @@ export default function Garçom() {
     getPedido();
     getMesa();
     getCardapios();
-  }, [showModall, active]);
+  }, [showModall, active, modalCancelamento]);
 
   useEffect(() => {
     calcularTotal();
@@ -189,8 +189,8 @@ export default function Garçom() {
       update_by: userNome,
       obs_cancel: obsCancelamento,
     };
-
     postPedidosStatus(data);
+    setObsCancelamento("");
   };
 
   const statusPedido = (id, status) => {
@@ -509,7 +509,10 @@ export default function Garçom() {
           </Modal>
           <Modal
             open={modalCancelamento}
-            onCancel={() => setModalCancelamento(false)}
+            onCancel={() => [
+              setModalCancelamento(false),
+              setObsCancelamento(""),
+            ]}
             okText="Pedir Cancelamento"
             okType="danger"
             cancelButtonProps={{ style: { display: "none" } }}
