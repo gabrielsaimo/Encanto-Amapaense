@@ -68,8 +68,12 @@ export default function Cozinha() {
       update_at: new Date(),
     };
     if (status == "Cancelado") {
+      const destinararios = [
+        "gabrielsaimo68@gmail.com",
+        "Josemaria023182@gmail.com",
+      ];
       const email = {
-        destinatario: "gabrielsaimo68@gmail.com",
+        destinatario: destinararios,
         assunto: "Pedido Cancelado",
         corpo: `Olá,
 

@@ -189,8 +189,9 @@ export default function Garçom() {
       update_at: new Date(),
       update_by: userNome,
       obs_cancel: ` 
-      ${obsCancelamento} by : ${userNome}
+      ${obsCancelamento} 
       Status : ${status} 
+      by : ${userNome}
       `,
     };
     postPedidosStatus(data);
