@@ -47,6 +47,7 @@ export default function Garçom() {
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [valor, setValor] = useState(0);
+  const [active, setActive] = useState(false);
   const [pedidosTotais, setPedidosTotais] = useState([
     { id: "", quantidade: "" },
   ]);
@@ -56,7 +57,7 @@ export default function Garçom() {
     getPedido();
     getMesa();
     getCardapios();
-  }, [showModall]);
+  }, [showModall, active]);
 
   useEffect(() => {
     calcularTotal();
@@ -186,8 +187,7 @@ export default function Garçom() {
       update_by: userNome,
     };
     postPedidosStatus(data);
-    getMesa();
-    getPedido();
+    setActive(!active);
   };
 
   const calcularTotal = () => {
