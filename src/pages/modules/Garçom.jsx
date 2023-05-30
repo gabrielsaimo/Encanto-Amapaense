@@ -19,7 +19,7 @@ import {
   postPedidosStatus,
   putPedidos,
 } from "../../services/Pedidos.ws";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 
 const { Option } = Select;
@@ -451,16 +451,18 @@ export default function Garçom() {
                 >
                   <h3>
                     Pedido {index + 1}{" "}
-                    <Button onClick={() => removerPedido(index)}>
-                      Excluir
-                    </Button>
+                    <Button
+                      style={{ backgroundColor: "#FF0000", color: "#FFF" }}
+                      onClick={() => removerPedido(index)}
+                      icon={<DeleteOutlined />}
+                    />
                   </h3>
 
                   <Space>
                     <Select
                       value={pedido.id}
                       showSearch
-                      style={{ width: 200 }}
+                      style={{ width: 250 }}
                       onChange={(value) =>
                         handlePedidoChange(index, "id", value)
                       }
@@ -474,9 +476,10 @@ export default function Garçom() {
                     </Select>
                     <InputNumber
                       value={pedido.quantidade}
-                      style={{ width: 100 }}
+                      style={{ width: 62 }}
                       prefix="x"
                       min={1}
+                      max={99}
                       defaultValue={0}
                       onChange={(event) =>
                         handlePedidoChange(index, "quantidade", event)
