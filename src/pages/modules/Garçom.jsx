@@ -47,9 +47,12 @@ export default function Garçom() {
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [active, setActive] = useState(false);
+  const [modalCancelamento, setModalCancelamento] = useState(false);
+  const [obsCancelamento, setObsCancelamento] = useState("");
   const [pedidosTotais, setPedidosTotais] = useState([
     { id: "", quantidade: "" },
   ]);
+  const [idPedido, setIdPedido] = useState();
   const [total, setTotal] = useState(0);
   useEffect(() => {
     getCachedDateUser();
@@ -178,6 +181,18 @@ export default function Garçom() {
     setPedidosTotais(newPedidos);
   };
 
+  const cancelarPedido = (id) => {
+    const data = {
+      id: id,
+      status: "Em Cancelamento",
+      update_at: new Date(),
+      update_by: userNome,
+      obs_cancel: obsCancelamento,
+    };
+
+    postPedidosStatus(data);
+  };
+
   const statusPedido = (id, status) => {
     const data = {
       id: id,
@@ -227,7 +242,9 @@ export default function Garçom() {
   }
 
   return (
-    <>
+    <Card
+      style={{ backgroundColor: "#707070", height: "100%", minHeight: "99vh" }}
+    >
       {!acessable ? (
         <Modal
           title="Acesso Restrito para Administradores"
@@ -257,7 +274,7 @@ export default function Garçom() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <Card style={{ margin: 10 }}>
+          <Card style={{ margin: 10, fontSize: 20 }}>
             {userNome}
             <div style={{ float: "right" }}>
               <Button onClick={() => logout()}>Sair</Button>
@@ -369,9 +386,10 @@ export default function Garçom() {
                                 {item.status !== "Em Cancelamento" ? (
                                   <Button
                                     type="primary"
-                                    onClick={() =>
-                                      statusPedido(item.id, "Em Cancelamento")
-                                    }
+                                    onClick={() => [
+                                      setIdPedido(item.id),
+                                      setModalCancelamento(true),
+                                    ]}
                                     style={{
                                       marginRight: 10,
                                       backgroundColor: "#FF0000",
@@ -489,8 +507,35 @@ export default function Garçom() {
               </div>
             </div>
           </Modal>
+          <Modal
+            open={modalCancelamento}
+            onCancel={() => setModalCancelamento(false)}
+            okText="Pedir Cancelamento"
+            okType="danger"
+            cancelButtonProps={{ style: { display: "none" } }}
+            cancelText="Voltar"
+            okButtonProps={{
+              disabled: obsCancelamento.length < 3,
+            }}
+            onOk={() => {
+              cancelarPedido(idPedido);
+              setModalCancelamento(false);
+            }}
+          >
+            <div className="container">
+              <h2 className="title">Cancelar Pedido</h2>
+              <div style={{ marginBottom: 10 }}>
+                <label>Motivo</label>
+                <TextArea
+                  value={obsCancelamento}
+                  rows={4}
+                  onChange={(event) => setObsCancelamento(event.target.value)}
+                />
+              </div>
+            </div>
+          </Modal>
         </div>
       )}
-    </>
+    </Card>
   );
 }
