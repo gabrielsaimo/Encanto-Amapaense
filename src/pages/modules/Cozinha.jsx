@@ -22,7 +22,9 @@ export default function Cozinha() {
   const [dateUser, setDateUser] = React.useState();
   const [userNome, setUserNome] = React.useState("");
   const [UserCategoria, setUserCategoria] = React.useState("");
-
+  const [modalCancelamento, setModalCancelamento] = React.useState(false);
+  const [idPedido, setIdPedido] = React.useState("");
+  const [obsCancelamento, setObsCancelamento] = React.useState("");
   useEffect(() => {
     getPedido();
     const interval = setInterval(() => {
@@ -31,7 +33,7 @@ export default function Cozinha() {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [modalCancelamento]);
   const getPedido = async () => {
     const pedidos = await getPedidos();
     setPedido(pedidos);
@@ -101,6 +103,13 @@ export default function Cozinha() {
     setAcessable(false);
     setDateUser(null);
   };
+
+  const confirmarCancelamento = () => {
+    setModalCancelamento(false);
+    StatusPedido(idPedido, "Cancelado");
+    setObsCancelamento("");
+  };
+
   return (
     <Card>
       {!acessable ? (
@@ -210,7 +219,8 @@ export default function Cozinha() {
 
                 <Descriptions.Item label="Ações">
                   {pedido.status !== "Cancelado" &&
-                  pedido.status !== "Em Cancelamento" && pedido.status !== "Pronto"  ? (
+                  pedido.status !== "Em Cancelamento" &&
+                  pedido.status !== "Pronto" ? (
                     <Button
                       onClick={() => {
                         StatusPedido(
@@ -245,7 +255,10 @@ export default function Cozinha() {
                       style={{ marginLeft: 10, backgroundColor: "red" }}
                       type="primary"
                       onClick={() => {
-                        StatusPedido(pedido.id, "Cancelado");
+                        setIdPedido(pedido.id);
+                        setObsCancelamento(pedido.obs_cancel);
+                        setModalCancelamento(true);
+                        //  StatusPedido(pedido.id, "Cancelado");
                       }}
                     >
                       Confimar Cancelamento
@@ -258,6 +271,19 @@ export default function Cozinha() {
               </Descriptions>
             </div>
           ))}
+          <Modal
+            title="Motivo do Cancelamento"
+            open={modalCancelamento}
+            okType="danger"
+            okText="Cancelar Pedido"
+            onOk={() => {
+              confirmarCancelamento();
+            }}
+            cancelButtonProps={{ style: { display: "none" } }}
+            onCancel={() => setModalCancelamento(false)}
+          >
+            <h3>{obsCancelamento}</h3>
+          </Modal>
         </Card>
       )}
     </Card>
