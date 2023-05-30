@@ -1,5 +1,4 @@
 import axios from "axios";
-//! Inativo
 const api = axios.create({
   baseURL: "https://encanto-backend.vercel.app/",
 });
