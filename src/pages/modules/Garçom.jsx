@@ -205,7 +205,7 @@ export default function Garçom() {
 
   async function enviarPedido() {
     await putPedidos({
-      id: pedidos.length + 1,
+      id: Math.floor(Math.random() * 100000000),
       created_at: new Date(),
       created_by: userNome,
       desconto,
