@@ -300,7 +300,6 @@ export default function Garçom() {
                 title={"Messa " + itemMesa.mesa}
                 style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
                 key={index}
-                hoverable={true}
               >
                 {pedidos.map((item, index) => (
                   <>

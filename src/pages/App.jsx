@@ -41,11 +41,6 @@ function App() {
         <Affix offsetTop={10} style={{ marginLeft: "80%" }}>
           <Menu />
         </Affix>
-        {visible2 ? (
-          <Button>
-            <Link to="/Dashboard"> 👀👀👀👀 </Link>
-          </Button>
-        ) : null}
         <CollapseMenu />
         <FloatButton.BackTop />
         <Msn />
