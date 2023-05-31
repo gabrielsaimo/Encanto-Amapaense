@@ -90,9 +90,11 @@ export default function Pedidos(atualizar) {
             <Descriptions.Item label="Valor do Pedido">
               R$ {pedido.valor},00
             </Descriptions.Item>
-            <Descriptions.Item label="Desconto">
-              R$ {pedido.desconto},00
-            </Descriptions.Item>
+            {pedido.desconto > 0 ? (
+              <Descriptions.Item label="Desconto">
+                R$ {pedido.desconto},00
+              </Descriptions.Item>
+            ) : null}
 
             <Descriptions.Item label="Valor Total">
               R$ {Number(pedido.valor) - Number(pedido.desconto)},00
@@ -134,12 +136,26 @@ export default function Pedidos(atualizar) {
                 <Descriptions.Item label="Aceito em">
                   {moment(pedido.acepted_at).format("DD/MM/YYYY HH:mm:ss")}
                 </Descriptions.Item>
-                {pedido.status === "Finalizado" ? (
+                {pedido.status === "Finalizado" ||
+                pedido.status === "Pronto" ||
+                pedido.status === "Cancelado" ? (
                   <>
-                    <Descriptions.Item label="Finalizado por">
+                    <Descriptions.Item
+                      label={
+                        pedido.status === "Cancelado"
+                          ? "Cancelado por"
+                          : "Finalizado por"
+                      }
+                    >
                       {pedido.finished_by}
                     </Descriptions.Item>
-                    <Descriptions.Item label="Finalizado em">
+                    <Descriptions.Item
+                      label={
+                        pedido.status === "Cancelado"
+                          ? "Cancelado em"
+                          : "Finalizado em"
+                      }
+                    >
                       {moment(pedido.finished_at).format("DD/MM/YYYY HH:mm:ss")}
                     </Descriptions.Item>
                   </>
