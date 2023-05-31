@@ -203,6 +203,8 @@ export default function Garçom() {
     const data = {
       id: id,
       status: status,
+      finished_by: status == "Finalizado" ? userNome : null,
+      finished_at: status == "Finalizado" ? new Date() : null,
       update_at: new Date(),
       update_by: userNome,
     };
