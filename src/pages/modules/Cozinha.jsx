@@ -94,8 +94,6 @@ export default function Cozinha() {
       const data = {
         id: id,
         status: status,
-        acepted_by: status == "Em Preparo" ? userNome : null,
-        acepted_at: status == "Em Preparo" ? new Date() : null,
         finished_by:
           status == "Pronto" || status == "Cancelado" ? userNome : null,
         finished_at:
