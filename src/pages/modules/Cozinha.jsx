@@ -88,6 +88,7 @@ export default function Cozinha() {
         acepted_by: userNome,
         acepted_at: new Date(),
         update_at: new Date(),
+        update_by: userNome,
       };
       await postPedidosStatus(data);
     } else {
