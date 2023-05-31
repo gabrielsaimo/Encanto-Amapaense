@@ -158,6 +158,14 @@ export default function Pedidos(atualizar) {
                     >
                       {moment(pedido.finished_at).format("DD/MM/YYYY HH:mm:ss")}
                     </Descriptions.Item>
+                    {pedido.status === "Cancelado" ||
+                    pedido.status === "Em Cancelamento" ? (
+                      <>
+                        <Descriptions.Item label="Motivo">
+                          {pedido.obs_cancel}
+                        </Descriptions.Item>
+                      </>
+                    ) : null}
                   </>
                 ) : null}
               </>
