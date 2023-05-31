@@ -5,6 +5,7 @@ import Dashboard from "./modules/Dasboard";
 import Menssagem from "./modules/Menssagem";
 import Pedidos from "./modules/Pedidos";
 import { getUser } from "../services/user.ws";
+import Users from "./modules/Users";
 
 export default function Config() {
   const [actionCardapio, setActionCardapio] = useState(true);
@@ -81,7 +82,6 @@ export default function Config() {
   };
 
   const onChange = (key) => {
-    console.log(key);
     if (key == 1) {
       setActionCardapio(!actionCardapio);
     } else if (key == 2) {
@@ -120,6 +120,12 @@ export default function Config() {
       label: "Pedidos",
       disabled: false,
       children: <Pedidos atualizar={actionPeido} user={dateUser} />,
+    },
+    {
+      key: "4",
+      label: "Usuários",
+      disabled: UserCategoria !== "ADM" ? true : false,
+      children: <Users atualizar={actionPeido} user={dateUser} />,
     },
   ];
 

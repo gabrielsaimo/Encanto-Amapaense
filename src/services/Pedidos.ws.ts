@@ -39,13 +39,29 @@ export const getMesasbyId = async (id: number): Promise<pedido[]> => {
   return response.data;
 };
 
+export const postTransferir = async (data: pedido): Promise<pedido> => {
+  const response = await api.post<pedido>("/pedido/transferir", data);
+  return response.data;
+};
+
 export const postPedidos = async (data: pedido): Promise<pedido> => {
   const response = await api.post<pedido>("/pedido", data);
   return response.data;
 };
 
-export const postPedidosStatus = async (data: pedido): Promise<pedido> => {
-  const response = await api.post<pedido>("/pedido/status", data);
+export const postPedidosStatus = async (data: any): Promise<any> => {
+  const response = await api.post<any>("/pedido/status", data);
+  console.log("teste", response.data[1]);
+  if (response.data[1] === 1) {
+    return response.data;
+  } else {
+    alert("Erro ao Mudar Status , Pedido Possivelmente Excluido");
+    return response.data;
+  }
+};
+
+export const getStatusPedido = async (id: number): Promise<any[]> => {
+  const response = await api.get<any[]>(`/pedido/status/${id}`);
   return response.data;
 };
 

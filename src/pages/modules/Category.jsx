@@ -95,7 +95,6 @@ export default function Category() {
   }
 
   function handleClickEdit(task) {
-    console.log(task);
     setSelectedTaskId(task.id);
     setId(task.id);
     setName(task.name);

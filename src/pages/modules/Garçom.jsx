@@ -14,9 +14,12 @@ import "firebase/database";
 import { getUser } from "../../services/user.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import {
+  deletePedidos,
   getMesas,
   getPedidos,
+  getStatusPedido,
   postPedidosStatus,
+  postTransferir,
   putPedidos,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -47,6 +50,8 @@ export default function Garçom() {
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [active, setActive] = useState(false);
+  const [modalTransferir, setModalTransferir] = useState(false);
+  const [dataTransferir, setDataTransferir] = useState([]);
   const [modalCancelamento, setModalCancelamento] = useState(false);
   const [obsCancelamento, setObsCancelamento] = useState("");
   const [pedidosTotais, setPedidosTotais] = useState([
@@ -60,7 +65,7 @@ export default function Garçom() {
     getCardapios();
     getMesa();
     getPedido();
-  }, [showModall, active]);
+  }, [active, showModall]);
 
   useEffect(() => {
     calcularTotal();
@@ -80,6 +85,40 @@ export default function Garçom() {
   const getMesa = async () => {
     const mesas = await getMesas();
     setDateMesa(mesas);
+  };
+
+  const DeletarPedido = async (id) => {
+    await deletePedidos({
+      id: id,
+    });
+    setActive(!active);
+    window.location.reload();
+  };
+
+  const confimerDelete = async (id) => {
+    setActive(!active);
+    const verify = await getStatusPedido(id);
+    if (verify[0].status == "Em Analize") {
+      Modal.confirm({
+        title: "Deseja excluir o pedido?",
+        content: "Ao excluir o pedido não será possivel recupera-lo",
+        okText: "Excluir",
+        cancelText: "Cancelar",
+        okButtonProps: {
+          danger: true,
+        },
+        cancelButtonProps: {
+          type: "primary",
+        },
+
+        onOk: () => DeletarPedido(id),
+      });
+    } else {
+      Modal.error({
+        title: "Pedido não pode ser excluido",
+        content: "Pedido diferente de Em analize não pode ser excluido",
+      });
+    }
   };
 
   const GetUsuario = async () => {
@@ -208,8 +247,8 @@ export default function Garçom() {
       update_at: new Date(),
       update_by: userNome,
     };
-    setActive(!active);
     postPedidosStatus(data);
+    setActive(!active);
   };
 
   const calcularTotal = () => {
@@ -224,6 +263,17 @@ export default function Garçom() {
 
     setTotal(newTotal);
   };
+
+  async function tranferirPedido() {
+    await postTransferir({
+      id: dataTransferir.id,
+      mesa: mesa,
+      update_at: new Date(),
+      update_by: userNome,
+    });
+    setModalCancelamento(false);
+    clear();
+  }
 
   async function enviarPedido() {
     await putPedidos({
@@ -364,17 +414,16 @@ export default function Garçom() {
                               justifyContent: "flex-end",
                             }}
                           >
-                            {item.status == "Em Analize" ? (
+                            {item.status !== "Em Cancelamento" ? (
                               <Button
                                 type="primary"
-                                onClick={() => console.log(item)}
-                                style={{
-                                  marginRight: 10,
-                                  backgroundColor: "#ffa600",
-                                  color: "#FFFFFF",
-                                }}
+                                style={{ marginRight: 10 }}
+                                onClick={() => [
+                                  setDataTransferir(item),
+                                  setModalTransferir(!modalTransferir),
+                                ]}
                               >
-                                Excluir
+                                Trasferir
                               </Button>
                             ) : null}
                             {item.status == "Pronto" ? (
@@ -391,27 +440,41 @@ export default function Garçom() {
                               >
                                 Finalizar
                               </Button>
-                            ) : (
-                              <>
-                                {item.status !== "Em Cancelamento" ? (
-                                  <Button
-                                    type="primary"
-                                    onClick={() => [
-                                      setIdPedido(item.id),
-                                      setStatus(item.status),
-                                      setModalCancelamento(true),
-                                    ]}
-                                    style={{
-                                      marginRight: 10,
-                                      backgroundColor: "#FF0000",
-                                      color: "#FFFFFF",
-                                    }}
-                                  >
-                                    Cancelar
-                                  </Button>
-                                ) : null}
-                              </>
-                            )}
+                            ) : null}
+                            <>
+                              {item.status !== "Em Cancelamento" &&
+                              item.status !== "Em Analize" ? (
+                                <Button
+                                  type="primary"
+                                  onClick={() => [
+                                    setIdPedido(item.id),
+                                    setStatus(item.status),
+                                    setModalCancelamento(true),
+                                  ]}
+                                  style={{
+                                    marginRight: 10,
+                                    backgroundColor: "#FF0000",
+                                    color: "#FFFFFF",
+                                  }}
+                                >
+                                  Cancelar
+                                </Button>
+                              ) : null}
+
+                              {item.status == "Em Analize" ? (
+                                <Button
+                                  type="primary"
+                                  onClick={() => confimerDelete(item.id)}
+                                  style={{
+                                    marginRight: 10,
+                                    backgroundColor: "#FF0000",
+                                    color: "#FFFFFF",
+                                  }}
+                                >
+                                  Excluir
+                                </Button>
+                              ) : null}
+                            </>
                           </div>
                         </Panel>
                       </Collapse>
@@ -547,6 +610,32 @@ export default function Garçom() {
                   value={obsCancelamento}
                   rows={4}
                   onChange={(event) => setObsCancelamento(event.target.value)}
+                />
+              </div>
+            </div>
+          </Modal>
+          <Modal
+            open={modalTransferir}
+            okText="Tranferir"
+            onCancel={() => setModalTransferir(!modalTransferir)}
+            okButtonProps={{
+              disabled: mesa == "" || mesa == dataTransferir.mesa,
+            }}
+            onOk={() => [
+              tranferirPedido(),
+              setActive(!active),
+              setModalTransferir(false),
+              clear(),
+            ]}
+          >
+            <div className="container">
+              <h2 className="title">Transferir Pedido</h2>
+              <div style={{ marginBottom: 10 }}>
+                <label>Mesa {dataTransferir.mesa} para :</label>
+                <InputNumber
+                  style={{ width: 100 }}
+                  min={1}
+                  onChange={(event) => setMesa(event)}
                 />
               </div>
             </div>
