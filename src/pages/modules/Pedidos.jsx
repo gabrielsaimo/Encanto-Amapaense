@@ -2,7 +2,7 @@ import { Badge, Descriptions } from "antd";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { service } from "../../services/firebase.ws";
-import { getPedidos } from "../../services/Pedidos.ws";
+import { getPedidosAdm } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment/moment";
 export default function Pedidos(atualizar) {
@@ -31,7 +31,7 @@ export default function Pedidos(atualizar) {
     return () => clearInterval(interval);
   }, [atualizar]);
   const getPedido = async () => {
-    const pedidos = await getPedidos();
+    const pedidos = await getPedidosAdm();
     setPedido(pedidos);
   };
 
@@ -75,13 +75,13 @@ export default function Pedidos(atualizar) {
               <Badge
                 status={
                   pedido.status === "Em Analize"
-                    ? "processing"
+                    ? "warning"
                     : pedido.status === "Cancelado"
                     ? "error"
                     : pedido.status === "Finalizado"
                     ? "success"
-                    : pedido.status === "Atrazado"
-                    ? "warning"
+                    : pedido.status === "Em Preparo"
+                    ? "processing"
                     : "default"
                 }
                 text={pedido.status}
@@ -125,6 +125,27 @@ export default function Pedidos(atualizar) {
                 <p>Item Excluido</p>
               )}
             </Descriptions.Item>
+            {pedido.status !== "Em Analize" &&
+            pedido.status !== "Em Cancelamento" ? (
+              <>
+                <Descriptions.Item label="Aceito por">
+                  {pedido.acepted_by}
+                </Descriptions.Item>
+                <Descriptions.Item label="Aceito em">
+                  {moment(pedido.acepted_at).format("DD/MM/YYYY HH:mm:ss")}
+                </Descriptions.Item>
+                {pedido.status === "Finalizado" ? (
+                  <>
+                    <Descriptions.Item label="Finalizado por">
+                      {pedido.finished_by}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Finalizado em">
+                      {moment(pedido.finished_at).format("DD/MM/YYYY HH:mm:ss")}
+                    </Descriptions.Item>
+                  </>
+                ) : null}
+              </>
+            ) : null}
           </Descriptions>
         </div>
       ))}

@@ -24,6 +24,10 @@ export const getPedidos = async (): Promise<pedido[]> => {
   const response = await api.get<pedido[]>("/pedido");
   return response.data;
 };
+export const getPedidosAdm = async (): Promise<pedido[]> => {
+  const response = await api.get<pedido[]>("/pedido/adm");
+  return response.data;
+};
 
 export const getMesas = async (): Promise<any[]> => {
   const response = await api.get<pedido[]>("/pedido/mesa");

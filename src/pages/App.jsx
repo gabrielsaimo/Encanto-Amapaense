@@ -1,7 +1,7 @@
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Affix, Button, FloatButton } from "antd";
+import { Affix, Button, FloatButton, Modal, Space } from "antd";
 import React from "react";
 import CollapseMenu from "./modules/Collapse";
 import Menu from "./modules/BottonMenu";
@@ -13,7 +13,7 @@ function App() {
   const [contar, setContar] = React.useState(0);
 
   React.useEffect(() => {
-    if (contar > 20 && contar < 30) {
+    if (contar > 10 && contar < 15) {
       setVisible2(true);
     }
   }, [contar]);
@@ -51,6 +51,19 @@ function App() {
         <Msn />
         <Footer />
         <div style={{ height: 30 }} />
+        <Modal visible={visible2} footer={null} closable={false} width={150}>
+          <Space direction="vertical">
+            <Button>
+              <Link to="/Dashboard"> Dashboard</Link>
+            </Button>
+            <Button>
+              <Link to="/Garçom"> Garçom</Link>
+            </Button>
+            <Button>
+              <Link to="/Cozinha"> Cozinha</Link>
+            </Button>
+          </Space>
+        </Modal>
       </div>
     </div>
   );
