@@ -91,7 +91,7 @@ export default function Pedidos(atualizar) {
               R$ {pedido.valor},00
             </Descriptions.Item>
             {pedido.desconto > 0 ? (
-              <Descriptions.Item label="Desconto">
+              <Descriptions.Item label="Desconto" style={{ color: "red" }}>
                 R$ {pedido.desconto},00
               </Descriptions.Item>
             ) : null}

@@ -60,22 +60,11 @@ export default function Cozinha() {
   };
 
   const StatusPedido = async (id, status) => {
-    const data = {
-      id: id,
-      status: status,
-      acepted_by: status == "Em Preparo" ? userNome : null,
-      acepted_at: status == "Em Preparo" ? new Date() : null,
-      finished_by:
-        status == "Pronto" || status == "Cancelado" ? userNome : null,
-      finished_at:
-        status == "Pronto" || status == "Cancelado" ? new Date() : null,
-      update_at: new Date(),
-    };
     if (status == "Cancelado") {
       const destinararios = [
         "gabrielsaimo68@gmail.com",
         "Josemaria023182@gmail.com",
-        "leogabarito841@gmail.com"
+        "leogabarito841@gmail.com",
       ];
       const email = {
         destinatario: destinararios,
@@ -92,7 +81,29 @@ export default function Cozinha() {
       };
       await postEmail(email);
     }
-    await postPedidosStatus(data);
+    if (status == "Em Preparo") {
+      const data = {
+        id: id,
+        status: status,
+        acepted_by: userNome,
+        acepted_at: new Date(),
+        update_at: new Date(),
+      };
+      await postPedidosStatus(data);
+    } else {
+      const data = {
+        id: id,
+        status: status,
+        acepted_by: status == "Em Preparo" ? userNome : null,
+        acepted_at: status == "Em Preparo" ? new Date() : null,
+        finished_by:
+          status == "Pronto" || status == "Cancelado" ? userNome : null,
+        finished_at:
+          status == "Pronto" || status == "Cancelado" ? new Date() : null,
+        update_at: new Date(),
+      };
+      await postPedidosStatus(data);
+    }
     getPedido();
   };
 
