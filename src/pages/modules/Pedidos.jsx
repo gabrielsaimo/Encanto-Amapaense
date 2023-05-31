@@ -1,7 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Badge, Descriptions } from "antd";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { service } from "../../services/firebase.ws";
 import { getPedidosAdm } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment/moment";
@@ -11,21 +10,14 @@ export default function Pedidos(atualizar) {
   const dataFormatada =
     hora + ":" + data.getMinutes() + ":" + data.getSeconds();
 
-  const db = getFirestore(service);
   const [pedidos, setPedido] = useState([]);
-  const colletionRefPedido = collection(db, "pedidos");
-  const colletionRefListaPedido = collection(db, "listaPedidos");
-  const [listapedidos, setListaPedido] = useState([]);
   const [count, setCount] = useState(0);
   const [cardapio, setCardapio] = useState([]);
   useEffect(() => {
     getPedido();
-
-    getListaPedido();
     const interval = setInterval(() => {
       setCount(count + 1);
       getPedido();
-      getListaPedido();
     }, 60000);
 
     return () => clearInterval(interval);
@@ -42,14 +34,7 @@ export default function Pedidos(atualizar) {
     const cardapio = await getCardapio();
     setCardapio(cardapio);
   };
-  const getListaPedido = async () => {
-    const Collection = await getDocs(colletionRefListaPedido);
-    const listapedido = Collection.docs.map((doc) => ({
-      ...doc.data(),
-      key: doc.id,
-    }));
-    setListaPedido(listapedido.sort((a, b) => b.id - a.id));
-  };
+
   return (
     <>
       <h1>Atualizado as {dataFormatada}</h1>
@@ -103,7 +88,7 @@ export default function Pedidos(atualizar) {
               {cardapio.length > 0 ? (
                 JSON.parse(pedido.pedidos).map((pedido) => (
                   <>
-                    {pedido.id ==
+                    {pedido.id ===
                     cardapio.find((option) => option.id === Number(pedido.id))
                       .id ? (
                       <>

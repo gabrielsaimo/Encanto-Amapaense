@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Badge, Button, Card, Descriptions, Divider, Input, Modal } from "antd";
 import React, { useEffect, useState } from "react";
-import { service } from "../../services/firebase.ws";
 import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
@@ -22,7 +22,6 @@ export default function Cozinha() {
   const [password, setPassword] = React.useState("");
   const [dateUser, setDateUser] = React.useState();
   const [userNome, setUserNome] = React.useState("");
-  const [UserCategoria, setUserCategoria] = React.useState("");
   const [modalCancelamento, setModalCancelamento] = React.useState(false);
   const [idPedido, setIdPedido] = React.useState("");
   const [obsCancelamento, setObsCancelamento] = React.useState("");
@@ -38,7 +37,7 @@ export default function Cozinha() {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, [modalCancelamento]);
+  }, [modalCancelamento, dateUser]);
   const getPedido = async () => {
     const pedidos = await getPedidos();
     setPedido(pedidos);
@@ -60,7 +59,7 @@ export default function Cozinha() {
   };
 
   const StatusPedido = async (id, status) => {
-    if (status == "Cancelado") {
+    if (status === "Cancelado") {
       const destinararios = [
         "gabrielsaimo68@gmail.com",
         "Josemaria023182@gmail.com",
@@ -81,7 +80,7 @@ export default function Cozinha() {
       };
       await postEmail(email);
     }
-    if (status == "Em Preparo") {
+    if (status === "Em Preparo") {
       const data = {
         id: id,
         status: status,
@@ -96,9 +95,9 @@ export default function Cozinha() {
         id: id,
         status: status,
         finished_by:
-          status == "Pronto" || status == "Cancelado" ? userNome : null,
+          status === "Pronto" || status === "Cancelado" ? userNome : null,
         finished_at:
-          status == "Pronto" || status == "Cancelado" ? new Date() : null,
+          status === "Pronto" || status === "Cancelado" ? new Date() : null,
         update_at: new Date(),
       };
       await postPedidosStatus(data);
@@ -113,17 +112,16 @@ export default function Cozinha() {
 
     if (UserCollection.length > 0) {
       setUserNome(UserCollection[0].name);
-      setUserCategoria(UserCollection[0].categoria);
       // Armazenar o valor no localStorage
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
 
       setDateUser(UserCollection);
-      if (UserCollection[0].active == false) {
+      if (UserCollection[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        UserCollection[0].categoria == "ADM" ||
-        UserCollection[0].categoria == "Cozinha"
+        UserCollection[0].categoria === "ADM" ||
+        UserCollection[0].categoria === "Cozinha"
       ) {
         setAcessable(true);
       } else {
@@ -227,7 +225,7 @@ export default function Cozinha() {
                   {cardapio.length > 0
                     ? JSON.parse(pedido.pedidos).map((pedido) => (
                         <>
-                          {pedido.id ==
+                          {pedido.id ===
                           cardapio.find(
                             (option) => option.id === Number(pedido.id)
                           ).id ? (

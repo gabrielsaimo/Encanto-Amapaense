@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -27,14 +28,7 @@ import TextArea from "antd/es/input/TextArea";
 
 const { Option } = Select;
 const { Panel } = Collapse;
-const pedidoOptions = [
-  { id: 1, name: "agua", price: 5 },
-  { id: 2, name: "suco", price: 10 },
-];
 export default function Garçom() {
-  const [actionCardapio, setActionCardapio] = useState(true);
-  const [actionMensagem, setActionMensagem] = useState(true);
-  const [actionPeido, setActionPedido] = useState(true);
   const [dateUser, setDateUser] = useState();
   const [visible, setVisible] = React.useState(true);
   const [showModall, setShowModall] = React.useState(false);
@@ -65,7 +59,7 @@ export default function Garçom() {
     getCardapios();
     getMesa();
     getPedido();
-  }, [active, showModall]);
+  }, [active, showModall, dateUser, UserCategoria]);
 
   useEffect(() => {
     calcularTotal();
@@ -98,7 +92,7 @@ export default function Garçom() {
   const confimerDelete = async (id) => {
     setActive(!active);
     const verify = await getStatusPedido(id);
-    if (verify[0].status == "Em Analize") {
+    if (verify[0].status === "Em Analize") {
       Modal.confirm({
         title: "Deseja excluir o pedido?",
         content: "Ao excluir o pedido não será possivel recupera-lo",
@@ -133,13 +127,13 @@ export default function Garçom() {
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
 
       setDateUser(UserCollection);
-      if (UserCollection[0].active == false) {
+      if (UserCollection[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        UserCollection[0].categoria == "ADM" ||
-        UserCollection[0].categoria == "Gerência" ||
-        UserCollection[0].categoria == "Garçom"
+        UserCollection[0].categoria === "ADM" ||
+        UserCollection[0].categoria === "Gerência" ||
+        UserCollection[0].categoria === "Garçom"
       ) {
         setAcessable(true);
       } else {
@@ -160,13 +154,13 @@ export default function Garçom() {
       setDateUser(JSON.parse(cachedData));
       setUserNome(JSON.parse(cachedData)[0].name);
       setUserCategoria(JSON.parse(cachedData)[0].categoria);
-      if (JSON.parse(cachedData)[0].active == false) {
+      if (JSON.parse(cachedData)[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData)[0].categoria == "ADM" ||
-        JSON.parse(cachedData)[0].categoria == "Gerência" ||
-        JSON.parse(cachedData)[0].categoria == "Garçom"
+        JSON.parse(cachedData)[0].categoria === "ADM" ||
+        JSON.parse(cachedData)[0].categoria === "Gerência" ||
+        JSON.parse(cachedData)[0].categoria === "Garçom"
       ) {
         setAcessable(true);
       } else {
@@ -175,16 +169,6 @@ export default function Garçom() {
       }
     }
     return cachedData ? JSON.parse(cachedData) : null;
-  };
-
-  const onChange = (key) => {
-    if (key == 1) {
-      setActionCardapio(!actionCardapio);
-    } else if (key == 2) {
-      setActionMensagem(!actionMensagem);
-    } else {
-      setActionPedido(!actionPeido);
-    }
   };
 
   const close = () => {
@@ -242,8 +226,8 @@ export default function Garçom() {
     const data = {
       id: id,
       status: status,
-      finished_by: status == "Finalizado" ? userNome : null,
-      finished_at: status == "Finalizado" ? new Date() : null,
+      finished_by: status === "Finalizado" ? userNome : null,
+      finished_at: status === "Finalizado" ? new Date() : null,
       update_at: new Date(),
       update_by: userNome,
     };
@@ -353,7 +337,7 @@ export default function Garçom() {
               >
                 {pedidos.map((item, index) => (
                   <>
-                    {itemMesa.mesa == item.mesa ? (
+                    {itemMesa.mesa === item.mesa ? (
                       <Collapse>
                         <Panel
                           onClick={() => setActive(!active)}
@@ -362,13 +346,13 @@ export default function Garçom() {
                           style={{
                             marginBottom: 10,
                             backgroundColor:
-                              item.status == "Em Analize"
+                              item.status === "Em Analize"
                                 ? "#ff8800"
-                                : item.status == "Em Preparo"
+                                : item.status === "Em Preparo"
                                 ? "#0a4bff"
-                                : item.status == "Pronto"
+                                : item.status === "Pronto"
                                 ? "#00ff00"
-                                : item.status == "Em Cancelamento"
+                                : item.status === "Em Cancelamento"
                                 ? "#ff0000"
                                 : "#000000",
                             color: "#FFFFFF",
@@ -379,7 +363,7 @@ export default function Garçom() {
                             {cardapio.length > 0 ? (
                               JSON.parse(item.pedidos).map((pedido) => (
                                 <>
-                                  {pedido.id ==
+                                  {pedido.id ===
                                   cardapio.find(
                                     (option) => option.id === Number(pedido.id)
                                   ).id ? (
@@ -426,7 +410,7 @@ export default function Garçom() {
                                 Trasferir
                               </Button>
                             ) : null}
-                            {item.status == "Pronto" ? (
+                            {item.status === "Pronto" ? (
                               <Button
                                 type="primary"
                                 onClick={() =>
@@ -461,7 +445,7 @@ export default function Garçom() {
                                 </Button>
                               ) : null}
 
-                              {item.status == "Em Analize" ? (
+                              {item.status === "Em Analize" ? (
                                 <Button
                                   type="primary"
                                   onClick={() => confimerDelete(item.id)}
@@ -619,7 +603,7 @@ export default function Garçom() {
             okText="Tranferir"
             onCancel={() => setModalTransferir(!modalTransferir)}
             okButtonProps={{
-              disabled: mesa == "" || mesa == dataTransferir.mesa,
+              disabled: mesa === "" || mesa === dataTransferir.mesa,
             }}
             onOk={() => [
               tranferirPedido(),

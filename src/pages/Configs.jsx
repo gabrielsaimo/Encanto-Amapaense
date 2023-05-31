@@ -39,12 +39,12 @@ export default function Config() {
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
 
       setDateUser(UserCollection);
-      if (UserCollection[0].active == false) {
+      if (UserCollection[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        UserCollection[0].categoria == "ADM" ||
-        UserCollection[0].categoria == "Gerência"
+        UserCollection[0].categoria === "ADM" ||
+        UserCollection[0].categoria === "Gerência"
       ) {
         setAcessable(true);
       } else {
@@ -65,12 +65,12 @@ export default function Config() {
       setDateUser(JSON.parse(cachedData));
       setUserNome(JSON.parse(cachedData)[0].name);
       setUserCategoria(JSON.parse(cachedData)[0].categoria);
-      if (JSON.parse(cachedData)[0].active == false) {
+      if (JSON.parse(cachedData)[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData)[0].categoria == "ADM" ||
-        JSON.parse(cachedData)[0].categoria == "Gerência"
+        JSON.parse(cachedData)[0].categoria === "ADM" ||
+        JSON.parse(cachedData)[0].categoria === "Gerência"
       ) {
         setAcessable(true);
       } else {
@@ -82,9 +82,9 @@ export default function Config() {
   };
 
   const onChange = (key) => {
-    if (key == 1) {
+    if (key === 1) {
       setActionCardapio(!actionCardapio);
-    } else if (key == 2) {
+    } else if (key === 2) {
       setActionMensagem(!actionMensagem);
     } else {
       setActionPedido(!actionPeido);

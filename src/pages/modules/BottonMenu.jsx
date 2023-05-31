@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { Anchor, Button, Drawer, Tooltip } from "antd";
-import { SearchOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 
@@ -9,7 +10,6 @@ const Menu = () => {
   const colletionCategory = collection(db, "categorias_cardapio");
   const [cardapioCategory, setCardapioCategory] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
-  const [placement, setPlacement] = React.useState("bottom");
 
   const showDrawer = () => {
     setVisible(true);
@@ -20,7 +20,7 @@ const Menu = () => {
   };
 
   useEffect(() => {
-    cardapioCategory.length == 0 && getCardapiocategory();
+    cardapioCategory.length === 0 && getCardapiocategory();
   }, []);
   const getCardapiocategory = async () => {
     const cardapioCollection = await getDocs(colletionCategory);
@@ -45,7 +45,7 @@ const Menu = () => {
 
         <Drawer
           title="Menu"
-          placement={placement}
+          placement={"bottom"}
           closable={false}
           onClose={onClose}
           open={visible}

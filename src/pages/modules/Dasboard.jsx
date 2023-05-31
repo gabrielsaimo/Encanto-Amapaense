@@ -24,15 +24,6 @@ import {
   FilterOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  addDoc,
-  doc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 import Category from "./Category";
 import {
@@ -62,9 +53,6 @@ export default function Dashboard({ atualizar, user }) {
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [modalCategory, setModalCategory] = useState(false);
-  const db = getFirestore(service);
-  const colletionRefCardapio = collection(db, "cardapio");
-  const colletionCategory = collection(db, "categorias_cardapio");
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -391,7 +379,7 @@ export default function Dashboard({ atualizar, user }) {
                       </Radio.Button>
                     ))}
 
-                    {filteredStatus != null ? (
+                    {filteredStatus !== null ? (
                       <Button
                         style={{
                           backgroundColor: "#fc5f5f",
@@ -434,7 +422,7 @@ export default function Dashboard({ atualizar, user }) {
               size="large"
               placeholder="Preço"
               type="number"
-              value={price != "" ? price : undefined}
+              value={price !== "" ? price : undefined}
               onChange={(e) => setPrice(e.target.value)}
             />
             <Input

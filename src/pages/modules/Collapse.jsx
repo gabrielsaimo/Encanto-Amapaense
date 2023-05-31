@@ -9,48 +9,30 @@ import SlidesBebidas from "./SlideBebidas";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
 import "firebase/database";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { service } from "../../services/firebase.ws";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
-  const db = getFirestore(service);
-  const colletionRef = collection(db, "cardapio");
-  const colletionCategory = collection(db, "categorias_cardapio");
   useEffect(() => {
-    cardapio.length == 0 && gtCardapio();
-    cardapioCategory.length == 0 && getCardapioCategory();
+    cardapio.length === 0 && gtCardapio();
+    cardapioCategory.length === 0 && getCardapioCategory();
   }, []);
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
     setCardapio(cardapioCollection);
-
-    /* const cardapioCollection = await getDocs(colletionRef);
-    setCardapio(
-      cardapioCollection.docs
-        .map((doc) => doc.data())
-        .sort((a, b) => a.id - b.id)
-    );*/
-    if (cardapio.length == 0) {
-      //  setCardapio(cardapios);
-    }
   };
   const getCardapioCategory = async () => {
     const cardapioCollection = await getCategoty();
     setCardapioCategory(cardapioCollection);
-    if (cardapioCategory.length == 0) {
-      //  setCardapioCategory(category);
-    }
   };
   const items = cardapioCategory.map((item1, index) => {
     const key = "part-" + index;
     return (
       <div key={index}>
-        {index == 0 ? <SlidesPrincipal /> : null}
-        {index == 11 ? <SlidesSobemesas /> : null}
-        {index == 14 ? <SlidesBebidas /> : null}
+        {index === 0 ? <SlidesPrincipal /> : null}
+        {index === 11 ? <SlidesSobemesas /> : null}
+        {index === 14 ? <SlidesBebidas /> : null}
         <Collapse
           key={index}
           bordered={false}
@@ -111,14 +93,14 @@ const CollapseMenu = () => {
           >
             {cardapio.map((categotia, index) => (
               <div key={index}>
-                {categotia.category == item1.name &&
-                categotia.active == true ? (
+                {categotia.category === item1.name &&
+                categotia.active === true ? (
                   <div className="border">
                     <div className="flex">
                       <p className="p_1 name georgia-font">{categotia.name}</p>
                       <p className="p_1 price georgia-bold-font">
                         {/*"R$ " + categotia.price.toFixed(2).replace(".", ",")*/}
-                        {categotia.price % 1 != 0
+                        {categotia.price % 1 !== 0
                           ? "R$ " + categotia.price.replace(".", ",")
                           : "R$ " + categotia.price + ",00"}
                       </p>

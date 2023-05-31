@@ -1,14 +1,17 @@
-import { Select, Table } from "antd";
+import { Button, Input, Modal, Select, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { getUsers, postUserAdm } from "../../services/user.ws";
-export default function Users() {
+import { getUsers, postUserAdm, putUser } from "../../services/user.ws";
+export default function Users(atualizar) {
   const [data, setData] = useState([]);
   const [active, setActive] = useState(false);
+  const [categoria, setCategoria] = useState(null);
+  const [name, setName] = useState("");
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     getUsers().then((users) => {
       setData(users);
     });
-  }, [active]);
+  }, [active, atualizar]);
 
   const onChange = (value, data) => {
     const body = {
@@ -27,6 +30,25 @@ export default function Users() {
     };
     postUserAdm(body);
     setActive(!active);
+  };
+
+  const Novo = () => {
+    setShowModal(false);
+    const body = {
+      id: data.length + 1,
+      name: name,
+      password: "encanto@" + name,
+      categoria: categoria,
+    };
+    putUser(body);
+    setName("");
+    setCategoria(null);
+    setActive(!active);
+  };
+  const cancelar = () => {
+    setName("");
+    setCategoria(null);
+    setShowModal(false);
   };
 
   const columns = [
@@ -76,5 +98,41 @@ export default function Users() {
       ),
     },
   ];
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <>
+      <Button type="primary" onClick={() => setShowModal(true)}>
+        Novo
+      </Button>
+      <Table columns={columns} dataSource={data} />;
+      <Modal
+        open={showModal}
+        onCancel={() => cancelar()}
+        okText="Salvar"
+        cancelText="Cancelar"
+        onOk={() => Novo()}
+      >
+        <Space direction="vertical">
+          <h2>Novo Usuário</h2>
+          <Input
+            type="text"
+            value={name}
+            placeholder="Nome"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Select
+            style={{ width: 120 }}
+            showSearch
+            value={categoria}
+            placeholder="Categoria"
+            onChange={(value) => setCategoria(value)}
+          >
+            <Select.Option value={"ADM"}>ADM</Select.Option>
+            <Select.Option value={"Gerência"}>Gerente</Select.Option>
+            <Select.Option value={"Garçom"}>Garçom</Select.Option>
+            <Select.Option value={"Cozinha"}>Cozinherio</Select.Option>
+          </Select>
+        </Space>
+      </Modal>
+    </>
+  );
 }

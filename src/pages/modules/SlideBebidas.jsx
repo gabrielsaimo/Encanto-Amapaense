@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Carousel, Image } from "antd";
 import "../../css/Slide.css";
@@ -20,15 +21,6 @@ const SlidesBebidas = () => {
     const urls = await fetchImages();
     setFiles(urls);
   };
-  const Slide = [
-    { id: 1, caption: "Bebidas" },
-    { id: 2, caption: "Bebidas" },
-    { id: 3, caption: "Bebidas" },
-    { id: 4, caption: "Bebidas" },
-    { id: 5, caption: "Bebidas" },
-    { id: 6, caption: "Bebidas" },
-    { id: 7, caption: "Bebidas" },
-  ];
 
   return (
     <div id={"part-12"} style={{ margin: 5 }}>

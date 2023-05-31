@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -13,7 +14,6 @@ import {
 } from "antd";
 import "../../css/Collapse.css";
 import {
-  CaretRightOutlined,
   DeleteOutlined,
   EditOutlined,
   FilterOutlined,
@@ -22,16 +22,6 @@ import {
 } from "@ant-design/icons";
 
 import "firebase/database";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  getFirestore,
-  updateDoc,
-} from "firebase/firestore";
-import { service } from "../../services/firebase.ws";
 import {
   deleteCategoty,
   getCategoty,
@@ -49,8 +39,6 @@ export default function Category() {
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
-  const db = getFirestore(service);
-  const colletionCategory = collection(db, "categorias_cardapio");
 
   useEffect(() => {
     getCardapioCategory();
@@ -247,7 +235,7 @@ export default function Category() {
               size="large"
               placeholder="Nome"
               value={
-                name != ""
+                name !== ""
                   ? name[0].toUpperCase() + name.slice(1).toLowerCase()
                   : undefined
               }
@@ -262,7 +250,7 @@ export default function Category() {
               placeholder="Ativo"
               optionFilterProp="children"
               onChange={(value) => setActive(value)}
-              value={active != "" ? active : undefined}
+              value={active !== "" ? active : undefined}
             >
               <Option value={true}>Sim</Option>
               <Option value={false}>Não</Option>
