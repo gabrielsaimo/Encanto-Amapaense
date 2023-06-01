@@ -44,7 +44,6 @@ export default function Garçom() {
   const [name, setName] = useState("");
   const [mesa, setMesa] = useState("");
   const [dateMesa, setDateMesa] = useState([]);
-  const [desconto, setDesconto] = useState(0);
   const [obs, setObs] = useState("");
   const [password, setPassword] = useState("");
   const [pedidos, setPedido] = useState([]);
@@ -308,7 +307,6 @@ export default function Garçom() {
         id: Math.floor(Math.random() * 100000000),
         created_at: new Date(),
         created_by: userNome,
-        desconto,
         mesa,
         pedidos: JSON.stringify(pedidosTotais),
         obs,
@@ -338,7 +336,6 @@ export default function Garçom() {
         id: Math.floor(Math.random() * 100000000),
         created_at: new Date(),
         created_by: userNome,
-        desconto,
         mesa,
         pedidos: JSON.stringify(pedidosTotais),
         obs,
@@ -356,7 +353,6 @@ export default function Garçom() {
   function clear() {
     setMesa("");
     setPedidosTotais([{ id: "", quantidade: "1" }]);
-    setDesconto(0);
     setObs("");
     setTipoPagamento(null);
     setObsFinalizar(null);
@@ -408,6 +404,8 @@ export default function Garçom() {
         obs: obsFinalizar,
         tipo_pagamento: tipoPagamento,
         valor: valorMesa,
+        taxa: parseInt(valorMesa) * 0.1,
+        valorTotal: parseInt(valorMesa) + parseInt(valorMesa) * 0.1,
       });
       setModalFinalizar(false);
       setActive(!active);
@@ -528,7 +526,6 @@ export default function Garçom() {
                             )}
                           </Card>
                           <p>Valor: R$ {item.valor}</p>
-                          <p>Desconto: R$ {item.desconto}</p>
                           <p>Observações: {item.obs}</p>
                           <div
                             style={{
@@ -616,8 +613,7 @@ export default function Garçom() {
             okText="Enviar Pedido"
             cancelText="Cancelar"
             okButtonProps={{
-              disabled:
-                total - desconto === 0 || mesa === "" || total - desconto < 0,
+              disabled: total === 0 || mesa === "",
             }}
             onOk={() => enviarPedido()}
           >
@@ -698,19 +694,25 @@ export default function Garçom() {
                 onClick={adicionarNovoPedido}
               />
               <div style={{ marginBottom: 10 }}>
-                <label>Desconto</label>
+                <label>Valor</label>
+                <Input prefix="R$" value={total} readOnly />
+              </div>
+              <div>
+                <label>Taxa de serviço</label>
                 <Input
-                  type="number"
-                  min={0}
-                  value={desconto}
-                  max={total}
                   prefix="R$"
-                  onChange={(event) => setDesconto(event.target.value)}
+                  value={(parseInt(total) * 0.1).toFixed(2)}
+                  readOnly
                 />
               </div>
+              <Divider />
               <div style={{ marginBottom: 10 }}>
-                <label>Valor Total</label>
-                <Input prefix="R$" value={total - desconto} readOnly />
+                <lavel>Valor Total</lavel>
+                <Input
+                  prefix="R$"
+                  value={(parseInt(total) + parseInt(total) * 0.1).toFixed(2)}
+                  readOnly
+                />
               </div>
               <div style={{ marginBottom: 10 }}>
                 <label>Observações</label>
@@ -796,6 +798,37 @@ export default function Garçom() {
           >
             <div className="container">
               <h2 className="title">Finalizar Pedido</h2>
+              <div style={{ marginBottom: 10 }}>
+                <label>Valor</label>
+                <Input
+                  prefix="R$"
+                  value={valorMesa > 0 ? valorMesa : 0}
+                  readOnly
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Taxa de serviço</label>
+                <Input
+                  prefix="R$"
+                  value={valorMesa > 0 ? parseInt(valorMesa) * 0.1 : 0}
+                  readOnly
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <lavel>Valor Total</lavel>
+                <Input
+                  prefix="R$"
+                  value={
+                    valorMesa > 0
+                      ? (
+                          parseInt(valorMesa) +
+                          parseInt(valorMesa) * 0.1
+                        ).toFixed(2)
+                      : 0
+                  }
+                  readOnly
+                />
+              </div>
               <Space direction="vertical">
                 <Select
                   style={{ width: 250 }}
@@ -815,14 +848,6 @@ export default function Garçom() {
                   value={obsFinalizar}
                   onChange={(event) => setObsFinalizar(event.target.value)}
                 />
-                <div style={{ marginBottom: 10 }}>
-                  <label>Valor Total</label>
-                  <Input
-                    prefix="R$"
-                    value={valorMesa > 0 ? valorMesa : 0}
-                    readOnly
-                  />
-                </div>
               </Space>
             </div>
           </Modal>
