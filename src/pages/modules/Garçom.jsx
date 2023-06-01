@@ -485,6 +485,7 @@ export default function Garçom() {
               <div>
                 <InputNumber
                   value={mesa}
+                  type="number"
                   style={{ width: 100 }}
                   min={1}
                   onChange={(event) => setMesa(event)}
@@ -510,6 +511,7 @@ export default function Garçom() {
                     <Select
                       value={pedido.id}
                       showSearch
+                      type="number"
                       style={{ width: 250 }}
                       onChange={(value) =>
                         handlePedidoChange(index, "id", value)
