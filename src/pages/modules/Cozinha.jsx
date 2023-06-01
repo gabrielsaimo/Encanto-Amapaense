@@ -295,7 +295,7 @@ export default function Cozinha() {
                         //  StatusPedido(pedido.id, "Cancelado");
                       }}
                     >
-                      Confimar Cancelamento
+                      Confimar?
                     </Button>
                   ) : null}
                   {pedido.status === "Pronto" ? (
