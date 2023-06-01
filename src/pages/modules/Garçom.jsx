@@ -483,7 +483,6 @@ export default function Garçom() {
               <h3>Mesa</h3>
               <div>
                 <Input
-                  value={mesa}
                   type="number"
                   style={{ width: 100 }}
                   min={1}
