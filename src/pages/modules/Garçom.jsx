@@ -501,7 +501,7 @@ export default function Garçom() {
                   style={{ marginBottom: 10 }}
                 >
                   <h3>
-                    Pedido {index + 1}{" "}
+                    Pedido {index + 1}
                     <Button
                       style={{ backgroundColor: "#FF0000", color: "#FFF" }}
                       onClick={() => removerPedido(index)}
