@@ -508,7 +508,6 @@ export default function Garçom() {
 
                   <Space>
                     <Select
-                      value={pedido.id}
                       showSearch
                       type="number"
                       style={{ width: 250 }}
@@ -524,7 +523,6 @@ export default function Garçom() {
                       ))}
                     </Select>
                     <Input
-                      value={pedido.quantidade}
                       style={{ width: 62 }}
                       type="number"
                       prefix="x"
@@ -547,7 +545,6 @@ export default function Garçom() {
                 <label>Desconto</label>
                 <Input
                   type="number"
-                  value={desconto}
                   min={0}
                   max={total}
                   prefix="R$"
