@@ -5,7 +5,6 @@ import {
   Card,
   Divider,
   Input,
-  InputNumber,
   Modal,
   Select,
   Space,
@@ -483,7 +482,7 @@ export default function Garçom() {
               <h2 className="title">Adicionar Pedidos</h2>
               <h3>Mesa</h3>
               <div>
-                <InputNumber
+                <Input
                   value={mesa}
                   type="number"
                   style={{ width: 100 }}
@@ -524,9 +523,10 @@ export default function Garçom() {
                         </Option>
                       ))}
                     </Select>
-                    <InputNumber
+                    <Input
                       value={pedido.quantidade}
                       style={{ width: 62 }}
+                      type="number"
                       prefix="x"
                       min={1}
                       max={99}
@@ -618,8 +618,9 @@ export default function Garçom() {
               <h2 className="title">Transferir Pedido</h2>
               <div style={{ marginBottom: 10 }}>
                 <label>Mesa {dataTransferir.mesa} para :</label>
-                <InputNumber
+                <Input
                   style={{ width: 100 }}
+                  type="number"
                   min={1}
                   onChange={(event) => setMesa(event)}
                 />
