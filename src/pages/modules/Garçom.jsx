@@ -352,7 +352,6 @@ export default function Garçom() {
       setActive(!active);
       clear();
     }
-    window.location.reload();
   }
   function clear() {
     setMesa("");
