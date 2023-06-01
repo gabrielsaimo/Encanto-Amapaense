@@ -26,9 +26,11 @@ import {
   valorTotal,
   FinalizarPedido,
   verifyFinalizar,
+  deleteMesa,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
+import { postEmail } from "../../services/email.ws";
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -379,7 +381,27 @@ export default function Garçom() {
         title: "Mesa não pode ser finalizada",
         content: "Mesa com pedidos em aberto",
       });
-    } else {
+    } else if (valorMesa > 0) {
+      const destinararios = [
+        "gabrielsaimo68@gmail.com",
+        "Josemaria023182@gmail.com",
+        "sraebarbossa@gmail.com",
+      ];
+      const email = {
+        destinatario: destinararios,
+        assunto: "Pedido Cancelado",
+        corpo: `
+        O pedido ${dadosFinalizar.id} foi Finalizado por ${userNome}.
+
+        Observações: ${obsFinalizar}
+
+        Tipo de Pagamento: ${tipoPagamento}
+        Valor: R$ ${valorMesa}
+
+        Atenciosamente,
+        Encando Amapaense`,
+      };
+      await postEmail(email);
       await FinalizarPedido({
         id: dadosFinalizar.id,
         closed_by: userNome,
@@ -391,6 +413,11 @@ export default function Garçom() {
       setModalFinalizar(false);
       setActive(!active);
       clear();
+    } else {
+      Modal.error({
+        title: "Mesa não pode ser finalizada",
+        content: "Mesa sem pedidos",
+      });
     }
   };
 
@@ -443,11 +470,7 @@ export default function Garçom() {
             {dateMesa.map((itemMesa, index) => (
               <Card
                 title={"Messa " + itemMesa.nm_mesa}
-                extra={
-                  <h4>
-                    Por: {itemMesa.created_by}
-                  </h4>
-                }
+                extra={<h4>Por: {itemMesa.created_by}</h4>}
                 style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
                 key={index}
               >
@@ -760,11 +783,14 @@ export default function Garçom() {
             open={modalFinalizar}
             onCancel={() => setModalFinalizar(false)}
             cancelText="Voltar"
-            okText="Finalizar"
+            okText={valorMesa > 0 ? "Finalizar" : "Excluir"}
+            okType={valorMesa > 0 ? "primary" : "danger"}
             okButtonProps={{
-              disabled: tipoPagamento === "",
+              disabled: tipoPagamento === null && valorMesa > 0,
             }}
-            onOk={() => finalizarMesa()}
+            onOk={() =>
+              valorMesa > 0 ? finalizarMesa() : deleteMesa(dadosFinalizar.id)
+            }
           >
             <div className="container">
               <h2 className="title">Finalizar Pedido</h2>
@@ -789,7 +815,11 @@ export default function Garçom() {
                 />
                 <div style={{ marginBottom: 10 }}>
                   <label>Valor Total</label>
-                  <Input prefix="R$" value={valorMesa} readOnly />
+                  <Input
+                    prefix="R$"
+                    value={valorMesa > 0 ? valorMesa : 0}
+                    readOnly
+                  />
                 </div>
               </Space>
             </div>

@@ -98,3 +98,7 @@ export const putMesas = async (data: any): Promise<any> => {
 export const deletePedidos = async (data: pedido): Promise<void> => {
   await api.delete(`/pedido/${data.id}`);
 };
+
+export const deleteMesa = async (id_mesa: number): Promise<void> => {
+  await api.delete(`/pedido/mesa/${id_mesa}`);
+};
