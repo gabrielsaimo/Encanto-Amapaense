@@ -259,14 +259,43 @@ export default function Garçom() {
   };
 
   async function tranferirPedido() {
-    await postTransferir({
-      id: dataTransferir.id,
-      mesa: mesa,
-      update_at: new Date(),
-      update_by: userNome,
-    });
-    setModalCancelamento(false);
-    clear();
+    const verifyMessa = await veryfyMesa(mesa);
+    if (verifyMessa.length > 0) {
+      await postTransferir({
+        id: dataTransferir.id,
+        id_mesa: verifyMessa[0].id,
+        mesa: mesa,
+        update_at: new Date(),
+        update_by: userNome,
+      });
+      setModalCancelamento(false);
+      clear();
+      setActive(!active);
+    } else {
+      const idMesa = Math.floor(Math.random() * 100000000);
+
+      await putMesas({
+        created_at: new Date(),
+        created_by: userNome,
+        nm_mesa: mesa,
+        id: idMesa,
+        status: "Aberto",
+        update_at: new Date(),
+        update_by: userNome,
+      });
+
+      await postTransferir({
+        id: dataTransferir.id,
+        id_mesa: idMesa,
+        mesa: mesa,
+        update_at: new Date(),
+        update_by: userNome,
+      });
+      setModalCancelamento(false);
+      clear();
+      setActive(!active);
+    }
+    window.location.reload();
   }
 
   async function enviarPedido() {
@@ -291,7 +320,6 @@ export default function Garçom() {
       setActive(!active);
       clear();
     } else {
-      console.log("oxi");
       const idMesa = Math.floor(Math.random() * 100000000);
 
       await putMesas({
