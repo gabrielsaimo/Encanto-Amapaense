@@ -21,6 +21,10 @@ import {
   postPedidosStatus,
   postTransferir,
   putPedidos,
+  veryfyMesa,
+  putMesas,
+  valorTotal,
+  FinalizarPedido,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
@@ -43,16 +47,21 @@ export default function Garçom() {
   const [pedidos, setPedido] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [active, setActive] = useState(false);
+  const [dadosFinalizar, setDadosFinalizar] = useState([]);
   const [modalTransferir, setModalTransferir] = useState(false);
   const [dataTransferir, setDataTransferir] = useState([]);
   const [modalCancelamento, setModalCancelamento] = useState(false);
   const [obsCancelamento, setObsCancelamento] = useState("");
+  const [modalFinalizar, setModalFinalizar] = useState(false);
+  const [valorMesa, setValorMesa] = useState(0);
   const [pedidosTotais, setPedidosTotais] = useState([
     { id: "", quantidade: "" },
   ]);
   const [idPedido, setIdPedido] = useState();
   const [status, setStatus] = useState();
   const [total, setTotal] = useState(0);
+  const [tipoPagamento, setTipoPagamento] = useState(null);
+  const [obsFinalizar, setObsFinalizar] = useState(null);
   useEffect(() => {
     getCachedDateUser();
     getCardapios();
@@ -190,10 +199,6 @@ export default function Garçom() {
   };
 
   const handlePedidoChange = (index, name, value) => {
-    console.log(
-      "🚀 ~ file: Garçom.jsx:192 ~ handlePedidoChange ~ value:",
-      value
-    );
     const newPedidos = [...pedidosTotais];
     newPedidos[index][name] = value;
     setPedidosTotais(newPedidos);
@@ -264,28 +269,95 @@ export default function Garçom() {
   }
 
   async function enviarPedido() {
-    await putPedidos({
-      id: Math.floor(Math.random() * 100000000),
-      created_at: new Date(),
-      created_by: userNome,
-      desconto,
-      mesa,
-      pedidos: JSON.stringify(pedidosTotais),
-      obs,
-      status: "Em Analize",
-      valor: total,
-      update_at: new Date(),
-      update_by: userNome,
-    });
-    setShowModall(false);
-    clear();
+    const verifyMessa = await veryfyMesa(mesa);
+
+    if (verifyMessa.length > 0) {
+      await putPedidos({
+        id: Math.floor(Math.random() * 100000000),
+        created_at: new Date(),
+        created_by: userNome,
+        desconto,
+        mesa,
+        pedidos: JSON.stringify(pedidosTotais),
+        obs,
+        id_mesa: verifyMessa[0].id,
+        status: "Em Analize",
+        valor: total,
+        update_at: new Date(),
+        update_by: userNome,
+      });
+      setShowModall(false);
+      setActive(!active);
+      clear();
+      return;
+    } else {
+      console.log("oxi");
+      const idMesa = Math.floor(Math.random() * 100000000);
+
+      await putMesas({
+        created_at: new Date(),
+        created_by: userNome,
+        nm_mesa: mesa,
+        id: idMesa,
+        status: "Aberto",
+        update_at: new Date(),
+        update_by: userNome,
+      });
+
+      await putPedidos({
+        id: Math.floor(Math.random() * 100000000),
+        created_at: new Date(),
+        created_by: userNome,
+        desconto,
+        mesa,
+        pedidos: JSON.stringify(pedidosTotais),
+        obs,
+        id_mesa: idMesa,
+        status: "Em Analize",
+        valor: total,
+        update_at: new Date(),
+        update_by: userNome,
+      });
+      setShowModall(false);
+      setActive(!active);
+      clear();
+      return;
+    }
   }
   function clear() {
     setMesa("");
     setPedidosTotais([{ id: "", quantidade: "" }]);
     setDesconto(0);
     setObs("");
+    setTipoPagamento(null);
+    setObsFinalizar(null);
+    setObsCancelamento("");
   }
+
+  const finalmesa = async (itemMesa) => {
+    setTipoPagamento(null);
+    setObsFinalizar(null);
+    const valor = await valorTotal(itemMesa.id);
+    setValorMesa(valor[0].valor);
+    setModalFinalizar(true);
+    setDadosFinalizar(itemMesa);
+    clear();
+  };
+
+  const finalizarMesa = async () => {
+    
+    await FinalizarPedido({
+      id: dadosFinalizar.id,
+      closed_by: userNome,
+      closed_at: new Date(),
+      obs: obsFinalizar,
+      tipo_pagamento: tipoPagamento,
+      valor: valorMesa,
+    });
+    setModalFinalizar(false);
+    setActive(!active);
+    clear();
+  };
 
   return (
     <Card
@@ -328,20 +400,20 @@ export default function Garçom() {
           </Card>
           <div>
             <Button type="primary" onClick={() => showModal()}>
-              Nova Messa
+              Novo Pedido
             </Button>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             {dateMesa.map((itemMesa, index) => (
               <Card
-                title={"Messa " + itemMesa.mesa}
+                title={"Messa " + itemMesa.nm_mesa}
                 style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
                 key={index}
               >
                 {pedidos.map((item, index) => (
                   <>
-                    {itemMesa.mesa === item.mesa ? (
+                    {itemMesa.id === item.id_mesa ? (
                       <Collapse>
                         <Panel
                           onClick={() => setActive(!active)}
@@ -458,9 +530,8 @@ export default function Garçom() {
                                     backgroundColor: "#FF0000",
                                     color: "#FFFFFF",
                                   }}
-                                >
-                                  Excluir
-                                </Button>
+                                  icon={<DeleteOutlined />}
+                                />
                               ) : null}
                             </>
                           </div>
@@ -469,12 +540,11 @@ export default function Garçom() {
                     ) : null}
                   </>
                 ))}
-                <Button type="primary" onClick={() => {}}>
-                  Finalizar Messa
-                </Button>
-                <Button type="primary" onClick={() => {}}>
-                  Adionar pedido
-                </Button>
+                <div style={{ float: "right" }}>
+                  <Button type="primary" onClick={() => finalmesa(itemMesa)}>
+                    Finalizar Messa
+                  </Button>
+                </div>
               </Card>
             ))}
           </div>
@@ -644,6 +714,44 @@ export default function Garçom() {
                   onChange={(event) => setMesa(event.target.value)}
                 />
               </div>
+            </div>
+          </Modal>
+          <Modal
+            open={modalFinalizar}
+            onCancel={() => setModalFinalizar(false)}
+            cancelText="Voltar"
+            okText="Finalizar"
+            okButtonProps={{
+              disabled: tipoPagamento === "",
+            }}
+            onOk={() => finalizarMesa()}
+          >
+            <div className="container">
+              <h2 className="title">Finalizar Pedido</h2>
+              <Space direction="vertical">
+                <Select
+                  style={{ width: 250 }}
+                  value={tipoPagamento}
+                  placeholder="Tipo de Pagamento"
+                  onChange={(event) => setTipoPagamento(event)}
+                >
+                  <Option value="PIX">Pix</Option>
+                  <Option value="Dinheiro">Dinheiro</Option>
+                  <Option value="Crédito">Crédito</Option>
+                  <Option value="Débito">Débito</Option>
+                  <Option value="Cortesia">Cortesia</Option>
+                </Select>
+                <TextArea
+                  rows={3}
+                  placeholder="Observações"
+                  value={obsFinalizar}
+                  onChange={(event) => setObsFinalizar(event.target.value)}
+                />
+                <div style={{ marginBottom: 10 }}>
+                  <label>Valor Total</label>
+                  <Input prefix="R$" value={valorMesa} readOnly />
+                </div>
+              </Space>
             </div>
           </Modal>
         </div>

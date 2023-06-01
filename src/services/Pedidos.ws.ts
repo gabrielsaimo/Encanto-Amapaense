@@ -70,6 +70,26 @@ export const putPedidos = async (data: pedido): Promise<pedido> => {
   return response.data;
 };
 
+export const veryfyMesa = async (messa: Number): Promise<any> => {
+  const response = await api.get<any>(`/pedido/verif/${messa}`);
+  return response.data;
+};
+
+export const valorTotal = async (id_mesa: number): Promise<any> => {
+  const response = await api.get<any>(`/pedido/valor/${id_mesa}`);
+  return response.data;
+};
+
+export const FinalizarPedido = async (data: any): Promise<any> => {
+  const response = await api.post<any>(`/pedido/finalizar`, data);
+  return response.data;
+};
+
+export const putMesas = async (data: any): Promise<any> => {
+  const response = await api.put<any>("/pedido/mesa", data);
+  return response.data;
+};
+
 export const deletePedidos = async (data: pedido): Promise<void> => {
   await api.delete(`/pedido/${data.id}`);
 };
