@@ -530,7 +530,6 @@ export default function Garçom() {
                       prefix="x"
                       min={1}
                       max={99}
-                      defaultValue={0}
                       onChange={(event) =>
                         handlePedidoChange(index, "quantidade", event)
                       }
@@ -551,7 +550,6 @@ export default function Garçom() {
                   value={desconto}
                   min={0}
                   max={total}
-                  defaultValue={0}
                   prefix="R$"
                   onChange={(event) => setDesconto(event.target.value)}
                 />
