@@ -510,6 +510,14 @@ export default function Garçom() {
                       showSearch
                       type="number"
                       style={{ width: 250 }}
+                      placeholder="Selecione um item"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children
+                          .toString()
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
                       onChange={(value) =>
                         handlePedidoChange(index, "id", value)
                       }
