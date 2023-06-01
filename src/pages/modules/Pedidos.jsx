@@ -150,7 +150,10 @@ export default function Pedidos(atualizar) {
             {pedido.status === "Cancelado" ||
             pedido.status === "Em Cancelamento" ? (
               <>
-                <Descriptions.Item label="Motivo">
+                <Descriptions.Item
+                  label="Motivo"
+                  style={{ color: "red", fontWeight: "bold" }}
+                >
                   {pedido.obs_cancel}
                 </Descriptions.Item>
               </>

@@ -189,6 +189,10 @@ export default function Garçom() {
   };
 
   const handlePedidoChange = (index, name, value) => {
+    console.log(
+      "🚀 ~ file: Garçom.jsx:192 ~ handlePedidoChange ~ value:",
+      value
+    );
     const newPedidos = [...pedidosTotais];
     newPedidos[index][name] = value;
     setPedidosTotais(newPedidos);
@@ -486,7 +490,7 @@ export default function Garçom() {
                   type="number"
                   style={{ width: 100 }}
                   min={1}
-                  onChange={(event) => setMesa(event)}
+                  onChange={(event) => setMesa(event.target.value)}
                 />
               </div>
 
@@ -508,7 +512,6 @@ export default function Garçom() {
                   <Space>
                     <Select
                       showSearch
-                      type="number"
                       style={{ width: 250 }}
                       placeholder="Selecione um item"
                       optionFilterProp="children"
@@ -536,7 +539,11 @@ export default function Garçom() {
                       min={1}
                       max={99}
                       onChange={(event) =>
-                        handlePedidoChange(index, "quantidade", event)
+                        handlePedidoChange(
+                          index,
+                          "quantidade",
+                          event.target.value
+                        )
                       }
                     />
                   </Space>
@@ -624,7 +631,7 @@ export default function Garçom() {
                   style={{ width: 100 }}
                   type="number"
                   min={1}
-                  onChange={(event) => setMesa(event)}
+                  onChange={(event) => setMesa(event.target.value)}
                 />
               </div>
             </div>
