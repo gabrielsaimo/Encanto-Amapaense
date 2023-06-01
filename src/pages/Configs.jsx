@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Input, Modal, Tabs } from "antd";
+import { Button, Card, Divider, Input, Modal, Tabs } from "antd";
 import "firebase/database";
 import Dashboard from "./modules/Dasboard";
 import Menssagem from "./modules/Menssagem";
@@ -160,12 +160,15 @@ export default function Config() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <div>
-            {userNome} - {UserCategoria}
+          <Card>
+            <h3>
+              {userNome} - {UserCategoria}
+            </h3>
+
             <div style={{ float: "right" }}>
               <Button onClick={() => logout()}>Sair</Button>
             </div>
-          </div>
+          </Card>
 
           <Tabs onChange={onChange} key={items} type="card" items={items} />
         </div>
