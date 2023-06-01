@@ -39,6 +39,7 @@ export default function Users(atualizar) {
       name: name,
       password: "encanto@" + name,
       categoria: categoria,
+      active: true,
     };
     putUser(body);
     setName("");
