@@ -789,7 +789,9 @@ export default function Garçom() {
               disabled: tipoPagamento === null && valorMesa > 0,
             }}
             onOk={() =>
-              valorMesa > 0 ? finalizarMesa() : deleteMesa(dadosFinalizar.id)
+              valorMesa > 0
+                ? finalizarMesa()
+                : [deleteMesa(dadosFinalizar.id), window.location.reload()]
             }
           >
             <div className="container">
