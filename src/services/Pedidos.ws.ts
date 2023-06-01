@@ -80,6 +80,11 @@ export const valorTotal = async (id_mesa: number): Promise<any> => {
   return response.data;
 };
 
+export const verifyFinalizar = async (id_mesa: number): Promise<any> => {
+  const response = await api.get<any>(`/pedido/verif/finalizar/${id_mesa}`);
+  return response.data;
+};
+
 export const FinalizarPedido = async (data: any): Promise<any> => {
   const response = await api.post<any>(`/pedido/finalizar`, data);
   return response.data;

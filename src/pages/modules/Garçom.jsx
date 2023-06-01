@@ -25,6 +25,7 @@ import {
   putMesas,
   valorTotal,
   FinalizarPedido,
+  verifyFinalizar,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
@@ -289,7 +290,6 @@ export default function Garçom() {
       setShowModall(false);
       setActive(!active);
       clear();
-      return;
     } else {
       console.log("oxi");
       const idMesa = Math.floor(Math.random() * 100000000);
@@ -321,8 +321,8 @@ export default function Garçom() {
       setShowModall(false);
       setActive(!active);
       clear();
-      return;
     }
+    window.location.reload();
   }
   function clear() {
     setMesa("");
@@ -345,18 +345,25 @@ export default function Garçom() {
   };
 
   const finalizarMesa = async () => {
-    
-    await FinalizarPedido({
-      id: dadosFinalizar.id,
-      closed_by: userNome,
-      closed_at: new Date(),
-      obs: obsFinalizar,
-      tipo_pagamento: tipoPagamento,
-      valor: valorMesa,
-    });
-    setModalFinalizar(false);
-    setActive(!active);
-    clear();
+    const verify = await verifyFinalizar(dadosFinalizar.id);
+    if (verify.length > 0) {
+      Modal.error({
+        title: "Mesa não pode ser finalizada",
+        content: "Mesa com pedidos em aberto",
+      });
+    } else {
+      await FinalizarPedido({
+        id: dadosFinalizar.id,
+        closed_by: userNome,
+        closed_at: new Date(),
+        obs: obsFinalizar,
+        tipo_pagamento: tipoPagamento,
+        valor: valorMesa,
+      });
+      setModalFinalizar(false);
+      setActive(!active);
+      clear();
+    }
   };
 
   return (
