@@ -28,12 +28,12 @@ import TextArea from "antd/es/input/TextArea";
 const { Option } = Select;
 const { Panel } = Collapse;
 export default function Garçom() {
-  const [dateUser, setDateUser] = useState();
+  // const [dateUser, setDateUser] = useState();
   const [visible, setVisible] = React.useState(true);
   const [showModall, setShowModall] = React.useState(false);
   const [acessable, setAcessable] = React.useState(false);
   const [userNome, setUserNome] = useState("");
-  const [UserCategoria, setUserCategoria] = useState("");
+  /// const [UserCategoria, setUserCategoria] = useState("");
   const [name, setName] = useState("");
   const [mesa, setMesa] = useState("");
   const [dateMesa, setDateMesa] = useState([]);
@@ -58,7 +58,7 @@ export default function Garçom() {
     getCardapios();
     getMesa();
     getPedido();
-  }, [active, showModall, dateUser, UserCategoria]);
+  }, [active, showModall]);
 
   useEffect(() => {
     calcularTotal();
@@ -121,11 +121,11 @@ export default function Garçom() {
 
     if (UserCollection.length > 0) {
       setUserNome(UserCollection[0].name);
-      setUserCategoria(UserCollection[0].categoria);
+      //  setUserCategoria(UserCollection[0].categoria);
       // Armazenar o valor no localStorage
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
 
-      setDateUser(UserCollection);
+      //  setDateUser(UserCollection);
       if (UserCollection[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
@@ -150,9 +150,9 @@ export default function Garçom() {
   const getCachedDateUser = () => {
     const cachedData = localStorage.getItem("dateUser");
     if (cachedData) {
-      setDateUser(JSON.parse(cachedData));
+      // setDateUser(JSON.parse(cachedData));
       setUserNome(JSON.parse(cachedData)[0].name);
-      setUserCategoria(JSON.parse(cachedData)[0].categoria);
+      //  setUserCategoria(JSON.parse(cachedData)[0].categoria);
       if (JSON.parse(cachedData)[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
@@ -181,7 +181,7 @@ export default function Garçom() {
   const logout = () => {
     localStorage.removeItem("dateUser");
     setAcessable(false);
-    setDateUser(null);
+    //   setDateUser(null);
   };
 
   const showModal = () => {
