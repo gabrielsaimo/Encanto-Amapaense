@@ -63,7 +63,7 @@ export default function Cozinha() {
       const destinararios = [
         "gabrielsaimo68@gmail.com",
         "Josemaria023182@gmail.com",
-        "leogabarito841@gmail.com",
+        "sraebarbossa@gmail.com",
       ];
       const email = {
         destinatario: destinararios,

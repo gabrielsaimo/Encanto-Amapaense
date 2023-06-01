@@ -171,6 +171,7 @@ export default function Garçom() {
   };
 
   const close = () => {
+    Modal.destroyAll();
     setShowModall(false);
     clear();
   };
@@ -327,7 +328,7 @@ export default function Garçom() {
           </Card>
           <div>
             <Button type="primary" onClick={() => showModal()}>
-              Novo Pedido
+              Nova Messa
             </Button>
           </div>
 
@@ -468,6 +469,12 @@ export default function Garçom() {
                     ) : null}
                   </>
                 ))}
+                <Button type="primary" onClick={() => {}}>
+                  Finalizar Messa
+                </Button>
+                <Button type="primary" onClick={() => {}}>
+                  Adionar pedido
+                </Button>
               </Card>
             ))}
           </div>
@@ -488,6 +495,7 @@ export default function Garçom() {
               <div>
                 <Input
                   type="number"
+                  value={mesa}
                   style={{ width: 100 }}
                   min={1}
                   onChange={(event) => setMesa(event.target.value)}
@@ -535,6 +543,7 @@ export default function Garçom() {
                     <Input
                       style={{ width: 62 }}
                       type="number"
+                      value={pedido.quantidade}
                       prefix="x"
                       min={1}
                       max={99}
@@ -560,6 +569,7 @@ export default function Garçom() {
                 <Input
                   type="number"
                   min={0}
+                  value={desconto}
                   max={total}
                   prefix="R$"
                   onChange={(event) => setDesconto(event.target.value)}
