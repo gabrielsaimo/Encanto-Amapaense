@@ -58,7 +58,7 @@ export default function Garçom() {
   const [modalFinalizar, setModalFinalizar] = useState(false);
   const [valorMesa, setValorMesa] = useState(0);
   const [pedidosTotais, setPedidosTotais] = useState([
-    { id: "", quantidade: "" },
+    { id: "", quantidade: "1" },
   ]);
   const [idPedido, setIdPedido] = useState();
   const [status, setStatus] = useState();
@@ -208,7 +208,7 @@ export default function Garçom() {
   };
 
   const adicionarNovoPedido = () => {
-    setPedidosTotais([...pedidosTotais, { id: "", quantidade: "" }]);
+    setPedidosTotais([...pedidosTotais, { id: "", quantidade: "1" }]);
   };
 
   const removerPedido = (index) => {
@@ -356,7 +356,7 @@ export default function Garçom() {
   }
   function clear() {
     setMesa("");
-    setPedidosTotais([{ id: "", quantidade: "" }]);
+    setPedidosTotais([{ id: "", quantidade: "1" }]);
     setDesconto(0);
     setObs("");
     setTipoPagamento(null);
@@ -509,7 +509,7 @@ export default function Garçom() {
                                     <>
                                       {pedido.quantidade > 0 ? (
                                         <p>
-                                          x{pedido.quantidade}{" "}
+                                          x{pedido.quantidade}
                                           {
                                             cardapio.find(
                                               (option) =>
@@ -665,6 +665,7 @@ export default function Garçom() {
                       onChange={(value) =>
                         handlePedidoChange(index, "id", value)
                       }
+                      value={pedido.id}
                     >
                       <Option value="">Selecione um item</Option>
                       {cardapio.map((option) => (
