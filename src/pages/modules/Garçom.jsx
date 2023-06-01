@@ -443,6 +443,11 @@ export default function Garçom() {
             {dateMesa.map((itemMesa, index) => (
               <Card
                 title={"Messa " + itemMesa.nm_mesa}
+                extra={
+                  <h4>
+                    Por: {itemMesa.created_by}
+                  </h4>
+                }
                 style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
                 key={index}
               >
