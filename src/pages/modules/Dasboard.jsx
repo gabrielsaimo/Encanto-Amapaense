@@ -47,7 +47,7 @@ export default function Dashboard({ atualizar, user }) {
   const [description, setDescription] = useState("");
   const [sub, setSub] = useState("");
   const [active, setActive] = useState(true);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(null);
   const [actionCardapio, setActionCardapio] = useState(true);
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const [filteredStatus, setFilteredStatus] = useState(null);
@@ -91,8 +91,8 @@ export default function Dashboard({ atualizar, user }) {
     },
   ];
   useEffect(() => {
-    gtCardapio();
     getCardapiocategory();
+    gtCardapio();
   }, [actionCardapio, atualizar]);
   useEffect(() => {
     filterTable();
@@ -192,7 +192,7 @@ export default function Dashboard({ atualizar, user }) {
     setDescription("");
     setSub("");
     setActive(true);
-    setCategory("");
+    setCategory(null);
   }
   function closeModal() {
     if (modalCategory) {
