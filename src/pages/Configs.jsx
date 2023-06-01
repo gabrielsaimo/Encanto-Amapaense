@@ -160,12 +160,9 @@ export default function Config() {
         </Modal>
       ) : (
         <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <Card>
-            <h3>
-              {userNome} - {UserCategoria}
-            </h3>
-
+          <Card style={{ marginTop: 10 }}>
             <div style={{ float: "right" }}>
+              {userNome} - {UserCategoria}{" "}
               <Button onClick={() => logout()}>Sair</Button>
             </div>
           </Card>
