@@ -1,10 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Badge, Button, Card, Descriptions, Divider, Input, Modal } from "antd";
+import {
+  Badge,
+  Button,
+  Card,
+  Descriptions,
+  Divider,
+  Input,
+  Modal,
+  notification,
+} from "antd";
 import React, { useEffect, useState } from "react";
 import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
 import { postEmail } from "../../services/email.ws";
+import io from "socket.io-client";
 import moment from "moment/moment";
 export default function Cozinha() {
   const data = new Date();
@@ -14,7 +24,6 @@ export default function Cozinha() {
     hora + ":" + data.getMinutes() + ":" + data.getSeconds();
 
   const [pedidos, setPedido] = useState([]);
-  const [count, setCount] = useState(0);
   const [cardapio, setCardapio] = useState([]);
   const [acessable, setAcessable] = React.useState(false);
   const [visible, setVisible] = React.useState(true);
@@ -29,14 +38,28 @@ export default function Cozinha() {
   const statusIndex = text.indexOf("Status");
   const beforeStatus = text.slice(0, statusIndex).trim();
   const afterStatus = text.slice(statusIndex).trim();
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement, title, notifi) => {
+    api.info({
+      message: `${title}`,
+      description: `${notifi}`,
+      placement,
+    });
+  };
+  useEffect(() => {
+    const socket = io("http://localhost:3000"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
+
+    socket.on("notification", (data) => {
+      openNotification("topRight", data.title, data.notification);
+      getPedido();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   useEffect(() => {
     getPedido();
-    const interval = setInterval(() => {
-      setCount(count + 1);
-      getPedido();
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, [modalCancelamento, dateUser]);
   const getPedido = async () => {
     const pedidos = await getPedidos();
@@ -60,23 +83,11 @@ export default function Cozinha() {
 
   const StatusPedido = async (id, status) => {
     if (status === "Cancelado") {
-      const destinararios = [
-        "gabrielsaimo68@gmail.com",
-        "Josemaria023182@gmail.com",
-        "sraebarbossa@gmail.com",
-      ];
+      const destinararios = ["gabrielsaimo68@gmail.com"];
       const email = {
         destinatario: destinararios,
         assunto: "Pedido Cancelado",
-        corpo: `Olá,
-
-        O pedido ${id} foi cancelado por ${userNome}.
-
-        motivo do cancelamento: 
-        ${obsCancelamento}
-        
-        Atenciosamente,
-        Encando Amapaense`,
+        corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Cancelamento</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Cancelado</h1><p>Cancelado por: ${userNome},</p><p>Pedido N° ${id} foi cancelado.</p><p>Motivo do cancelamento:</p><p>${obsCancelamento}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
       };
       await postEmail(email);
     }
@@ -176,6 +187,7 @@ export default function Cozinha() {
       ) : (
         <Card>
           {userNome}
+          {contextHolder}
           <div style={{ float: "right" }}>
             <Button onClick={() => logout()}>Sair</Button>
           </div>

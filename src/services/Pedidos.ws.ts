@@ -3,6 +3,9 @@ const api = axios.create({
   baseURL: "https://encanto-backend.vercel.app/",
   // baseURL: "http://localhost:3000/",
 });
+const api2 = axios.create({
+  baseURL: "http://localhost:3000/",
+});
 
 interface pedido {
   id: number;
@@ -46,6 +49,10 @@ export const postTransferir = async (data: pedido): Promise<pedido> => {
 
 export const postPedidos = async (data: pedido): Promise<pedido> => {
   const response = await api.post<pedido>("/pedido", data);
+  return response.data;
+};
+export const postNotification = async (data: any): Promise<any> => {
+  const response = await api2.post<any>("/notifications/send", data);
   return response.data;
 };
 

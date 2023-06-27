@@ -27,6 +27,7 @@ import {
   FinalizarPedido,
   verifyFinalizar,
   deleteMesa,
+  postNotification,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
@@ -94,6 +95,10 @@ export default function Garçom() {
   const DeletarPedido = async (id) => {
     await deletePedidos({
       id: id,
+    });
+    await postNotification({
+      title: "Pedido N°" + id + " " + "Cancelado",
+      notification: `Pedido Exluido`,
     });
     setActive(!active);
     window.location.reload();
@@ -216,7 +221,7 @@ export default function Garçom() {
     setPedidosTotais(newPedidos);
   };
 
-  const cancelarPedido = (id) => {
+  const cancelarPedido = async (id) => {
     const data = {
       id: id,
       status: "Em Cancelamento",
@@ -228,6 +233,11 @@ export default function Garçom() {
       by : ${userNome}
       `,
     };
+
+    await postNotification({
+      title: "Pedido N°" + id + " " + "Em Cancelamento",
+      notification: `por: ${userNome}`,
+    });
     postPedidosStatus(data);
     setObsCancelamento("");
     setActive(!active);
@@ -301,10 +311,11 @@ export default function Garçom() {
 
   async function enviarPedido() {
     const verifyMessa = await veryfyMesa(mesa);
+    const random = Math.floor(Math.random() * 100000000);
 
     if (verifyMessa.length > 0) {
       await putPedidos({
-        id: Math.floor(Math.random() * 100000000),
+        id: random,
         created_at: new Date(),
         created_by: userNome,
         mesa,
@@ -320,7 +331,7 @@ export default function Garçom() {
       setActive(!active);
       clear();
     } else {
-      const idMesa = Math.floor(Math.random() * 100000000);
+      const idMesa = random;
 
       await putMesas({
         created_at: new Date(),
@@ -333,7 +344,7 @@ export default function Garçom() {
       });
 
       await putPedidos({
-        id: Math.floor(Math.random() * 100000000),
+        id: random,
         created_at: new Date(),
         created_by: userNome,
         mesa,
@@ -349,6 +360,10 @@ export default function Garçom() {
       setActive(!active);
       clear();
     }
+    await postNotification({
+      title: "Novo Pedido N°" + random,
+      notification: `Novo pedido na mesa ${mesa}`,
+    });
   }
   function clear() {
     setMesa("");
@@ -466,7 +481,7 @@ export default function Garçom() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {dateMesa.map((itemMesa, index) => (
               <Card
-                title={"Messa " + itemMesa.nm_mesa}
+                title={"Mesa " + itemMesa.nm_mesa}
                 extra={<h4>Por: {itemMesa.created_by}</h4>}
                 style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
                 key={index}
