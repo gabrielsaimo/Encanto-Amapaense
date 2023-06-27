@@ -83,7 +83,11 @@ export default function Cozinha() {
 
   const StatusPedido = async (id, status) => {
     if (status === "Cancelado") {
-      const destinararios = ["gabrielsaimo68@gmail.com"];
+      const destinararios = [
+        "gabrielsaimo68@gmail.com",
+        "Josemaria023182@gmail.com",
+        "sraebarbossa@gmail.com",
+      ];
       const email = {
         destinatario: destinararios,
         assunto: "Pedido Cancelado",
