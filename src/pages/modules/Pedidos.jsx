@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Badge, Descriptions } from "antd";
+import { Badge, Descriptions, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { getPedidosAdm } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment/moment";
+import { io } from "socket.io-client";
 export default function Pedidos(atualizar) {
   const data = new Date();
   const hora = data.getHours();
@@ -13,14 +14,30 @@ export default function Pedidos(atualizar) {
   const [pedidos, setPedido] = useState([]);
   const [count, setCount] = useState(0);
   const [cardapio, setCardapio] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement, title, notifi) => {
+    api.info({
+      message: `${title}`,
+      description: `${notifi}`,
+      placement,
+    });
+  };
+
+  useEffect(() => {
+    const socket = io("http://192.168.12.11:3000"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
+
+    socket.on("notification", (data) => {
+      openNotification("topRight", data.title, data.notification);
+      getPedido();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     getPedido();
-    const interval = setInterval(() => {
-      setCount(count + 1);
-      getPedido();
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, [atualizar]);
   const getPedido = async () => {
     const pedidos = await getPedidosAdm();
@@ -38,6 +55,7 @@ export default function Pedidos(atualizar) {
   return (
     <>
       <h1>Atualizado as {dataFormatada}</h1>
+      {contextHolder}
       {pedidos.map((pedido) => (
         <div style={{ marginBottom: 10 }}>
           <Descriptions

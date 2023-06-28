@@ -4,7 +4,7 @@ const api = axios.create({
   // baseURL: "http://localhost:3000/",
 });
 const api2 = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "http://192.168.12.11:3000/",
 });
 
 interface pedido {
