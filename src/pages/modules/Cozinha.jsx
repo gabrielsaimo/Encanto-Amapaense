@@ -47,7 +47,7 @@ export default function Cozinha() {
     });
   };
   useEffect(() => {
-    const socket = io("http://192.168.12.11:3000"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
+    const socket = io("http://192.168.12.11:3020"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
 
     socket.on("notification", (data) => {
       openNotification("topRight", data.title, data.notification);

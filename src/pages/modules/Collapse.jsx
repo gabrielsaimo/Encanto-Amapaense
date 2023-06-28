@@ -8,7 +8,6 @@ import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
-import "firebase/database";
 const { Panel } = Collapse;
 
 const CollapseMenu = () => {

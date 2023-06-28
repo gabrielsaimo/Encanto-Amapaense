@@ -21,7 +21,6 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 
-import "firebase/database";
 import {
   deleteCategoty,
   getCategoty,
