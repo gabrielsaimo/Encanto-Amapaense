@@ -32,6 +32,29 @@ import {
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
+import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import "firebase/compat/storage";
+import { get, getDatabase, onValue, ref, set } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
+  authDomain: "encanto-amapaense.firebaseapp.com",
+  projectId: "encanto-amapaense",
+  storageBucket: "encanto-amapaense.appspot.com",
+  messagingSenderId: "66845466662",
+  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
+  measurementId: "G-T9LP3T7QBB",
+};
+
+// Initialize Firebase
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
+const service = initializeApp(firebaseConfig);
+const database = getDatabase(service);
+const mensagensRef = ref(database, "data");
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -96,13 +119,31 @@ export default function Garçom() {
     await deletePedidos({
       id: id,
     });
-    await postNotification({
+    /* await postNotification({
       title: "Pedido N°" + id + " " + "Cancelado",
       notification: `Pedido Exluido`,
-    });
+    });*/
+
+    const titulo = "Pedido N°" + id + " " + "Cancelado";
+    const notificacao = `Pedido Exluido por: ${userNome}`;
+    await atualizarMensagens(titulo, notificacao);
     setActive(!active);
     window.location.reload();
   };
+  function atualizarMensagens(title, notification) {
+    const mensagens = {
+      title,
+      notification,
+    };
+
+    set(mensagensRef, mensagens)
+      .then(() => {
+        console.log("Mensagens atualizadas com sucesso.");
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar as mensagens:", error);
+      });
+  }
 
   const confimerDelete = async (id) => {
     setActive(!active);
@@ -233,10 +274,13 @@ export default function Garçom() {
       `,
     };
 
-    await postNotification({
+    /*await postNotification({
       title: "Pedido N°" + id + " " + "Em Cancelamento",
       notification: `por: ${userNome}`,
-    });
+    });*/
+    const titulo = " Pedido de Cancelamento";
+    const notificacao = `por: ${userNome}`;
+    await atualizarMensagens(titulo, notificacao);
     postPedidosStatus(data);
     setObsCancelamento("");
     setActive(!active);
@@ -359,10 +403,13 @@ export default function Garçom() {
       setActive(!active);
       clear();
     }
-    await postNotification({
+    const titulo = "Novo Pedido N°" + random;
+    const notificacao = `Novo pedido na mesa ${mesa}`;
+    await atualizarMensagens(titulo, notificacao);
+    /* await postNotification({
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,
-    });
+    });*/
   }
   function clear() {
     setMesa("");

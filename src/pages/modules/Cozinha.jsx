@@ -16,6 +16,32 @@ import { getUser } from "../../services/user.ws";
 import { postEmail } from "../../services/email.ws";
 import io from "socket.io-client";
 import moment from "moment/moment";
+
+import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import { getAnalytics } from "firebase/analytics";
+import "firebase/compat/storage";
+import { get, getDatabase, onValue, ref, set } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
+  authDomain: "encanto-amapaense.firebaseapp.com",
+  projectId: "encanto-amapaense",
+  storageBucket: "encanto-amapaense.appspot.com",
+  messagingSenderId: "66845466662",
+  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
+  measurementId: "G-T9LP3T7QBB",
+};
+
+// Initialize Firebase
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
+const service = initializeApp(firebaseConfig);
+const database = getDatabase(service);
+const mensagensRef = ref(database, "data");
+
 export default function Cozinha() {
   const data = new Date();
 
@@ -46,6 +72,30 @@ export default function Cozinha() {
       placement,
     });
   };
+
+  useEffect(() => {
+    onValue(mensagensRef, (snapshot) => {
+      const mensagens = snapshot.val();
+      openNotification("topRight", mensagens.title, mensagens.notification);
+      getPedido();
+    });
+  }, []);
+
+  function atualizarMensagens(title, notification) {
+    const mensagens = {
+      title,
+      notification,
+    };
+
+    set(mensagensRef, mensagens)
+      .then(() => {
+        console.log("Mensagens atualizadas com sucesso.");
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar as mensagens:", error);
+      });
+  }
+
   useEffect(() => {
     const socket = io("http://192.168.12.11:3020"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
 

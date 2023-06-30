@@ -57,13 +57,14 @@ export default function Menssagem({ atualizar }) {
             >
               {menssagens.map((item, index) => (
                 <Space key={item.key}>
+                  {console.log(item)}
                   {index % 4 === 0 ? <Divider key={index} /> : null}
                   <Card
                     title={item.motivo}
                     bordered={true}
                     style={{
                       width: 400,
-                      height: 300,
+                      ninHeight: 300,
                       marginLeft: 20,
                       marginTop: 20,
                       backgroundColor:
