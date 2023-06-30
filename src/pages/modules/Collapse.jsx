@@ -25,49 +25,28 @@ const CollapseMenu = () => {
     const cardapioCollection = await getCategoty();
     setCardapioCategory(cardapioCollection);
   };
+  const renderSlides = (index) => {
+    if (index === 0) {
+      return <SlidesPrincipal />;
+    } else if (index === 11) {
+      return <SlidesSobemesas />;
+    } else if (index === 14) {
+      return <SlidesBebidas />;
+    }
+    return null;
+  };
+
   const items = cardapioCategory.map((item1, index) => {
-    const key = "part-" + index;
+    const key = item1.name;
     return (
       <div key={index}>
-        {index === 0 ? <SlidesPrincipal /> : null}
-        {index === 11 ? <SlidesSobemesas /> : null}
-        {index === 14 ? <SlidesBebidas /> : null}
+        {renderSlides(index)}
+
         <Collapse
           key={index}
           bordered={false}
-          defaultActiveKey={[
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-          ]}
+          header={item1.name}
+          defaultActiveKey={Array.from({ length: 31 }, (_, i) => String(i))}
           destroyInactivePanel={false}
           expandIconPosition="end"
           expandIcon={({ isActive }) => (
