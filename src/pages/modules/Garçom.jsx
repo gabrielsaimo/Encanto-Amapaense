@@ -9,6 +9,7 @@ import {
   Select,
   Space,
   Collapse,
+  Spin,
 } from "antd";
 import "firebase/database";
 import { getUser } from "../../services/user.ws";
@@ -88,9 +89,12 @@ export default function Garçom() {
   const [total, setTotal] = useState(0);
   const [tipoPagamento, setTipoPagamento] = useState(null);
   const [obsFinalizar, setObsFinalizar] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     getCachedDateUser();
     getCardapios();
+  }, []);
+  useEffect(() => {
     getMesa();
     getPedido();
   }, [active, showModall]);
@@ -102,8 +106,10 @@ export default function Garçom() {
     GetUsuario();
   };
   const getPedido = async () => {
+    setLoading(true);
     const pedidos = await getPedidos();
     setPedido(pedidos);
+    await setLoading(false);
   };
   const getCardapios = async () => {
     const cardapio = await getCardapio();
@@ -126,17 +132,17 @@ export default function Garçom() {
 
     const titulo = "Pedido N°" + id + " " + "Cancelado";
     const notificacao = `Pedido Exluido por: ${userNome}`;
-    await atualizarMensagens(titulo, notificacao);
+    atualizarMensagens(titulo, notificacao);
     setActive(!active);
     window.location.reload();
   };
-  function atualizarMensagens(title, notification) {
+  async function atualizarMensagens(title, notification) {
     const mensagens = {
       title,
       notification,
     };
 
-    set(mensagensRef, mensagens)
+    await set(mensagensRef, mensagens)
       .then(() => {
         console.log("Mensagens atualizadas com sucesso.");
       })
@@ -280,13 +286,13 @@ export default function Garçom() {
     });*/
     const titulo = " Pedido de Cancelamento";
     const notificacao = `por: ${userNome}`;
-    await atualizarMensagens(titulo, notificacao);
-    postPedidosStatus(data);
+    atualizarMensagens(titulo, notificacao);
+    await postPedidosStatus(data);
     setObsCancelamento("");
     setActive(!active);
   };
 
-  const statusPedido = (id, status) => {
+  const statusPedido = async (id, status) => {
     const data = {
       id: id,
       status: status,
@@ -295,8 +301,11 @@ export default function Garçom() {
       update_at: new Date(),
       update_by: userNome,
     };
-    postPedidosStatus(data);
+    await postPedidosStatus(data);
     setActive(!active);
+    if (status === "Finalizado") {
+      window.location.reload();
+    }
   };
 
   const calcularTotal = () => {
@@ -353,6 +362,7 @@ export default function Garçom() {
   }
 
   async function enviarPedido() {
+    setLoading(true);
     const verifyMessa = await veryfyMesa(mesa);
     const random = Math.floor(Math.random() * 100000000);
 
@@ -373,6 +383,7 @@ export default function Garçom() {
       setShowModall(false);
       setActive(!active);
       clear();
+      setLoading(false);
     } else {
       const idMesa = random;
 
@@ -402,6 +413,7 @@ export default function Garçom() {
       setShowModall(false);
       setActive(!active);
       clear();
+      setLoading(false);
     }
     const titulo = "Novo Pedido N°" + random;
     const notificacao = `Novo pedido na mesa ${mesa}`;
@@ -431,12 +443,14 @@ export default function Garçom() {
   };
 
   const finalizarMesa = async () => {
+    setLoading(true);
     const verify = await verifyFinalizar(dadosFinalizar.id);
     if (verify.length > 0) {
       Modal.error({
         title: "Mesa não pode ser finalizada",
         content: "Mesa com pedidos em aberto",
       });
+      setLoading(false);
     } else if (valorMesa > 0) {
       const destinararios = [
         "gabrielsaimo68@gmail.com",
@@ -448,6 +462,7 @@ export default function Garçom() {
         assunto: "Pedido Finalizado",
         corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Finalizado</h1><p>Finalizado por: ${userNome},</p><p>O pedido N° ${dadosFinalizar.id} foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Tipo de Pagamento: ${tipoPagamento}</p><p>Valor: R$ ${valorMesa}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
       };
+      setModalFinalizar(false);
       await postEmail(email);
       await FinalizarPedido({
         id: dadosFinalizar.id,
@@ -459,14 +474,34 @@ export default function Garçom() {
         taxa: parseInt(valorMesa) * 0.1,
         valorTotal: parseInt(valorMesa) + parseInt(valorMesa) * 0.1,
       });
-      setModalFinalizar(false);
+
       setActive(!active);
       clear();
+      setLoading(false);
     } else {
       Modal.error({
         title: "Mesa não pode ser finalizada",
         content: "Mesa sem pedidos",
       });
+      setLoading(false);
+    }
+  };
+
+  const excluiMesa = async (id) => {
+    setLoading(true);
+    const verify = await verifyFinalizar(id);
+    if (verify.length > 0) {
+      Modal.error({
+        title: "Mesa não pode ser excluida",
+        content: "Mesa com pedidos em aberto",
+      });
+      setLoading(false);
+      setModalFinalizar(false);
+    } else {
+      await deleteMesa(id);
+      setActive(!active);
+      setLoading(false);
+      setModalFinalizar(false);
     }
   };
 
@@ -474,437 +509,447 @@ export default function Garçom() {
     <Card
       style={{ backgroundColor: "#707070", height: "100%", minHeight: "99vh" }}
     >
-      {!acessable ? (
-        <Modal
-          title="Acesso Restrito para Administradores"
-          open={visible}
-          footer={null}
-          onCancel={() => open()}
-        >
-          <div
-            style={{
-              width: "95%",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "grid",
-              gridGap: "10px",
-            }}
+      <Spin spinning={loading}>
+        {!acessable ? (
+          <Modal
+            title="Acesso Restrito para Administradores"
+            open={visible}
+            footer={null}
+            onCancel={() => open()}
           >
-            <label>Nome</label>
-            <Input type="text" onChange={(e) => setName(e.target.value)} />
-            <label>Senha</label>
-            <Input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Divider />
-            <Button onClick={acessar}>Acessar</Button>
-          </div>
-        </Modal>
-      ) : (
-        <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <Card style={{ margin: 10, fontSize: 20 }}>
-            {userNome}
-            <div style={{ float: "right" }}>
-              <Button onClick={() => logout()}>Sair</Button>
+            <div
+              style={{
+                width: "95%",
+                marginLeft: "auto",
+                marginRight: "auto",
+                display: "grid",
+                gridGap: "10px",
+              }}
+            >
+              <label>Nome</label>
+              <Input type="text" onChange={(e) => setName(e.target.value)} />
+              <label>Senha</label>
+              <Input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Divider />
+              <Button onClick={acessar}>Acessar</Button>
             </div>
-          </Card>
-          <div>
-            <Button type="primary" onClick={() => showModal()}>
-              Novo Pedido
-            </Button>
-          </div>
+          </Modal>
+        ) : (
+          <div
+            style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}
+          >
+            <Card style={{ margin: 10, fontSize: 20 }}>
+              {userNome}
+              <div style={{ float: "right" }}>
+                <Button onClick={() => logout()}>Sair</Button>
+              </div>
+            </Card>
+            <div>
+              <Button type="primary" onClick={() => showModal()}>
+                Novo Pedido
+              </Button>
+            </div>
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {dateMesa.map((itemMesa, index) => (
-              <Card
-                title={"Mesa " + itemMesa.nm_mesa}
-                extra={<h4>Por: {itemMesa.created_by}</h4>}
-                style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
-                key={index}
-              >
-                {pedidos.map((item, index) => (
-                  <>
-                    {itemMesa.id === item.id_mesa ? (
-                      <Collapse>
-                        <Panel
-                          onClick={() => setActive(!active)}
-                          header={item.status}
-                          key={index}
-                          style={{
-                            marginBottom: 10,
-                            backgroundColor:
-                              item.status === "Em Analize"
-                                ? "#ff8800"
-                                : item.status === "Em Preparo"
-                                ? "#0a4bff"
-                                : item.status === "Pronto"
-                                ? "#00ff00"
-                                : item.status === "Em Cancelamento"
-                                ? "#ff0000"
-                                : "#000000",
-                            color: "#FFFFFF",
-                          }}
-                        >
-                          <p> Status: {item.status}</p>
-                          <Card>
-                            {cardapio.length > 0 ? (
-                              JSON.parse(item.pedidos).map((pedido) => (
-                                <>
-                                  {pedido.id ===
-                                  cardapio.find(
-                                    (option) => option.id === Number(pedido.id)
-                                  ).id ? (
-                                    <>
-                                      {pedido.quantidade > 0 ? (
-                                        <p>
-                                          x{pedido.quantidade}
-                                          {
-                                            cardapio.find(
-                                              (option) =>
-                                                option.id === Number(pedido.id)
-                                            ).name
-                                          }
-                                        </p>
-                                      ) : null}
-                                    </>
-                                  ) : (
-                                    <p>Item Excluido</p>
-                                  )}
-                                </>
-                              ))
-                            ) : (
-                              <p>Item Excluido</p>
-                            )}
-                          </Card>
-                          <p>Valor: R$ {item.valor}</p>
-                          <p>Observações: {item.obs}</p>
-                          <div
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {dateMesa.map((itemMesa, index) => (
+                <Card
+                  title={"Mesa " + itemMesa.nm_mesa}
+                  extra={<h4>Por: {itemMesa.created_by}</h4>}
+                  style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
+                  key={index}
+                >
+                  {pedidos.map((item, index) => (
+                    <>
+                      {itemMesa.id === item.id_mesa ? (
+                        <Collapse>
+                          <Panel
+                            onClick={() => setActive(!active)}
+                            header={item.status}
+                            key={index}
                             style={{
-                              display: "flex",
-                              justifyContent: "flex-end",
+                              marginBottom: 10,
+                              backgroundColor:
+                                item.status === "Em Analize"
+                                  ? "#ff8800"
+                                  : item.status === "Em Preparo"
+                                  ? "#0a4bff"
+                                  : item.status === "Pronto"
+                                  ? "#00ff00"
+                                  : item.status === "Em Cancelamento"
+                                  ? "#ff0000"
+                                  : "#000000",
+                              color: "#FFFFFF",
                             }}
                           >
-                            {item.status !== "Em Cancelamento" ? (
-                              <Button
-                                type="primary"
-                                style={{ marginRight: 10 }}
-                                onClick={() => [
-                                  setDataTransferir(item),
-                                  setModalTransferir(!modalTransferir),
-                                ]}
-                              >
-                                Trasferir
-                              </Button>
-                            ) : null}
-                            {item.status === "Pronto" ? (
-                              <Button
-                                type="primary"
-                                onClick={() =>
-                                  statusPedido(item.id, "Finalizado")
-                                }
-                                style={{
-                                  marginRight: 10,
-                                  backgroundColor: "#00FF00",
-                                  color: "#FFFFFF",
-                                }}
-                              >
-                                Finalizar
-                              </Button>
-                            ) : null}
-                            <>
-                              {item.status !== "Em Cancelamento" &&
-                              item.status !== "Em Analize" ? (
+                            <p> Status: {item.status}</p>
+                            <Card>
+                              {cardapio.length > 0 ? (
+                                JSON.parse(item.pedidos).map((pedido) => (
+                                  <>
+                                    {pedido.id ===
+                                    cardapio.find(
+                                      (option) =>
+                                        option.id === Number(pedido.id)
+                                    ).id ? (
+                                      <>
+                                        {pedido.quantidade > 0 ? (
+                                          <p>
+                                            x{pedido.quantidade}
+                                            {
+                                              cardapio.find(
+                                                (option) =>
+                                                  option.id ===
+                                                  Number(pedido.id)
+                                              ).name
+                                            }
+                                          </p>
+                                        ) : null}
+                                      </>
+                                    ) : (
+                                      <p>Item Excluido</p>
+                                    )}
+                                  </>
+                                ))
+                              ) : (
+                                <p>Item Excluido</p>
+                              )}
+                            </Card>
+                            <p>Valor: R$ {item.valor}</p>
+                            <p>Observações: {item.obs}</p>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                              }}
+                            >
+                              {item.status !== "Em Cancelamento" ? (
                                 <Button
                                   type="primary"
+                                  style={{ marginRight: 10 }}
                                   onClick={() => [
-                                    setIdPedido(item.id),
-                                    setStatus(item.status),
-                                    setModalCancelamento(true),
+                                    setDataTransferir(item),
+                                    setModalTransferir(!modalTransferir),
                                   ]}
+                                >
+                                  Trasferir
+                                </Button>
+                              ) : null}
+                              {item.status === "Pronto" ? (
+                                <Button
+                                  type="primary"
+                                  onClick={() =>
+                                    statusPedido(item.id, "Finalizado")
+                                  }
                                   style={{
                                     marginRight: 10,
-                                    backgroundColor: "#FF0000",
+                                    backgroundColor: "#00FF00",
                                     color: "#FFFFFF",
                                   }}
                                 >
-                                  Cancelar
+                                  Finalizar
                                 </Button>
                               ) : null}
+                              <>
+                                {item.status !== "Em Cancelamento" &&
+                                item.status !== "Em Analize" ? (
+                                  <Button
+                                    type="primary"
+                                    onClick={() => [
+                                      setIdPedido(item.id),
+                                      setStatus(item.status),
+                                      setModalCancelamento(true),
+                                    ]}
+                                    style={{
+                                      marginRight: 10,
+                                      backgroundColor: "#FF0000",
+                                      color: "#FFFFFF",
+                                    }}
+                                  >
+                                    Cancelar
+                                  </Button>
+                                ) : null}
 
-                              {item.status === "Em Analize" ? (
-                                <Button
-                                  type="primary"
-                                  onClick={() => confimerDelete(item.id)}
-                                  style={{
-                                    marginRight: 10,
-                                    backgroundColor: "#FF0000",
-                                    color: "#FFFFFF",
-                                  }}
-                                  icon={<DeleteOutlined />}
-                                />
-                              ) : null}
-                            </>
-                          </div>
-                        </Panel>
-                      </Collapse>
-                    ) : null}
-                  </>
-                ))}
-                <div style={{ float: "right" }}>
-                  <Button type="primary" onClick={() => finalmesa(itemMesa)}>
-                    Finalizar Messa
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-          <Modal
-            open={showModall}
-            onCancel={() => close()}
-            okText="Enviar Pedido"
-            cancelText="Cancelar"
-            okButtonProps={{
-              disabled: total === 0 || mesa === "",
-            }}
-            onOk={() => enviarPedido()}
-          >
-            <div className="container">
-              <h2 className="title">Adicionar Pedidos</h2>
-              <h3>Mesa</h3>
-              <div>
-                <Input
-                  type="number"
-                  value={mesa}
-                  style={{ width: 100 }}
-                  min={1}
-                  onChange={(event) => setMesa(event.target.value)}
-                />
-              </div>
-
-              {pedidosTotais.map((pedido, index) => (
-                <div
-                  key={index}
-                  className="pedido-container"
-                  style={{ marginBottom: 10 }}
-                >
-                  <h3>
-                    Pedido {index + 1}
-                    <Button
-                      style={{ backgroundColor: "#FF0000", color: "#FFF" }}
-                      onClick={() => removerPedido(index)}
-                      icon={<DeleteOutlined />}
-                    />
-                  </h3>
-
-                  <Space>
-                    <Select
-                      showSearch
-                      style={{ width: 250 }}
-                      placeholder="Selecione um item"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.children
-                          .toString()
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
-                      onChange={(value) =>
-                        handlePedidoChange(index, "id", value)
-                      }
-                      value={pedido.id}
-                    >
-                      <Option value="">Selecione um item</Option>
-                      {cardapio.map((option) => (
-                        <Option key={option.id} value={option.id}>
-                          {option.id} - {option.name}
-                        </Option>
-                      ))}
-                    </Select>
-                    <Input
-                      style={{ width: 62 }}
-                      type="number"
-                      value={pedido.quantidade}
-                      prefix="x"
-                      min={1}
-                      max={99}
-                      onChange={(event) =>
-                        handlePedidoChange(
-                          index,
-                          "quantidade",
-                          event.target.value
-                        )
-                      }
-                    />
-                  </Space>
-                </div>
+                                {item.status === "Em Analize" ? (
+                                  <Button
+                                    type="primary"
+                                    onClick={() => confimerDelete(item.id)}
+                                    style={{
+                                      marginRight: 10,
+                                      backgroundColor: "#FF0000",
+                                      color: "#FFFFFF",
+                                    }}
+                                    icon={<DeleteOutlined />}
+                                  />
+                                ) : null}
+                              </>
+                            </div>
+                          </Panel>
+                        </Collapse>
+                      ) : null}
+                    </>
+                  ))}
+                  <div style={{ float: "right" }}>
+                    <Button type="primary" onClick={() => finalmesa(itemMesa)}>
+                      Finalizar Messa
+                    </Button>
+                  </div>
+                </Card>
               ))}
-              <Button
-                type="primary"
-                style={{ marginBottom: 10 }}
-                icon={<PlusOutlined />}
-                onClick={adicionarNovoPedido}
-              />
-              <div style={{ marginBottom: 10 }}>
-                <label>Valor</label>
-                <Input prefix="R$" value={total} readOnly />
-              </div>
-              <div>
-                <label>Taxa de serviço</label>
-                <Input
-                  prefix="R$"
-                  value={(parseInt(total) * 0.1).toFixed(2)}
-                  readOnly
-                />
-              </div>
-              <Divider />
-              <div style={{ marginBottom: 10 }}>
-                <lavel>Valor Total</lavel>
-                <Input
-                  prefix="R$"
-                  value={(parseInt(total) + parseInt(total) * 0.1).toFixed(2)}
-                  readOnly
-                />
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Observações</label>
-                <TextArea
-                  value={obs}
-                  rows={3}
-                  onChange={(event) => setObs(event.target.value)}
-                />
-              </div>
             </div>
-          </Modal>
-          <Modal
-            open={modalCancelamento}
-            onCancel={() => [
-              setModalCancelamento(false),
-              setObsCancelamento(""),
-            ]}
-            okText="Pedir Cancelamento"
-            okType="danger"
-            cancelButtonProps={{ style: { display: "none" } }}
-            cancelText="Voltar"
-            okButtonProps={{
-              disabled: obsCancelamento.length < 3,
-            }}
-            onOk={() => {
-              cancelarPedido(idPedido);
-              setModalCancelamento(false);
-            }}
-          >
-            <div className="container">
-              <h2 className="title">Cancelar Pedido</h2>
-              <div style={{ marginBottom: 10 }}>
-                <label>Motivo</label>
-                <TextArea
-                  value={obsCancelamento}
-                  rows={4}
-                  onChange={(event) => setObsCancelamento(event.target.value)}
+            <Modal
+              open={showModall}
+              onCancel={() => close()}
+              okText="Enviar Pedido"
+              cancelText="Cancelar"
+              okButtonProps={{
+                disabled: total === 0 || mesa === "",
+                loading: loading,
+              }}
+              onOk={() => enviarPedido()}
+            >
+              <div className="container">
+                <h2 className="title">Adicionar Pedidos</h2>
+                <h3>Mesa</h3>
+                <div>
+                  <Input
+                    type="number"
+                    value={mesa}
+                    style={{ width: 100 }}
+                    min={1}
+                    onChange={(event) => setMesa(event.target.value)}
+                  />
+                </div>
+
+                {pedidosTotais.map((pedido, index) => (
+                  <div
+                    key={index}
+                    className="pedido-container"
+                    style={{ marginBottom: 10 }}
+                  >
+                    <h3>
+                      Pedido {index + 1}
+                      <Button
+                        style={{ backgroundColor: "#FF0000", color: "#FFF" }}
+                        onClick={() => removerPedido(index)}
+                        icon={<DeleteOutlined />}
+                      />
+                    </h3>
+
+                    <Space>
+                      <Select
+                        showSearch
+                        style={{ width: 250 }}
+                        placeholder="Selecione um item"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          option.children
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0
+                        }
+                        onChange={(value) =>
+                          handlePedidoChange(index, "id", value)
+                        }
+                        value={pedido.id}
+                      >
+                        <Option value="">Selecione um item</Option>
+                        {cardapio.map((option) => (
+                          <Option key={option.id} value={option.id}>
+                            {option.id} - {option.name}
+                          </Option>
+                        ))}
+                      </Select>
+                      <Input
+                        style={{ width: 62 }}
+                        type="number"
+                        value={pedido.quantidade}
+                        prefix="x"
+                        min={1}
+                        max={99}
+                        onChange={(event) =>
+                          handlePedidoChange(
+                            index,
+                            "quantidade",
+                            event.target.value
+                          )
+                        }
+                      />
+                    </Space>
+                  </div>
+                ))}
+                <Button
+                  type="primary"
+                  style={{ marginBottom: 10 }}
+                  icon={<PlusOutlined />}
+                  onClick={adicionarNovoPedido}
                 />
+                <div style={{ marginBottom: 10 }}>
+                  <label>Valor</label>
+                  <Input prefix="R$" value={total} readOnly />
+                </div>
+                <div>
+                  <label>Taxa de serviço</label>
+                  <Input
+                    prefix="R$"
+                    value={(parseInt(total) * 0.1).toFixed(2)}
+                    readOnly
+                  />
+                </div>
+                <Divider />
+                <div style={{ marginBottom: 10 }}>
+                  <lavel>Valor Total</lavel>
+                  <Input
+                    prefix="R$"
+                    value={(parseInt(total) + parseInt(total) * 0.1).toFixed(2)}
+                    readOnly
+                  />
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                  <label>Observações</label>
+                  <TextArea
+                    value={obs}
+                    rows={3}
+                    onChange={(event) => setObs(event.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-          </Modal>
-          <Modal
-            open={modalTransferir}
-            okText="Tranferir"
-            onCancel={() => setModalTransferir(!modalTransferir)}
-            okButtonProps={{
-              disabled: mesa === "" || mesa === dataTransferir.mesa,
-            }}
-            onOk={() => [
-              tranferirPedido(),
-              setActive(!active),
-              setModalTransferir(false),
-              clear(),
-            ]}
-          >
-            <div className="container">
-              <h2 className="title">Transferir Pedido</h2>
-              <div style={{ marginBottom: 10 }}>
-                <label>Mesa {dataTransferir.mesa} para :</label>
-                <Input
-                  style={{ width: 100 }}
-                  type="number"
-                  min={1}
-                  onChange={(event) => setMesa(event.target.value)}
-                />
+            </Modal>
+            <Modal
+              open={modalCancelamento}
+              onCancel={() => [
+                setModalCancelamento(false),
+                setObsCancelamento(""),
+              ]}
+              okText="Pedir Cancelamento"
+              okType="danger"
+              cancelButtonProps={{ style: { display: "none" } }}
+              cancelText="Voltar"
+              okButtonProps={{
+                disabled: obsCancelamento.length < 3,
+                loading: loading,
+              }}
+              onOk={() => {
+                cancelarPedido(idPedido);
+                setModalCancelamento(false);
+              }}
+            >
+              <div className="container">
+                <h2 className="title">Cancelar Pedido</h2>
+                <div style={{ marginBottom: 10 }}>
+                  <label>Motivo</label>
+                  <TextArea
+                    value={obsCancelamento}
+                    rows={4}
+                    onChange={(event) => setObsCancelamento(event.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-          </Modal>
-          <Modal
-            open={modalFinalizar}
-            onCancel={() => setModalFinalizar(false)}
-            cancelText="Voltar"
-            okText={valorMesa > 0 ? "Finalizar" : "Excluir"}
-            okType={valorMesa > 0 ? "primary" : "danger"}
-            okButtonProps={{
-              disabled: tipoPagamento === null && valorMesa > 0,
-            }}
-            onOk={() =>
-              valorMesa > 0
-                ? finalizarMesa()
-                : [deleteMesa(dadosFinalizar.id), window.location.reload()]
-            }
-          >
-            <div className="container">
-              <h2 className="title">Finalizar Pedido</h2>
-              <div style={{ marginBottom: 10 }}>
-                <label>Valor</label>
-                <Input
-                  prefix="R$"
-                  value={valorMesa > 0 ? valorMesa : 0}
-                  readOnly
-                />
+            </Modal>
+            <Modal
+              open={modalTransferir}
+              okText="Tranferir"
+              onCancel={() => setModalTransferir(!modalTransferir)}
+              okButtonProps={{
+                disabled: mesa === "" || mesa === dataTransferir.mesa,
+                loading: loading,
+              }}
+              onOk={() => [
+                tranferirPedido(),
+                setActive(!active),
+                setModalTransferir(false),
+                clear(),
+              ]}
+            >
+              <div className="container">
+                <h2 className="title">Transferir Pedido</h2>
+                <div style={{ marginBottom: 10 }}>
+                  <label>Mesa {dataTransferir.mesa} para :</label>
+                  <Input
+                    style={{ width: 100 }}
+                    type="number"
+                    min={1}
+                    onChange={(event) => setMesa(event.target.value)}
+                  />
+                </div>
               </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Taxa de serviço</label>
-                <Input
-                  prefix="R$"
-                  value={valorMesa > 0 ? parseInt(valorMesa) * 0.1 : 0}
-                  readOnly
-                />
+            </Modal>
+            <Modal
+              open={modalFinalizar}
+              onCancel={() => setModalFinalizar(false)}
+              cancelText="Voltar"
+              okText={valorMesa > 0 ? "Finalizar" : "Excluir"}
+              okType={valorMesa > 0 ? "primary" : "danger"}
+              okButtonProps={{
+                disabled: tipoPagamento === null && valorMesa > 0,
+                loading: loading,
+              }}
+              onOk={() =>
+                valorMesa > 0
+                  ? finalizarMesa()
+                  : [excluiMesa(dadosFinalizar.id)]
+              }
+            >
+              <div className="container">
+                <h2 className="title">Finalizar Pedido</h2>
+                <div style={{ marginBottom: 10 }}>
+                  <label>Valor</label>
+                  <Input
+                    prefix="R$"
+                    value={valorMesa > 0 ? valorMesa : 0}
+                    readOnly
+                  />
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                  <label>Taxa de serviço</label>
+                  <Input
+                    prefix="R$"
+                    value={valorMesa > 0 ? parseInt(valorMesa) * 0.1 : 0}
+                    readOnly
+                  />
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                  <lavel>Valor Total</lavel>
+                  <Input
+                    prefix="R$"
+                    value={
+                      valorMesa > 0
+                        ? (
+                            parseInt(valorMesa) +
+                            parseInt(valorMesa) * 0.1
+                          ).toFixed(2)
+                        : 0
+                    }
+                    readOnly
+                  />
+                </div>
+                <Space direction="vertical">
+                  <Select
+                    style={{ width: 250 }}
+                    value={tipoPagamento}
+                    placeholder="Tipo de Pagamento"
+                    onChange={(event) => setTipoPagamento(event)}
+                  >
+                    <Option value="PIX">Pix</Option>
+                    <Option value="Dinheiro">Dinheiro</Option>
+                    <Option value="Crédito">Crédito</Option>
+                    <Option value="Débito">Débito</Option>
+                    <Option value="Cortesia">Cortesia</Option>
+                  </Select>
+                  <TextArea
+                    rows={3}
+                    placeholder="Observações"
+                    value={obsFinalizar}
+                    onChange={(event) => setObsFinalizar(event.target.value)}
+                  />
+                </Space>
               </div>
-              <div style={{ marginBottom: 10 }}>
-                <lavel>Valor Total</lavel>
-                <Input
-                  prefix="R$"
-                  value={
-                    valorMesa > 0
-                      ? (
-                          parseInt(valorMesa) +
-                          parseInt(valorMesa) * 0.1
-                        ).toFixed(2)
-                      : 0
-                  }
-                  readOnly
-                />
-              </div>
-              <Space direction="vertical">
-                <Select
-                  style={{ width: 250 }}
-                  value={tipoPagamento}
-                  placeholder="Tipo de Pagamento"
-                  onChange={(event) => setTipoPagamento(event)}
-                >
-                  <Option value="PIX">Pix</Option>
-                  <Option value="Dinheiro">Dinheiro</Option>
-                  <Option value="Crédito">Crédito</Option>
-                  <Option value="Débito">Débito</Option>
-                  <Option value="Cortesia">Cortesia</Option>
-                </Select>
-                <TextArea
-                  rows={3}
-                  placeholder="Observações"
-                  value={obsFinalizar}
-                  onChange={(event) => setObsFinalizar(event.target.value)}
-                />
-              </Space>
-            </div>
-          </Modal>
-        </div>
-      )}
+            </Modal>
+          </div>
+        )}
+      </Spin>
     </Card>
   );
 }
