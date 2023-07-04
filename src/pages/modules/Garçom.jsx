@@ -132,14 +132,16 @@ export default function Garçom() {
 
     const titulo = "Pedido N°" + id + " " + "Cancelado";
     const notificacao = `Pedido Exluido por: ${userNome}`;
-    atualizarMensagens(titulo, notificacao);
+    const type = "danger";
+    atualizarMensagens(titulo, notificacao, type);
     setActive(!active);
     window.location.reload();
   };
-  async function atualizarMensagens(title, notification) {
+  async function atualizarMensagens(title, notification, type) {
     const mensagens = {
       title,
       notification,
+      type,
     };
 
     await set(mensagensRef, mensagens)
@@ -286,7 +288,8 @@ export default function Garçom() {
     });*/
     const titulo = " Pedido de Cancelamento";
     const notificacao = `por: ${userNome}`;
-    atualizarMensagens(titulo, notificacao);
+    const type = "danger";
+    atualizarMensagens(titulo, notificacao, type);
     await postPedidosStatus(data);
     setObsCancelamento("");
     setActive(!active);
@@ -417,7 +420,8 @@ export default function Garçom() {
     }
     const titulo = "Novo Pedido N°" + random;
     const notificacao = `Novo pedido na mesa ${mesa}`;
-    await atualizarMensagens(titulo, notificacao);
+    const type = "success";
+    await atualizarMensagens(titulo, notificacao, type);
     /* await postNotification({
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,

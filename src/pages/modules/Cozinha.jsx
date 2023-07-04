@@ -22,6 +22,7 @@ import "firebase/compat/database";
 import "firebase/compat/storage";
 import { get, getDatabase, onValue, ref, set } from "firebase/database";
 import sound from "../../assets/notification.wav";
+import soundError from "../../assets/error.wav";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
@@ -65,19 +66,36 @@ export default function Cozinha() {
   const afterStatus = text.slice(statusIndex).trim();
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotification = (placement, title, notifi) => {
-    api.info({
-      message: `${title}`,
-      description: `${notifi}`,
-      placement,
-    });
+  const openNotification = (placement, title, notifi, type) => {
+    if (type === "success") {
+      api.success({
+        message: `${title}`,
+        description: `${notifi}`,
+        placement,
+      });
+    } else {
+      api.error({
+        message: `${title}`,
+        description: `${notifi}`,
+        placement,
+      });
+    }
   };
   useEffect(() => {
     onValue(mensagensRef, (snapshot) => {
       const mensagens = snapshot.val();
-      openNotification("topRight", mensagens.title, mensagens.notification);
+      openNotification(
+        "topRight",
+        mensagens.title,
+        mensagens.notification,
+        mensagens.type
+      );
       getPedido();
-      new Audio(sound).play();
+      if (mensagens.type === "success") {
+        new Audio(sound).play();
+      } else {
+        new Audio(soundError).play();
+      }
     });
   }, []);
 
