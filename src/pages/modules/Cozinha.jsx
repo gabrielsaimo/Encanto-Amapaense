@@ -9,20 +9,19 @@ import {
   Modal,
   notification,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
 import { postEmail } from "../../services/email.ws";
 import io from "socket.io-client";
 import moment from "moment/moment";
-
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-import { getAnalytics } from "firebase/analytics";
 import "firebase/compat/storage";
 import { get, getDatabase, onValue, ref, set } from "firebase/database";
+import sound from "../../assets/notification.wav";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
@@ -65,6 +64,7 @@ export default function Cozinha() {
   const beforeStatus = text.slice(0, statusIndex).trim();
   const afterStatus = text.slice(statusIndex).trim();
   const [api, contextHolder] = notification.useNotification();
+
   const openNotification = (placement, title, notifi) => {
     api.info({
       message: `${title}`,
@@ -72,12 +72,12 @@ export default function Cozinha() {
       placement,
     });
   };
-
   useEffect(() => {
     onValue(mensagensRef, (snapshot) => {
       const mensagens = snapshot.val();
       openNotification("topRight", mensagens.title, mensagens.notification);
       getPedido();
+      new Audio(sound).play();
     });
   }, []);
 
