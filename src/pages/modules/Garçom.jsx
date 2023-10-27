@@ -69,7 +69,7 @@ export default function Garçom() {
   const [userNome, setUserNome] = useState("");
   /// const [UserCategoria, setUserCategoria] = useState("");
   const [name, setName] = useState("");
-  const [mesa, setMesa] = useState("");
+  const [mesa, setMesa] = useState(null);
   const [dateMesa, setDateMesa] = useState([]);
   const [obs, setObs] = useState("");
   const [password, setPassword] = useState("");
@@ -141,7 +141,6 @@ export default function Garçom() {
     setActive(!active);
     window.location.reload();
   };
-
 
   const DeletarPedidoUni = async (id) => {
     await deletePedidos({
@@ -299,12 +298,19 @@ export default function Garçom() {
 
   const handlePedidoChange = (index, name, value) => {
     const newPedidos = [...pedidosTotais];
+    console.log(index, name, value);
     newPedidos[index][name] = value;
+
     for (let i = 0; i < cardapio.length; i++) {
       if (cardapio[i].id === Number(value)) {
-        newPedidos[index]["categoria"] = cardapio[i].category;
-        newPedidos[index]["valor"] = cardapio[i].price;
-        newPedidos[index]["item"] = cardapio[i].name;
+        if (name === "iditem") {
+          newPedidos[index]["categoria"] = cardapio[i].category;
+          newPedidos[index]["valor"] = cardapio[i].price;
+          newPedidos[index]["item"] = cardapio[i].name;
+        } else {
+          newPedidos[index]["qdt"] = value;
+        }
+
         newPedidos[index]["idmesa"] = mesa;
         newPedidos[index]["id"] = random;
         newPedidos[index]["status"] = "Em Analize";
@@ -677,7 +683,6 @@ export default function Garçom() {
                                         {pedido_uni.qdt > 0 ? (
                                           <p>
                                             x{pedido_uni.qdt} {pedido_uni.item}{" "}
-                                            
                                           </p>
                                         ) : null}
                                       </>
