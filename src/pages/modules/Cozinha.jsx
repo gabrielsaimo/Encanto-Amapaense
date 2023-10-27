@@ -172,6 +172,9 @@ export default function Cozinha() {
     };
 
     await postPedidostatus(dataPedido);
+
+    StatusPedidoFinal(pedido.id, status);
+
     getPedido();
   };
 
@@ -356,7 +359,7 @@ export default function Cozinha() {
                                             ? "Em Preparo"
                                             : pedido.status === "Em Preparo"
                                             ? "Pronto"
-                                            : "Pronto",
+                                            : "Finalizado",
                                           pedido
                                         );
                                       }}
@@ -396,9 +399,6 @@ export default function Cozinha() {
                                     Confimar?
                                   </Button>
                                 ) : null}
-                                {pedidoss.status === "Pronto" ? (
-                                  <Button type="danger">Pronto!</Button>
-                                ) : null}
                               </p>
                             ) : null}
                           </>
@@ -409,27 +409,7 @@ export default function Cozinha() {
                     <p>Carregando...</p>
                   )}
                 </Descriptions.Item>
-                <Descriptions.Item label="Ação" span={3}>
-                  <Button
-                    style={{
-                      backgroundColor: "orange",
-                    }}
-                    type="primary"
-                    onClick={() => StatusPedidoFinal(pedido.id, "Em Preparo")}
-                  >
-                    Em Preparo
-                  </Button>
-                  <Button
-                    style={{
-                      marginLeft: 10,
-                      backgroundColor: "green",
-                    }}
-                    type="primary"
-                    onClick={() => StatusPedidoFinal(pedido.id, "Pronto")}
-                  >
-                    Pronto
-                  </Button>
-                </Descriptions.Item>
+
                 <Descriptions.Item label="Oberservação" span={1}>
                   {pedido.obs}
                 </Descriptions.Item>

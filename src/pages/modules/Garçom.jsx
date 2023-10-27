@@ -313,6 +313,10 @@ export default function Garçom() {
 
         newPedidos[index]["idmesa"] = mesa;
         newPedidos[index]["id"] = random;
+        newPedidos[index]["created_at"] = new Date();
+        newPedidos[index]["created_by"] = userNome;
+        newPedidos[index]["update_at"] = new Date();
+        newPedidos[index]["update_by"] = userNome;
         newPedidos[index]["status"] = "Em Analize";
         if (idpedido === undefined) {
           newPedidos[index]["idpedido"] = random;
@@ -496,6 +500,7 @@ export default function Garçom() {
         valor: total,
         update_at: new Date(),
         update_by: userNome,
+        
       });
       putPedi();
       setShowModall(false);
@@ -574,6 +579,8 @@ export default function Garçom() {
       });
       setLoading(false);
     }
+
+    statusPedido(dadosFinalizar.id, "Concluido");
   };
 
   const excluiMesa = async (id) => {
@@ -653,28 +660,32 @@ export default function Garçom() {
                   {pedidos.map((item, index) => (
                     <>
                       {itemMesa.id === item.id_mesa ? (
-                        <Collapse onChange={() => [setActive(!active)]}>
+                        <Collapse
+                          key={item}
+                          onChange={() => [setActive(!active)]}
+                        >
                           <Panel
                             header={item.status}
                             key={index}
                             style={{
                               marginBottom: 10,
-                              backgroundColor:
+                              borderRadius: 8,
+                              backgroundImage:
                                 item.status === "Em Analize"
-                                  ? "#ff8800"
+                                  ? "linear-gradient(to right,#ff8800, #ff0000)"
                                   : item.status === "Em Preparo"
-                                  ? "#0a4bff"
+                                  ? "linear-gradient(to right,#0a4bff , #00ff00)"
                                   : item.status === "Pronto"
-                                  ? "#00ff00"
+                                  ? "linear-gradient(to right,#00ff00 , #0a4bff)"
                                   : item.status === "Em Cancelamento"
                                   ? "#ff0000"
-                                  : "#000000",
+                                  : "linear-gradient(to right,#00ff00, #0a4bff, #ff8800)",
                               color: "#FFFFFF",
                             }}
                           >
                             <p> Status: {item.status}</p>
                             {}
-                            <Card>
+                            <Card key={item.id}>
                               {cardapio.length > 0 && pedidos_uni.length > 0 ? (
                                 pedidos_uni.map((pedido_uni) => (
                                   <>

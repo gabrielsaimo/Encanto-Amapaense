@@ -101,6 +101,11 @@ export const postPedidostatus = async (data: any): Promise<pedido> => {
   }
 };
 
+export const getPedidosBar = async (): Promise<any[]> => {
+  const response = await api.get<pedido[]>("/pedido/bar");
+  return response.data;
+}
+
 export const veryfyMesa = async (messa: Number): Promise<any> => {
   const response = await api.get<any>(`/pedido/verif/${messa}`);
   return response.data;
