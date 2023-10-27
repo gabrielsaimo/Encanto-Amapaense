@@ -32,7 +32,11 @@ import {
   putPedido,
   getPedidoId,
 } from "../../services/Pedidos.ws";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  CaretRightOutlined,
+} from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
 import { initializeApp } from "firebase/app";
@@ -500,7 +504,6 @@ export default function Garçom() {
         valor: total,
         update_at: new Date(),
         update_by: userNome,
-        
       });
       putPedi();
       setShowModall(false);
@@ -662,6 +665,13 @@ export default function Garçom() {
                       {itemMesa.id === item.id_mesa ? (
                         <Collapse
                           key={item}
+                          destroyInactivePanel
+                          expandIcon={({ isActive }) => (
+                            <CaretRightOutlined
+                              style={{ color: "#FFF" }}
+                              rotate={isActive ? 90 : 0}
+                            />
+                          )}
                           onChange={() => [setActive(!active)]}
                         >
                           <Panel
