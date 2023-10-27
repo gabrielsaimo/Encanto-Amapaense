@@ -77,6 +77,30 @@ export const putPedidos = async (data: pedido): Promise<pedido> => {
   return response.data;
 };
 
+export const putPedido = async (data: any): Promise<any> => {
+  const response = await api.put<any>("/pedido/pedidos", data);
+  return response.data;
+};
+
+export const getPedidoId = async (): Promise<pedido> => {
+  const response = await api.get<pedido>(`/pedido/pedidos`);
+  if (response.data === null) {
+    alert("Pedido não encontrado");
+    return response.data;
+  } else {
+    return response.data;
+  }
+};
+
+export const postPedidostatus = async (data: any): Promise<pedido> => {
+  const response = await api.post<pedido>(`/pedido/pedidos`,data);
+  if (response.data === null) {
+    return response.data;
+  } else {
+    return response.data;
+  }
+};
+
 export const veryfyMesa = async (messa: Number): Promise<any> => {
   const response = await api.get<any>(`/pedido/verif/${messa}`);
   return response.data;

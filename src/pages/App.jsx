@@ -57,6 +57,9 @@ function App() {
             <Button>
               <Link to="/Cozinha"> Cozinha</Link>
             </Button>
+            <Button>
+              <Link to="/Bar"> Bar</Link>
+            </Button>
           </Space>
         </Modal>
       </div>

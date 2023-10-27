@@ -10,7 +10,12 @@ import {
   notification,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
+import {
+  getPedidoId,
+  getPedidos,
+  postPedidosStatus,
+  postPedidostatus,
+} from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
 import { postEmail } from "../../services/email.ws";
@@ -65,7 +70,7 @@ export default function Cozinha() {
   const beforeStatus = text.slice(0, statusIndex).trim();
   const afterStatus = text.slice(statusIndex).trim();
   const [api, contextHolder] = notification.useNotification();
-
+  const [pedidoss, setPedidos] = useState([]);
   const openNotification = (placement, title, notifi, type) => {
     if (type === "success") {
       api.success({
@@ -126,6 +131,10 @@ export default function Cozinha() {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    getPedidoss();
+  }, [pedidos]);
   useEffect(() => {
     getPedido();
   }, [modalCancelamento, dateUser]);
@@ -141,7 +150,10 @@ export default function Cozinha() {
     const cardapio = await getCardapio();
     setCardapio(cardapio);
   };
-
+  async function getPedidoss() {
+    const pedidos = await getPedidoId();
+    setPedidos(pedidos);
+  }
   const open = () => {
     setVisible(true);
   };
@@ -149,7 +161,21 @@ export default function Cozinha() {
     GetUsuario();
   };
 
-  const StatusPedido = async (id, status) => {
+  const StatusPedido = async (data, status, pedido) => {
+    const dataPedido = {
+      id: data.id,
+      status: status,
+      acepted_by: userNome,
+      acepted_at: new Date(),
+      update_at: new Date(),
+      update_by: userNome,
+    };
+
+    await postPedidostatus(dataPedido);
+    getPedido();
+  };
+
+  const StatusPedidoFinal = async (id, status) => {
     if (status === "Cancelado") {
       const destinararios = [
         "gabrielsaimo68@gmail.com",
@@ -161,7 +187,10 @@ export default function Cozinha() {
         assunto: "Pedido Cancelado",
         corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Cancelamento</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Cancelado</h1><p>Cancelado por: ${userNome},</p><p>Pedido N° ${id} foi cancelado.</p><p>Motivo do cancelamento:</p><p>${obsCancelamento}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
       };
-      await postEmail(email);
+      await postEmail(email).catch((err) => {
+        console.log(err);
+        return;
+      });
     }
     if (status === "Em Preparo") {
       const data = {
@@ -223,7 +252,7 @@ export default function Cozinha() {
 
   const confirmarCancelamento = () => {
     setModalCancelamento(false);
-    StatusPedido(idPedido, "Cancelado");
+    StatusPedidoFinal(idPedido, "Cancelado");
     setObsCancelamento("");
   };
 
@@ -306,85 +335,103 @@ export default function Cozinha() {
                   />
                 </Descriptions.Item>
                 <Descriptions.Item label="Pedido" span={2}>
-                  {cardapio.length > 0
-                    ? JSON.parse(pedido.pedidos).map((pedido) => (
-                        <>
-                          {pedido.id ===
-                          cardapio.find(
-                            (option) => option.id === Number(pedido.id)
-                          ).id ? (
-                            <>
-                              {pedido.quantidade > 0 ? (
-                                <p>
-                                  x{pedido.quantidade}{" "}
-                                  {
-                                    cardapio.find(
-                                      (option) =>
-                                        option.id === Number(pedido.id)
-                                    ).name
-                                  }
-                                </p>
-                              ) : null}
-                            </>
-                          ) : null}
-                        </>
-                      ))
-                    : null}
+                  {cardapio.length > 0 && pedidoss.length > 0 ? (
+                    pedidoss.map((pedidoss) => (
+                      <>
+                        {pedido.pedidos === pedidoss.idpedido ? (
+                          <>
+                            {pedidoss.qdt > 0 ? (
+                              <p>
+                                x{pedidoss.qdt} {pedidoss.item}
+                                {pedidoss.categoria !== "Bebidas" &&
+                                pedidoss.categoria !== "Sucos exóticos" ? (
+                                  pedidoss.status !== "Cancelado" &&
+                                  pedidoss.status !== "Em Cancelamento" &&
+                                  pedidoss.status !== "Pronto" ? (
+                                    <Button
+                                      onClick={() => {
+                                        StatusPedido(
+                                          pedidoss,
+                                          pedidoss.status === "Em Analize"
+                                            ? "Em Preparo"
+                                            : pedido.status === "Em Preparo"
+                                            ? "Pronto"
+                                            : "Pronto",
+                                          pedido
+                                        );
+                                      }}
+                                      type="primary"
+                                      style={{
+                                        marginLeft: 10,
+                                        backgroundColor:
+                                          pedidoss.status === "Em Analize"
+                                            ? "orange"
+                                            : pedidoss.status === "Em Preparo"
+                                            ? "green"
+                                            : "purple",
+                                      }}
+                                    >
+                                      {pedidoss.status === "Em Analize"
+                                        ? "Em Preparo"
+                                        : pedidoss.status === "Em Preparo"
+                                        ? "Pronto"
+                                        : "Finalizar"}
+                                    </Button>
+                                  ) : null
+                                ) : null}
+                                {pedidoss.status === "Em Cancelamento" ? (
+                                  <Button
+                                    style={{
+                                      marginLeft: 10,
+                                      backgroundColor: "red",
+                                    }}
+                                    type="primary"
+                                    onClick={() => {
+                                      setIdPedido(pedido.id);
+                                      setObsCancelamento(pedido.obs_cancel);
+                                      setModalCancelamento(true);
+                                      //  StatusPedidoFinal(pedido.id, "Cancelado");
+                                    }}
+                                  >
+                                    Confimar?
+                                  </Button>
+                                ) : null}
+                                {pedidoss.status === "Pronto" ? (
+                                  <Button type="danger">Pronto!</Button>
+                                ) : null}
+                              </p>
+                            ) : null}
+                          </>
+                        ) : null}
+                      </>
+                    ))
+                  ) : (
+                    <p>Carregando...</p>
+                  )}
+                </Descriptions.Item>
+                <Descriptions.Item label="Ação" span={3}>
+                  <Button
+                    style={{
+                      backgroundColor: "orange",
+                    }}
+                    type="primary"
+                    onClick={() => StatusPedidoFinal(pedido.id, "Em Preparo")}
+                  >
+                    Em Preparo
+                  </Button>
+                  <Button
+                    style={{
+                      marginLeft: 10,
+                      backgroundColor: "green",
+                    }}
+                    type="primary"
+                    onClick={() => StatusPedidoFinal(pedido.id, "Pronto")}
+                  >
+                    Pronto
+                  </Button>
                 </Descriptions.Item>
                 <Descriptions.Item label="Oberservação" span={1}>
                   {pedido.obs}
-                </Descriptions.Item>
-
-                <Descriptions.Item label="Ações">
-                  {pedido.status !== "Cancelado" &&
-                  pedido.status !== "Em Cancelamento" &&
-                  pedido.status !== "Pronto" ? (
-                    <Button
-                      onClick={() => {
-                        StatusPedido(
-                          pedido.id,
-                          pedido.status === "Em Analize"
-                            ? "Em Preparo"
-                            : pedido.status === "Em Preparo"
-                            ? "Pronto"
-                            : "Finalizado"
-                        );
-                      }}
-                      type="primary"
-                      style={{
-                        marginLeft: 10,
-                        backgroundColor:
-                          pedido.status === "Em Analize"
-                            ? "orange"
-                            : pedido.status === "Em Preparo"
-                            ? "green"
-                            : "purple",
-                      }}
-                    >
-                      {pedido.status === "Em Analize"
-                        ? "Em Preparo"
-                        : pedido.status === "Em Preparo"
-                        ? "Finalizar"
-                        : "Finalizar"}
-                    </Button>
-                  ) : null}
-                  {pedido.status === "Em Cancelamento" ? (
-                    <Button
-                      style={{ marginLeft: 10, backgroundColor: "red" }}
-                      type="primary"
-                      onClick={() => {
-                        setIdPedido(pedido.id);
-                        setObsCancelamento(pedido.obs_cancel);
-                        setModalCancelamento(true);
-                        //  StatusPedido(pedido.id, "Cancelado");
-                      }}
-                    >
-                      Confimar?
-                    </Button>
-                  ) : null}
-                  {pedido.status === "Pronto" ? (
-                    <Button type="danger">Pronto!</Button>
-                  ) : null}
                 </Descriptions.Item>
               </Descriptions>
             </div>

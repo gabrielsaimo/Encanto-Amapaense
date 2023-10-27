@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Badge, Descriptions, notification } from "antd";
 import React, { useEffect, useState } from "react";
-import { getPedidosAdm } from "../../services/Pedidos.ws";
+import { getPedidoId, getPedidosAdm } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment/moment";
 import { io } from "socket.io-client";
@@ -15,6 +15,7 @@ export default function Pedidos(atualizar) {
   const [count, setCount] = useState(0);
   const [cardapio, setCardapio] = useState([]);
   const [api, contextHolder] = notification.useNotification();
+  const [pedidoss, setPedidos] = useState([]);
   const openNotification = (placement, title, notifi) => {
     api.info({
       message: `${title}`,
@@ -22,6 +23,10 @@ export default function Pedidos(atualizar) {
       placement,
     });
   };
+  
+  useEffect(() => {
+    getPedidoss();
+  }, [pedidos]);
 
   useEffect(() => {
     const socket = io("http://192.168.12.11:3020"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
@@ -43,6 +48,11 @@ export default function Pedidos(atualizar) {
     const pedidos = await getPedidosAdm();
     setPedido(pedidos);
   };
+
+  async function getPedidoss() {
+    const pedidos = await getPedidoId();
+    setPedidos(pedidos);
+  }
 
   useEffect(() => {
     getCardapios();
@@ -102,32 +112,23 @@ export default function Pedidos(atualizar) {
             <Descriptions.Item label="Valor Total">
               R$ {Number(pedido.valor) - Number(pedido.desconto)},00
             </Descriptions.Item>
-            <Descriptions.Item label="Pedido" span={3}>
-              {cardapio.length > 0 ? (
-                JSON.parse(pedido.pedidos).map((pedido) => (
+            <Descriptions.Item label="Pedido" span={2}>
+              {cardapio.length > 0 && pedidoss.length > 0 ? (
+                pedidoss.map((pedidoss) => (
                   <>
-                    {pedido.id ===
-                    cardapio.find((option) => option.id === Number(pedido.id))
-                      .id ? (
+                    {pedido.pedidos === pedidoss.idpedido ? (
                       <>
-                        {pedido.quantidade > 0 ? (
+                        {pedidoss.qdt > 0 ? (
                           <p>
-                            x{pedido.quantidade}{" "}
-                            {
-                              cardapio.find(
-                                (option) => option.id === Number(pedido.id)
-                              ).name
-                            }
+                            x{pedidoss.qdt} {pedidoss.item}
                           </p>
                         ) : null}
                       </>
-                    ) : (
-                      <p>Item Excluido</p>
-                    )}
+                    ) : null}
                   </>
                 ))
               ) : (
-                <p>Item Excluido</p>
+                <p>Carregando...</p>
               )}
             </Descriptions.Item>
             {pedido.status !== "Em Analize" &&

@@ -29,6 +29,8 @@ import {
   verifyFinalizar,
   deleteMesa,
   postNotification,
+  putPedido,
+  getPedidoId,
 } from "../../services/Pedidos.ws";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
@@ -82,14 +84,16 @@ export default function Garçom() {
   const [modalFinalizar, setModalFinalizar] = useState(false);
   const [valorMesa, setValorMesa] = useState(0);
   const [pedidosTotais, setPedidosTotais] = useState([
-    { id: "", quantidade: "1" },
+    { iditem: "", qdt: "1" },
   ]);
-  const [idPedido, setIdPedido] = useState();
+  const [idpedido, setIdpedido] = useState();
   const [status, setStatus] = useState();
   const [total, setTotal] = useState(0);
   const [tipoPagamento, setTipoPagamento] = useState(null);
   const [obsFinalizar, setObsFinalizar] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pedidos_uni, setPedidos] = useState([]);
+  const random = Math.floor(Math.random() * 100000000);
   useEffect(() => {
     getCachedDateUser();
     getCardapios();
@@ -137,6 +141,19 @@ export default function Garçom() {
     setActive(!active);
     window.location.reload();
   };
+
+
+  const DeletarPedidoUni = async (id) => {
+    await deletePedidos({
+      id: id,
+    });
+    const titulo = "Item N°" + id + " " + "Cancelado";
+    const notificacao = `Pedido Exluido por: ${userNome}`;
+    const type = "danger";
+    atualizarMensagens(titulo, notificacao, type);
+    setActive(!active);
+    window.location.reload();
+  };
   async function atualizarMensagens(title, notification, type) {
     const mensagens = {
       title,
@@ -170,6 +187,32 @@ export default function Garçom() {
         },
 
         onOk: () => DeletarPedido(id),
+      });
+    } else {
+      Modal.error({
+        title: "Pedido não pode ser excluido",
+        content: "Pedido diferente de Em analize não pode ser excluido",
+      });
+    }
+  };
+
+  const confimerDeleteItem = async (id) => {
+    setActive(!active);
+    const verify = await getStatusPedido(id);
+    if (verify[0].status === "Em Analize") {
+      Modal.confirm({
+        title: "Deseja excluir esse Item?",
+        content: "Ao excluir o pedido não será possivel recupera-lo",
+        okText: "Excluir",
+        cancelText: "Cancelar",
+        okButtonProps: {
+          danger: true,
+        },
+        cancelButtonProps: {
+          type: "primary",
+        },
+
+        onOk: () => DeletarPedidoUni(id),
       });
     } else {
       Modal.error({
@@ -257,11 +300,32 @@ export default function Garçom() {
   const handlePedidoChange = (index, name, value) => {
     const newPedidos = [...pedidosTotais];
     newPedidos[index][name] = value;
+    for (let i = 0; i < cardapio.length; i++) {
+      if (cardapio[i].id === Number(value)) {
+        newPedidos[index]["categoria"] = cardapio[i].category;
+        newPedidos[index]["valor"] = cardapio[i].price;
+        newPedidos[index]["item"] = cardapio[i].name;
+        newPedidos[index]["idmesa"] = mesa;
+        newPedidos[index]["id"] = random;
+        newPedidos[index]["status"] = "Em Analize";
+        if (idpedido === undefined) {
+          newPedidos[index]["idpedido"] = random;
+          setIdpedido(random);
+        } else {
+          newPedidos[index]["idpedido"] = idpedido;
+          setIdpedido(idpedido);
+        }
+      }
+    }
+    console.log(newPedidos);
     setPedidosTotais(newPedidos);
   };
 
   const adicionarNovoPedido = () => {
-    setPedidosTotais([...pedidosTotais, { id: "", quantidade: "1" }]);
+    setPedidosTotais([
+      ...pedidosTotais,
+      { iditem: "", qdt: "1", categoria: "" },
+    ]);
   };
 
   const removerPedido = (index) => {
@@ -314,10 +378,10 @@ export default function Garçom() {
   const calcularTotal = () => {
     let newTotal = 0;
     pedidosTotais.forEach((pedido) => {
-      const { id, quantidade } = pedido;
-      const item = cardapio.find((option) => option.id === Number(id));
+      const { iditem, qdt } = pedido;
+      const item = cardapio.find((option) => option.id === Number(iditem));
       if (item) {
-        newTotal += item.price * Number(quantidade);
+        newTotal += item.price * Number(qdt);
       }
     });
 
@@ -364,10 +428,23 @@ export default function Garçom() {
     window.location.reload();
   }
 
+  async function putPedi() {
+    for (let i = 0; i < pedidosTotais.length; i++) {
+      await putPedido(pedidosTotais[i]);
+    }
+    clear();
+  }
+  useEffect(() => {
+    getPedidoss();
+  }, [active]);
+
+  async function getPedidoss() {
+    const pedidos = await getPedidoId();
+    setPedidos(pedidos);
+  }
   async function enviarPedido() {
     setLoading(true);
     const verifyMessa = await veryfyMesa(mesa);
-    const random = Math.floor(Math.random() * 100000000);
 
     if (verifyMessa.length > 0) {
       await putPedidos({
@@ -375,7 +452,7 @@ export default function Garçom() {
         created_at: new Date(),
         created_by: userNome,
         mesa,
-        pedidos: JSON.stringify(pedidosTotais),
+        pedidos: idpedido,
         obs,
         id_mesa: verifyMessa[0].id,
         status: "Em Analize",
@@ -383,6 +460,7 @@ export default function Garçom() {
         update_at: new Date(),
         update_by: userNome,
       });
+      putPedi();
       setShowModall(false);
       setActive(!active);
       clear();
@@ -405,7 +483,7 @@ export default function Garçom() {
         created_at: new Date(),
         created_by: userNome,
         mesa,
-        pedidos: JSON.stringify(pedidosTotais),
+        pedidos: idpedido,
         obs,
         id_mesa: idMesa,
         status: "Em Analize",
@@ -413,12 +491,13 @@ export default function Garçom() {
         update_at: new Date(),
         update_by: userNome,
       });
+      putPedi();
       setShowModall(false);
       setActive(!active);
       clear();
       setLoading(false);
     }
-    const titulo = "Novo Pedido N°" + random;
+    const titulo = "Novo Pedido N°" + idpedido;
     const notificacao = `Novo pedido na mesa ${mesa}`;
     const type = "success";
     await atualizarMensagens(titulo, notificacao, type);
@@ -429,7 +508,7 @@ export default function Garçom() {
   }
   function clear() {
     setMesa("");
-    setPedidosTotais([{ id: "", quantidade: "1" }]);
+    setPedidosTotais([{ id: "", qdt: "1" }]);
     setObs("");
     setTipoPagamento(null);
     setObsFinalizar(null);
@@ -568,9 +647,8 @@ export default function Garçom() {
                   {pedidos.map((item, index) => (
                     <>
                       {itemMesa.id === item.id_mesa ? (
-                        <Collapse>
+                        <Collapse onChange={() => [setActive(!active)]}>
                           <Panel
-                            onClick={() => setActive(!active)}
                             header={item.status}
                             key={index}
                             style={{
@@ -589,38 +667,28 @@ export default function Garçom() {
                             }}
                           >
                             <p> Status: {item.status}</p>
+                            {}
                             <Card>
-                              {cardapio.length > 0 ? (
-                                JSON.parse(item.pedidos).map((pedido) => (
+                              {cardapio.length > 0 && pedidos_uni.length > 0 ? (
+                                pedidos_uni.map((pedido_uni) => (
                                   <>
-                                    {pedido.id ===
-                                    cardapio.find(
-                                      (option) =>
-                                        option.id === Number(pedido.id)
-                                    ).id ? (
+                                    {item.pedidos === pedido_uni.idpedido ? (
                                       <>
-                                        {pedido.quantidade > 0 ? (
+                                        {pedido_uni.qdt > 0 ? (
                                           <p>
-                                            x{pedido.quantidade}
-                                            {
-                                              cardapio.find(
-                                                (option) =>
-                                                  option.id ===
-                                                  Number(pedido.id)
-                                              ).name
-                                            }
+                                            x{pedido_uni.qdt} {pedido_uni.item}{" "}
+                                            
                                           </p>
                                         ) : null}
                                       </>
-                                    ) : (
-                                      <p>Item Excluido</p>
-                                    )}
+                                    ) : null}
                                   </>
                                 ))
                               ) : (
-                                <p>Item Excluido</p>
+                                <p>Carregando...</p>
                               )}
                             </Card>
+
                             <p>Valor: R$ {item.valor}</p>
                             <p>Observações: {item.obs}</p>
                             <div
@@ -662,7 +730,7 @@ export default function Garçom() {
                                   <Button
                                     type="primary"
                                     onClick={() => [
-                                      setIdPedido(item.id),
+                                      setIdpedido(item.id),
                                       setStatus(item.status),
                                       setModalCancelamento(true),
                                     ]}
@@ -755,9 +823,9 @@ export default function Garçom() {
                             .indexOf(input.toLowerCase()) >= 0
                         }
                         onChange={(value) =>
-                          handlePedidoChange(index, "id", value)
+                          handlePedidoChange(index, "iditem", value)
                         }
-                        value={pedido.id}
+                        value={pedido.iditem}
                       >
                         <Option value="">Selecione um item</Option>
                         {cardapio.map((option) => (
@@ -769,16 +837,12 @@ export default function Garçom() {
                       <Input
                         style={{ width: 62 }}
                         type="number"
-                        value={pedido.quantidade}
+                        value={pedido.qdt}
                         prefix="x"
                         min={1}
                         max={99}
                         onChange={(event) =>
-                          handlePedidoChange(
-                            index,
-                            "quantidade",
-                            event.target.value
-                          )
+                          handlePedidoChange(index, "qdt", event.target.value)
                         }
                       />
                     </Space>
@@ -836,7 +900,7 @@ export default function Garçom() {
                 loading: loading,
               }}
               onOk={() => {
-                cancelarPedido(idPedido);
+                cancelarPedido(idpedido);
                 setModalCancelamento(false);
               }}
             >
