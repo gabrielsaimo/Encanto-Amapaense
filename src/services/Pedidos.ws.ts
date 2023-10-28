@@ -58,7 +58,6 @@ export const postNotification = async (data: any): Promise<any> => {
 
 export const postPedidosStatus = async (data: any): Promise<any> => {
   const response = await api.post<any>("/pedido/status", data);
-  console.log("teste", response.data[1]);
   if (response.data[1] === 1) {
     return response.data;
   } else {

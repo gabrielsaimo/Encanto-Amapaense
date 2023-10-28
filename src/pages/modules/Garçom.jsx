@@ -302,7 +302,6 @@ export default function Garçom() {
 
   const handlePedidoChange = (index, name, value) => {
     const newPedidos = [...pedidosTotais];
-    console.log(index, name, value);
     newPedidos[index][name] = value;
 
     for (let i = 0; i < cardapio.length; i++) {
@@ -331,7 +330,6 @@ export default function Garçom() {
         }
       }
     }
-    console.log(newPedidos);
     setPedidosTotais(newPedidos);
   };
 
@@ -700,6 +698,7 @@ export default function Garçom() {
                               {cardapio.length > 0 && pedidos_uni.length > 0 ? (
                                 pedidos_uni.map((pedido_uni) => (
                                   <>
+                                  
                                     {item.pedidos === pedido_uni.idpedido ? (
                                       <>
                                         {pedido_uni.qdt > 0 ? (

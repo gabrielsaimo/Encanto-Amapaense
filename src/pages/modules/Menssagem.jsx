@@ -57,7 +57,6 @@ export default function Menssagem({ atualizar }) {
             >
               {menssagens.map((item, index) => (
                 <Space key={item.key}>
-                  {console.log(item)}
                   {index % 4 === 0 ? <Divider key={index} /> : null}
                   <Card
                     title={item.motivo}
