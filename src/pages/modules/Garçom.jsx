@@ -519,6 +519,7 @@ export default function Garçom() {
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,
     });*/
+    window.location.reload();
   }
   function clear() {
     setMesa("");
