@@ -62,7 +62,7 @@ export const postPedidosStatus = async (data: any): Promise<any> => {
   if (response.data[1] === 1) {
     return response.data;
   } else {
-    alert("Erro ao Mudar Status , Pedido Possivelmente Excluido");
+    alert("Erro ao Mudar Status");
     return response.data;
   }
 };
