@@ -687,7 +687,7 @@ export default function Garçom() {
                                   : item.status === "Pronto"
                                   ? "linear-gradient(to right,#00ff00 , #0a4bff)"
                                   : item.status === "Em Cancelamento"
-                                  ? "#ff0000"
+                                  ? "linear-gradient(to right,#ff0000 , #9b0000)"
                                   : "linear-gradient(to right,#00ff00, #0a4bff, #ff8800)",
                               color: "#FFFFFF",
                             }}
@@ -698,7 +698,6 @@ export default function Garçom() {
                               {cardapio.length > 0 && pedidos_uni.length > 0 ? (
                                 pedidos_uni.map((pedido_uni) => (
                                   <>
-                                  
                                     {item.pedidos === pedido_uni.idpedido ? (
                                       <>
                                         {pedido_uni.qdt > 0 ? (
