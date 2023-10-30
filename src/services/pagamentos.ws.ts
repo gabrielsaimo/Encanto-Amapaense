@@ -13,11 +13,11 @@ interface pagamentos {
 }
 
 export const getPagametos = async (id: number): Promise<pagamentos[]> => {
-  const response = await api.get<pagamentos[]>(`/pagamentos/${id}`);
+  const response = await api.get<pagamentos[]>(`/pedido/pagamentos/${id}`);
   return response.data;
 };
 
 export const putPagamentos = async (data: pagamentos): Promise<pagamentos> => {
-  const response = await api.put<pagamentos>("/pagamentos", data);
+  const response = await api.put<pagamentos>("/pedido/pagamentos", data);
   return response.data;
 };

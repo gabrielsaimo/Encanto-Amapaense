@@ -10,6 +10,8 @@ import {
   Space,
   Collapse,
   Spin,
+  List,
+  Typography,
 } from "antd";
 import "firebase/database";
 import { getUser } from "../../services/user.ws";
@@ -32,6 +34,7 @@ import {
   putPedido,
   getPedidoId,
 } from "../../services/Pedidos.ws";
+import { getPagametos, putPagamentos } from "../../services/pagamentos.ws";
 import {
   PlusOutlined,
   DeleteOutlined,
@@ -87,6 +90,8 @@ export default function Garçom() {
   const [obsCancelamento, setObsCancelamento] = useState("");
   const [modalFinalizar, setModalFinalizar] = useState(false);
   const [valorMesa, setValorMesa] = useState(0);
+  const [valorPagamentos, setValorPagamentos] = useState(0);
+  const [valoresPagos, setValoresPagos] = useState([]);
   const [pedidosTotais, setPedidosTotais] = useState([
     { iditem: "", qdt: "1" },
   ]);
@@ -94,7 +99,7 @@ export default function Garçom() {
   const [status, setStatus] = useState();
   const [total, setTotal] = useState(0);
   const [tipoPagamento, setTipoPagamento] = useState(null);
-  const [obsFinalizar, setObsFinalizar] = useState(null);
+  const [obsFinalizar, setObsFinalizar] = useState("");
   const [loading, setLoading] = useState(false);
   const [pedidos_uni, setPedidos] = useState([]);
   const random = Math.floor(Math.random() * 100000000);
@@ -513,7 +518,9 @@ export default function Garçom() {
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,
     });*/
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
   function clear() {
     setMesa("");
@@ -528,14 +535,24 @@ export default function Garçom() {
     setTipoPagamento(null);
     setObsFinalizar(null);
     const valor = await valorTotal(itemMesa.id);
+    const pagamentos = await getPagametos(itemMesa.id);
+    setValoresPagos(pagamentos);
     setValorMesa(valor[0].valor);
     setModalFinalizar(true);
     setDadosFinalizar(itemMesa);
+    setValorPagamentos(
+      (
+        parseInt(valorMesa) +
+        parseInt(valorMesa) * 0.1 -
+        valoresPagos.reduce((total, item) => total + item.valor, 0)
+      ).toFixed(2)
+    );
     clear();
   };
 
   const finalizarMesa = async () => {
     setLoading(true);
+
     const verify = await verifyFinalizar(dadosFinalizar.id);
     if (verify.length > 0) {
       Modal.error({
@@ -544,32 +561,110 @@ export default function Garçom() {
       });
       setLoading(false);
     } else if (valorMesa > 0) {
-      const destinararios = [
-        "gabrielsaimo68@gmail.com",
-        "Josemaria023182@gmail.com",
-        "sraebarbossa@gmail.com",
-      ];
-      const email = {
-        destinatario: destinararios,
-        assunto: "Pedido Finalizado",
-        corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Finalizado</h1><p>Finalizado por: ${userNome},</p><p>O pedido N° ${dadosFinalizar.id} foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Tipo de Pagamento: ${tipoPagamento}</p><p>Valor: R$ ${valorMesa}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
-      };
-      setModalFinalizar(false);
-      await postEmail(email);
-      await FinalizarPedido({
-        id: dadosFinalizar.id,
-        closed_by: userNome,
-        closed_at: new Date(),
-        obs: obsFinalizar,
-        tipo_pagamento: tipoPagamento,
-        valor: valorMesa,
-        taxa: parseInt(valorMesa) * 0.1,
-        valorTotal: parseInt(valorMesa) + parseInt(valorMesa) * 0.1,
-      });
+      if (
+        valoresPagos[0]?.valor_pgt.toFixed(2) ===
+        Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(2)
+      ) {
+      } else {
+        setModalFinalizar(false);
+        if (
+          Number(Number(valorPagamentos).toFixed(2)) +
+            Number(valoresPagos[0]?.valor_pgt.toFixed(2)) ===
+            Number(
+              Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(2)
+            ) ||
+          Number(Number(valorPagamentos).toFixed(2)) ===
+            Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1)
+        ) {
+          if (
+            Number(Number(valorPagamentos).toFixed(2)) >
+              Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1) ||
+            Number(Number(valorPagamentos).toFixed(2)) +
+              Number(valoresPagos[0]?.valor_pgt.toFixed(2)) >
+              Number(
+                Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
+                  2
+                )
+              )
+          ) {
+            alert("Valor pago maior que o valor da mesa");
+            setLoading(false);
+            return;
+          } 
+          await putPagamentos({
+            id: random,
+            tipo: tipoPagamento,
+            idpedido: dadosFinalizar.id,
+            created_at: new Date(),
+            created_by: userNome,
+            valor: valorPagamentos,
+          });
+          const pagamentos = await getPagametos(dadosFinalizar.id);
 
-      setActive(!active);
-      clear();
-      setLoading(false);
+          var vlvl = pagamentos
+            .map(
+              (transacao) =>
+                `<br></br> ${transacao.tipo}\n R$ ${transacao.valor.toFixed(
+                  2
+                )}\n\n`
+            )
+            .join("");
+          const destinararios = [
+            "gabrielsaimo68@gmail.com",
+            "Josemaria023182@gmail.com",
+            "sraebarbossa@gmail.com",
+          ];
+          const email = {
+            destinatario: destinararios,
+            assunto: "Pedido Finalizado",
+            corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Finalizado</h1><p>Finalizado por: ${userNome},</p><p>O pedido N° ${dadosFinalizar.id} foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Metodos de Pagamento:${vlvl}</p><p>Valor: R$ ${valorMesa}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+          };
+          setModalFinalizar(false);
+          await postEmail(email);
+          await FinalizarPedido({
+            id: dadosFinalizar.id,
+            closed_by: userNome,
+            closed_at: new Date(),
+            obs: obsFinalizar,
+            tipo_pagamento: tipoPagamento,
+            valor: valorMesa,
+            taxa: parseInt(valorMesa) * 0.1,
+            valorTotal: parseInt(valorMesa) + parseInt(valorMesa) * 0.1,
+          });
+          statusPedido(dadosFinalizar.id, "Concluido");
+          setActive(!active);
+          clear();
+          setLoading(false);
+          getPagametos(dadosFinalizar.id);
+        } else {
+          if (
+            Number(Number(valorPagamentos).toFixed(2)) >
+              Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1) ||
+            Number(Number(valorPagamentos).toFixed(2)) +
+              Number(valoresPagos[0]?.valor_pgt.toFixed(2)) >
+              Number(
+                Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
+                  2
+                )
+              )
+          ) {
+            alert("Valor pago maior que o valor da mesa");
+            setLoading(false);
+            return;
+          }
+          await putPagamentos({
+            id: random,
+            tipo: tipoPagamento,
+            idpedido: dadosFinalizar.id,
+            created_at: new Date(),
+            created_by: userNome,
+            valor: valorPagamentos,
+          });
+          setActive(!active);
+          clear();
+          setLoading(false);
+        }
+      }
     } else {
       Modal.error({
         title: "Mesa não pode ser finalizada",
@@ -577,8 +672,7 @@ export default function Garçom() {
       });
       setLoading(false);
     }
-
-    statusPedido(dadosFinalizar.id, "Concluido");
+    setLoading(false);
   };
 
   const excluiMesa = async (id) => {
@@ -995,7 +1089,9 @@ export default function Garçom() {
                   <label>Taxa de serviço</label>
                   <Input
                     prefix="R$"
-                    value={valorMesa > 0 ? parseInt(valorMesa) * 0.1 : 0}
+                    value={
+                      valorMesa > 0 ? (parseInt(valorMesa) * 0.1).toFixed(2) : 0
+                    }
                     readOnly
                   />
                 </div>
@@ -1015,18 +1111,96 @@ export default function Garçom() {
                   />
                 </div>
                 <Space direction="vertical">
-                  <Select
-                    style={{ width: 250 }}
-                    value={tipoPagamento}
-                    placeholder="Tipo de Pagamento"
-                    onChange={(event) => setTipoPagamento(event)}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
-                    <Option value="PIX">Pix</Option>
-                    <Option value="Dinheiro">Dinheiro</Option>
-                    <Option value="Crédito">Crédito</Option>
-                    <Option value="Débito">Débito</Option>
-                    <Option value="Cortesia">Cortesia</Option>
-                  </Select>
+                    <div>
+                      {valoresPagos.length > 0 ? (
+                        <>
+                          <label>Valores Pagos</label>
+                          <List
+                            style={{ width: 200 }}
+                            bordered
+                            dataSource={valoresPagos}
+                            renderItem={(item) => (
+                              <List.Item>
+                                <Typography.Text mark>
+                                  R$ {item.valor.toFixed(2)} {item.tipo}
+                                </Typography.Text>
+                              </List.Item>
+                            )}
+                          />
+                        </>
+                      ) : null}
+                    </div>
+
+                    <div>
+                      {valoresPagos.length > 0 ? (
+                        <>
+                          <label>Total Pago</label>
+                          <div style={{ marginBottom: 10 }}>
+                            <Input
+                              prefix="R$"
+                              value={valoresPagos[0]?.valor_pgt}
+                              readOnly
+                            />
+                          </div>
+                        </>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <label>Valor a Pagar</label>
+                  <div style={{ marginBottom: 10 }}>
+                    <Input
+                      prefix="R$"
+                      value={
+                        valorMesa > 0
+                          ? (
+                              parseInt(valorMesa) +
+                              parseInt(valorMesa) * 0.1 -
+                              valoresPagos.reduce(
+                                (total, item) => total + item.valor,
+                                0
+                              )
+                            ).toFixed(2)
+                          : 0
+                      }
+                      readOnly
+                    />
+                  </div>
+
+                  <Space>
+                    <Select
+                      style={{ width: 250 }}
+                      value={tipoPagamento}
+                      placeholder="Tipo de Pagamento"
+                      onChange={(event) => setTipoPagamento(event)}
+                    >
+                      <Option value="PIX">Pix</Option>
+                      <Option value="Dinheiro">Dinheiro</Option>
+                      <Option value="Crédito">Crédito</Option>
+                      <Option value="Débito">Débito</Option>
+                      <Option value="Cortesia">Cortesia</Option>
+                    </Select>
+                    <Input
+                      style={{ width: 215 }}
+                      placeholder="Valor"
+                      value={valorPagamentos}
+                      prefix="R$"
+                      type="number"
+                      disabled={tipoPagamento === "Cortesia"}
+                      min={0}
+                      onChange={(event) =>
+                        setValorPagamentos(event.target.value)
+                      }
+                    />
+                  </Space>
+
                   <TextArea
                     rows={3}
                     placeholder="Observações"
