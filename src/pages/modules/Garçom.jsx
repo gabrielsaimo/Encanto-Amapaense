@@ -232,11 +232,7 @@ export default function Garçom() {
 
     if (UserCollection.length > 0) {
       setUserNome(UserCollection[0].name);
-      //  setUserCategoria(UserCollection[0].categoria);
-      // Armazenar o valor no localStorage
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
-
-      //  setDateUser(UserCollection);
       if (UserCollection[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
