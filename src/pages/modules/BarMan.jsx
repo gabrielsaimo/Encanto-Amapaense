@@ -201,6 +201,7 @@ export default function Bar() {
     }
   };
   useEffect(() => {
+    getCachedDateUser();
     if (acessable === true) {
       onValue(mensagensRef, (snapshot) => {
         const mensagens = snapshot.val();
@@ -369,6 +370,26 @@ export default function Bar() {
     } else {
       alert("Senha incorreta");
     }
+  };
+
+  const getCachedDateUser = () => {
+    const cachedData = localStorage.getItem("dateUser");
+    if (cachedData) {
+      setUserNome(JSON.parse(cachedData)[0].name);
+      if (JSON.parse(cachedData)[0].active === false) {
+        alert("Usuário desativado");
+        setAcessable(false);
+      } else if (
+        JSON.parse(cachedData)[0].categoria === "ADM" ||
+        JSON.parse(cachedData)[0].categoria === "Cozinha"
+      ) {
+        setAcessable(true);
+      } else {
+        alert("Usuário não tem permissão");
+        setAcessable(false);
+      }
+    }
+    return cachedData ? JSON.parse(cachedData) : null;
   };
   const logout = () => {
     localStorage.removeItem("dateUser");

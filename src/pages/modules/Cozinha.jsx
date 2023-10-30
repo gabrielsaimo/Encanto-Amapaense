@@ -87,6 +87,7 @@ export default function Cozinha() {
     }
   };
   useEffect(() => {
+    getCachedDateUser();
     onValue(mensagensRef, (snapshot) => {
       const mensagens = snapshot.val();
       openNotification(
@@ -96,6 +97,7 @@ export default function Cozinha() {
         mensagens.type
       );
       getPedido();
+      
       if (mensagens.type === "success") {
         new Audio(sound).play();
       } else {
@@ -227,7 +229,6 @@ export default function Cozinha() {
 
     if (UserCollection.length > 0) {
       setUserNome(UserCollection[0].name);
-      // Armazenar o valor no localStorage
       localStorage.setItem("dateUser", JSON.stringify(UserCollection));
 
       setDateUser(UserCollection);
@@ -247,6 +248,27 @@ export default function Cozinha() {
       alert("Senha incorreta");
     }
   };
+
+  const getCachedDateUser = () => {
+    const cachedData = localStorage.getItem("dateUser");
+    if (cachedData) {
+      setUserNome(JSON.parse(cachedData)[0].name);
+      if (JSON.parse(cachedData)[0].active === false) {
+        alert("Usuário desativado");
+        setAcessable(false);
+      } else if (
+        JSON.parse(cachedData)[0].categoria === "ADM" ||
+        JSON.parse(cachedData)[0].categoria === "Cozinha"
+      ) {
+        setAcessable(true);
+      } else {
+        alert("Usuário não tem permissão");
+        setAcessable(false);
+      }
+    }
+    return cachedData ? JSON.parse(cachedData) : null;
+  };
+
   const logout = () => {
     localStorage.removeItem("dateUser");
     setAcessable(false);
