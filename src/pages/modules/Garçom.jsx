@@ -542,11 +542,12 @@ export default function Garçom() {
     setDadosFinalizar(itemMesa);
     setValorPagamentos(
       (
-        parseInt(valorMesa) +
-        parseInt(valorMesa) * 0.1 -
-        valoresPagos.reduce((total, item) => total + item.valor, 0)
+        parseInt(valor[0].valor) +
+        parseInt(valor[0].valor) * 0.1 -
+        pagamentos.reduce((total, item) => total + item.valor, 0)
       ).toFixed(2)
     );
+
     clear();
   };
 
@@ -590,7 +591,7 @@ export default function Garçom() {
             alert("Valor pago maior que o valor da mesa");
             setLoading(false);
             return;
-          } 
+          }
           await putPagamentos({
             id: random,
             tipo: tipoPagamento,

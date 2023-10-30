@@ -299,6 +299,7 @@ export default function Bar() {
     };
 
     await postPedidostatus(dataPedido);
+    StatusPedidoFinal(data.idptincipal, status);
     getPedidosBarUni();
   };
 
