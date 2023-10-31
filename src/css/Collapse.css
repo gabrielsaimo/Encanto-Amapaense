@@ -20,22 +20,28 @@
   font-weight: bold;
   flex: none;
   color: transparent;
+  margin-left: 10px;
   background-clip: text;
 }
 .name {
   color: #7a4827;
   font-size: 18px;
+  font-weight: bold;
+  flex: none;
+  text-align: start;
 }
 .price {
   color: #7a4827;
   font-weight: bold;
   font-size: 16px;
+  text-align: start;
 }
 .sub {
   color: #7a4827;
   font-weight: bold;
   flex: none;
   font-size: 12px;
+  text-align: start;
 }
 @font-face {
   font-family: "Georgia";

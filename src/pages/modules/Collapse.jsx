@@ -1,6 +1,6 @@
 /* eslint-disable  */
 import React, { useState, useEffect } from "react";
-import { Collapse } from "antd";
+import { Collapse, Modal } from "antd";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -13,6 +13,7 @@ const { Panel } = Collapse;
 const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
+  const [imgModal, setImgModal] = useState(null);
   useEffect(() => {
     cardapio.length === 0 && gtCardapio();
     cardapioCategory.length === 0 && getCardapioCategory();
@@ -36,8 +37,14 @@ const CollapseMenu = () => {
     return null;
   };
 
+  function closeModal() {
+    setModalImgVisible(false);
+  }
+  const [modalImgVisible, setModalImgVisible] = useState(false);
+
   const items = cardapioCategory.map((item1, index) => {
     const key = item1.name;
+
     return (
       <div key={index}>
         {renderSlides(index)}
@@ -74,18 +81,48 @@ const CollapseMenu = () => {
                 {categotia.category === item1.name &&
                 categotia.active === true ? (
                   <div className="border">
-                    <div className="flex">
-                      <p className="p_1 name georgia-font">{categotia.name}</p>
-                      <p className="p_1 price georgia-bold-font">
-                        {/*"R$ " + categotia.price.toFixed(2).replace(".", ",")*/}
-                        {categotia.price % 1 !== 0
-                          ? "R$ " + categotia.price.replace(".", ",")
-                          : "R$ " + categotia.price + ",00"}
-                      </p>
-                    </div>
-
-                    <div className="sub">
-                      {categotia.sub} {categotia.description}
+                    <div style={{ display: "flex" }}>
+                      <div className="flex">
+                        <div>
+                          <p className="p_1 name georgia-font">
+                            {categotia.name}
+                          </p>
+                        </div>
+                        <div className="flex">
+                          <div>
+                            <div className="sub">
+                              {categotia.sub} {categotia.description}
+                            </div>
+                            <p className="p_1 price georgia-bold-font">
+                              {categotia.price % 1 !== 0
+                                ? "R$ " + categotia.price.replace(".", ",")
+                                : "R$ " + categotia.price + ",00"}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      {categotia.img === undefined ||
+                      categotia.img === null ? null : (
+                        <div
+                          className="img"
+                          style={{
+                            position: "relative",
+                            
+                          }}
+                        >
+                          <img
+                            src={atob(categotia.img)}
+                            style={{ borderRadius: 5 }}
+                            onClick={() => [
+                              setModalImgVisible(true),
+                              setImgModal(atob(categotia.img)),
+                            ]}
+                            alt={categotia.name}
+                            width="150"
+                            height="150"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 ) : null}
@@ -93,11 +130,18 @@ const CollapseMenu = () => {
             ))}
           </Panel>
         </Collapse>
+        <Modal
+          open={modalImgVisible}
+          onCancel={closeModal}
+          footer={null}
+          width={"90vw"}
+        >
+          <img src={imgModal} alt="img" style={{ width: "100%" }} />
+        </Modal>
       </div>
     );
   });
 
   return <div style={{ margin: 5 }}>{items}</div>;
 };
-
 export default CollapseMenu;

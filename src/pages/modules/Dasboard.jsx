@@ -15,8 +15,10 @@ import {
   Divider,
   Space,
   Tour,
+  Upload,
 } from "antd";
 import "firebase/database";
+import ImgCrop from "antd-img-crop";
 import {
   EditOutlined,
   DeleteOutlined,
@@ -29,6 +31,7 @@ import Category from "./Category";
 import {
   deleteCardapio,
   getCardapio,
+  imgCardapio,
   postCardapio,
   putCardapio,
 } from "../../services/cardapio.ws";
@@ -37,6 +40,7 @@ import { getCategoty } from "../../services/category.ws";
 const { Option } = Select;
 export default function Dashboard({ atualizar, user }) {
   const userDate = user[0];
+  const [fileList, setFileList] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -46,6 +50,7 @@ export default function Dashboard({ atualizar, user }) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [sub, setSub] = useState("");
+  const [imgByte, setImgByte] = useState("");
   const [active, setActive] = useState(true);
   const [category, setCategory] = useState(null);
   const [actionCardapio, setActionCardapio] = useState(true);
@@ -53,12 +58,50 @@ export default function Dashboard({ atualizar, user }) {
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [modalCategory, setModalCategory] = useState(false);
+  const [modalImgVisible, setModalImgVisible] = useState(false);
+  const [imgModal, setImgModal] = useState(null);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const ref5 = useRef(null);
   const [open, setOpen] = useState(false);
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  useEffect(() => {
+    if (fileList.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        upimg(reader.result);
+      });
+      reader.readAsDataURL(fileList[0].originFileObj);
+    }
+  }, [fileList]);
+
+  const upimg = async (code) => {
+    let body = {
+      imagem: code,
+      id: selectedTaskId,
+    };
+    if (code) await imgCardapio(body);
+  };
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
   const steps = [
     {
       title: "Bem vindo",
@@ -142,6 +185,7 @@ export default function Dashboard({ atualizar, user }) {
     setDescription(task.description);
     setSub(task.sub);
     setActive(task.active);
+    setImgByte(task.img);
     setCategory(task.category);
     handleShowModalNewAction();
   }
@@ -158,6 +202,7 @@ export default function Dashboard({ atualizar, user }) {
         description,
         sub,
         active,
+        imagem: imgByte,
         category,
         update_at: new Date(),
         update_by: userDate.name,
@@ -171,6 +216,7 @@ export default function Dashboard({ atualizar, user }) {
         description,
         sub,
         active,
+        imagem: imgByte,
         category,
         update_at: new Date(),
         update_by: userDate.name,
@@ -193,12 +239,17 @@ export default function Dashboard({ atualizar, user }) {
     setSub("");
     setActive(true);
     setCategory(null);
+    setImgModal(null);
+    setImgByte("");
+    setFileList([]);
   }
   function closeModal() {
     if (modalCategory) {
       setModalCategory(false);
+      setModalImgVisible(false);
     } else {
       setModalNewAction(false);
+      setModalImgVisible(false);
       clearSelecteds();
     }
   }
@@ -237,6 +288,21 @@ export default function Dashboard({ atualizar, user }) {
       key: "active",
       render: (_, text) => {
         return <p>{text.active ? "Sim" : "Não"}</p>;
+      },
+    },
+    {
+      title: "Imagem",
+      dataIndex: "img",
+      key: "img",
+      render: (_, text) => {
+        return (
+          <img
+            src={atob(text.img)}
+            onClick={() => [setModalImgVisible(true),setImgModal(atob(text.img))]}
+            alt="img"
+            width="100"
+          />
+        );
       },
     },
     {
@@ -306,6 +372,7 @@ export default function Dashboard({ atualizar, user }) {
   function handleRemoveStatus() {
     setFilteredStatus(null);
   }
+
   return (
     <>
       <Row gutter={8}>
@@ -488,6 +555,20 @@ export default function Dashboard({ atualizar, user }) {
                 />
               </Button>
             </div>
+            <div>
+              <ImgCrop rotationSlider>
+                <Upload
+                  action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                  listType="picture-card"
+                  fileList={fileList}
+                  quality={0.5}
+                  onChange={onChange}
+                  onPreview={onPreview}
+                >
+                  {fileList.length < 1 && "+Up Imagem"}
+                </Upload>
+              </ImgCrop>
+            </div>
           </Col>
         </Row>
       </Modal>
@@ -499,6 +580,9 @@ export default function Dashboard({ atualizar, user }) {
         title={"Categoria"}
       >
         <Category />
+      </Modal>
+      <Modal open={modalImgVisible} onCancel={closeModal} footer={null} width={'90vw'}>
+        <img src={imgModal} alt="img" style={{ width: "100%" }} />
       </Modal>
     </>
   );
