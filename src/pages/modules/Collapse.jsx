@@ -1,6 +1,6 @@
 /* eslint-disable  */
 import React, { useState, useEffect } from "react";
-import { Collapse, Modal } from "antd";
+import { Collapse, Modal, Image, Divider, Space } from "antd";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -82,47 +82,51 @@ const CollapseMenu = () => {
                 categotia.active === true ? (
                   <div className="border">
                     <div style={{ display: "flex" }}>
-                      <div className="flex">
-                        <div>
-                          <p className="p_1 name georgia-font">
-                            {categotia.name}
-                          </p>
-                        </div>
-                        <div className="flex">
-                          <div>
-                            <div className="sub">
-                              {categotia.sub} {categotia.description}
-                            </div>
-                            <p className="p_1 price georgia-bold-font">
-                              {categotia.price % 1 !== 0
-                                ? "R$ " + categotia.price.replace(".", ",")
-                                : "R$ " + categotia.price + ",00"}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
                       {categotia.img === undefined ||
                       categotia.img === null ? null : (
                         <div
                           className="img"
                           style={{
                             position: "relative",
-                            
                           }}
                         >
-                          <img
+                          <Image
                             src={atob(categotia.img)}
-                            style={{ borderRadius: 5 }}
-                            onClick={() => [
-                              setModalImgVisible(true),
-                              setImgModal(atob(categotia.img)),
-                            ]}
+                            style={{ borderRadius: 10 }}
                             alt={categotia.name}
-                            width="150"
-                            height="150"
+                            width={150}
+                            height={150}
                           />
                         </div>
                       )}
+                      <div className="flex">
+                        <div style={{ width: "100%", display: "contents" }}>
+                          <div>
+                            <p className="p_1 name georgia-font">
+                              {categotia.name}
+                            </p>
+                          </div>
+                          <div className="flex">
+                            <div className="sub">
+                              {categotia.sub} {categotia.description}
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "end",
+                            minWidth: "100%",
+                            alignItems: "flex-end",
+                          }}
+                        >
+                          <p className="p_1 price georgia-bold-font">
+                            {categotia.price % 1 !== 0
+                              ? "R$ " + categotia.price.replace(".", ",")
+                              : "R$ " + categotia.price + ",00"}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -130,14 +134,6 @@ const CollapseMenu = () => {
             ))}
           </Panel>
         </Collapse>
-        <Modal
-          open={modalImgVisible}
-          onCancel={closeModal}
-          footer={null}
-          width={"90vw"}
-        >
-          <img src={imgModal} alt="img" style={{ width: "100%" }} />
-        </Modal>
       </div>
     );
   });

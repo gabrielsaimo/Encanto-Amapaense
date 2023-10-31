@@ -16,6 +16,7 @@ import {
   Space,
   Tour,
   Upload,
+  Image,
 } from "antd";
 import "firebase/database";
 import ImgCrop from "antd-img-crop";
@@ -296,15 +297,11 @@ export default function Dashboard({ atualizar, user }) {
       key: "img",
       render: (_, text) => {
         return (
-          <img
+          <Image
             src={atob(text.img)}
             style={{ borderRadius: 5 }}
-            onClick={() => [
-              setModalImgVisible(true),
-              setImgModal(atob(text.img)),
-            ]}
             alt="img"
-            width="100"
+            width={100}
           />
         );
       },
