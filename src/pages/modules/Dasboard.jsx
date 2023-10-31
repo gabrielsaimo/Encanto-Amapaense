@@ -298,7 +298,11 @@ export default function Dashboard({ atualizar, user }) {
         return (
           <img
             src={atob(text.img)}
-            onClick={() => [setModalImgVisible(true),setImgModal(atob(text.img))]}
+            style={{ borderRadius: 5 }}
+            onClick={() => [
+              setModalImgVisible(true),
+              setImgModal(atob(text.img)),
+            ]}
             alt="img"
             width="100"
           />
@@ -581,7 +585,12 @@ export default function Dashboard({ atualizar, user }) {
       >
         <Category />
       </Modal>
-      <Modal open={modalImgVisible} onCancel={closeModal} footer={null} width={'90vw'}>
+      <Modal
+        open={modalImgVisible}
+        onCancel={closeModal}
+        footer={null}
+        width={"90vw"}
+      >
         <img src={imgModal} alt="img" style={{ width: "100%" }} />
       </Modal>
     </>
