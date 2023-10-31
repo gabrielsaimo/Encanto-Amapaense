@@ -92,7 +92,7 @@ export const getPedidoId = async (): Promise<pedido> => {
 };
 
 export const postPedidostatus = async (data: any): Promise<pedido> => {
-  const response = await api.post<pedido>(`/pedido/pedidos`,data);
+  const response = await api.post<pedido>(`/pedido/pedidos`, data);
   if (response.data === null) {
     return response.data;
   } else {
@@ -103,7 +103,7 @@ export const postPedidostatus = async (data: any): Promise<pedido> => {
 export const getPedidosBar = async (): Promise<any[]> => {
   const response = await api.get<pedido[]>("/pedido/bar");
   return response.data;
-}
+};
 
 export const veryfyMesa = async (messa: Number): Promise<any> => {
   const response = await api.get<any>(`/pedido/verif/${messa}`);
@@ -136,4 +136,9 @@ export const deletePedidos = async (data: pedido): Promise<void> => {
 
 export const deleteMesa = async (id_mesa: number): Promise<void> => {
   await api.delete(`/pedido/mesa/${id_mesa}`);
+};
+
+export const veryfyStatusPedidos = async (id: number): Promise<any> => {
+  const response = await api.get<any>(`pedido/pagamentos/verify/${id}`);
+  return response.data;
 };

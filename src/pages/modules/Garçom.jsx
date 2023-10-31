@@ -618,7 +618,13 @@ export default function Garçom() {
           const email = {
             destinatario: destinararios,
             assunto: "Pedido Finalizado",
-            corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Finalizado</h1><p>Finalizado por: ${userNome},</p><p>O pedido N° ${dadosFinalizar.id} foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Metodos de Pagamento:${vlvl}</p><p>Valor: R$ ${valorMesa}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+            corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Finalizado</h1><p>Finalizado por: ${userNome},</p><p>O pedido N° ${
+              dadosFinalizar.id
+            } foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Metodos de Pagamento:${vlvl}</p><p>Valor Mesa: R$ ${valorMesa}</p><p>Taxa de serviço + 10%: R$ ${(
+              parseInt(valorMesa) * 0.1
+            ).toFixed(2)}</p><p>Valor Total: R$ ${
+              (parseInt(valorMesa) * 0.1).toFixed(2) + valorMesa
+            }</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
           };
           setModalFinalizar(false);
           await postEmail(email);

@@ -15,6 +15,7 @@ import {
   getPedidos,
   postPedidosStatus,
   postPedidostatus,
+  veryfyStatusPedidos,
 } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
@@ -97,7 +98,7 @@ export default function Cozinha() {
         mensagens.type
       );
       getPedido();
-      
+
       if (mensagens.type === "success") {
         new Audio(sound).play();
       } else {
@@ -175,8 +176,14 @@ export default function Cozinha() {
 
     await postPedidostatus(dataPedido);
 
-    StatusPedidoFinal(pedido.id, status);
-
+    const returnVerify = await veryfyStatusPedidos(pedido.pedidos);
+    console.log(
+      "🚀 ~ file: Cozinha.jsx:180 ~ StatusPedido ~ returnVerify:",
+      returnVerify.length
+    );
+    if (returnVerify.length === 1) {
+      StatusPedidoFinal(pedido.id, status);
+    }
     getPedido();
   };
 
@@ -282,7 +289,16 @@ export default function Cozinha() {
   };
 
   return (
-    <Card>
+    <Card
+      style={{
+        backgroundImage:
+          "url(https://img.freepik.com/fotos-gratis/vista-lateral-do-chef-queimando-um-prato-na-cozinha_23-2148763118.jpg?w=1380&t=st=1698719436~exp=1698720036~hmac=086f3a4813af89ce79e7b81da27744f6b692ca453f7b959f4587ef1c7f98e10f)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+      }}
+    >
       {!acessable ? (
         <Modal
           title="Acesso Restrito para Administradores"
@@ -311,7 +327,7 @@ export default function Cozinha() {
           </div>
         </Modal>
       ) : (
-        <Card>
+        <Card style={{ backgroundColor: "rgba(255,255,255,0.8)" }}>
           {userNome}
           {contextHolder}
           <div style={{ float: "right" }}>
@@ -323,6 +339,7 @@ export default function Cozinha() {
             <div style={{ marginBottom: 10 }}>
               <Descriptions
                 bordered
+                style={{ backgroundColor: "rgb(255, 255, 255)",borderRadius: 10 }}
                 column={{
                   xxl: 4,
                   xl: 3,
@@ -371,6 +388,7 @@ export default function Cozinha() {
                                 {pedidoss.categoria !== "Bebidas" &&
                                 pedidoss.categoria !== "Sucos exóticos" ? (
                                   pedidoss.status !== "Cancelado" &&
+                                  pedidoss.status !== "Finalizado" &&
                                   pedidoss.status !== "Em Cancelamento" &&
                                   pedidoss.status !== "Pronto" ? (
                                     <Button
@@ -400,7 +418,7 @@ export default function Cozinha() {
                                         ? "Em Preparo"
                                         : pedidoss.status === "Em Preparo"
                                         ? "Pronto"
-                                        : "Finalizar"}
+                                        : null}
                                     </Button>
                                   ) : null
                                 ) : null}

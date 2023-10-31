@@ -17,6 +17,7 @@ import {
   getPedidosBar,
   postPedidosStatus,
   postPedidostatus,
+  veryfyStatusPedidos,
 } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import { getUser } from "../../services/user.ws";
@@ -289,6 +290,7 @@ export default function Bar() {
   };
 
   const StatusPedido = async (data, status) => {
+    console.log("🚀 ~ file: BarMan.jsx:293 ~ StatusPedido ~ data:", data);
     const dataPedido = {
       id: data.id,
       status: status,
@@ -299,7 +301,10 @@ export default function Bar() {
     };
 
     await postPedidostatus(dataPedido);
-    StatusPedidoFinal(data.idptincipal, status);
+    const returnVerify = await veryfyStatusPedidos(data.idpedido);
+    if (returnVerify.length === 1) {
+      StatusPedidoFinal(data.idptincipal, status);
+    }
     getPedidosBarUni();
   };
 
@@ -405,7 +410,16 @@ export default function Bar() {
   };
 
   return (
-    <Card>
+    <Card
+      style={{
+        backgroundImage:
+          "url(https://images2.alphacoders.com/553/553717.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+      }}
+    >
       {!acessable ? (
         <Modal
           title="Acesso Restrito para Administradores"
@@ -434,7 +448,8 @@ export default function Bar() {
           </div>
         </Modal>
       ) : (
-        <Card>
+        <Card style={{ backgroundColor: "rgba(255,255,255,0.8)" }}
+        >
           {userNome}
           {contextHolder}
           <div style={{ float: "right" }}>
