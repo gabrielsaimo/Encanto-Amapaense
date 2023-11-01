@@ -14,6 +14,7 @@ const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const [imgModal, setImgModal] = useState(null);
+  const [AllImg, setSetAllImg] = useState([]);
   useEffect(() => {
     cardapio.length === 0 && gtCardapio();
     cardapioCategory.length === 0 && getCardapioCategory();
@@ -36,11 +37,6 @@ const CollapseMenu = () => {
     }
     return null;
   };
-
-  function closeModal() {
-    setModalImgVisible(false);
-  }
-  const [modalImgVisible, setModalImgVisible] = useState(false);
 
   const items = cardapioCategory.map((item1, index) => {
     const key = item1.name;
@@ -93,12 +89,12 @@ const CollapseMenu = () => {
                           <Image
                             src={atob(categotia.img)}
                             style={{ borderRadius: 10 }}
-                            alt={categotia.name}
                             width={150}
                             height={150}
                           />
                         </div>
                       )}
+
                       <div className="flex">
                         <div style={{ width: "100%", display: "contents" }}>
                           <div>

@@ -33,6 +33,7 @@ import {
   deleteCardapio,
   getCardapio,
   imgCardapio,
+  InsertImg,
   postCardapio,
   putCardapio,
 } from "../../services/cardapio.ws";
@@ -75,7 +76,19 @@ export default function Dashboard({ atualizar, user }) {
     if (fileList.length > 0) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        upimg(reader.result);
+        if (imgByte.length > 0) {
+          console.log(
+            "🚀 ~ file: Dasboard.jsx:80 ~ reader.addEventListener ~ imgByte:",
+            imgByte
+          );
+          upimg(reader.result);
+        } else {
+          console.log(
+            "🚀 ~ file: Dasboard.jsx:83 ~ reader.addEventListener ~ imgByte:",
+            imgByte
+          );
+          insertImg(reader.result);
+        }
       });
       reader.readAsDataURL(fileList[0].originFileObj);
     }
@@ -84,9 +97,19 @@ export default function Dashboard({ atualizar, user }) {
   const upimg = async (code) => {
     let body = {
       imagem: code,
-      id: selectedTaskId,
+      idreq: selectedTaskId,
+      tipo: "cardapio",
     };
     if (code) await imgCardapio(body);
+  };
+
+  const insertImg = async (code) => {
+    let body = {
+      imagem: code,
+      idreq: selectedTaskId,
+      tipo: "cardapio",
+    };
+    if (code) await InsertImg(body);
   };
 
   const onPreview = async (file) => {

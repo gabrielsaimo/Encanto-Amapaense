@@ -32,11 +32,16 @@ export const deleteCardapio = async (data: Cardapio): Promise<void> => {
 };
 
 export const imgCardapio = async (data: any): Promise<any> => {
-  const response = await api.post<any>("/cardapio/imagem", data);
+  const response = await api.post<any>("/cardapio/imagemsub", data);
   return response.data;
 };
 
 export const getImgCardapio = async (id: number): Promise<any> => {
   const response = await api.get<any>("/cardapio/imagem/" + id);
+  return response.data;
+};
+
+export const InsertImg = async (data: any): Promise<any> => {
+  const response = await api.post<any>("/cardapio/InsertImg", data);
   return response.data;
 };
