@@ -91,7 +91,10 @@ const CollapseMenu = () => {
                             showArrows={true}
                             dotPosition={"bottom"}
                             style={{
-                              width: 120,
+                              width: "30vw",
+
+                              maxWidth: "300px",
+                              minWidth: "100px",
                               color: "#fff",
                             }}
                           >
@@ -103,9 +106,11 @@ const CollapseMenu = () => {
                                     borderRadius: 10,
                                     color: "#fff",
                                     objectFit: "fill",
+                                    minWidth: "100px",
                                   }}
                                   alt="img"
-                                  width={"40vw"}
+                                  width={"30vw"}
+                                  height={"30vw"}
                                 />
                               </div>
                             ))}
