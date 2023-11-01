@@ -102,9 +102,10 @@ const CollapseMenu = () => {
                                   style={{
                                     borderRadius: 10,
                                     color: "#fff",
+                                    objectFit: "fill",
                                   }}
                                   alt="img"
-                                  width={100}
+                                  width={"40vw"}
                                 />
                               </div>
                             ))}
