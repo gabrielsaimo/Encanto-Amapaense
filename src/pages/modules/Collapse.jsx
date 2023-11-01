@@ -1,6 +1,6 @@
 /* eslint-disable  */
 import React, { useState, useEffect } from "react";
-import { Collapse, Modal, Image, Divider, Space } from "antd";
+import { Collapse, Modal, Image, Divider, Space, Carousel } from "antd";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -86,12 +86,29 @@ const CollapseMenu = () => {
                             position: "relative",
                           }}
                         >
-                          <Image
-                            src={atob(categotia.img)}
-                            style={{ borderRadius: 10 }}
-                            width={150}
-                            height={150}
-                          />
+                          <Carousel
+                            autoplay={true}
+                            showArrows={true}
+                            dotPosition={"bottom"}
+                            style={{
+                              width: 120,
+                              color: "#fff",
+                            }}
+                          >
+                            {categotia.img.split(",").map((item, index) => (
+                              <div key={index}>
+                                <Image
+                                  src={atob(item)}
+                                  style={{
+                                    borderRadius: 10,
+                                    color: "#fff",
+                                  }}
+                                  alt="img"
+                                  width={100}
+                                />
+                              </div>
+                            ))}
+                          </Carousel>
                         </div>
                       )}
 

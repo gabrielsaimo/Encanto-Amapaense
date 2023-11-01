@@ -17,6 +17,7 @@ import {
   Tour,
   Upload,
   Image,
+  Carousel,
 } from "antd";
 import "firebase/database";
 import ImgCrop from "antd-img-crop";
@@ -27,7 +28,6 @@ import {
   FilterOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { service } from "../../services/firebase.ws";
 import Category from "./Category";
 import {
   deleteCardapio,
@@ -67,26 +67,20 @@ export default function Dashboard({ atualizar, user }) {
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const ref5 = useRef(null);
+  const [coint, setCoint] = useState(0);
   const [open, setOpen] = useState(false);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
+    setCoint(coint + 1);
   };
 
   useEffect(() => {
-    if (fileList.length > 0) {
+    if (fileList.length > 0 && coint == 1) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        if (imgByte.length > 0) {
-          console.log(
-            "🚀 ~ file: Dasboard.jsx:80 ~ reader.addEventListener ~ imgByte:",
-            imgByte
-          );
+        if (imgByte) {
           upimg(reader.result);
         } else {
-          console.log(
-            "🚀 ~ file: Dasboard.jsx:83 ~ reader.addEventListener ~ imgByte:",
-            imgByte
-          );
           insertImg(reader.result);
         }
       });
@@ -266,6 +260,7 @@ export default function Dashboard({ atualizar, user }) {
     setImgModal(null);
     setImgByte("");
     setFileList([]);
+    setCoint(0);
   }
   function closeModal() {
     if (modalCategory) {
@@ -319,13 +314,29 @@ export default function Dashboard({ atualizar, user }) {
       dataIndex: "img",
       key: "img",
       render: (_, text) => {
+        const data = text.img ? text.img.split(", ") : [];
+
         return (
-          <Image
-            src={atob(text.img)}
-            style={{ borderRadius: 5 }}
-            alt="img"
-            width={100}
-          />
+          <Carousel
+            autoplay={true}
+            dotPosition={"bottom"}
+            style={{ width: 160 }}
+          >
+            {data.map((item, index) => (
+              <div key={index}>
+                <Image
+                  src={atob(item)}
+                  style={{
+                    borderRadius: 10,
+                    color: "#fff",
+                  }}
+                  alt="img"
+                  className="img-fluid"
+                  width={150}
+                />
+              </div>
+            ))}
+          </Carousel>
         );
       },
     },
