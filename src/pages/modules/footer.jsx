@@ -13,7 +13,7 @@ const Footer = () => {
     >
       <p>Copyrights © 2023 SAIMO </p>
       <div style={{ width: 10 }} />
-      <img src={logo} width={40} height={40} style={{ borderRadius: 50 }} />
+      <img src={logo} alt="img" width={40} height={40} style={{ borderRadius: 50 }} />
     </div>
   );
 };
