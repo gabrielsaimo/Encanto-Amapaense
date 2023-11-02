@@ -1,42 +1,39 @@
 .border {
-  border: 3px solid white;
+  border: 3px solid #7a4827;
   border-radius: 10px;
-  border-color: #7a4827;
-  margin: 2px;
-  margin-bottom: 25px;
+  margin: 2px 0 25px;
   padding: 5px;
 }
+
 .flex {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding-left: 10px;
   flex-wrap: wrap;
+  padding-left: 10px;
 }
+
 .p_1 {
   -webkit-background-clip: text;
+  background-clip: text;
   font-weight: bold;
-  flex: none;
   color: transparent;
   margin-left: 10px;
-  background-clip: text;
 }
+
 .name {
   color: #7a4827;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 0px;
-  display: contents;
-  flex: none;
+  margin-top: 0;
   text-align: start;
 }
+
 .price {
   color: #7a4827;
   font-weight: bold;
   font-size: 16px;
-
-  display: contents;
 }
+
 .sub {
   color: #7a4827;
   font-weight: bold;
@@ -44,17 +41,21 @@
   font-size: 12px;
   text-align: start;
 }
+
 @font-face {
   font-family: "Georgia";
   src: url("../fonts/georgia.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Georgia-bold";
   src: url("../fonts/georgia-bold.ttf") format("truetype");
 }
-.georgia-font {
+
+.georgia-font, .georgia-bold-font {
   font-family: "Georgia", serif;
 }
+
 .georgia-bold-font {
   font-family: "Georgia-bold", serif;
 }
