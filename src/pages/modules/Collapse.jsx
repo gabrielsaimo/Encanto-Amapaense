@@ -72,7 +72,7 @@ const CollapseMenu = () => {
               style={{
                 color: "#7a4827",
                 fontWeight: "bold",
-                backgroundImage: `url(${require("../../assets/tinta.png")}) `,
+                backgroundImage: `url(${require("../../assets/tinta.webp")}) `,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: 150,
                 backgroundPositionX: "50%",

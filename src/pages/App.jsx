@@ -26,14 +26,14 @@ function App() {
   return (
     <div className="App background_fundo">
       <LazyLoadImage
-        src={require("../assets/fundo.png")}
+        src={require("../assets/fundo.webp")}
         className="fundo"
         alt="fundo"
         decoding="async"
         loading="eager"
       />
       <LazyLoadImage
-        src={require("../assets/logo.png")}
+        src={require("../assets/logo.webp")}
         className="logo"
         alt="logo-principal"
         loading="eager"
