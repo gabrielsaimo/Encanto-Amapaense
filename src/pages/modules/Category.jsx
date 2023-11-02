@@ -12,7 +12,6 @@ import {
   Select,
   Table,
 } from "antd";
-import "../../css/Collapse.css";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -20,14 +19,16 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-
+import "../../css/Collapse.css";
 import {
   deleteCategoty,
   getCategoty,
   postCategoty,
   putCategoty,
 } from "../../services/category.ws";
+
 const { Option } = Select;
+
 export default function Category() {
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const [action, setAction] = useState(false);
@@ -39,46 +40,36 @@ export default function Category() {
   const [searchData, setSearchData] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
 
-  useEffect(() => {
-    getCardapioCategory();
-  }, [action]);
-  const getCardapioCategory = async () => {
-    const cardapioCollection = await getCategoty();
-    setCardapioCategory(cardapioCollection.sort((a, b) => a.id - b.id));
-  };
+
+
   useEffect(() => {
     filterTable();
   }, [search, cardapioCategory]);
+
   function filterTable() {
-    if (!search) {
-      setSearchData(cardapioCategory);
-    } else {
-      const array = cardapioCategory.filter(
-        (record) =>
-          !search ||
-          record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1
-      );
-      setSearchData(array);
-    }
+    const filteredData = cardapioCategory.filter(
+      (record) =>
+        !search ||
+        record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1
+    );
+    setSearchData(filteredData);
   }
+
   async function handleSave() {
-    if (selectedTaskId) {
-      await postCategoty({
-        id,
-        name,
-        active,
-      });
-      message.success("Item atualizado com sucesso!");
-    } else {
-      await putCategoty({
-        id: cardapioCategory.length + 1,
-        name,
-        active,
-      });
-      message.success("Item salvo com sucesso!");
+    try {
+      if (selectedTaskId) {
+        await postCategoty({ id, name, active });
+        message.success("Item atualizado com sucesso!");
+      } else {
+        await putCategoty({ id: cardapioCategory.length + 1, name, active });
+        message.success("Item salvo com sucesso!");
+      }
+      setAction(!action);
+      closeModal();
+    } catch (error) {
+      console.error(error);
+      message.error("Erro ao salvar categoria.");
     }
-    setAction(!action);
-    closeModal();
   }
 
   function handleClickEdit(task) {
@@ -88,39 +79,56 @@ export default function Category() {
     setActive(task.active);
     handleShowModalNewAction();
   }
+
   async function confirmDelete(record) {
-    await deleteCategoty(record);
-    message.success("Item deletado com sucesso!");
-    setAction(!action);
+    try {
+      await deleteCategoty(record);
+      message.success("Item deletado com sucesso!");
+      setAction(!action);
+    } catch (error) {
+      console.error(error);
+      message.error("Erro ao excluir categoria.");
+    }
   }
+
   function handleShowModalNewAction() {
     setModalNewAction(true);
   }
+
+  function disableSave() {
+    return !name || active === "" || active === null;
+  }
+
+  function clearSelecteds() {
+    setSelectedTaskId(null);
+    setId("");
+    setName("");
+    setActive("");
+  }
+
+  function closeModal() {
+    setModalNewAction(false);
+    clearSelecteds();
+  }
+
   const columns = [
     {
       title: "Ordem",
       dataIndex: "id",
       key: "id",
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-      },
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Categoria",
       dataIndex: "name",
       key: "name",
-      sorter: {
-        compare: (a, b) => a.name - b.name,
-      },
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
       title: "Ativo",
       dataIndex: "active",
       key: "active",
-
-      render: (_, text) => {
-        return <p>{text.active ? "Sim" : "Não"}</p>;
-      },
+      render: (text) => (text ? "Sim" : "Não"),
     },
     {
       title: "Ações",
@@ -128,51 +136,29 @@ export default function Category() {
       key: "actions",
       width: 150,
       align: "center",
-      render: (_, record) => {
-        return (
-          <div>
-            <Button
-              style={{ backgroundColor: "yellow" }}
-              onClick={() => handleClickEdit(record)}
-            >
-              <EditOutlined size={24} color="#00CC66" />
+      render: (_, record) => (
+        <div>
+          <Button
+            style={{ backgroundColor: "yellow" }}
+            onClick={() => handleClickEdit(record)}
+          >
+            <EditOutlined size={24} color="#00CC66" />
+          </Button>
+          <Popconfirm
+            title="Tem certeza que deseja excluir essa tarefa?"
+            onConfirm={() => confirmDelete(record)}
+            okText="Excluir"
+            okButtonProps={{ danger: true }}
+            cancelText="Cancelar"
+          >
+            <Button style={{ backgroundColor: "red" }}>
+              <DeleteOutlined size={24} style={{ color: "#fff" }} />
             </Button>
-
-            <Popconfirm
-              title="Tem certeza que deseja excluir essa tarefa?"
-              onConfirm={() => confirmDelete(record)}
-              okText="Excluir"
-              okButtonProps={{ danger: true }}
-              cancelText="Cancelar"
-            >
-              <Button style={{ backgroundColor: "red" }}>
-                <DeleteOutlined
-                  size={24}
-                  style={{
-                    color: "#fff",
-                  }}
-                />
-              </Button>
-            </Popconfirm>
-          </div>
-        );
-      },
+          </Popconfirm>
+        </div>
+      ),
     },
   ];
-
-  function disableSave() {
-    return !name || active === "" || active === null;
-  }
-  function clearSelecteds() {
-    setSelectedTaskId(null);
-    setId("");
-    setName("");
-    setActive("");
-  }
-  function closeModal() {
-    setModalNewAction(false);
-    clearSelecteds();
-  }
 
   return (
     <div>
@@ -181,12 +167,7 @@ export default function Category() {
           <Card bordered={false}>
             <Row justify="space-between" gutter={[16, 16]}>
               <Col span={12}>
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                  }}
-                >
+                <div style={{ width: "100%", display: "flex" }}>
                   <Button
                     icon={<PlusOutlined />}
                     type="primary"
@@ -220,9 +201,9 @@ export default function Category() {
       </Row>
       <Table dataSource={searchData} columns={columns} />
       <Modal
-        open={modalNewAction}
+        visible={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
-        okText={"Salvar"}
+        okText="Salvar"
         onOk={handleSave}
         onCancel={closeModal}
         title={selectedTaskId ? "Atualizar Categoria" : "Nova Categoria"}
@@ -233,14 +214,9 @@ export default function Category() {
               style={{ width: "100%", margin: "10px 0" }}
               size="large"
               placeholder="Nome"
-              value={
-                name !== ""
-                  ? name[0].toUpperCase() + name.slice(1).toLowerCase()
-                  : undefined
-              }
+              value={name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}
               onChange={(e) => setName(e.target.value)}
             />
-
             <Select
               style={{ width: "100%", margin: "10px 0" }}
               size="large"

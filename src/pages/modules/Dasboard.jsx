@@ -62,6 +62,7 @@ export default function Dashboard({ atualizar, user }) {
   const [modalCategory, setModalCategory] = useState(false);
   const [modalImgVisible, setModalImgVisible] = useState(false);
   const [imgModal, setImgModal] = useState(null);
+  const random = Math.floor(Math.random() * 100000000);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -86,7 +87,7 @@ export default function Dashboard({ atualizar, user }) {
       });
       reader.readAsDataURL(fileList[0].originFileObj);
     }
-  }, [fileList]);
+  }, [fileList[0]]);
 
   const upimg = async (code) => {
     let body = {
@@ -102,6 +103,7 @@ export default function Dashboard({ atualizar, user }) {
       imagem: code,
       idreq: selectedTaskId,
       tipo: "cardapio",
+      id: random,
     };
     if (code) await InsertImg(body);
   };
@@ -313,6 +315,7 @@ export default function Dashboard({ atualizar, user }) {
       title: "Imagem",
       dataIndex: "img",
       key: "img",
+      width: 160,
       render: (_, text) => {
         const data = text.img ? text.img.split(", ") : [];
 
@@ -321,6 +324,7 @@ export default function Dashboard({ atualizar, user }) {
             autoplay={true}
             dotPosition={"bottom"}
             style={{ width: 160 }}
+            width={160}
           >
             {data.map((item, index) => (
               <div key={index}>
@@ -597,7 +601,7 @@ export default function Dashboard({ atualizar, user }) {
                   listType="picture-card"
                   fileList={fileList}
                   quality={0.5}
-                  onChange={onChange}
+                  onChange={(e) => onChange(e)}
                   onPreview={onPreview}
                 >
                   {fileList.length < 1 && "+Up Imagem"}
