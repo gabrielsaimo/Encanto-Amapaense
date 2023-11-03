@@ -6,7 +6,7 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
-import { getCardapio } from "../../services/cardapio.ws";
+import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
 
 const { Panel } = Collapse;
@@ -14,7 +14,7 @@ const { Panel } = Collapse;
 const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
-
+  const [imgSrc, setImgSrc] = useState([]);
   useEffect(() => {
     if (cardapio.length === 0) {
       gtCardapio();
@@ -26,12 +26,27 @@ const CollapseMenu = () => {
 
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
+    for (let i = 0; i < cardapioCollection.length; i++) {
+      await getImgCardapioWS(
+        cardapioCollection[i].id,
+        cardapioCollection[i].ids
+      );
+    }
     setCardapio(cardapioCollection);
   };
 
   const getCardapioCategory = async () => {
     const cardapioCollection = await getCategoty();
     setCardapioCategory(cardapioCollection);
+  };
+
+  const getImgCardapioWS = async (idimg, ids) => {
+    if (ids === null) {
+      return null;
+    }
+    const img = await getImgCardapio(idimg, ids);
+    imgSrc.push(img);
+    return img;
   };
 
   const renderSlides = useMemo(() => {
@@ -80,53 +95,55 @@ const CollapseMenu = () => {
               }}
               header={item1.name}
             >
-              {cardapio.map((categotia, idx) => {
-                if (categotia.category === item1.name && categotia.active) {
+              {cardapio.map((categoria, idx) => {
+                if (categoria.category === item1.name && categoria.active) {
                   return (
                     <div key={idx} className="border">
                       <div style={{ display: "flex" }}>
-                        {categotia.img && (
+                        {imgSrc.map((img1, index) => (
                           <div className="img">
-                            <Carousel
-                              autoplay={true}
-                              showArrows={true}
-                              dotPosition="bottom"
-                              style={{
-                                width: "30vw",
-                                minWidth: "100px",
-                                color: "#fff",
-                              }}
-                            >
-                              {categotia.img.split(",").map((item, index) => (
-                                <div key={index}>
-                                  <Image
-                                    src={atob(item)}
-                                    style={{
-                                      borderRadius: 10,
-                                      color: "#fff",
-                                      objectFit: "fill",
-                                      minWidth: "100px",
-                                    }}
-                                    alt="img"
-                                    width={"30vw"}
-                                    height={"30vw"}
-                                  />
-                                </div>
-                              ))}
-                            </Carousel>
+                            {img1.map((img, index) => (
+                              <Carousel
+                                autoplay={true}
+                                showArrows={true}
+                                dotPosition="bottom"
+                                style={{
+                                  width: "30vw",
+                                  minWidth: "100px",
+                                  color: "#fff",
+                                }}
+                              >
+                                {categoria.id === img.idreq && (
+                                  <div key={index}>
+                                    <Image
+                                      src={atob(img.imagem)}
+                                      style={{
+                                        borderRadius: 10,
+                                        color: "#fff",
+                                        objectFit: "fill",
+                                        minWidth: "100px",
+                                      }}
+                                      alt="img"
+                                      width={"30vw"}
+                                      height={"30vw"}
+                                    />
+                                  </div>
+                                )}
+                              </Carousel>
+                            ))}
                           </div>
-                        )}
+                        ))}
 
                         <div className="flex">
                           <div style={{ width: "100%", display: "contents" }}>
                             <div>
                               <p className="p_1 name georgia-font">
-                                {categotia.name}
+                                {categoria.name}
                               </p>
                             </div>
                             <div className="flex">
                               <div className="sub">
-                                {categotia.sub} {categotia.description}
+                                {categoria.sub} {categoria.description}
                               </div>
                             </div>
                           </div>
@@ -139,9 +156,9 @@ const CollapseMenu = () => {
                             }}
                           >
                             <p className="p_1 price georgia-bold-font">
-                              {categotia.price % 1 !== 0
-                                ? "R$ " + categotia.price.replace(".", ",")
-                                : "R$ " + categotia.price + ",00"}
+                              {categoria.price % 1 !== 0
+                                ? "R$ " + categoria.price.replace(".", ",")
+                                : "R$ " + categoria.price + ",00"}
                             </p>
                           </div>
                         </div>
