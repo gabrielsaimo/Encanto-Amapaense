@@ -159,14 +159,15 @@ export default function Dashboard({ atualizar, user }) {
   useEffect(() => {
     getCardapiocategory();
     gtCardapio();
-    if (cardapio.length > 0 && imgSrc.length === 0) {
-      getImgCardapioWS();
-    }
-  }, [actionCardapio, atualizar,cardapio]);
+  }, [actionCardapio, atualizar]);
   useEffect(() => {
     filterTable();
   }, [search, cardapio, filteredStatus]);
-
+  useEffect(() => {
+    if (cardapio.length > 0 && imgSrc.length === 0) {
+      getImgCardapioWS();
+    }
+  }, [cardapio]);
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
     const cardapios = cardapioCollection;
