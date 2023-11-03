@@ -167,7 +167,7 @@ export default function Dashboard({ atualizar, user }) {
     if (cardapio.length > 0 && imgSrc.length === 0) {
       getImgCardapioWS();
     }
-  }, [cardapio]);
+  }, [cardapio, atualizar, actionCardapio]);
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
     const cardapios = cardapioCollection;
