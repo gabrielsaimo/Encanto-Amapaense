@@ -29,9 +29,11 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import Category from "./Category";
+import LazyLoad from "react-lazyload";
 import {
   deleteCardapio,
   getCardapio,
+  getImgCardapio,
   imgCardapio,
   InsertImg,
   postCardapio,
@@ -70,6 +72,7 @@ export default function Dashboard({ atualizar, user }) {
   const ref5 = useRef(null);
   const [coint, setCoint] = useState(0);
   const [open, setOpen] = useState(false);
+  const [imgSrc, setImgSrc] = useState([]);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
     setCoint(coint + 1);
@@ -160,6 +163,13 @@ export default function Dashboard({ atualizar, user }) {
   useEffect(() => {
     filterTable();
   }, [search, cardapio, filteredStatus]);
+
+  useEffect(() => {
+    if (cardapio.length > 0 && imgSrc.length === 0) {
+      // Certifique-se de que o cardápio foi carregado antes de buscar as imagens
+      getImgCardapioWS();
+    }
+  }, [cardapio]);
   //! Cardapio
 
   const gtCardapio = async () => {
@@ -274,6 +284,13 @@ export default function Dashboard({ atualizar, user }) {
       clearSelecteds();
     }
   }
+
+  const getImgCardapioWS = async () => {
+    for (let i = 0; i < cardapio.length; i++) {
+      const img = await getImgCardapio(cardapio[i].id, cardapio[i].ids);
+      setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
+    }
+  };
   const columns = [
     {
       title: "ID",
@@ -317,31 +334,11 @@ export default function Dashboard({ atualizar, user }) {
       key: "img",
       width: 160,
       render: (_, text) => {
-        const data = text.img ? text.img.split(", ") : [];
-
-        return (
-          <Carousel
-            autoplay={true}
-            dotPosition={"bottom"}
-            style={{ width: 160 }}
-            width={160}
-          >
-            {data.map((item, index) => (
-              <div key={index}>
-                <Image
-                  src={atob(item)}
-                  style={{
-                    borderRadius: 10,
-                    color: "#fff",
-                  }}
-                  alt="img"
-                  className="img-fluid"
-                  width={150}
-                />
-              </div>
-            ))}
-          </Carousel>
-        );
+        return imgSrc.map((img1, index) => (
+          <div className="img" key={index}>
+            {img1.map((img, index) => renderImageCarousel(img, index, text.id))}
+          </div>
+        ));
       },
     },
     {
@@ -399,6 +396,41 @@ export default function Dashboard({ atualizar, user }) {
       },
     },
   ];
+
+  const renderImageCarousel = (img, index, id) => {
+    if (img.idreq && index === 0 && img.idreq === id) {
+      return (
+        <LazyLoad key={index} height={200} offset={100}>
+          <Carousel
+            autoplay={true}
+            showArrows={true}
+            dotPosition="bottom"
+            style={{
+              width: 100,
+              minWidth: "100px",
+              color: "#fff",
+            }}
+          >
+            <div key={index}>
+              <Image
+                src={atob(img.imagem)}
+                style={{
+                  borderRadius: 10,
+                  color: "#fff",
+                  objectFit: "fill",
+                  minWidth: "100px",
+                }}
+                alt="img"
+                width={100}
+              />
+            </div>
+          </Carousel>
+        </LazyLoad>
+      );
+    }
+    // Se img não for uma matriz válida, retorne algo apropriado, como uma mensagem de erro ou componente vazio
+    return null;
+  };
 
   function handleChangeStatus(e) {
     const { value } = e.target;

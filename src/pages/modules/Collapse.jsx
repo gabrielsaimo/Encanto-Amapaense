@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import React, { useState, useEffect, useMemo } from "react";
 import { Collapse, Image, Carousel } from "antd";
+import LazyLoad from "react-lazyload";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -15,6 +16,7 @@ const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
   const [imgSrc, setImgSrc] = useState([]);
+
   useEffect(() => {
     if (cardapio.length === 0) {
       gtCardapio();
@@ -22,16 +24,14 @@ const CollapseMenu = () => {
     if (cardapioCategory.length === 0) {
       getCardapioCategory();
     }
-  }, []);
+    if (cardapio.length > 0 && imgSrc.length === 0) {
+      // Certifique-se de que o cardápio foi carregado antes de buscar as imagens
+      getImgCardapioWS();
+    }
+  }, [cardapio]);
 
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
-    for (let i = 0; i < cardapioCollection.length; i++) {
-      await getImgCardapioWS(
-        cardapioCollection[i].id,
-        cardapioCollection[i].ids
-      );
-    }
     setCardapio(cardapioCollection);
   };
 
@@ -40,13 +40,47 @@ const CollapseMenu = () => {
     setCardapioCategory(cardapioCollection);
   };
 
-  const getImgCardapioWS = async (idimg, ids) => {
-    if (ids === null) {
-      return null;
+  const getImgCardapioWS = async () => {
+    for (let i = 0; i < cardapio.length; i++) {
+      const img = await getImgCardapio(cardapio[i].id, cardapio[i].ids);
+      setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
     }
-    const img = await getImgCardapio(idimg, ids);
-    imgSrc.push(img);
-    return img;
+  };
+
+  const renderImageCarousel = (img, index, id) => {
+    if (img.idreq && index === 0 && img.idreq === id) {
+      return (
+        <LazyLoad key={index} height={200} offset={100}>
+          <Carousel
+            autoplay={true}
+            showArrows={true}
+            dotPosition="bottom"
+            style={{
+              width: "30vw",
+              minWidth: "100px",
+              color: "#fff",
+            }}
+          >
+            <div key={index}>
+              <Image
+                src={atob(img.imagem)}
+                style={{
+                  borderRadius: 10,
+                  color: "#fff",
+                  objectFit: "fill",
+                  minWidth: "100px",
+                }}
+                alt="img"
+                width={"30vw"}
+                height={"30vw"}
+              />
+            </div>
+          </Carousel>
+        </LazyLoad>
+      );
+    }
+    // Se img não for uma matriz válida, retorne algo apropriado, como uma mensagem de erro ou componente vazio
+    return null;
   };
 
   const renderSlides = useMemo(() => {
@@ -101,36 +135,10 @@ const CollapseMenu = () => {
                     <div key={idx} className="border">
                       <div style={{ display: "flex" }}>
                         {imgSrc.map((img1, index) => (
-                          <div className="img">
-                            {img1.map((img, index) => (
-                              <Carousel
-                                autoplay={true}
-                                showArrows={true}
-                                dotPosition="bottom"
-                                style={{
-                                  width: "30vw",
-                                  minWidth: "100px",
-                                  color: "#fff",
-                                }}
-                              >
-                                {categoria.id === img.idreq && (
-                                  <div key={index}>
-                                    <Image
-                                      src={atob(img.imagem)}
-                                      style={{
-                                        borderRadius: 10,
-                                        color: "#fff",
-                                        objectFit: "fill",
-                                        minWidth: "100px",
-                                      }}
-                                      alt="img"
-                                      width={"30vw"}
-                                      height={"30vw"}
-                                    />
-                                  </div>
-                                )}
-                              </Carousel>
-                            ))}
+                          <div className="img" key={index}>
+                            {img1.map((img, index) =>
+                              renderImageCarousel(img, index, categoria.id)
+                            )}
                           </div>
                         ))}
 
