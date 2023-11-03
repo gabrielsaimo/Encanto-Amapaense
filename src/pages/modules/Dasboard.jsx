@@ -32,6 +32,7 @@ import Category from "./Category";
 import LazyLoad from "react-lazyload";
 import {
   deleteCardapio,
+  DeleteImg,
   getCardapio,
   getImgCardapio,
   imgCardapio,
@@ -48,6 +49,7 @@ export default function Dashboard({ atualizar, user }) {
   const [cardapio, setCardapio] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [uptela, setUptela] = useState(false);
   const [search, setSearch] = useState("");
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -70,6 +72,7 @@ export default function Dashboard({ atualizar, user }) {
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const ref5 = useRef(null);
+  const [totalImg, setTotalImg] = useState(0);
   const [coint, setCoint] = useState(0);
   const [open, setOpen] = useState(false);
   const [imgSrc, setImgSrc] = useState([]);
@@ -79,27 +82,14 @@ export default function Dashboard({ atualizar, user }) {
   };
 
   useEffect(() => {
-    if (fileList.length > 0 && coint == 1) {
+    if (fileList.length > 0 && coint == 3) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        if (imgByte) {
-          upimg(reader.result);
-        } else {
-          insertImg(reader.result);
-        }
+        insertImg(reader.result);
       });
       reader.readAsDataURL(fileList[0].originFileObj);
     }
   }, [fileList[0]]);
-
-  const upimg = async (code) => {
-    let body = {
-      imagem: code,
-      idreq: selectedTaskId,
-      tipo: "cardapio",
-    };
-    if (code) await imgCardapio(body);
-  };
 
   const insertImg = async (code) => {
     let body = {
@@ -109,6 +99,7 @@ export default function Dashboard({ atualizar, user }) {
       id: random,
     };
     if (code) await InsertImg(body);
+    setUptela(!uptela);
   };
 
   const onPreview = async (file) => {
@@ -159,15 +150,15 @@ export default function Dashboard({ atualizar, user }) {
   useEffect(() => {
     getCardapiocategory();
     gtCardapio();
-  }, [actionCardapio, atualizar]);
+  }, [actionCardapio, atualizar, uptela]);
   useEffect(() => {
     filterTable();
-  }, [search, cardapio, filteredStatus]);
+  }, [search, cardapio, filteredStatus, uptela]);
   useEffect(() => {
     if (cardapio.length > 0 && imgSrc.length === 0) {
       getImgCardapioWS();
     }
-  }, [cardapio, atualizar, actionCardapio]);
+  }, [cardapio, atualizar, actionCardapio, uptela]);
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
     const cardapios = cardapioCollection;
@@ -262,6 +253,7 @@ export default function Dashboard({ atualizar, user }) {
     setName("");
     setPrice("");
     setDescription("");
+    setTotalImg(0);
     setSub("");
     setActive(true);
     setCategory(null);
@@ -429,6 +421,13 @@ export default function Dashboard({ atualizar, user }) {
     }
     // Se img não for uma matriz válida, retorne algo apropriado, como uma mensagem de erro ou componente vazio
     return null;
+  };
+
+  const DeleteImage = async (id) => {
+    await DeleteImg(id);
+    message.success("Imagem deletada com sucesso!");
+    setUptela(!uptela);
+    setActionCardapio(!actionCardapio);
   };
 
   function handleChangeStatus(e) {
@@ -626,18 +625,65 @@ export default function Dashboard({ atualizar, user }) {
               </Button>
             </div>
             <div>
-              <ImgCrop rotationSlider>
-                <Upload
-                  action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-                  listType="picture-card"
-                  fileList={fileList}
-                  quality={0.5}
-                  onChange={(e) => onChange(e)}
-                  onPreview={onPreview}
-                >
-                  {fileList.length < 1 && "+Up Imagem"}
-                </Upload>
-              </ImgCrop>
+              {totalImg < 3 && (
+                <ImgCrop rotationSlider>
+                  <Upload
+                    action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                    listType="picture-card"
+                    fileList={fileList}
+                    quality={0.5}
+                    onChange={(e) => onChange(e)}
+                    onPreview={onPreview}
+                  >
+                    {fileList.length < 1 && "+add Imagem"}
+                  </Upload>
+                </ImgCrop>
+              )}
+            </div>
+            <div>
+              {imgSrc.map((img1, index) => (
+                <div className="img" key={index}>
+                  {img1.map(
+                    (img, index) =>
+                      selectedTaskId === img.idreq &&
+                      (totalImg === 0 ? setTotalImg(img1.length) : null,
+                      (
+                        <>
+                          <img
+                            src={atob(img.imagem)}
+                            alt="img"
+                            style={{
+                              width: 100,
+                              marginRight: 5,
+                              borderRadius: 10,
+                            }}
+                          />
+
+                          <Button
+                            ref={ref5}
+                            style={{
+                              backgroundColor: "#fc5f5f",
+                              width: 20,
+                              position: "absolute",
+                              marginLeft: -35,
+                            }}
+                            onClick={() => {
+                              DeleteImage(img.id);
+                            }}
+                          >
+                            <DeleteOutlined
+                              size={24}
+                              style={{
+                                color: "#fff",
+                                marginLeft: -7,
+                              }}
+                            />
+                          </Button>
+                        </>
+                      ))
+                  )}
+                </div>
+              ))}
             </div>
           </Col>
         </Row>
