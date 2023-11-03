@@ -162,7 +162,7 @@ export default function Dashboard({ atualizar, user }) {
     if (cardapio.length > 0 && imgSrc.length === 0) {
       getImgCardapioWS();
     }
-  }, [actionCardapio, atualizar]);
+  }, [actionCardapio, atualizar,cardapio]);
   useEffect(() => {
     filterTable();
   }, [search, cardapio, filteredStatus]);
