@@ -25,7 +25,7 @@
   color: #7a4827;
   font-size: 18px;
   font-weight: bold;
-  margin-left: 20px;
+  margin-left: 1vw;
   margin-top: 0;
   text-align: start;
 }
@@ -61,4 +61,8 @@
 
 .georgia-bold-font {
   font-family: "Georgia-bold", serif;
+}
+
+img.ant-image-img {
+  border-radius: 10px;
 }

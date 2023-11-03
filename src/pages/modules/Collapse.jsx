@@ -60,7 +60,6 @@ const CollapseMenu = () => {
           style={{
             width: "30vw",
             minWidth: "100px",
-            borderRadius: 10,
             color: "#fff",
           }}
         >
