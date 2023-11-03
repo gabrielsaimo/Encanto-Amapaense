@@ -42,6 +42,9 @@ const CollapseMenu = () => {
 
   const getImgCardapioWS = async () => {
     for (let i = 0; i < cardapio.length; i++) {
+      if (!cardapio[i].ids) {
+        continue;
+      }
       const img = await getImgCardapio(cardapio[i].id, cardapio[i].ids);
       setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
     }
