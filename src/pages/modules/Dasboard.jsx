@@ -624,22 +624,7 @@ export default function Dashboard({ atualizar, user }) {
                 />
               </Button>
             </div>
-            <div>
-              {totalImg < 3 && (
-                <ImgCrop rotationSlider>
-                  <Upload
-                    action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-                    listType="picture-card"
-                    fileList={fileList}
-                    quality={0.5}
-                    onChange={(e) => onChange(e)}
-                    onPreview={onPreview}
-                  >
-                    {fileList.length < 1 && "+add Imagem"}
-                  </Upload>
-                </ImgCrop>
-              )}
-            </div>
+
             <div>
               {imgSrc.map((img1, index) => (
                 <div className="img" key={index}>
@@ -684,6 +669,22 @@ export default function Dashboard({ atualizar, user }) {
                   )}
                 </div>
               ))}
+            </div>
+            <div>
+              {totalImg < 3 && (
+                <ImgCrop rotationSlider>
+                  <Upload
+                    action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                    listType="picture-card"
+                    fileList={fileList}
+                    quality={0.5}
+                    onChange={(e) => onChange(e)}
+                    onPreview={onPreview}
+                  >
+                    {fileList.length < 1 && "+add Imagem"}
+                  </Upload>
+                </ImgCrop>
+              )}
             </div>
           </Col>
         </Row>
