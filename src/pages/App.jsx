@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Affix, Button, FloatButton, Modal, Space } from "antd";
+import { Affix, Button, FloatButton, Modal, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import CollapseMenu from "./modules/Collapse";
+
 import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
-
+const CollapseMenu = lazy(() => import("./modules/Collapse"));
 function App() {
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
@@ -19,7 +19,7 @@ function App() {
     }
   }, [contar]);
 
-  const handleLogoClick = () => {
+  const handleLogoClick = async () => {
     setContar(contar + 1);
   };
 
@@ -38,27 +38,17 @@ function App() {
         alt="logo-principal"
         loading="eager"
         decoding="async"
-        onClick={handleLogoClick}
+        onClick={() => handleLogoClick()}
       />
       <Affix offsetTop={10} style={{ marginLeft: "80%" }}>
         <Menu />
       </Affix>
-      <CollapseMenu />
-      <Space direction="vertical" style={{ margin: "10px 0" }}>
-        <Button>
-          <Link to="/Dashboard"> Dashboard</Link>
-        </Button>
-        <Button>
-          <Link to="/Garçom"> Garçom</Link>
-        </Button>
-        <Button>
-          <Link to="/Cozinha"> Cozinha</Link>
-        </Button>
-        <Button>
-          <Link to="/Bar"> Bar</Link>
-        </Button>
-      </Space>
-      <Modal visible={visible2} footer={null} closable={false} width={150}>
+      <Suspense fallback={<Spin />}>
+        <CollapseMenu />
+      </Suspense>
+
+      <Space direction="vertical" style={{ margin: "10px 0" }}></Space>
+      <Modal open={visible2} footer={null} closable={true} width={150}>
         <Space direction="vertical">
           <Button>
             <Link to="/Dashboard"> Dashboard</Link>
