@@ -1,6 +1,6 @@
 /* eslint-disable  */
 import React, { useState, useEffect, useMemo } from "react";
-import { Collapse, Image, Carousel } from "antd";
+import { Collapse, Image, Carousel, Spin } from "antd";
 import LazyLoad from "react-lazyload";
 import "../../css/Collapse.css";
 import { CaretRightOutlined } from "@ant-design/icons";
@@ -134,13 +134,33 @@ const CollapseMenu = () => {
                   return (
                     <div key={idx} className="border">
                       <div style={{ display: "flex" }}>
-                        {imgSrc.map((img1, index) => (
-                          <div className="img" key={index}>
-                            {img1.map((img, index) =>
-                              renderImageCarousel(img, index, categoria.id)
-                            )}
-                          </div>
-                        ))}
+                        {categoria.ids && (
+                          <>
+                            {imgSrc.map((img1, index) => (
+                              <div
+                                className="img"
+                                key={index}
+                                style={{ zIndex: 5 }}
+                              >
+                                {img1.map((img, index) =>
+                                  renderImageCarousel(img, index, categoria.id)
+                                )}
+                              </div>
+                            ))}
+                          </>
+                        )}
+
+                        <>
+                          {categoria.ids && (
+                            <Spin
+                              style={{
+                                margin: 5,
+                                position: "absolute",
+                                zIndex: 4,
+                              }}
+                            />
+                          )}
+                        </>
 
                         <div className="flex">
                           <div style={{ width: "100%", display: "contents" }}>

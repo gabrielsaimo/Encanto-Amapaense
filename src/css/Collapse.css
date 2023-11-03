@@ -25,6 +25,7 @@
   color: #7a4827;
   font-size: 18px;
   font-weight: bold;
+  margin-left: 20px;
   margin-top: 0;
   text-align: start;
 }
@@ -53,7 +54,8 @@
   src: url("../fonts/georgia-bold.ttf") format("truetype");
 }
 
-.georgia-font, .georgia-bold-font {
+.georgia-font,
+.georgia-bold-font {
   font-family: "Georgia", serif;
 }
 
