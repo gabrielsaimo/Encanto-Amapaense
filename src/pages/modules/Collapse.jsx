@@ -58,7 +58,7 @@ const CollapseMenu = () => {
           showArrows={true}
           dotPosition="bottom"
           style={{
-            width: "30vw",
+            width: "35vw",
             minWidth: "100px",
             color: "#fff",
           }}
@@ -77,8 +77,8 @@ const CollapseMenu = () => {
                     minWidth: "100px",
                   }}
                   alt="img"
-                  width={"30vw"}
-                  height={"30vw"}
+                  width={"35vw"}
+                  height={"35vw"}
                 />
               )
           )}
