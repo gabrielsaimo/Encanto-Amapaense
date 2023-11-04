@@ -82,7 +82,7 @@ export default function Dashboard({ atualizar, user }) {
   };
 
   useEffect(() => {
-    if (fileList.length > 0 && coint == 3) {
+    if (fileList.length > 0 && coint == 2) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         insertImg(reader.result);
@@ -242,6 +242,7 @@ export default function Dashboard({ atualizar, user }) {
     }
     setActionCardapio(!actionCardapio);
     closeModal();
+    window.location.reload();
   }
 
   function disableSave() {
@@ -271,7 +272,6 @@ export default function Dashboard({ atualizar, user }) {
       setModalImgVisible(false);
       clearSelecteds();
     }
-    window.location.reload();
   }
 
   const getImgCardapioWS = async () => {
