@@ -24,7 +24,7 @@ const SlidesBebidas = () => {
 
   return (
     <div id={"part-12"} style={{ margin: 5 }}>
-      <Carousel showArrows={true} autoplay={true}>
+      <Carousel showArrows={true} autoplay={true} autoplaySpeed={2000}>
         {files.map((item, index) => (
           <div key={index}>
             <Image
