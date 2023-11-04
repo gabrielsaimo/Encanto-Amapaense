@@ -48,41 +48,44 @@ const CollapseMenu = () => {
     }
   };
 
-  const renderImageCarousel = (img, index, id) => (
-    <LazyLoad key={index} height={200} offset={100}>
-      <Carousel
-        autoplay={true}
-        autoplaySpeed={1500}
-        showArrows={true}
-        Swiping={true}
-        draggable={true}
-        effect="fade"
-        dotPosition="bottom"
-        style={{
-          width: "45vw",
-          minWidth: "100px",
-          color: "#fff",
-        }}
-      >
-        {img
-          .filter((img1) => img1.idreq && img1.idreq === id)
-          .map((img1, index) => (
-            <Image
-              src={atob(img1.imagem)}
-              key={index}
-              style={{
-                borderRadius: 10,
-                color: "#fff",
-                objectFit: "fill",
-                minWidth: "100px",
-              }}
-              alt="img"
-              width={"45vw"}
-            />
-          ))}
-      </Carousel>
-    </LazyLoad>
-  );
+  const renderImageCarousel = (img, index, id) =>
+    img[0].idreq === id && (
+      <div className="img" key={index} style={{ zIndex: 5 }}>
+        <LazyLoad key={index} height={200} offset={100}>
+          <Carousel
+            autoplay={true}
+            autoplaySpeed={1500}
+            showArrows={true}
+            Swiping={true}
+            draggable={true}
+            effect="fade"
+            dotPosition="bottom"
+            style={{
+              width: "45vw",
+              minWidth: "100px",
+              color: "#fff",
+            }}
+          >
+            {img
+              .filter((img1) => img1.idreq && img1.idreq === id)
+              .map((img1, index) => (
+                <Image
+                  src={atob(img1.imagem)}
+                  key={index}
+                  style={{
+                    borderRadius: 10,
+                    color: "#fff",
+                    objectFit: "fill",
+                    minWidth: "100px",
+                  }}
+                  alt="img"
+                  width={"45vw"}
+                />
+              ))}
+          </Carousel>
+        </LazyLoad>
+      </div>
+    );
 
   const renderSlides = useMemo(() => {
     return (index) => {
@@ -141,15 +144,9 @@ const CollapseMenu = () => {
                   <div key={idx} className="border">
                     <div style={{ display: "flex" }}>
                       {categoria.ids &&
-                        imgSrc.map((img1, index) => (
-                          <div
-                            className="img"
-                            key={index}
-                            style={{ zIndex: 5 }}
-                          >
-                            {renderImageCarousel(img1, index, categoria.id)}
-                          </div>
-                        ))}
+                        imgSrc.map((img1, index) =>
+                          renderImageCarousel(img1, index, categoria.id)
+                        )}
                       {categoria.ids && (
                         <Spin
                           style={{
