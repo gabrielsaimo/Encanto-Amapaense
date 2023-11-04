@@ -680,7 +680,7 @@ export default function Dashboard({ atualizar, user }) {
               ))}
             </div>
             <div>
-              {totalImg < 3 && (
+              {totalImg < 3 && selectedTaskId && (
                 <ImgCrop rotationSlider>
                   <Upload
                     action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
@@ -689,6 +689,7 @@ export default function Dashboard({ atualizar, user }) {
                     quality={0.5}
                     onChange={(e) => onChange(e)}
                     onPreview={onPreview}
+                    accept="image/*"
                   >
                     {fileList.length < 1 && "+add Imagem"}
                   </Upload>
