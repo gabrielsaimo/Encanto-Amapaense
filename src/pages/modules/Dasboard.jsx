@@ -271,6 +271,7 @@ export default function Dashboard({ atualizar, user }) {
       setModalImgVisible(false);
       clearSelecteds();
     }
+    window.location.reload();
   }
 
   const getImgCardapioWS = async () => {
