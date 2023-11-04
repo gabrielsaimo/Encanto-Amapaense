@@ -536,7 +536,15 @@ export default function Dashboard({ atualizar, user }) {
           </Card>
         </Col>
       </Row>
-      <Table dataSource={searchData} columns={columns} size="small" />
+      <Table
+        dataSource={searchData}
+        columns={columns}
+        footer={() => "Total de itens: " + searchData.length}
+        size="small"
+        sticky={{
+          offsetHeader: 0,
+        }}
+      />
       <Modal
         open={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
