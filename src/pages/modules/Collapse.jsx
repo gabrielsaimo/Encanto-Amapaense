@@ -149,15 +149,7 @@ const CollapseMenu = () => {
                         imgSrc.map((img1, index) =>
                           renderImageCarousel(img1, index, categoria.id)
                         )}
-                      {categoria.ids && (
-                        <Spin
-                          style={{
-                            margin: 5,
-                            position: "absolute",
-                            zIndex: 4,
-                          }}
-                        />
-                      )}
+
                       <div className="flex">
                         <div style={{ width: "100%", display: "contents" }}>
                           <div>
