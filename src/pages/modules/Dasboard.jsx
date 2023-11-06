@@ -82,6 +82,7 @@ export default function Dashboard({ atualizar, user }) {
   };
 
   useEffect(() => {
+    console.log(coint);
     if (fileList.length > 0 && coint == 1) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
@@ -681,12 +682,11 @@ export default function Dashboard({ atualizar, user }) {
             </div>
             <div>
               {totalImg < 3 && selectedTaskId && (
-                <ImgCrop rotationSlider>
+                <ImgCrop >
                   <Upload
                     action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                     listType="picture-card"
                     fileList={fileList}
-                    quality={0.5}
                     onChange={(e) => onChange(e)}
                     onPreview={onPreview}
                     accept="image/*"
