@@ -82,7 +82,7 @@ export default function Dashboard({ atualizar, user }) {
   };
 
   useEffect(() => {
-    if (fileList.length > 0 && coint == 2) {
+    if (fileList.length > 0 && coint == 1) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         insertImg(reader.result);
