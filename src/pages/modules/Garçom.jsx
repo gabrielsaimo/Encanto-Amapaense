@@ -1170,7 +1170,7 @@ export default function Garçom() {
                   <div style={{ marginBottom: 10 }}>
                     <Input
                       prefix="R$"
-                      style={{ width: "80vw" }}
+                      style={{ width: "80vw", maxWidth: 470 }}
                       value={
                         valorMesa > 0
                           ? (
