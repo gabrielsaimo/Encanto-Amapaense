@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Collapse, Image, Carousel, Spin } from "antd";
+import { Collapse, Image, Carousel } from "antd";
+import { CaretRightOutlined } from "@ant-design/icons";
 import LazyLoad from "react-lazyload";
 import "../../css/Collapse.css";
-import { CaretRightOutlined } from "@ant-design/icons";
 import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
@@ -172,9 +172,11 @@ const CollapseMenu = () => {
                           }}
                         >
                           <p className="p_1 price georgia-bold-font">
-                            {categoria.price % 1 !== 0
-                              ? "R$ " + categoria.price.replace(".", ",")
-                              : "R$ " + categoria.price + ",00"}
+                            {`R$ ${
+                              categoria.price % 1 !== 0
+                                ? categoria.price.replace(".", ",")
+                                : categoria.price + ",00"
+                            }`}
                           </p>
                         </div>
                       </div>
