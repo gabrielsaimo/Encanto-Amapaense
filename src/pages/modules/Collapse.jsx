@@ -54,7 +54,7 @@ const CollapseMenu = () => {
         <LazyLoad key={index} height={200} offset={100}>
           <Carousel
             autoplay={true}
-            autoplaySpeed={1500}
+            autoplaySpeed={2000}
             showArrows={true}
             Swiping={true}
             draggable={true}
