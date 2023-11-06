@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { Collapse, Image, Carousel } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import LazyLoad from "react-lazyload";
@@ -10,6 +11,7 @@ import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
 
 const { Panel } = Collapse;
+const LazyLoadedImage = lazy(() => import("antd").then(module => ({ default: module.Image })));
 
 const CollapseMenu = () => {
   const [cardapio, setCardapio] = useState([]);
@@ -70,19 +72,22 @@ const CollapseMenu = () => {
             {img
               .filter((img1) => img1.idreq && img1.idreq === id)
               .map((img1, index) => (
-                <Image
-                  src={atob(img1.imagem)}
-                  key={index}
-                  style={{
-                    borderRadius: 10,
-                    color: "#fff",
-                    objectFit: "fill",
-                    minWidth: "100px",
-                  }}
-                  alt="img"
-                  width={"45vw"}
-                  height={"45vw"}
-                />
+                <Suspense key={index} fallback={<div>Carregando...</div>}>
+                  <LazyLoadedImage
+                    src={atob(img1.imagem)}
+                    key={index}
+                    style={{
+                      borderRadius: 10,
+                      color: "#fff",
+                      objectFit: "fill",
+                      minWidth: "100px",
+                    }}
+                    alt="img"
+                    width={"45vw"}
+                    height={"45vw"}
+                    loading="lazy"
+                  />
+                </Suspense>
               ))}
           </Carousel>
         </LazyLoad>
@@ -92,11 +97,11 @@ const CollapseMenu = () => {
   const renderSlides = useMemo(() => {
     return (index) => {
       if (index === 0) {
-        return <SlidesPrincipal />;
+        return <Suspense fallback={<div>Carregando...</div>}><SlidesPrincipal /></Suspense>;
       } else if (index === 11) {
-        return <SlidesSobemesas />;
+        return <Suspense fallback={<div>Carregando...</div>}><SlidesSobemesas /></Suspense>;
       } else if (index === 14) {
-        return <SlidesBebidas />;
+        return <Suspense fallback={<div>Carregando...</div>}><SlidesBebidas /></Suspense>;
       }
       return null;
     };
@@ -114,7 +119,7 @@ const CollapseMenu = () => {
             header={item1.name}
             easing="ease-in-out"
             waitForAnimate={true}
-            defaultActiveKey={Array.from({ length: 131 }, (_, i) => String(i))}
+            defaultActiveKey={Array.from({ length: 1 }, (_, i) => String(i))}
             destroyInactivePanel={false}
             expandIconPosition="end"
             expandIcon={({ isActive }) => (

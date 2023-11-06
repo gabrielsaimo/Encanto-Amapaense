@@ -610,6 +610,11 @@ export default function Garçom() {
                 )}\n\n`
             )
             .join("");
+
+          var lavorTotal = (
+            parseInt(valorMesa) +
+            parseInt(valorMesa) * 0.1
+          ).toFixed(2);
           const destinararios = [
             "gabrielsaimo68@gmail.com",
             "Josemaria023182@gmail.com",
@@ -622,9 +627,9 @@ export default function Garçom() {
               dadosFinalizar.id
             } foi Finalizado.</p><p>Observação:</p><p>${obsFinalizar}</p><p>Metodos de Pagamento:${vlvl}</p><p>Valor Mesa: R$ ${valorMesa}</p><p>Taxa de serviço + 10%: R$ ${(
               parseInt(valorMesa) * 0.1
-            ).toFixed(2)}</p><p>Valor Total: R$ ${
-              (parseInt(valorMesa) * 0.1).toFixed(2) + valorMesa
-            }</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+            ).toFixed(
+              2
+            )}</p><p>Valor Total: R$ ${lavorTotal}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
           };
           setModalFinalizar(false);
           await postEmail(email);
