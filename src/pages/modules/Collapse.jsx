@@ -66,7 +66,6 @@ const CollapseMenu = () => {
             dotPosition="bottom"
             style={{
               width: "45vw",
-              height: "45vw",
               minWidth: "100px",
               color: "#fff",
             }}
@@ -86,7 +85,6 @@ const CollapseMenu = () => {
                     }}
                     alt="img"
                     width={"45vw"}
-                    height={"45vw"}
                     loading="lazy"
                   />
                 </Suspense>
