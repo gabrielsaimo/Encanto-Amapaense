@@ -108,7 +108,7 @@ const CollapseMenu = () => {
             <SlidesSobemesas />
           </Suspense>
         );
-      } else if (index === 14) {
+      } else if (index === 16) {
         return (
           <Suspense fallback={<Spin />}>
             <SlidesBebidas />
