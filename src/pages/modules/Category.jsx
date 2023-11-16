@@ -40,8 +40,6 @@ export default function Category() {
   const [searchData, setSearchData] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
 
-
-
   useEffect(() => {
     filterTable();
   }, [search, cardapioCategory]);
@@ -53,6 +51,16 @@ export default function Category() {
         record["name"].toLowerCase().indexOf(search.toLowerCase()) > -1
     );
     setSearchData(filteredData);
+  }
+
+  useEffect(() => {
+    if (!action) {
+      fetchData();
+    }
+  }, [action]);
+  async function fetchData() {
+    const cardapioCollection = await getCategoty();
+    setCardapioCategory(cardapioCollection);
   }
 
   async function handleSave() {
@@ -201,7 +209,7 @@ export default function Category() {
       </Row>
       <Table dataSource={searchData} columns={columns} />
       <Modal
-        visible={modalNewAction}
+        open={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}
         okText="Salvar"
         onOk={handleSave}
