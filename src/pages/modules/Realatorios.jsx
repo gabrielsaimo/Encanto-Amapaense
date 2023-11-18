@@ -12,7 +12,7 @@ import {
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [tpRelatorio, setTpRelatorio] = useState("");
-  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortesia");
+  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortezia");
 
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
@@ -105,6 +105,11 @@ export default function Relatorios(atualizar) {
       title: "Taxa%",
       dataIndex: "taxa",
       key: "taxa",
+      render: (text) => (
+        <span>
+          <div>{"R$ " + Number(text).toFixed(2)}</div>
+        </span>
+      ),
     },
     {
       title: "Valor Pago",
@@ -245,9 +250,11 @@ export default function Relatorios(atualizar) {
             }}
             style={{ marginBottom: 10 }}
             summary={(pageData) => {
-              let totalBorrow = 0;
-              pageData.forEach(({ total_pago }) => {
-                totalBorrow += Number(total_pago);
+              let valorTotal = 0;
+              let taxaTotal = 0;
+              pageData.forEach(({ total_pago, taxa }) => {
+                valorTotal += Number(total_pago);
+                taxaTotal += Number(taxa);
               });
               return (
                 <>
@@ -257,9 +264,16 @@ export default function Relatorios(atualizar) {
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell>Total</Table.Summary.Cell>
+                      <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell>
-                        R$ {totalBorrow.toFixed(2)}
+                        <span style={{ fontWeight: "bold", color: "green" }}>
+                          R$ {taxaTotal.toFixed(2)}
+                        </span>
+                      </Table.Summary.Cell>
+                      <Table.Summary.Cell>
+                        <span style={{ fontWeight: "bold", color: "green" }}>
+                          R$ {valorTotal.toFixed(2)}
+                        </span>
                       </Table.Summary.Cell>
                     </Table.Summary.Row>
                   )}
