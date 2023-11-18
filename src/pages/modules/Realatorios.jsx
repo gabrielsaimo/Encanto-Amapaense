@@ -235,7 +235,7 @@ export default function Relatorios(atualizar) {
             }
             pagination={{ pageSize: 30 }}
             scroll={{
-              x: 1500,
+              x: 1000,
               y: 500,
             }}
             style={{ marginBottom: 10 }}
