@@ -252,7 +252,6 @@ export default function Relatorios(atualizar) {
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
-
                       <Table.Summary.Cell>Total</Table.Summary.Cell>
                       <Table.Summary.Cell>
                         R$ {totalBorrow.toFixed(2)}
