@@ -21,7 +21,7 @@ export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tpRelatorio, setTpRelatorio] = useState("");
-  const [tpPag, setTpPag] = useState("Pix,Creito,Debito,Dinheiro,Cortezia");
+  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortezia");
 
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
@@ -148,7 +148,11 @@ export default function Relatorios(atualizar) {
       <Select
         style={{ width: 120 }}
         defaultValue="Selecione"
-        onChange={(e) => [setTpRelatorio(e), setData([])]}
+        onChange={(e) => [
+          setTpRelatorio(e),
+          setData([]),
+          setTpPag("PIX,Crédito,Débito,Dinheiro,Cortezia"),
+        ]}
       >
         <Select.Option value=""></Select.Option>
         <Select.Option value="Vendas">Vendas</Select.Option>
@@ -158,41 +162,39 @@ export default function Relatorios(atualizar) {
       <br />
 
       {(tpRelatorio === "Vendas" || tpRelatorio === "Pedidos") && (
-        <div>
-          <br />
-          <h3>Selecione o período</h3>
-          <ConfigProvider locale={locale}>
-            <DatePicker.RangePicker onChange={(e) => datas(e)} />
-          </ConfigProvider>
-          
-
-          <br />
-          <h3>Tipo Pagamento</h3>
-          <Select
-            style={{ width: 120 }}
-            
-            defaultValue="Selecione"
-            onChange={(e) => [setTpPag(e)]}
-          >
-            <Select.Option value="PIX,Créito,Debito,Dinheiro,Cortezia">
-              Todos
-            </Select.Option>
-            <Select.Option value="PIX">Pix</Select.Option>
-            <Select.Option value="Crédito">Crédito</Select.Option>
-            <Select.Option value="Débito">Débito</Select.Option>
-            <Select.Option value="Dinheiro">Dinheiro</Select.Option>
-            <Select.Option value="Cortezia">Cortezia</Select.Option>
-          </Select>
-          <br />
-          <Button
-            type="primary"
-            disabled={!dataInicio && !dataFim}
-            onClick={() => getRelatorio()}
-          >
-            Gerar relatório
-          </Button>
+        <div style={{ display: "flex", marginBottom: 10 }}>
+          <div style={{ marginRight: 10 }}>
+            <h3>Selecione o período</h3>
+            <ConfigProvider locale={locale}>
+              <DatePicker.RangePicker onChange={(e) => datas(e)} />
+            </ConfigProvider>
+          </div>
+          <div style={{ display: tpRelatorio === "Pedidos" && "none" }}>
+            <h3>Tipo Pagamento</h3>
+            <Select
+              style={{ width: 120 }}
+              defaultValue="Totos"
+              onChange={(e) => [setTpPag(e)]}
+            >
+              <Select.Option value="PIX,Crédito,Débito,Dinheiro,Cortesia">
+                Todos
+              </Select.Option>
+              <Select.Option value="PIX">Pix</Select.Option>
+              <Select.Option value="Crédito">Crédito</Select.Option>
+              <Select.Option value="Débito">Débito</Select.Option>
+              <Select.Option value="Dinheiro">Dinheiro</Select.Option>
+              <Select.Option value="Cortesia">Cortesia</Select.Option>
+            </Select>
+          </div>
         </div>
       )}
+      <Button
+        type="primary"
+        disabled={!dataInicio && !dataFim}
+        onClick={() => getRelatorio()}
+      >
+        Gerar relatório
+      </Button>
 
       {data.length > 0 && (
         <div>
