@@ -246,17 +246,19 @@ export default function Relatorios(atualizar) {
               });
               return (
                 <>
-                  <Table.Summary.Row>
-                    <Table.Summary.Cell></Table.Summary.Cell>
-                    <Table.Summary.Cell></Table.Summary.Cell>
-                    <Table.Summary.Cell></Table.Summary.Cell>
-                    <Table.Summary.Cell></Table.Summary.Cell>
+                  {tpRelatorio === "Vendas" && (
+                    <Table.Summary.Row>
+                      <Table.Summary.Cell></Table.Summary.Cell>
+                      <Table.Summary.Cell></Table.Summary.Cell>
+                      <Table.Summary.Cell></Table.Summary.Cell>
+                      <Table.Summary.Cell></Table.Summary.Cell>
 
-                    <Table.Summary.Cell>Total</Table.Summary.Cell>
-                    <Table.Summary.Cell>
-                      R$ {totalBorrow.toFixed(2)}
-                    </Table.Summary.Cell>
-                  </Table.Summary.Row>
+                      <Table.Summary.Cell>Total</Table.Summary.Cell>
+                      <Table.Summary.Cell>
+                        R$ {totalBorrow.toFixed(2)}
+                      </Table.Summary.Cell>
+                    </Table.Summary.Row>
+                  )}
                 </>
               );
             }}
