@@ -6,6 +6,7 @@ import Menssagem from "./modules/Menssagem";
 import Pedidos from "./modules/Pedidos";
 import { getUser } from "../services/user.ws";
 import Users from "./modules/Users";
+import Relatorios from "./modules/Realatorios";
 
 export default function Config() {
   const [actionCardapio, setActionCardapio] = useState(true);
@@ -126,6 +127,12 @@ export default function Config() {
       label: "Usuários",
       disabled: UserCategoria !== "ADM" ? true : false,
       children: <Users atualizar={actionPeido} user={dateUser} />,
+    },
+    {
+      key: "5",
+      label: "Relatórios",
+      disabled: UserCategoria !== "ADM" ? true : false,
+      children: <Relatorios atualizar={actionPeido} user={dateUser} />,
     },
   ];
 
