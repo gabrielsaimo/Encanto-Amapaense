@@ -1,18 +1,10 @@
-import {
-  Button,
-  Card,
-  DatePicker,
-  Input,
-  Modal,
-  Select,
-  ConfigProvider,
-  Space,
-  Table,
-} from "antd";
+import { Button, Card, DatePicker, Select, ConfigProvider, Table } from "antd";
+// import css
+import "../../css/Relatorio.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   getRelatorios_pedidos,
   getRelatorios_vendas,
@@ -46,7 +38,44 @@ export default function Relatorios(atualizar) {
       title: "Data",
       dataIndex: "acepted_at",
       key: "acepted_at",
+      fixed: "left",
+      width: 110,
       render: (text) => <span>{dayjs(text).format("DD/MM/YYYY")}</span>,
+    },
+
+    {
+      title: "Garçom",
+      dataIndex: "garcom",
+      key: "garcom",
+      filters: [
+        {
+          text: "Saimo",
+          value: "Saimo",
+        },
+        {
+          text: "Daniel",
+          value: "Daniel",
+        },
+      ],
+      onFilter: (value, record) => record.garcom.indexOf(value) === 0,
+      sorter: (a, b) => a.garcom.length - b.garcom.length,
+    },
+    {
+      title: "Recebido por",
+      dataIndex: "recebido_por",
+      key: "recebido_por",
+      filters: [
+        {
+          text: "Saimo",
+          value: "Saimo",
+        },
+        {
+          text: "Daniel",
+          value: "Daniel",
+        },
+      ],
+      onFilter: (value, record) => record.recebido_por.indexOf(value) === 0,
+      sorter: (a, b) => a.recebido_por.length - b.recebido_por.length,
     },
     {
       title: "Tipo Pagamento",
@@ -74,39 +103,34 @@ export default function Relatorios(atualizar) {
       ),
     },
     {
-      title: "Garçom",
-      dataIndex: "garcom",
-      key: "garcom",
-      sorter: (a, b) => a.garcom.length - b.garcom.length,
-    },
-    {
-      title: "Recebido por",
-      dataIndex: "recebido_por",
-      key: "recebido_por",
-    },
-    {
       title: "Valor Pago",
       dataIndex: "total_pago",
       key: "total_pago",
+      fixed: "right",
+      width: 200,
       render: (text) => <span>R$ {Number(text).toFixed(2)}</span>,
     },
   ];
 
   const columnsPedidos = [
     {
+      title: "Quantidade",
+      dataIndex: "qdt_vendido",
+      key: "qdt_vendido",
+      fixed: "left",
+      width: 110,
+    },
+    {
       title: "Item",
       dataIndex: "item",
       key: "item",
     },
     {
-      title: "Quantidade",
-      dataIndex: "qdt_vendido",
-      key: "qdt_vendido",
-    },
-    {
       title: "Valor Unitário",
       dataIndex: "valor_total_uni",
       key: "valor_total_uni",
+      fixed: "right",
+      width: 200,
       render: (text) => <span>R$ {text}</span>,
     },
   ];
@@ -205,11 +229,37 @@ export default function Relatorios(atualizar) {
             dataSource={data}
             footer={() =>
               data.length > 0 &&
-              "Valor Total Somado: " +
+              "Total Pedirodo: " +
                 "R$ " +
                 Number(data[0]?.soma_total).toFixed(2)
             }
             pagination={{ pageSize: 30 }}
+            scroll={{
+              x: 1500,
+              y: 500,
+            }}
+            style={{ marginBottom: 10 }}
+            summary={(pageData) => {
+              let totalBorrow = 0;
+              pageData.forEach(({ total_pago }) => {
+                totalBorrow += Number(total_pago);
+              });
+              return (
+                <>
+                  <Table.Summary.Row>
+                    <Table.Summary.Cell></Table.Summary.Cell>
+                    <Table.Summary.Cell></Table.Summary.Cell>
+                    <Table.Summary.Cell></Table.Summary.Cell>
+                    <Table.Summary.Cell></Table.Summary.Cell>
+
+                    <Table.Summary.Cell>Total</Table.Summary.Cell>
+                    <Table.Summary.Cell>
+                      R$ {totalBorrow.toFixed(2)}
+                    </Table.Summary.Cell>
+                  </Table.Summary.Row>
+                </>
+              );
+            }}
           />
         </div>
       )}
