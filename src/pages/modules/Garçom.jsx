@@ -374,12 +374,13 @@ export default function Garçom() {
     setActive(!active);
   };
 
-  const statusPedido = async (id, status) => {
+  const statusPedido = async (id, taxa, status) => {
     const data = {
       id: id,
       status: status,
       finished_by: status === "Finalizado" ? userNome : null,
       finished_at: status === "Finalizado" ? new Date() : null,
+      taxa: taxa === true ? parseInt(valorMesa) * 0.1 : 0,
       update_at: new Date(),
       update_by: userNome,
     };
@@ -529,13 +530,13 @@ export default function Garçom() {
     setPedidosTotais([{ id: "", qdt: "1" }]);
     setObs("");
     setTipoPagamento(null);
-    setObsFinalizar(null);
+    setObsFinalizar("");
     setObsCancelamento("");
   }
 
   const finalmesa = async (itemMesa, taxa) => {
     setTipoPagamento(null);
-    setObsFinalizar(null);
+    setObsFinalizar("");
     setItensMesa(itemMesa);
     const valor = await valorTotal(itemMesa.id);
     const pagamentos = await getPagametos(itemMesa.id);
@@ -577,15 +578,22 @@ export default function Garçom() {
       } else {
         setModalFinalizar(false);
         if (
-          Number(Number(valorPagamentos).toFixed(2)) +
+          (Number(Number(valorPagamentos).toFixed(2)) +
             Number(valoresPagos[0]?.valor_pgt.toFixed(2)) ===
+            Number(
+              taxa === true
+                ? Number(
+                    parseInt(valorMesa) + parseInt(valorMesa) * 0.1
+                  ).toFixed(2)
+                : Number(parseInt(valorMesa)).toFixed(2)
+            ) || Number(valorPagamentos).toFixed(2),
           Number(
             taxa === true
               ? Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
                   2
                 )
               : Number(parseInt(valorMesa)).toFixed(2)
-          )
+          ))
         ) {
           if (
             Number(Number(valorPagamentos).toFixed(2)) >
@@ -615,7 +623,7 @@ export default function Garçom() {
           var vlvl = pagamentos
             .map(
               (transacao) =>
-                `<br></br> ${transacao.tipo}\n R$ ${transacao.valor.toFixed(
+                `<br></br> ${transacao.tipo}: \n R$ ${transacao.valor.toFixed(
                   2
                 )}\n\n`
             )
@@ -652,10 +660,10 @@ export default function Garçom() {
             obs: obsFinalizar,
             tipo_pagamento: tipoPagamento,
             valor: valorMesa,
-            taxa: parseInt(valorMesa) * 0.1,
+            taxa: taxa === true ? parseInt(valorMesa) * 0.1 : 0,
             valorTotal: parseInt(valorMesa) + parseInt(valorMesa) * 0.1,
           });
-          statusPedido(dadosFinalizar.id, "Concluido");
+          statusPedido(dadosFinalizar.id, taxa, "Concluido");
           setActive(!active);
           clear();
           setLoading(false);
