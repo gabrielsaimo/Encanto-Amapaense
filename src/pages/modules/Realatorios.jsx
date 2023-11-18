@@ -182,7 +182,7 @@ export default function Relatorios(atualizar) {
         onChange={(e) => [
           setTpRelatorio(e),
           setData([]),
-          setTpPag("PIX,Crédito,Débito,Dinheiro,Cortezia"),
+          setTpPag("PIX,Crédito,Débito,Dinheiro,Cortesia"),
         ]}
       >
         <Select.Option value=""></Select.Option>
