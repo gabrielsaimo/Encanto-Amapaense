@@ -1,5 +1,4 @@
 import { Button, Card, DatePicker, Select, ConfigProvider, Table } from "antd";
-// import css
 import "../../css/Relatorio.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -12,8 +11,7 @@ import {
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [tpRelatorio, setTpRelatorio] = useState("");
-  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortezia");
-
+  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortesia");
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
 
