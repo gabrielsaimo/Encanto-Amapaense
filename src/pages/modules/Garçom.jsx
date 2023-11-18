@@ -578,7 +578,7 @@ export default function Garçom() {
       } else {
         setModalFinalizar(false);
         if (
-          (Number(Number(valorPagamentos).toFixed(2)) +
+          Number(Number(valorPagamentos).toFixed(2)) +
             Number(valoresPagos[0]?.valor_pgt.toFixed(2)) ===
             Number(
               taxa === true
@@ -586,14 +586,15 @@ export default function Garçom() {
                     parseInt(valorMesa) + parseInt(valorMesa) * 0.1
                   ).toFixed(2)
                 : Number(parseInt(valorMesa)).toFixed(2)
-            ) || Number(valorPagamentos).toFixed(2),
-          Number(
-            taxa === true
-              ? Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
-                  2
-                )
-              : Number(parseInt(valorMesa)).toFixed(2)
-          ))
+            ) ||
+          Number(Number(valorPagamentos).toFixed(2)) ===
+            Number(
+              taxa === true
+                ? Number(
+                    parseInt(valorMesa) + parseInt(valorMesa) * 0.1
+                  ).toFixed(2)
+                : Number(parseInt(valorMesa)).toFixed(2)
+            )
         ) {
           if (
             Number(Number(valorPagamentos).toFixed(2)) >

@@ -12,7 +12,7 @@ import {
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [tpRelatorio, setTpRelatorio] = useState("");
-  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortezia");
+  const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortesia");
 
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
@@ -100,6 +100,11 @@ export default function Relatorios(atualizar) {
           })}
         </span>
       ),
+    },
+    {
+      title: "Taxa%",
+      dataIndex: "taxa",
+      key: "taxa",
     },
     {
       title: "Valor Pago",
