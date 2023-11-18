@@ -173,7 +173,7 @@ export default function Relatorios(atualizar) {
             <h3>Tipo Pagamento</h3>
             <Select
               style={{ width: 120 }}
-              defaultValue="Totos"
+              defaultValue="Todos"
               onChange={(e) => [setTpPag(e)]}
             >
               <Select.Option value="PIX,Crédito,Débito,Dinheiro,Cortesia">
