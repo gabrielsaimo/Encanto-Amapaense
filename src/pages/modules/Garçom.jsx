@@ -12,6 +12,7 @@ import {
   Spin,
   List,
   Typography,
+  Switch,
 } from "antd";
 import "firebase/database";
 import { getUser } from "../../services/user.ws";
@@ -30,7 +31,6 @@ import {
   FinalizarPedido,
   verifyFinalizar,
   deleteMesa,
-  postNotification,
   putPedido,
   getPedidoId,
 } from "../../services/Pedidos.ws";
@@ -46,7 +46,7 @@ import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import "firebase/compat/storage";
-import { get, getDatabase, onValue, ref, set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
@@ -101,6 +101,8 @@ export default function Garçom() {
   const [tipoPagamento, setTipoPagamento] = useState(null);
   const [obsFinalizar, setObsFinalizar] = useState("");
   const [loading, setLoading] = useState(false);
+  const [taxa, setTaxa] = useState(true);
+  const [itensMesa, setItensMesa] = useState([]);
   const [pedidos_uni, setPedidos] = useState([]);
   const random = Math.floor(Math.random() * 100000000);
   useEffect(() => {
@@ -531,9 +533,10 @@ export default function Garçom() {
     setObsCancelamento("");
   }
 
-  const finalmesa = async (itemMesa) => {
+  const finalmesa = async (itemMesa, taxa) => {
     setTipoPagamento(null);
     setObsFinalizar(null);
+    setItensMesa(itemMesa);
     const valor = await valorTotal(itemMesa.id);
     const pagamentos = await getPagametos(itemMesa.id);
     setValoresPagos(pagamentos);
@@ -541,11 +544,16 @@ export default function Garçom() {
     setModalFinalizar(true);
     setDadosFinalizar(itemMesa);
     setValorPagamentos(
-      (
-        parseInt(valor[0].valor) +
-        parseInt(valor[0].valor) * 0.1 -
-        pagamentos.reduce((total, item) => total + item.valor, 0)
-      ).toFixed(2)
+      taxa
+        ? (
+            parseInt(valor[0].valor) +
+            parseInt(valor[0].valor) * 0.1 -
+            pagamentos.reduce((total, item) => total + item.valor, 0)
+          ).toFixed(2)
+        : (
+            parseInt(valor[0].valor) -
+            pagamentos.reduce((total, item) => total + item.valor, 0)
+          ).toFixed(2)
     );
 
     clear();
@@ -571,11 +579,13 @@ export default function Garçom() {
         if (
           Number(Number(valorPagamentos).toFixed(2)) +
             Number(valoresPagos[0]?.valor_pgt.toFixed(2)) ===
-            Number(
-              Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(2)
-            ) ||
-          Number(Number(valorPagamentos).toFixed(2)) ===
-            Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1)
+          Number(
+            taxa === true
+              ? Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
+                  2
+                )
+              : Number(parseInt(valorMesa)).toFixed(2)
+          )
         ) {
           if (
             Number(Number(valorPagamentos).toFixed(2)) >
@@ -649,16 +659,23 @@ export default function Garçom() {
           setLoading(false);
           getPagametos(dadosFinalizar.id);
         } else {
+          console.log(taxa);
           if (
-            Number(Number(valorPagamentos).toFixed(2)) >
-              Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1) ||
-            Number(Number(valorPagamentos).toFixed(2)) +
-              Number(valoresPagos[0]?.valor_pgt.toFixed(2)) >
-              Number(
-                Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1).toFixed(
-                  2
+            Number(
+              taxa === true
+                ? Number(valorPagamentos).toFixed(2) >
+                    Number(parseInt(valorMesa) + parseInt(valorMesa) * 0.1)
+                : Number(valorPagamentos).toFixed(2)
+            ) > Number(parseInt(valorMesa)) ||
+            Number(Number(valorPagamentos).toFixed(2)) + taxa
+              ? Number(valoresPagos[0]?.valor_pgt.toFixed(2)) >
+                Number(
+                  Number(
+                    parseInt(valorMesa) + parseInt(valorMesa) * 0.1
+                  ).toFixed(2)
                 )
-              )
+              : Number(valoresPagos[0]?.valor_pgt.toFixed(2)) >
+                Number(Number(parseInt(valorMesa)).toFixed(2))
           ) {
             alert("Valor pago maior que o valor da mesa");
             setLoading(false);
@@ -891,7 +908,10 @@ export default function Garçom() {
                     </>
                   ))}
                   <div style={{ float: "right" }}>
-                    <Button type="primary" onClick={() => finalmesa(itemMesa)}>
+                    <Button
+                      type="primary"
+                      onClick={() => finalmesa(itemMesa, taxa)}
+                    >
                       Finalizar Messa
                     </Button>
                   </div>
@@ -984,6 +1004,13 @@ export default function Garçom() {
                 <div style={{ marginBottom: 10 }}>
                   <label>Valor</label>
                   <Input prefix="R$" value={total} readOnly />
+                </div>
+                <div>
+                  <Switch
+                    checkedChildren="10%"
+                    unCheckedChildren="0%"
+                    defaultChecked
+                  />
                 </div>
                 <div>
                   <label>Taxa de serviço</label>
@@ -1097,26 +1124,50 @@ export default function Garçom() {
                     readOnly
                   />
                 </div>
-                <div style={{ marginBottom: 10 }}>
-                  <label>Taxa de serviço</label>
-                  <Input
-                    prefix="R$"
-                    value={
-                      valorMesa > 0 ? (parseInt(valorMesa) * 0.1).toFixed(2) : 0
-                    }
-                    readOnly
-                  />
+
+                <div
+                  style={{
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div></div>
+                  <div>
+                    <label>Taxa de serviço</label>
+                    <Switch
+                      size="large"
+                      style={{ marginLeft: 10, marginBottom: 1 }}
+                      checkedChildren="10%"
+                      unCheckedChildren="0%"
+                      defaultChecked={taxa}
+                      onChange={() => [
+                        setTaxa(!taxa),
+                        finalmesa(itensMesa, !taxa),
+                      ]}
+                    />
+                    <Input
+                      prefix="R$"
+                      value={
+                        valorMesa > 0
+                          ? (parseInt(valorMesa) * 0.1).toFixed(2)
+                          : 0
+                      }
+                      readOnly
+                    />
+                  </div>
                 </div>
                 <div style={{ marginBottom: 10 }}>
                   <lavel>Valor Total</lavel>
                   <Input
                     prefix="R$"
                     value={
-                      valorMesa > 0
+                      valorMesa > 0 && taxa
                         ? (
                             parseInt(valorMesa) +
                             parseInt(valorMesa) * 0.1
                           ).toFixed(2)
+                        : valorMesa > 0 && !taxa
+                        ? parseInt(valorMesa)
                         : 0
                     }
                     readOnly
@@ -1172,10 +1223,18 @@ export default function Garçom() {
                       prefix="R$"
                       style={{ width: "80vw", maxWidth: 470 }}
                       value={
-                        valorMesa > 0
+                        valorMesa > 0 && taxa
                           ? (
                               parseInt(valorMesa) +
                               parseInt(valorMesa) * 0.1 -
+                              valoresPagos.reduce(
+                                (total, item) => total + item.valor,
+                                0
+                              )
+                            ).toFixed(2)
+                          : valorMesa > 0 && !taxa
+                          ? (
+                              parseInt(valorMesa) -
                               valoresPagos.reduce(
                                 (total, item) => total + item.valor,
                                 0

@@ -11,7 +11,6 @@ import {
 } from "../../services/relatorios.ws";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const [tpRelatorio, setTpRelatorio] = useState("");
   const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortezia");
 
@@ -131,7 +130,7 @@ export default function Relatorios(atualizar) {
       key: "valor_total_uni",
       fixed: "right",
       width: 200,
-      render: (text) => <span>R$ {text}</span>,
+      render: (text) => <span>R$ {Number(text).toFixed(2)}</span>,
     },
   ];
 
@@ -186,7 +185,7 @@ export default function Relatorios(atualizar) {
       <br />
 
       {(tpRelatorio === "Vendas" || tpRelatorio === "Pedidos") && (
-        <div style={{ display: "flex", marginBottom: 10 }}>
+        <div style={{ display: "flex" }}>
           <div style={{ marginRight: 10 }}>
             <h3>Selecione o período</h3>
             <ConfigProvider locale={locale}>
@@ -215,6 +214,7 @@ export default function Relatorios(atualizar) {
       <Button
         type="primary"
         disabled={!dataInicio && !dataFim}
+        style={{ marginTop: 10 }}
         onClick={() => getRelatorio()}
       >
         Gerar relatório
