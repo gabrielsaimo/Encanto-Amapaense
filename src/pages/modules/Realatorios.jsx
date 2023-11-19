@@ -257,8 +257,11 @@ export default function Relatorios(atualizar) {
             summary={(pageData) => {
               let valorTotal = 0;
               let taxaTotal = 0;
-              pageData.forEach(({ total_pago, taxa }) => {
+              let descontoCortesia = 0;
+
+              pageData.forEach(({ total_pago, taxa, total_cortesia }) => {
                 valorTotal += Number(total_pago);
+                descontoCortesia += Number(total_cortesia);
                 taxaTotal += Number(taxa);
               });
               return (
@@ -269,7 +272,11 @@ export default function Relatorios(atualizar) {
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell></Table.Summary.Cell>
+                      <Table.Summary.Cell>
+                        <span style={{ fontWeight: "bold", color: "red" }}>
+                          R$ -{descontoCortesia.toFixed(2)}
+                        </span>
+                      </Table.Summary.Cell>
                       <Table.Summary.Cell>
                         <span style={{ fontWeight: "bold", color: "green" }}>
                           R$ {taxaTotal.toFixed(2)}
@@ -277,7 +284,11 @@ export default function Relatorios(atualizar) {
                       </Table.Summary.Cell>
                       <Table.Summary.Cell>
                         <span style={{ fontWeight: "bold", color: "green" }}>
-                          R$ {valorTotal.toFixed(2)}
+                          R${" "}
+                          {Number(
+                            Number(valorTotal).toFixed(2) -
+                              Number(descontoCortesia).toFixed(2)
+                          ).toFixed(2)}
                         </span>
                       </Table.Summary.Cell>
                     </Table.Summary.Row>
