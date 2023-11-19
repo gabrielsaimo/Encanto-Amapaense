@@ -242,12 +242,6 @@ export default function Relatorios(atualizar) {
           <Table
             columns={tpRelatorio !== "Vendas" ? columnsPedidos : columnsVendas}
             dataSource={data}
-            footer={() =>
-              data.length > 0 &&
-              "Total Pedirodo: " +
-                "R$ " +
-                Number(data[0]?.soma_total).toFixed(2)
-            }
             pagination={{ pageSize: 30 }}
             scroll={{
               x: 1000,
@@ -267,7 +261,15 @@ export default function Relatorios(atualizar) {
               return (
                 <>
                   {tpRelatorio === "Vendas" && (
-                    <Table.Summary.Row>
+                    <Table.Summary.Row
+                      fixed
+                      style={{
+                        position: "sticky",
+                        bottom: 0,
+                        background: "#f0f0f0",
+                        zIndex: 1,
+                      }}
+                    >
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
