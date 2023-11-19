@@ -1017,13 +1017,6 @@ export default function Garçom() {
                   <Input prefix="R$" value={total} readOnly />
                 </div>
                 <div>
-                  <Switch
-                    checkedChildren="10%"
-                    unCheckedChildren="0%"
-                    defaultChecked
-                  />
-                </div>
-                <div>
                   <label>Taxa de serviço</label>
                   <Input
                     prefix="R$"
