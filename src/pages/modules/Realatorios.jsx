@@ -1,4 +1,12 @@
-import { Button, Card, DatePicker, Select, ConfigProvider, Table } from "antd";
+import {
+  Button,
+  Card,
+  DatePicker,
+  Select,
+  ConfigProvider,
+  Table,
+  Tooltip,
+} from "antd";
 import "../../css/Relatorio.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -275,23 +283,29 @@ export default function Relatorios(atualizar) {
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell></Table.Summary.Cell>
                       <Table.Summary.Cell>
-                        <span style={{ fontWeight: "bold", color: "red" }}>
-                          R$ -{descontoCortesia.toFixed(2)}
-                        </span>
+                        <Tooltip title="Cortesia" color={"red"}>
+                          <span style={{ fontWeight: "bold", color: "red" }}>
+                            R$ -{descontoCortesia.toFixed(2)}
+                          </span>
+                        </Tooltip>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell>
-                        <span style={{ fontWeight: "bold", color: "green" }}>
-                          R$ {taxaTotal.toFixed(2)}
-                        </span>
+                        <Tooltip title="10%" color={"green"}>
+                          <span style={{ fontWeight: "bold", color: "green" }}>
+                            R$ {taxaTotal.toFixed(2)}
+                          </span>
+                        </Tooltip>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell>
-                        <span style={{ fontWeight: "bold", color: "green" }}>
-                          R${" "}
-                          {Number(
-                            Number(valorTotal).toFixed(2) -
-                              Number(descontoCortesia).toFixed(2)
-                          ).toFixed(2)}
-                        </span>
+                        <Tooltip title="Soma Total" color={"green"}>
+                          <span style={{ fontWeight: "bold", color: "green" }}>
+                            R${" "}
+                            {Number(
+                              Number(valorTotal).toFixed(2) -
+                                Number(descontoCortesia).toFixed(2)
+                            ).toFixed(2)}
+                          </span>
+                        </Tooltip>
                       </Table.Summary.Cell>
                     </Table.Summary.Row>
                   )}
