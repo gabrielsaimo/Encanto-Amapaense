@@ -3,17 +3,19 @@ import "../../css/Relatorio.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getRelatorios_pedidos,
   getRelatorios_vendas,
 } from "../../services/relatorios.ws";
+import { getUsers } from "../../services/user.ws";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [tpRelatorio, setTpRelatorio] = useState("");
   const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortesia");
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
+  const [user, setUser] = useState([]);
 
   async function getRelatorio() {
     let bobydate = {
@@ -30,6 +32,12 @@ export default function Relatorios(atualizar) {
     }
   }
 
+  useEffect(() => {
+    getUsers().then((users) => {
+      setUser(users);
+    });
+  }, [atualizar]);
+
   const columnsVendas = [
     {
       title: "Data",
@@ -44,16 +52,13 @@ export default function Relatorios(atualizar) {
       title: "Garçom",
       dataIndex: "garcom",
       key: "garcom",
-      filters: [
-        {
-          text: "Saimo",
-          value: "Saimo",
-        },
-        {
-          text: "Daniel",
-          value: "Daniel",
-        },
-      ],
+      filters: user.map((item) => {
+        return {
+          text: item.name,
+          value: item.name,
+        };
+      }),
+
       onFilter: (value, record) => record.garcom.indexOf(value) === 0,
       sorter: (a, b) => a.garcom.length - b.garcom.length,
     },
@@ -61,16 +66,12 @@ export default function Relatorios(atualizar) {
       title: "Recebido por",
       dataIndex: "recebido_por",
       key: "recebido_por",
-      filters: [
-        {
-          text: "Saimo",
-          value: "Saimo",
-        },
-        {
-          text: "Daniel",
-          value: "Daniel",
-        },
-      ],
+      filters: user.map((item) => {
+        return {
+          text: item.name,
+          value: item.name,
+        };
+      }),
       onFilter: (value, record) => record.recebido_por.indexOf(value) === 0,
       sorter: (a, b) => a.recebido_por.length - b.recebido_por.length,
     },
@@ -100,12 +101,18 @@ export default function Relatorios(atualizar) {
       ),
     },
     {
-      title: "Taxa%",
+      title: "Taxa 10%",
       dataIndex: "taxa",
       key: "taxa",
       render: (text) => (
         <span>
-          <div>{"R$ " + Number(text).toFixed(2)}</div>
+          {Number(text).toFixed(2) !== "0.00" ? (
+            <div>{"R$ " + Number(text).toFixed(2)}</div>
+          ) : (
+            <div style={{ color: "red" }}>
+              {"R$ " + Number(text).toFixed(2)}
+            </div>
+          )}
         </span>
       ),
     },
@@ -233,7 +240,7 @@ export default function Relatorios(atualizar) {
           <br />
           <br />
           <Table
-            columns={tpRelatorio === "Vendas" ? columnsVendas : columnsPedidos}
+            columns={tpRelatorio !== "Vendas" ? columnsPedidos : columnsVendas}
             dataSource={data}
             footer={() =>
               data.length > 0 &&
