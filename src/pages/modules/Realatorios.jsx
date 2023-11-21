@@ -14,11 +14,13 @@ import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
 import React, { useEffect, useState } from "react";
 import { TweenOneGroup } from "rc-tween-one";
+import Chart from "chart.js/auto";
 import {
   getRelatorioGraficoMensal,
   getRelatorios_pedidos,
   getRelatorios_vendas,
 } from "../../services/relatorios.ws";
+
 import { getUsers } from "../../services/user.ws";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
@@ -61,6 +63,44 @@ export default function Relatorios(atualizar) {
       setUser(users);
     });
   }, [atualizar]);
+
+  useEffect(() => {
+    if (tpRelatorio === "Grafico" && dataGrafico.length > 0) {
+      const ctx = document.getElementById("meuGrafico").getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: dataGrafico.map((item) => `${item.numero_mes}/${item.ano}`),
+          datasets: [
+            {
+              label: "R$",
+              data: dataGrafico.map((item) => parseFloat(item.soma_total)),
+              backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56",
+                // Adicione cores adicionais aqui, se necessário...
+              ],
+              hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56",
+                // Adicione cores de destaque aqui, se necessário...
+              ],
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              position: "bottom",
+            },
+          },
+        },
+      });
+    }
+  }, [tpRelatorio, dataGrafico]);
 
   const columnsVendas = [
     {
@@ -413,6 +453,14 @@ export default function Relatorios(atualizar) {
               );
             }}
           />
+        </div>
+      )}
+
+      {tpRelatorio === "Grafico" && dataGrafico.length > 0 && (
+        <div style={{ width: 400 }}>
+          <br />
+          <br />
+          <canvas id="meuGrafico"></canvas>
         </div>
       )}
     </Card>
