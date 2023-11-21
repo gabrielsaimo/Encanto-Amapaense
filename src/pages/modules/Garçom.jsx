@@ -868,7 +868,7 @@ export default function Garçom() {
                                 <Button
                                   type="primary"
                                   onClick={() =>
-                                    statusPedido(item.id, "Finalizado")
+                                    statusPedido(item.id, taxa, "Finalizado")
                                   }
                                   style={{
                                     marginRight: 10,
