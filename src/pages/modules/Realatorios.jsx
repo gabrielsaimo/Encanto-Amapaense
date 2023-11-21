@@ -6,37 +6,53 @@ import {
   ConfigProvider,
   Table,
   Tooltip,
+  Tag,
 } from "antd";
 import "../../css/Relatorio.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
 import React, { useEffect, useState } from "react";
+import { TweenOneGroup } from "rc-tween-one";
 import {
+  getRelatorioGraficoMensal,
   getRelatorios_pedidos,
   getRelatorios_vendas,
 } from "../../services/relatorios.ws";
 import { getUsers } from "../../services/user.ws";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
+  const [dataGrafico, setDataGrafico] = useState([]);
   const [tpRelatorio, setTpRelatorio] = useState("");
   const [tpPag, setTpPag] = useState("PIX,Crédito,Débito,Dinheiro,Cortesia");
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setdataFim] = useState(null);
+  const [dataMesAno, setdataMesAno] = useState([]);
   const [user, setUser] = useState([]);
-
+  const handleClose = (removedTag) => {
+    const newTags = dataMesAno.filter((tag) => tag !== removedTag);
+    setdataMesAno(newTags);
+  };
   async function getRelatorio() {
     let bobydate = {
       data_inicial: dataInicio + " 00:00:00.001",
       data_final: dataFim + " 23:59:59.999",
       tipo: tpPag,
     };
+
+    let bobydateGrafico = {
+      messes: dataMesAno.toString(),
+    };
+
     if (tpRelatorio === "Vendas") {
       const data = await getRelatorios_vendas(bobydate);
       setData(data);
     } else if (tpRelatorio === "Pedidos") {
       const data = await getRelatorios_pedidos(bobydate);
       setData(data);
+    } else if (tpRelatorio === "Grafico") {
+      const data = await getRelatorioGraficoMensal(bobydateGrafico);
+      setDataGrafico(data);
     }
   }
 
@@ -186,6 +202,45 @@ export default function Relatorios(atualizar) {
     }
   }
 
+  async function datasMeseAno(e) {
+    if (e) {
+      const originalDate1 = new Date(e);
+      const formattedDate1 = `${originalDate1.getFullYear()}-${(
+        originalDate1.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}`;
+
+      setdataMesAno([...dataMesAno, formattedDate1]);
+    }
+  }
+
+  const forMap = (tag) => {
+    const tagElem = (
+      <Tag
+        closable
+        onClose={(e) => {
+          e.preventDefault();
+          handleClose(tag);
+        }}
+      >
+        {tag}
+      </Tag>
+    );
+    return (
+      <span
+        key={tag}
+        style={{
+          display: "inline-block",
+        }}
+      >
+        {tagElem}
+      </span>
+    );
+  };
+
+  const tagChild = dataMesAno.map(forMap);
+
   return (
     <Card>
       <h1>Relatórios</h1>
@@ -197,12 +252,16 @@ export default function Relatorios(atualizar) {
         onChange={(e) => [
           setTpRelatorio(e),
           setData([]),
+          setDataInicio(null),
+          setdataFim(null),
+          setdataMesAno([]),
           setTpPag("PIX,Crédito,Débito,Dinheiro,Cortesia"),
         ]}
       >
         <Select.Option value=""></Select.Option>
         <Select.Option value="Vendas">Vendas</Select.Option>
         <Select.Option value="Pedidos">Pedidos</Select.Option>
+        <Select.Option value="Grafico">Grafico</Select.Option>
       </Select>
 
       <br />
@@ -234,9 +293,44 @@ export default function Relatorios(atualizar) {
           </div>
         </div>
       )}
+      {tpRelatorio === "Grafico" && (
+        <div style={{ display: "flex" }}>
+          <div style={{ marginRight: 10 }}>
+            <h3>Selecione o período</h3>
+            <ConfigProvider locale={locale}>
+              <DatePicker onChange={(e) => datasMeseAno(e)} picker="month" />
+            </ConfigProvider>
+            <div style={{ marginLeft: 160 }}>
+              <TweenOneGroup
+                enter={{
+                  scale: 0.8,
+                  opacity: 0,
+                  type: "from",
+                  duration: 100,
+                }}
+                onEnd={(e) => {
+                  if (e.type === "appear" || e.type === "enter") {
+                    e.target.style = "display: inline-block";
+                  }
+                }}
+                leave={{
+                  opacity: 0,
+                  width: 0,
+                  scale: 0,
+                  duration: 200,
+                }}
+                appear={false}
+              >
+                {tagChild}
+              </TweenOneGroup>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Button
         type="primary"
-        disabled={!dataInicio && !dataFim}
+        disabled={dataMesAno.length === 0 && !dataInicio && !dataFim}
         style={{ marginTop: 10 }}
         onClick={() => getRelatorio()}
       >
@@ -248,7 +342,13 @@ export default function Relatorios(atualizar) {
           <br />
           <br />
           <Table
-            columns={tpRelatorio !== "Vendas" ? columnsPedidos : columnsVendas}
+            columns={
+              tpRelatorio === "Vendas"
+                ? columnsVendas
+                : tpRelatorio === "Pedidos"
+                ? columnsPedidos
+                : []
+            }
             dataSource={data}
             pagination={{ pageSize: 30 }}
             scroll={{
