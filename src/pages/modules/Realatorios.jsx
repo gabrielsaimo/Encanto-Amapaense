@@ -31,6 +31,7 @@ export default function Relatorios(atualizar) {
   const [dataFim, setdataFim] = useState(null);
   const [dataMesAno, setdataMesAno] = useState([]);
   const [user, setUser] = useState([]);
+  const [chartInstance, setChartInstance] = useState(null);
   const handleClose = (removedTag) => {
     const newTags = dataMesAno.filter((tag) => tag !== removedTag);
     setdataMesAno(newTags);
@@ -65,9 +66,12 @@ export default function Relatorios(atualizar) {
   }, [atualizar]);
 
   useEffect(() => {
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
     if (tpRelatorio === "Grafico" && dataGrafico.length > 0) {
       const ctx = document.getElementById("meuGrafico").getContext("2d");
-      new Chart(ctx, {
+      const newChartInstance = new Chart(ctx, {
         type: "doughnut",
         data: {
           labels: dataGrafico.map((item) => `${item.numero_mes}/${item.ano}`),
@@ -79,13 +83,29 @@ export default function Relatorios(atualizar) {
                 "#FF6384",
                 "#36A2EB",
                 "#FFCE56",
-                // Adicione cores adicionais aqui, se necessário...
+                "#68ff16",
+                "#ff16e6",
+                "#16ffdd",
+                "#ff9d16",
+                "#ff1616",
+                "#1616ff",
+                "#16ff16",
+                "#ff16ff",
+                "#16ffff",
               ],
               hoverBackgroundColor: [
                 "#FF6384",
                 "#36A2EB",
                 "#FFCE56",
-                // Adicione cores de destaque aqui, se necessário...
+                "#68ff16",
+                "#ff16e6",
+                "#16ffdd",
+                "#ff9d16",
+                "#ff1616",
+                "#1616ff",
+                "#16ff16",
+                "#ff16ff",
+                "#16ffff",
               ],
             },
           ],
@@ -99,7 +119,13 @@ export default function Relatorios(atualizar) {
           },
         },
       });
+      setChartInstance(newChartInstance);
     }
+    return () => {
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+    };
   }, [tpRelatorio, dataGrafico]);
 
   const columnsVendas = [

@@ -223,6 +223,8 @@ export default function Cozinha() {
         finished_at:
           status === "Pronto" || status === "Cancelado" ? new Date() : null,
         update_at: new Date(),
+        update_by: userNome,
+        taxa: 0,
       };
       await postPedidosStatus(data);
     }
@@ -339,7 +341,10 @@ export default function Cozinha() {
             <div style={{ marginBottom: 10 }}>
               <Descriptions
                 bordered
-                style={{ backgroundColor: "rgb(255, 255, 255)",borderRadius: 10 }}
+                style={{
+                  backgroundColor: "rgb(255, 255, 255)",
+                  borderRadius: 10,
+                }}
                 column={{
                   xxl: 4,
                   xl: 3,
