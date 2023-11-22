@@ -391,7 +391,9 @@ export default function Cozinha() {
                               <p>
                                 x{pedidoss.qdt} {pedidoss.item}
                                 {pedidoss.categoria !== "Bebidas" &&
-                                pedidoss.categoria !== "Sucos exóticos" ? (
+                                pedidoss.categoria !== "Sucos exóticos" &&
+                                pedidoss.categoria !== "Drinks" &&
+                                pedidoss.categoria !== "Cerveja" ? (
                                   pedidoss.status !== "Cancelado" &&
                                   pedidoss.status !== "Finalizado" &&
                                   pedidoss.status !== "Em Cancelamento" &&
