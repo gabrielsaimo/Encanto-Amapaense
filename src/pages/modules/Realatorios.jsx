@@ -32,6 +32,7 @@ export default function Relatorios(atualizar) {
   const [dataMesAno, setdataMesAno] = useState([]);
   const [user, setUser] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
+  const [typeGrafico, setTypeGrafico] = useState("doughnut");
   const handleClose = (removedTag) => {
     const newTags = dataMesAno.filter((tag) => tag !== removedTag);
     setdataMesAno(newTags);
@@ -65,6 +66,10 @@ export default function Relatorios(atualizar) {
     });
   }, [atualizar]);
 
+  async function changeTypeGrafico(value) {
+    setTypeGrafico(value);
+  }
+
   useEffect(() => {
     if (chartInstance) {
       chartInstance.destroy();
@@ -72,7 +77,7 @@ export default function Relatorios(atualizar) {
     if (tpRelatorio === "Grafico" && dataGrafico.length > 0) {
       const ctx = document.getElementById("meuGrafico").getContext("2d");
       const newChartInstance = new Chart(ctx, {
-        type: "doughnut",
+        type: typeGrafico,
         data: {
           labels: dataGrafico.map((item) => `${item.numero_mes}/${item.ano}`),
           datasets: [
@@ -93,20 +98,8 @@ export default function Relatorios(atualizar) {
                 "#ff16ff",
                 "#16ffff",
               ],
-              hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#68ff16",
-                "#ff16e6",
-                "#16ffdd",
-                "#ff9d16",
-                "#ff1616",
-                "#1616ff",
-                "#16ff16",
-                "#ff16ff",
-                "#16ffff",
-              ],
+              borderWidth: 1,
+              hoverOffset: 4,
             },
           ],
         },
@@ -115,8 +108,34 @@ export default function Relatorios(atualizar) {
             legend: {
               display: true,
               position: "bottom",
+
+              labels: {
+                color: "rgb(255, 99, 132)",
+              },
+            },
+
+            title: {
+              display: true,
+              text: "Relatório Mensal",
+              color: "rgb(255, 99, 132)",
+              font: {
+                size: 20,
+              },
+            },
+            tooltip: {
+              enabled: true,
+              intersect: false,
+              mode: "index",
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  var valor = tooltipItem.formattedValue;
+                  return "R$ " + valor;
+                },
+              },
             },
           },
+
+          responsive: true,
         },
       });
       setChartInstance(newChartInstance);
@@ -126,7 +145,7 @@ export default function Relatorios(atualizar) {
         chartInstance.destroy();
       }
     };
-  }, [tpRelatorio, dataGrafico]);
+  }, [tpRelatorio, dataGrafico, typeGrafico]);
 
   const columnsVendas = [
     {
@@ -366,29 +385,21 @@ export default function Relatorios(atualizar) {
             <ConfigProvider locale={locale}>
               <DatePicker onChange={(e) => datasMeseAno(e)} picker="month" />
             </ConfigProvider>
-            <div style={{ marginLeft: 160 }}>
-              <TweenOneGroup
-                enter={{
-                  scale: 0.8,
-                  opacity: 0,
-                  type: "from",
-                  duration: 100,
-                }}
-                onEnd={(e) => {
-                  if (e.type === "appear" || e.type === "enter") {
-                    e.target.style = "display: inline-block";
-                  }
-                }}
-                leave={{
-                  opacity: 0,
-                  width: 0,
-                  scale: 0,
-                  duration: 200,
-                }}
-                appear={false}
+          </div>
+          <div>
+            <div style={{ alignItems: "center" }}>
+              <h3>Tipo Gráfico</h3>
+              <Select
+                style={{ width: 120 }}
+                defaultValue="doughnut"
+                onChange={(e) => changeTypeGrafico(e)}
               >
-                {tagChild}
-              </TweenOneGroup>
+                <Select.Option value="bar">Barra</Select.Option>
+                <Select.Option value="line">Linha</Select.Option>
+                <Select.Option value="pie">Pizza</Select.Option>
+                <Select.Option value="doughnut">Rosca</Select.Option>
+                <Select.Option value="polarArea">Polar</Select.Option>
+              </Select>
             </div>
           </div>
         </div>
@@ -402,6 +413,31 @@ export default function Relatorios(atualizar) {
       >
         Gerar relatório
       </Button>
+
+      <div style={{ marginTop: 20 }}>
+        <TweenOneGroup
+          enter={{
+            scale: 0.8,
+            opacity: 0,
+            type: "from",
+            duration: 100,
+          }}
+          onEnd={(e) => {
+            if (e.type === "appear" || e.type === "enter") {
+              e.target.style = "display: inline-block";
+            }
+          }}
+          leave={{
+            opacity: 0,
+            width: 0,
+            scale: 0,
+            duration: 200,
+          }}
+          appear={false}
+        >
+          {tagChild}
+        </TweenOneGroup>
+      </div>
 
       {data.length > 0 && (
         <div>
