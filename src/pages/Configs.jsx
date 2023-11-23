@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Card, Divider, Input, Modal, Tabs } from "antd";
 import "firebase/database";
 import Dashboard from "./modules/Dasboard";
@@ -19,14 +19,34 @@ export default function Config() {
   const [UserCategoria, setUserCategoria] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  const [position, setPosition] = useState(["right"]);
   useEffect(() => {
     getCachedDateUser();
+    setPosition(["right"]);
   }, []);
 
   const acessar = () => {
     GetUsuario();
   };
+  const OperationsSlot = {
+    right: (
+      <div style={{ float: "right" }}>
+        {userNome} - {UserCategoria}{" "}
+        <Button onClick={() => logout()}>Sair</Button>
+      </div>
+    ),
+  };
+
+  const slot = useMemo(() => {
+    if (position.length === 0) return null;
+    return position.reduce(
+      (acc, direction) => ({
+        ...acc,
+        [direction]: OperationsSlot["right"],
+      }),
+      {}
+    );
+  }, [position]);
 
   const GetUsuario = async () => {
     const data = { name: name, password: password };
@@ -166,15 +186,21 @@ export default function Config() {
           </div>
         </Modal>
       ) : (
-        <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto" }}>
-          <Card style={{ marginTop: 10 }}>
-            <div style={{ float: "right" }}>
-              {userNome} - {UserCategoria}{" "}
-              <Button onClick={() => logout()}>Sair</Button>
-            </div>
-          </Card>
-
-          <Tabs onChange={onChange} key={items} type="card" items={items} />
+        <div
+          style={{
+            width: "95%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 20,
+          }}
+        >
+          <Tabs
+            tabBarExtraContent={slot}
+            onChange={onChange}
+            key={items}
+            type="card"
+            items={items}
+          />
         </div>
       )}
     </>
