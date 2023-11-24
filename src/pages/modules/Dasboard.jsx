@@ -1,5 +1,5 @@
 /* eslint-disable  */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   Button,
   Card,
@@ -155,11 +155,7 @@ export default function Dashboard({ atualizar, user }) {
   useEffect(() => {
     filterTable();
   }, [search, cardapio, filteredStatus, uptela]);
-  useEffect(() => {
-    if (cardapio.length > 0 && imgSrc.length === 0) {
-      getImgCardapioWS();
-    }
-  }, [cardapio, atualizar, actionCardapio, uptela]);
+
   const gtCardapio = async () => {
     const cardapioCollection = await getCardapio();
     const cardapios = cardapioCollection;
@@ -274,16 +270,20 @@ export default function Dashboard({ atualizar, user }) {
       clearSelecteds();
     }
   }
-
-  const getImgCardapioWS = async () => {
-    for (let i = 0; i < cardapio.length; i++) {
-      if (!cardapio[i].ids) {
-        continue;
-      }
-      const img = await getImgCardapio(cardapio[i].id, cardapio[i].ids);
-      setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
+  const memoizedImgSrc = useMemo(() => {
+    if (cardapio.length > 0 && imgSrc.length === 0) {
+      const images = [];
+      cardapio.forEach(async (item) => {
+        if (!item.ids) return;
+        const img = await getImgCardapio(item.id, item.ids);
+        setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
+        images.push(img);
+      });
+      return images;
     }
-  };
+    return imgSrc;
+  }, [cardapio, imgSrc]);
+
   const columns = [
     {
       title: "ID",
@@ -327,7 +327,7 @@ export default function Dashboard({ atualizar, user }) {
       key: "img",
       width: 160,
       render: (_, text) => {
-        return imgSrc.map((img1, index) => (
+        return memoizedImgSrc.map((img1, index) => (
           <div className="img" key={index}>
             {img1.map((img, index) => renderImageCarousel(img, index, text.id))}
           </div>
@@ -445,7 +445,7 @@ export default function Dashboard({ atualizar, user }) {
   }
 
   return (
-    <>
+    <div style={{minHeight:'90vh'}}>
       <Row gutter={8}>
         <Button type="primary" onClick={() => setOpen(true)}>
           Tour
@@ -636,7 +636,7 @@ export default function Dashboard({ atualizar, user }) {
             </div>
 
             <div>
-              {imgSrc.map((img1, index) => (
+              {memoizedImgSrc.map((img1, index) => (
                 <div className="img" key={index}>
                   {img1.map(
                     (img, index) =>
@@ -682,7 +682,7 @@ export default function Dashboard({ atualizar, user }) {
             </div>
             <div>
               {totalImg < 3 && selectedTaskId && (
-                <ImgCrop >
+                <ImgCrop>
                   <Upload
                     action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                     listType="picture-card"
@@ -716,6 +716,6 @@ export default function Dashboard({ atualizar, user }) {
       >
         <img src={imgModal} alt="img" style={{ width: "100%" }} />
       </Modal>
-    </>
+    </div>
   );
 }

@@ -47,7 +47,7 @@ export default function Menssagem({ atualizar }) {
   }
 
   return (
-    <>
+    <div style={{ minHeight: "90vh" }}>
       <Card>
         <Row justify="start" gutter={20}>
           <Col span={24}>
@@ -93,6 +93,6 @@ export default function Menssagem({ atualizar }) {
           </Col>
         </Row>
       </Card>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Select, Space, Table } from "antd";
+import { Button, Card, Input, Modal, Select, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { getUsers, postUserAdm, putUser } from "../../services/user.ws";
 export default function Users(atualizar) {
@@ -100,11 +100,11 @@ export default function Users(atualizar) {
     },
   ];
   return (
-    <>
+    <Card style={{ minHeight: "90vh" }}>
       <Button type="primary" onClick={() => setShowModal(true)}>
         Novo
       </Button>
-      <Table columns={columns} dataSource={data} />;
+      <Table columns={columns} dataSource={data} />
       <Modal
         open={showModal}
         onCancel={() => cancelar()}
@@ -134,6 +134,6 @@ export default function Users(atualizar) {
           </Select>
         </Space>
       </Modal>
-    </>
+    </Card>
   );
 }

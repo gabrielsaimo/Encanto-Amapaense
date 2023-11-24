@@ -23,7 +23,7 @@ export default function Pedidos(atualizar) {
       placement,
     });
   };
-  
+
   useEffect(() => {
     getPedidoss();
   }, [pedidos]);
@@ -63,7 +63,7 @@ export default function Pedidos(atualizar) {
   };
 
   return (
-    <>
+    <div style={{ minHeight: "90vh" }}>
       <h1>Atualizado as {dataFormatada}</h1>
       {contextHolder}
       {pedidos.map((pedido) => (
@@ -180,6 +180,6 @@ export default function Pedidos(atualizar) {
           </Descriptions>
         </div>
       ))}
-    </>
+    </div>
   );
 }

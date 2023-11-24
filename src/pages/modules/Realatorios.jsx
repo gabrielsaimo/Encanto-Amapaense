@@ -331,21 +331,20 @@ export default function Relatorios(atualizar) {
   const tagChild = dataMesAno.map(forMap);
 
   return (
-    <Card>
+    <Card style={{ minHeight: "90vh" }}>
+      {!menu ? (
+        <MenuOutlined
+          style={{ fontSize: 30, color: "#1890ff" }}
+          onClick={() => setMenu(!menu)}
+        />
+      ) : (
+        <CloseOutlined
+          style={{ fontSize: 30, color: "#1890ff" }}
+          onClick={() => setMenu(!menu)}
+        />
+      )}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          {!menu ? (
-            <MenuOutlined
-              style={{ fontSize: 30, color: "#1890ff" }}
-              onClick={() => setMenu(!menu)}
-            />
-          ) : (
-            <CloseOutlined
-              style={{ fontSize: 30, color: "#1890ff" }}
-              onClick={() => setMenu(!menu)}
-            />
-          )}
-
           <br />
           {menu && (
             <>
@@ -438,38 +437,39 @@ export default function Relatorios(atualizar) {
             </>
           )}
         </div>
-
-        <div
-          style={{
-            marginTop: 20,
-            display: "flex",
-            flexDirection: "column",
-            width: 100,
-          }}
-        >
-          <TweenOneGroup
-            enter={{
-              scale: 0.8,
-              opacity: 0,
-              type: "from",
-              duration: 100,
+        {tpRelatorio === "Grafico" && (
+          <div
+            style={{
+              marginTop: 20,
+              display: "flex",
+              flexDirection: "column",
+              width: 100,
             }}
-            onEnd={(e) => {
-              if (e.type === "appear" || e.type === "enter") {
-                e.target.style = "display: inline-block ";
-              }
-            }}
-            leave={{
-              opacity: 0,
-              width: 0,
-              scale: 0,
-              duration: 200,
-            }}
-            appear={false}
           >
-            {tagChild}
-          </TweenOneGroup>
-        </div>
+            <TweenOneGroup
+              enter={{
+                scale: 0.8,
+                opacity: 0,
+                type: "from",
+                duration: 100,
+              }}
+              onEnd={(e) => {
+                if (e.type === "appear" || e.type === "enter") {
+                  e.target.style = "display: inline-block ";
+                }
+              }}
+              leave={{
+                opacity: 0,
+                width: 0,
+                scale: 0,
+                duration: 200,
+              }}
+              appear={false}
+            >
+              {tagChild}
+            </TweenOneGroup>
+          </div>
+        )}
 
         <div style={{ width: menu ? "65vw" : "100%" }}>
           {data.length > 0 && (
@@ -558,7 +558,7 @@ export default function Relatorios(atualizar) {
           )}
 
           {tpRelatorio === "Grafico" && dataGrafico.length > 0 && (
-            <div style={{ width: 400 }}>
+            <div style={{ width: "50%" }}>
               <br />
               <br />
               <canvas id="meuGrafico"></canvas>
