@@ -167,6 +167,7 @@ const MenuDashboard = () => {
               icon: <BookOutlined />,
               disabled: false,
               label: "Cardápio",
+              // eslint-disable-next-line no-dupe-keys
               disabled:
                 UserCategoria === "Gerente"
                   ? false
