@@ -165,7 +165,14 @@ const MenuDashboard = () => {
             {
               key: "1",
               icon: <BookOutlined />,
+              disabled: false,
               label: "Cardápio",
+              disabled:
+                UserCategoria === "Gerente"
+                  ? false
+                  : UserCategoria === "ADM"
+                  ? false
+                  : true,
               onClick: () => {
                 setTela(1);
                 setCollapsed(true);
@@ -175,6 +182,7 @@ const MenuDashboard = () => {
               key: "2",
               icon: <PieChartOutlined />,
               label: "Relatorios",
+              disabled: UserCategoria === "ADM" ? false : true,
               onClick: () => {
                 setTela(2);
                 setCollapsed(true);
@@ -201,6 +209,7 @@ const MenuDashboard = () => {
             {
               key: "5",
               icon: <UserOutlined />,
+              disabled: UserCategoria === "ADM" ? false : true,
               label: "Usuários",
               onClick: () => {
                 setTela(5);
