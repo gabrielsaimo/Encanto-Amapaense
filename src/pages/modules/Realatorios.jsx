@@ -22,6 +22,7 @@ import {
 } from "../../services/relatorios.ws";
 
 import { getUsers } from "../../services/user.ws";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [dataGrafico, setDataGrafico] = useState([]);
@@ -33,11 +34,13 @@ export default function Relatorios(atualizar) {
   const [user, setUser] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [typeGrafico, setTypeGrafico] = useState("doughnut");
+  const [menu, setMenu] = useState(false);
   const handleClose = (removedTag) => {
     const newTags = dataMesAno.filter((tag) => tag !== removedTag);
     setdataMesAno(newTags);
   };
   async function getRelatorio() {
+    setMenu(false);
     let bobydate = {
       data_inicial: dataInicio + " 00:00:00.001",
       data_final: dataFim + " 23:59:59.999",
@@ -145,6 +148,7 @@ export default function Relatorios(atualizar) {
         chartInstance.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tpRelatorio, dataGrafico, typeGrafico]);
 
   const columnsVendas = [
@@ -328,203 +332,240 @@ export default function Relatorios(atualizar) {
 
   return (
     <Card>
-      <h1>Relatórios</h1>
-      <br />
-      <h3>Selecione o relatório</h3>
-      <Select
-        style={{ width: 120 }}
-        defaultValue="Selecione"
-        onChange={(e) => [
-          setTpRelatorio(e),
-          setData([]),
-          setDataInicio(null),
-          setdataFim(null),
-          setdataMesAno([]),
-          setTpPag("PIX,Crédito,Débito,Dinheiro,Cortesia"),
-        ]}
-      >
-        <Select.Option value=""></Select.Option>
-        <Select.Option value="Vendas">Vendas</Select.Option>
-        <Select.Option value="Pedidos">Pedidos</Select.Option>
-        <Select.Option value="Grafico">Grafico</Select.Option>
-      </Select>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          {!menu ? (
+            <MenuOutlined
+              style={{ fontSize: 30, color: "#1890ff" }}
+              onClick={() => setMenu(!menu)}
+            />
+          ) : (
+            <CloseOutlined
+              style={{ fontSize: 30, color: "#1890ff" }}
+              onClick={() => setMenu(!menu)}
+            />
+          )}
 
-      <br />
-
-      {(tpRelatorio === "Vendas" || tpRelatorio === "Pedidos") && (
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10 }}>
-            <h3>Selecione o período</h3>
-            <ConfigProvider locale={locale}>
-              <DatePicker.RangePicker onChange={(e) => datas(e)} />
-            </ConfigProvider>
-          </div>
-          <div style={{ display: tpRelatorio === "Pedidos" && "none" }}>
-            <h3>Tipo Pagamento</h3>
-            <Select
-              style={{ width: 120 }}
-              defaultValue="Todos"
-              onChange={(e) => [setTpPag(e)]}
-            >
-              <Select.Option value="PIX,Crédito,Débito,Dinheiro,Cortesia">
-                Todos
-              </Select.Option>
-              <Select.Option value="PIX">Pix</Select.Option>
-              <Select.Option value="Crédito">Crédito</Select.Option>
-              <Select.Option value="Débito">Débito</Select.Option>
-              <Select.Option value="Dinheiro">Dinheiro</Select.Option>
-              <Select.Option value="Cortesia">Cortesia</Select.Option>
-            </Select>
-          </div>
-        </div>
-      )}
-      {tpRelatorio === "Grafico" && (
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10 }}>
-            <h3>Selecione o período</h3>
-            <ConfigProvider locale={locale}>
-              <DatePicker onChange={(e) => datasMeseAno(e)} picker="month" />
-            </ConfigProvider>
-          </div>
-          <div>
-            <div style={{ alignItems: "center" }}>
-              <h3>Tipo Gráfico</h3>
+          <br />
+          {menu && (
+            <>
+              <h3>Selecione o relatório</h3>
               <Select
                 style={{ width: 120 }}
-                defaultValue="doughnut"
-                onChange={(e) => changeTypeGrafico(e)}
+                defaultValue="Selecione"
+                onChange={(e) => [
+                  setTpRelatorio(e),
+                  setData([]),
+                  setDataInicio(null),
+                  setdataFim(null),
+                  setdataMesAno([]),
+                  setTpPag("PIX,Crédito,Débito,Dinheiro,Cortesia"),
+                ]}
               >
-                <Select.Option value="bar">Barra</Select.Option>
-                <Select.Option value="line">Linha</Select.Option>
-                <Select.Option value="pie">Pizza</Select.Option>
-                <Select.Option value="doughnut">Rosca</Select.Option>
-                <Select.Option value="polarArea">Polar</Select.Option>
+                <Select.Option value=""></Select.Option>
+                <Select.Option value="Vendas">Vendas</Select.Option>
+                <Select.Option value="Pedidos">Pedidos</Select.Option>
+                <Select.Option value="Grafico">Grafico</Select.Option>
               </Select>
-            </div>
-          </div>
-        </div>
-      )}
 
-      <Button
-        type="primary"
-        disabled={dataMesAno.length === 0 && !dataInicio && !dataFim}
-        style={{ marginTop: 10 }}
-        onClick={() => getRelatorio()}
-      >
-        Gerar relatório
-      </Button>
+              <br />
 
-      <div style={{ marginTop: 20 }}>
-        <TweenOneGroup
-          enter={{
-            scale: 0.8,
-            opacity: 0,
-            type: "from",
-            duration: 100,
-          }}
-          onEnd={(e) => {
-            if (e.type === "appear" || e.type === "enter") {
-              e.target.style = "display: inline-block";
-            }
-          }}
-          leave={{
-            opacity: 0,
-            width: 0,
-            scale: 0,
-            duration: 200,
-          }}
-          appear={false}
-        >
-          {tagChild}
-        </TweenOneGroup>
-      </div>
-
-      {data.length > 0 && (
-        <div>
-          <br />
-          <br />
-          <Table
-            columns={
-              tpRelatorio === "Vendas"
-                ? columnsVendas
-                : tpRelatorio === "Pedidos"
-                ? columnsPedidos
-                : []
-            }
-            dataSource={data}
-            pagination={{ pageSize: 30 }}
-            scroll={{
-              x: 1000,
-              y: 500,
-            }}
-            style={{ marginBottom: 10 }}
-            summary={(pageData) => {
-              let valorTotal = 0;
-              let taxaTotal = 0;
-              let descontoCortesia = 0;
-
-              pageData.forEach(({ total_pago, taxa, total_cortesia }) => {
-                valorTotal += Number(total_pago);
-                descontoCortesia += Number(total_cortesia);
-                taxaTotal += Number(taxa);
-              });
-              return (
-                <>
-                  {tpRelatorio === "Vendas" && (
-                    <Table.Summary.Row
-                      fixed
-                      style={{
-                        position: "sticky",
-                        bottom: 0,
-                        background: "#f0f0f0",
-                        zIndex: 1,
-                      }}
+              {(tpRelatorio === "Vendas" || tpRelatorio === "Pedidos") && (
+                <div style={{ display: "flex" }}>
+                  <div style={{ marginRight: 10 }}>
+                    <h3>Selecione o período</h3>
+                    <ConfigProvider locale={locale}>
+                      <DatePicker.RangePicker onChange={(e) => datas(e)} />
+                    </ConfigProvider>
+                  </div>
+                  <div style={{ display: tpRelatorio === "Pedidos" && "none" }}>
+                    <h3>Tipo Pagamento</h3>
+                    <Select
+                      style={{ width: 130 }}
+                      defaultValue="Todos"
+                      onChange={(e) => [setTpPag(e)]}
                     >
-                      <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell></Table.Summary.Cell>
-                      <Table.Summary.Cell>
-                        <Tooltip title="Cortesia" color={"red"}>
-                          <span style={{ fontWeight: "bold", color: "red" }}>
-                            R$ -{descontoCortesia.toFixed(2)}
-                          </span>
-                        </Tooltip>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell>
-                        <Tooltip title="10%" color={"green"}>
-                          <span style={{ fontWeight: "bold", color: "green" }}>
-                            R$ {taxaTotal.toFixed(2)}
-                          </span>
-                        </Tooltip>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell>
-                        <Tooltip title="Soma Total" color={"green"}>
-                          <span style={{ fontWeight: "bold", color: "green" }}>
-                            R${" "}
-                            {Number(
-                              Number(valorTotal).toFixed(2) -
-                                Number(descontoCortesia).toFixed(2)
-                            ).toFixed(2)}
-                          </span>
-                        </Tooltip>
-                      </Table.Summary.Cell>
-                    </Table.Summary.Row>
-                  )}
-                </>
-              );
-            }}
-          />
-        </div>
-      )}
+                      <Select.Option value="PIX,Crédito,Débito,Dinheiro,Cortesia">
+                        Todos
+                      </Select.Option>
+                      <Select.Option value="PIX">Pix</Select.Option>
+                      <Select.Option value="Crédito">Crédito</Select.Option>
+                      <Select.Option value="Débito">Débito</Select.Option>
+                      <Select.Option value="Dinheiro">Dinheiro</Select.Option>
+                      <Select.Option value="Cortesia">Cortesia</Select.Option>
+                    </Select>
+                  </div>
+                </div>
+              )}
+              {tpRelatorio === "Grafico" && (
+                <div style={{ display: "flex" }}>
+                  <div style={{ marginRight: 10 }}>
+                    <h3>Selecione o período</h3>
+                    <ConfigProvider locale={locale}>
+                      <DatePicker
+                        onChange={(e) => datasMeseAno(e)}
+                        picker="month"
+                      />
+                    </ConfigProvider>
+                  </div>
+                  <div>
+                    <div style={{ alignItems: "center" }}>
+                      <h3>Tipo Gráfico</h3>
+                      <Select
+                        style={{ width: 120 }}
+                        defaultValue="doughnut"
+                        onChange={(e) => changeTypeGrafico(e)}
+                      >
+                        <Select.Option value="bar">Barra</Select.Option>
+                        <Select.Option value="line">Linha</Select.Option>
+                        <Select.Option value="pie">Pizza</Select.Option>
+                        <Select.Option value="doughnut">Rosca</Select.Option>
+                        <Select.Option value="polarArea">Polar</Select.Option>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+              )}
 
-      {tpRelatorio === "Grafico" && dataGrafico.length > 0 && (
-        <div style={{ width: 400 }}>
-          <br />
-          <br />
-          <canvas id="meuGrafico"></canvas>
+              <Button
+                type="primary"
+                disabled={dataMesAno.length === 0 && !dataInicio && !dataFim}
+                style={{ marginTop: 10 }}
+                onClick={() => getRelatorio()}
+              >
+                Gerar relatório
+              </Button>
+            </>
+          )}
         </div>
-      )}
+
+        <div
+          style={{
+            marginTop: 20,
+            display: "flex",
+            flexDirection: "column",
+            width: 100,
+          }}
+        >
+          <TweenOneGroup
+            enter={{
+              scale: 0.8,
+              opacity: 0,
+              type: "from",
+              duration: 100,
+            }}
+            onEnd={(e) => {
+              if (e.type === "appear" || e.type === "enter") {
+                e.target.style = "display: inline-block ";
+              }
+            }}
+            leave={{
+              opacity: 0,
+              width: 0,
+              scale: 0,
+              duration: 200,
+            }}
+            appear={false}
+          >
+            {tagChild}
+          </TweenOneGroup>
+        </div>
+
+        <div style={{ width: menu ? "65vw" : "100%" }}>
+          {data.length > 0 && (
+            <div>
+              <br />
+              <br />
+              <Table
+                columns={
+                  tpRelatorio === "Vendas"
+                    ? columnsVendas
+                    : tpRelatorio === "Pedidos"
+                    ? columnsPedidos
+                    : []
+                }
+                dataSource={data}
+                pagination={{ pageSize: 30 }}
+                scroll={{
+                  x: 1500,
+                  y: 500,
+                }}
+                style={{ marginBottom: 10 }}
+                summary={(pageData) => {
+                  let valorTotal = 0;
+                  let taxaTotal = 0;
+                  let descontoCortesia = 0;
+
+                  pageData.forEach(({ total_pago, taxa, total_cortesia }) => {
+                    valorTotal += Number(total_pago);
+                    descontoCortesia += Number(total_cortesia);
+                    taxaTotal += Number(taxa);
+                  });
+                  return (
+                    <>
+                      {tpRelatorio === "Vendas" && (
+                        <Table.Summary.Row
+                          fixed
+                          style={{
+                            position: "sticky",
+                            bottom: 0,
+                            background: "#f0f0f0",
+                            zIndex: 1,
+                          }}
+                        >
+                          <Table.Summary.Cell></Table.Summary.Cell>
+                          <Table.Summary.Cell></Table.Summary.Cell>
+                          <Table.Summary.Cell></Table.Summary.Cell>
+                          <Table.Summary.Cell></Table.Summary.Cell>
+                          <Table.Summary.Cell>
+                            <Tooltip title="Cortesia" color={"red"}>
+                              <span
+                                style={{ fontWeight: "bold", color: "red" }}
+                              >
+                                R$ -{descontoCortesia.toFixed(2)}
+                              </span>
+                            </Tooltip>
+                          </Table.Summary.Cell>
+                          <Table.Summary.Cell>
+                            <Tooltip title="10%" color={"green"}>
+                              <span
+                                style={{ fontWeight: "bold", color: "green" }}
+                              >
+                                R$ {taxaTotal.toFixed(2)}
+                              </span>
+                            </Tooltip>
+                          </Table.Summary.Cell>
+                          <Table.Summary.Cell>
+                            <Tooltip title="Soma Total" color={"green"}>
+                              <span
+                                style={{ fontWeight: "bold", color: "green" }}
+                              >
+                                R${" "}
+                                {Number(
+                                  Number(valorTotal).toFixed(2) -
+                                    Number(descontoCortesia).toFixed(2)
+                                ).toFixed(2)}
+                              </span>
+                            </Tooltip>
+                          </Table.Summary.Cell>
+                        </Table.Summary.Row>
+                      )}
+                    </>
+                  );
+                }}
+              />
+            </div>
+          )}
+
+          {tpRelatorio === "Grafico" && dataGrafico.length > 0 && (
+            <div style={{ width: 400 }}>
+              <br />
+              <br />
+              <canvas id="meuGrafico"></canvas>
+            </div>
+          )}
+        </div>
+      </div>
     </Card>
   );
 }
