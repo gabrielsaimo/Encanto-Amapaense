@@ -569,7 +569,7 @@ export default function Dashboard({ atualizar, user }) {
         />
       )}
       {isMobile && (
-        <Row gutter={[16, 16]}>
+        <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
           {searchData.map((item) => (
             <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
               <Card className="card-mobile" title={item.name} bordered={true}>
