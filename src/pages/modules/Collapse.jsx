@@ -27,9 +27,6 @@ const CollapseMenu = () => {
     if (cardapioCategory.length === 0) {
       getCardapioCategory();
     }
-    if (cardapio.length > 0 && imgSrc.length === 0) {
-      getImgCardapioWS();
-    }
   }, [cardapio]);
 
   const getCardapios = async () => {
@@ -42,15 +39,19 @@ const CollapseMenu = () => {
     setCardapioCategory(cardapioCollection);
   };
 
-  const getImgCardapioWS = async () => {
-    for (let i = 0; i < cardapio.length; i++) {
-      if (!cardapio[i].ids) {
-        continue; 
-      }
-      const img = await getImgCardapio(cardapio[i].id, cardapio[i].ids);
-      setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
+  const memoizedImgSrc = useMemo(() => {
+    if (cardapio.length > 0 && imgSrc.length === 0) {
+      const images = [];
+      cardapio.forEach(async (item) => {
+        if (!item.ids) return;
+        const img = await getImgCardapio(item.id, item.ids);
+        setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
+        images.push(img);
+      });
+      return images;
     }
-  };
+    return imgSrc;
+  }, [cardapio, imgSrc]);
 
   const renderImageCarousel = (img, index, id) =>
     img[0].idreq === id && (
@@ -163,7 +164,7 @@ const CollapseMenu = () => {
                     <div key={idx} className="border">
                       <div style={{ display: "flex" }}>
                         {categoria.ids &&
-                          imgSrc.map((img1, index) =>
+                          memoizedImgSrc.map((img1, index) =>
                             renderImageCarousel(img1, index, categoria.id)
                           )}
 
