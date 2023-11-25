@@ -56,7 +56,7 @@ function App() {
         onClick={() => handleLogoClick()}
       />
       <div style={{ display: "flex" }}>
-        <Affix offsetTop={10} style={{ marginLeft: "40%" }}>
+        {/*<Affix offsetTop={10} style={{ marginLeft: "40%" }}>
           <Button
             type="primary"
             onClick={() => setVisible(true)}
@@ -71,8 +71,11 @@ function App() {
           >
             Acompanhar Pedido
           </Button>
-        </Affix>
-        <Affix offsetTop={10} style={{ marginLeft: "1%" }}>
+        </Affix>*/}
+        <Affix
+          offsetTop={10}
+          style={{ position: "fixed", right: 10, top: 10, zIndex: 9 }}
+        >
           <Menu />
         </Affix>
       </div>
