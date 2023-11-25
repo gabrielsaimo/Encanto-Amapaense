@@ -188,6 +188,12 @@ export default function Dashboard({ atualizar, user }) {
     setActionCardapio(!actionCardapio);
   }
 
+  async function confirmDeleteImg(record) {
+    await imgCardapio(record);
+    message.success("Imagem deletada com sucesso!");
+    setActionCardapio(!actionCardapio);
+  }
+
   function filterTable() {
     if (!search && !filteredStatus) {
       setSearchData(cardapio);
@@ -600,26 +606,31 @@ export default function Dashboard({ atualizar, user }) {
                                 }}
                               />
 
-                              <Button
-                                ref={ref5}
-                                style={{
-                                  backgroundColor: "#fc5f5f",
-                                  width: 20,
-                                  position: "absolute",
-                                  marginLeft: -35,
-                                }}
-                                onClick={() => {
-                                  DeleteImage(img.id);
-                                }}
+                              <Popconfirm
+                                title="Tem certeza que deseja excluir essa imagem?"
+                                onConfirm={() => confirmDeleteImg(img.id)}
+                                okText="Excluir"
+                                okButtonProps={{ danger: true }}
+                                cancelText="Cancelar"
                               >
-                                <DeleteOutlined
-                                  size={24}
+                                <Button
+                                  ref={ref5}
                                   style={{
-                                    color: "#fff",
-                                    marginLeft: -7,
+                                    backgroundColor: "#fc5f5f",
+                                    width: 20,
+                                    position: "absolute",
+                                    marginLeft: -35,
                                   }}
-                                />
-                              </Button>
+                                >
+                                  <DeleteOutlined
+                                    size={24}
+                                    style={{
+                                      color: "#fff",
+                                      marginLeft: -7,
+                                    }}
+                                  />
+                                </Button>
+                              </Popconfirm>
                             </>
                           ))
                       )}
@@ -773,27 +784,31 @@ export default function Dashboard({ atualizar, user }) {
                               borderRadius: 10,
                             }}
                           />
-
-                          <Button
-                            ref={ref5}
-                            style={{
-                              backgroundColor: "#fc5f5f",
-                              width: 20,
-                              position: "absolute",
-                              marginLeft: -35,
-                            }}
-                            onClick={() => {
-                              DeleteImage(img.id);
-                            }}
+                          <Popconfirm
+                            title="Tem certeza que deseja excluir essa imagem?"
+                            onConfirm={() => confirmDeleteImg(img.id)}
+                            okText="Excluir"
+                            okButtonProps={{ danger: true }}
+                            cancelText="Cancelar"
                           >
-                            <DeleteOutlined
-                              size={24}
+                            <Button
+                              ref={ref5}
                               style={{
-                                color: "#fff",
-                                marginLeft: -7,
+                                backgroundColor: "#fc5f5f",
+                                width: 20,
+                                position: "absolute",
+                                marginLeft: -35,
                               }}
-                            />
-                          </Button>
+                            >
+                              <DeleteOutlined
+                                size={24}
+                                style={{
+                                  color: "#fff",
+                                  marginLeft: -7,
+                                }}
+                              />
+                            </Button>
+                          </Popconfirm>
                         </>
                       ))
                   )}
