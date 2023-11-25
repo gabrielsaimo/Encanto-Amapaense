@@ -25,9 +25,11 @@ import Dashboard from "./Dasboard";
 import { getUser } from "../../services/user.ws";
 import Pedidos from "./Pedidos";
 import Users from "./Users";
+import { useParams } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 
 const MenuDashboard = () => {
+  const { idCompany } = useParams();
   const [collapsed, setCollapsed] = useState(false);
   const [tela, setTela] = useState(1);
   const {

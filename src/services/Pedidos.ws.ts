@@ -142,3 +142,8 @@ export const veryfyStatusPedidos = async (id: number): Promise<any> => {
   const response = await api.get<any>(`pedido/pagamentos/verify/${id}`);
   return response.data;
 };
+
+export const getStatusPedidos = async (id: number): Promise<any> => {
+  const response = await api.get<any>(`pedido/verif/status/mesa/${id}`);
+  return response.data;
+};

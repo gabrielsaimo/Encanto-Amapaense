@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import App from "../pages/App";
-import Config from "../pages/Configs";
 import Garçom from "../pages/modules/Garçom";
 import Cozinha from "../pages/modules/Cozinha";
 import Bar from "../pages/modules/BarMan";
@@ -12,11 +11,11 @@ export default function Rotas() {
   return (
     <Routes>
       <Route exact path="/" element={<App />} />
-      <Route path="/Dashboard" element={<MenuDashboard />} />
-      <Route path="/Garçom" element={<Garçom />} />
-      <Route path="/OldDashboard" element={<Config />} />
+      <Route path="/Dashboard/:idCompany?" element={<MenuDashboard />} />
+      <Route path="/Garçom/:idCompany?" element={<Garçom />} />
+      <Route path="/Cardapio/:idCompany?" element={<App />} />
       <Route parh="*">"404 - Not Found"</Route>
-      <Route path="/Cozinha" element={<Cozinha />}>
+      <Route path="/Cozinha/:idCompany?" element={<Cozinha />}>
         "Cozinha"
       </Route>
       <Route path="/Bar" element={<Bar />}>
