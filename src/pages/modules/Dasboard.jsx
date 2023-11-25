@@ -18,6 +18,7 @@ import {
   Upload,
   Image,
   Carousel,
+  Tag,
 } from "antd";
 import "firebase/database";
 import ImgCrop from "antd-img-crop";
@@ -80,7 +81,20 @@ export default function Dashboard({ atualizar, user }) {
     setFileList(newFileList);
     setCoint(coint + 1);
   };
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768); // Defina aqui o ponto de quebra para dispositivos móveis (768 é um exemplo)
+    }
+
+    handleResize(); // Verifica o tamanho da tela inicialmente
+    window.addEventListener("resize", handleResize); // Adiciona um listener para redimensionamento
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Remove o listener ao desmontar o componente
+    };
+  }, []);
   useEffect(() => {
     console.log(coint);
     if (fileList.length > 0 && coint == 1) {
@@ -445,7 +459,7 @@ export default function Dashboard({ atualizar, user }) {
   }
 
   return (
-    <div style={{minHeight:'90vh'}}>
+    <div style={{ minHeight: "90vh" }}>
       <Row gutter={8}>
         <Button type="primary" onClick={() => setOpen(true)}>
           Tour
@@ -537,15 +551,121 @@ export default function Dashboard({ atualizar, user }) {
           </Card>
         </Col>
       </Row>
-      <Table
-        dataSource={searchData}
-        columns={columns}
-        footer={() => "Total de itens: " + searchData.length}
-        size="small"
-        sticky={{
-          offsetHeader: 0,
-        }}
-      />
+      {!isMobile && (
+        <Table
+          dataSource={searchData}
+          columns={columns}
+          footer={() => "Total de itens: " + searchData.length}
+          size="small"
+          sticky={{
+            offsetHeader: 0,
+          }}
+        />
+      )}
+      {isMobile && (
+        <Row gutter={[16, 16]}>
+          {searchData.map((item) => (
+            <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
+              <Card className="card-mobile" title={item.name} bordered={true}>
+                <Tag
+                  color={item.active ? "green" : "red"}
+                  key={item.id}
+                  size="large"
+                  style={{ fontSize: 20 }}
+                >
+                  {item.active ? "Ativo" : "Desativado"}
+                </Tag>
+                <p>Preço: R$ {Number(item.price).toFixed(2)}</p>
+                <p>Descrição: </p>
+                {item.description}
+                <p>Sub Descrição: {item.sub}</p>
+
+                <p>Categoria: {item.category}</p>
+                <div>
+                  {memoizedImgSrc.map((img1, index) => (
+                    <div className="img" key={index}>
+                      {img1.map(
+                        (img, index) =>
+                          item.id === img.idreq &&
+                          (totalImg === 0 ? setTotalImg(img1.length) : null,
+                          (
+                            <>
+                              <img
+                                src={atob(img.imagem)}
+                                alt="img"
+                                style={{
+                                  width: 100,
+                                  marginRight: 5,
+                                  borderRadius: 10,
+                                }}
+                              />
+
+                              <Button
+                                ref={ref5}
+                                style={{
+                                  backgroundColor: "#fc5f5f",
+                                  width: 20,
+                                  position: "absolute",
+                                  marginLeft: -35,
+                                }}
+                                onClick={() => {
+                                  DeleteImage(img.id);
+                                }}
+                              >
+                                <DeleteOutlined
+                                  size={24}
+                                  style={{
+                                    color: "#fff",
+                                    marginLeft: -7,
+                                  }}
+                                />
+                              </Button>
+                            </>
+                          ))
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <Space>
+                  <Button
+                    ref={ref4}
+                    style={{ backgroundColor: "yellow" }}
+                    onClick={() => handleClickEdit(item)}
+                  >
+                    <EditOutlined
+                      size={24}
+                      style={{
+                        borderRadius: 5,
+                        padding: 5,
+                        color: "#000",
+                      }}
+                    />
+                  </Button>
+
+                  <Popconfirm
+                    title="Tem certeza que deseja excluir essa tarefa?"
+                    onConfirm={() => confirmDelete(item)}
+                    okText="Excluir"
+                    okButtonProps={{ danger: true }}
+                    cancelText="Cancelar"
+                  >
+                    <Button ref={ref5} style={{ backgroundColor: "red" }}>
+                      <DeleteOutlined
+                        size={24}
+                        style={{
+                          borderRadius: 5,
+                          padding: 5,
+                          color: "#fff",
+                        }}
+                      />
+                    </Button>
+                  </Popconfirm>
+                </Space>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
       <Modal
         open={modalNewAction}
         okButtonProps={{ disabled: disableSave() }}

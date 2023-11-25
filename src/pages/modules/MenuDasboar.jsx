@@ -40,9 +40,27 @@ const MenuDashboard = () => {
   const [dateUser, setDateUser] = useState();
   const [acessable, setAcessable] = React.useState(false);
   const [userNome, setUserNome] = useState("");
+  console.log(
+    "🚀 ~ file: MenuDasboar.jsx:43 ~ MenuDashboard ~ userNome:",
+    userNome
+  );
   const [UserCategoria, setUserCategoria] = useState("");
   const [visible, setVisible] = React.useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768); // Defina aqui o ponto de quebra para dispositivos móveis
+      setCollapsed(window.innerWidth < 768);
+    }
+
+    handleResize(); // Verifica o tamanho da tela inicialmente
+    window.addEventListener("resize", handleResize); // Adiciona um listener para redimensionamento
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Remove o listener ao desmontar o componente
+    };
+  }, []);
   useEffect(() => {
     getCachedDateUser();
   }, []);
