@@ -189,7 +189,7 @@ export default function Dashboard({ atualizar, user }) {
   }
 
   async function confirmDeleteImg(record) {
-    await imgCardapio(record);
+    await DeleteImg(record);
     message.success("Imagem deletada com sucesso!");
     setActionCardapio(!actionCardapio);
   }
