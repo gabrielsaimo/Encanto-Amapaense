@@ -72,6 +72,7 @@ export default function Category() {
         await putCategoty({ id: cardapioCategory.length + 1, name, active });
         message.success("Item salvo com sucesso!");
       }
+      getCategoty();
       setAction(!action);
       closeModal();
     } catch (error) {
