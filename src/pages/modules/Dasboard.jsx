@@ -19,6 +19,7 @@ import {
   Image,
   Carousel,
   Tag,
+  Typography,
 } from "antd";
 import "firebase/database";
 import ImgCrop from "antd-img-crop";
@@ -685,56 +686,85 @@ export default function Dashboard({ atualizar, user }) {
         onCancel={closeModal}
         title={selectedTaskId ? "Atualizar Item" : "Novo Item"}
       >
-        <Row justify="center" gutter={20}>
-          <Col span={12}>
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Preço"
-              type="number"
-              value={price !== "" ? price : undefined}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Descrição"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <Input
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              placeholder="Sub Descrição"
-              value={sub}
-              onChange={(e) => setSub(e.target.value)}
-            />
+        <Row justify="center">
+          <Col span={20}>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Nome
+              </Typography.Title>
 
-            <Select
-              style={{ width: "100%", margin: "10px 0" }}
-              size="large"
-              dropdownMatchSelectWidth={false}
-              showSearch
-              placeholder="Ativo"
-              optionFilterProp="children"
-              onChange={(value) => setActive(value)}
-              value={active}
-            >
-              <Option key={1} value={true}>
-                Sim
-              </Option>
-              <Option key={2} value={false}>
-                Não
-              </Option>
-            </Select>
-            <div style={{ display: "flex", alignItems: "center" }}>
+              <Input
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                placeholder="Nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Preço
+              </Typography.Title>
+              <Input
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                placeholder="Preço"
+                type="number"
+                value={price !== "" ? price : undefined}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Descrição
+              </Typography.Title>
+              <Input
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                placeholder="Descrição"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Sub Descrição
+              </Typography.Title>
+              <Input
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                placeholder="Sub Descrição"
+                value={sub}
+                onChange={(e) => setSub(e.target.value)}
+              />
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Ativo?
+              </Typography.Title>
+              <Select
+                style={{ width: "100%", margin: "10px 0" }}
+                size="large"
+                dropdownMatchSelectWidth={false}
+                showSearch
+                placeholder="Ativo"
+                optionFilterProp="children"
+                onChange={(value) => setActive(value)}
+                value={active}
+              >
+                <Option key={1} value={true}>
+                  Sim
+                </Option>
+                <Option key={2} value={false}>
+                  Não
+                </Option>
+              </Select>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 170 }}>
+                Categoria
+              </Typography.Title>
               <Select
                 style={{ width: "100%", margin: "10px 0" }}
                 size="large"
