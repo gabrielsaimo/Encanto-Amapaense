@@ -164,11 +164,12 @@ export default function Garçom() {
     setActive(!active);
     window.location.reload();
   };
-  async function atualizarMensagens(title, notification, type) {
+  async function atualizarMensagens(title, notification, type, company) {
     const mensagens = {
       title,
       notification,
       type,
+      company,
     };
 
     await set(mensagensRef, mensagens)
@@ -516,7 +517,8 @@ export default function Garçom() {
     const titulo = "Novo Pedido N°" + idpedido;
     const notificacao = `Novo pedido na mesa ${mesa}`;
     const type = "success";
-    await atualizarMensagens(titulo, notificacao, type);
+    const company = "Encanto Amapaense";
+    await atualizarMensagens(titulo, notificacao, type, company);
     /* await postNotification({
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,

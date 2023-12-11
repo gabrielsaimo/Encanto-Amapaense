@@ -11,11 +11,11 @@ export default function Rotas() {
   return (
     <Routes>
       <Route exact path="/" element={<App />} />
-      <Route path="/Dashboard/:idCompany?" element={<MenuDashboard />} />
-      <Route path="/Garçom/:idCompany?" element={<Garçom />} />
-      <Route path="/Cardapio/:idCompany?" element={<App />} />
+      <Route path="/Dashboard" element={<MenuDashboard />} />
+      <Route path="/Garçom" element={<Garçom />} />
+      <Route path="/Cardapio" element={<App />} />
       <Route parh="*">"404 - Not Found"</Route>
-      <Route path="/Cozinha/:idCompany?" element={<Cozinha />}>
+      <Route path="/Cozinha" element={<Cozinha />}>
         "Cozinha"
       </Route>
       <Route path="/Bar" element={<Bar />}>

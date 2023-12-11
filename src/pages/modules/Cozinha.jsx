@@ -126,8 +126,10 @@ export default function Cozinha() {
     const socket = io("http://192.168.12.11:3020"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
 
     socket.on("notification", (data) => {
-      openNotification("topRight", data.title, data.notification);
-      getPedido();
+      if (data.company === "Encanto Amapaense") {
+        openNotification("topRight", data.title, data.notification);
+        getPedido();
+      }
     });
 
     return () => {
