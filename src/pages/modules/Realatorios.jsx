@@ -332,7 +332,7 @@ export default function Relatorios(atualizar) {
 
   return (
     <Card style={{ minHeight: "90vh" }}>
-      {menu ? (
+      {!menu ? (
         <MenuOutlined
           style={{ fontSize: 30, color: "#1890ff" }}
           onClick={() => setMenu(!menu)}
@@ -346,7 +346,7 @@ export default function Relatorios(atualizar) {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <br />
-          {!menu && (
+          {menu && (
             <>
               <h3>Selecione o relatório</h3>
               <Select

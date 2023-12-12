@@ -147,3 +147,10 @@ export const getStatusPedidos = async (id: number): Promise<any> => {
   const response = await api.get<any>(`pedido/verif/status/mesa/${id}`);
   return response.data;
 };
+
+export const getPedidosData = async (data: any): Promise<any> => {
+  const response = await api.get<any>(`pedido/pedidos/data`, {
+    params: data,
+  });
+  return response.data;
+};

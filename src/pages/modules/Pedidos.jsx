@@ -1,8 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Badge, Descriptions, notification } from "antd";
+import {
+  Badge,
+  ConfigProvider,
+  DatePicker,
+  Descriptions,
+  Select,
+  notification,
+} from "antd";
 import React, { useEffect, useState } from "react";
-import { getPedidoId, getPedidosAdm } from "../../services/Pedidos.ws";
+import {
+  getPedidoId,
+  getPedidosAdm,
+  getPedidosData,
+} from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+import locale from "antd/locale/pt_BR";
 import moment from "moment/moment";
 import { io } from "socket.io-client";
 export default function Pedidos(atualizar) {
@@ -16,6 +30,8 @@ export default function Pedidos(atualizar) {
   const [cardapio, setCardapio] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const [pedidoss, setPedidos] = useState([]);
+  const [dataInicio, setDataInicio] = useState(null);
+  const [dataFim, setdataFim] = useState(null);
   const openNotification = (placement, title, notifi) => {
     api.info({
       message: `${title}`,
@@ -27,6 +43,16 @@ export default function Pedidos(atualizar) {
   useEffect(() => {
     getPedidoss();
   }, [pedidos]);
+
+  const getPedido_data = async (init, fin) => {
+    const body = {
+      data_inicial: init + " 00:00:00.000",
+      data_final: fin + " 23:59:59.000",
+    };
+    console.log("🚀 ~ file: Pedidos.jsx:52 ~ constgetPedido_data= ~ body:", body)
+    const pedidos = await getPedidosData(body);
+    setPedido(pedidos);
+  };
 
   useEffect(() => {
     const socket = io("http://192.168.12.11:3020"); // Substitua 'http://localhost:3000' pela URL correta do seu servidor
@@ -62,10 +88,43 @@ export default function Pedidos(atualizar) {
     setCardapio(cardapio);
   };
 
+  async function datas(e) {
+    setDataInicio(null);
+    setdataFim(null);
+    if (e) {
+      const originalDate1 = new Date(e[0]);
+      const originalDate2 = new Date(e[1]);
+
+      const formattedDate1 = `${originalDate1.getFullYear()}-${(
+        originalDate1.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}-${originalDate1
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`;
+      const formattedDate2 = `${originalDate2.getFullYear()}-${(
+        originalDate2.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}-${originalDate2
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`;
+
+      setDataInicio(formattedDate1);
+      setdataFim(formattedDate2);
+      getPedido_data(formattedDate1, formattedDate2);
+    }
+  }
+
   return (
     <div style={{ minHeight: "90vh" }}>
       <h1>Atualizado as {dataFormatada}</h1>
       {contextHolder}
+      <ConfigProvider locale={locale}>
+        <DatePicker.RangePicker onChange={(e) => datas(e)} />
+      </ConfigProvider>
       {pedidos.map((pedido) => (
         <div style={{ marginBottom: 10 }}>
           <Descriptions
