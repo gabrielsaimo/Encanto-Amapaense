@@ -15,9 +15,7 @@ export default function Rotas() {
       <Route path="/Garçom" element={<Garçom />} />
       <Route path="/Cardapio" element={<App />} />
       <Route parh="*">"404 - Not Found"</Route>
-      <Route path="/Cozinha" element={<Cozinha />}>
-        "Cozinha"
-      </Route>
+      <Route path="/Cozinha" element={<Cozinha />} />
       <Route path="/Bar" element={<Bar />}>
         "Bar"
       </Route>
