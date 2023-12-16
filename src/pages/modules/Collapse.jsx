@@ -66,7 +66,8 @@ const CollapseMenu = () => {
             effect="fade"
             dotPosition="bottom"
             style={{
-              width: "45vw",
+              width: "80vw",
+              maxWidth: 300,
               minWidth: "100px",
               color: "#fff",
             }}
@@ -75,19 +76,21 @@ const CollapseMenu = () => {
               .filter((img1) => img1.idreq && img1.idreq === id)
               .map((img1, index) => (
                 <Suspense key={index} fallback={<Spin />}>
-                  <LazyLoadedImage
-                    src={atob(img1.imagem)}
-                    key={index}
-                    style={{
-                      borderRadius: 10,
-                      color: "#fff",
-                      objectFit: "fill",
-                      minWidth: "100px",
-                    }}
-                    alt="img"
-                    width={"45vw"}
-                    loading="lazy"
-                  />
+                  <div style={{ width: "80vw", maxWidth: 300 }}>
+                    <LazyLoadedImage
+                      src={atob(img1.imagem)}
+                      key={index}
+                      style={{
+                        borderRadius: 10,
+                        color: "#fff",
+                        objectFit: "fill",
+                        minWidth: "100px",
+                      }}
+                      alt="img"
+                      width={"100%"}
+                      loading="lazy"
+                    />
+                  </div>
                 </Suspense>
               ))}
           </Carousel>
