@@ -55,7 +55,7 @@
 }
 .background_fundo {
   width: 100%;
-  max-width: 768px;
+  max-width: 1200px;
   height: 100%;
   background-size: cover;
   justify-content: center;

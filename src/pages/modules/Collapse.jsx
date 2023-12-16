@@ -83,10 +83,11 @@ const CollapseMenu = () => {
                       style={{
                         borderRadius: 10,
                         color: "#fff",
-                        objectFit: "fill",
                         minWidth: "100px",
+                        minHeight: 300,
                       }}
                       alt="img"
+                      objectFit="cover"
                       width={"100%"}
                       loading="lazy"
                     />
