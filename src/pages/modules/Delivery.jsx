@@ -652,6 +652,7 @@ const DeliveryMenu = () => {
             <Select
               defaultValue="Selecione"
               style={{ width: "100%" }}
+              showSearch
               onChange={handleChangeBairro}
               options={bairros}
             />
