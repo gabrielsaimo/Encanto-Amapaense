@@ -640,7 +640,6 @@ const DeliveryMenu = () => {
             }}
           >
             <label>Bairro* </label>
-            <label style={{ paddingRight: 50 }}>Frete</label>
           </div>
           <div
             style={{
@@ -655,12 +654,6 @@ const DeliveryMenu = () => {
               style={{ width: "100%" }}
               onChange={handleChangeBairro}
               options={bairros}
-            />
-            <Input
-              placeholder="Frete R$"
-              style={{ width: 100 }}
-              value={"R$ " + valorFrete + ",00"}
-              disabled
             />
           </div>
           <div style={{ marginBottom: 10 }}>
@@ -708,6 +701,31 @@ const DeliveryMenu = () => {
               style={{ width: 100 }}
               onBlur={(e) => setTroco(e.target.value)}
             />
+          </div>
+
+          <div style={{ marginTop: 10 }}>
+            <p className="p_1 price georgia-bold-font">
+              {`Total: R$ ${Number(
+                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              )},00`}
+            </p>
+          </div>
+
+          <div style={{ marginTop: 10 }}>
+            <p className="p_1 price georgia-bold-font">
+              {`Frete: R$ ${valorFrete},00`}
+            </p>
+          </div>
+
+          <div style={{ marginTop: 10 }}>
+            <p className="p_1 price georgia-bold-font">
+              {`Total Geral: R$ ${
+                Number(valorFrete) +
+                Number(
+                  pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+                )
+              },00`}
+            </p>
           </div>
         </Card>
       </Modal>
