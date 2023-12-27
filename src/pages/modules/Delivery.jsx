@@ -71,7 +71,7 @@ const bairros = [
   { value: 21, label: "Muca", price: 12 },
   { value: 22, label: "Novo Buritizal", price: 12 },
   { value: 23, label: "Novo Horizonte", price: 20 },
-  { value: 23, label: "Nova Esperança", price: 15 },
+  { value: 24, label: "Nova Esperança", price: 15 },
   { value: 25, label: "Pacoval", price: 15 },
   { value: 26, label: "Perpétuo Socorro", price: 15 },
   { value: 27, label: "Pedrinhas", price: 12 },
@@ -710,12 +710,19 @@ const DeliveryMenu = () => {
               )},00`}
             </p>
           </div>
-
-          <div style={{ marginTop: 10 }}>
-            <p className="p_1 price georgia-bold-font">
-              {`Frete: R$ ${valorFrete},00`}
-            </p>
-          </div>
+          {bairro === "Outro" ? (
+            <div style={{ marginTop: 10 }}>
+              <p className="p_1 price georgia-bold-font">
+                {`Frete: Valor a Confirmar`}
+              </p>
+            </div>
+          ) : (
+            <div style={{ marginTop: 10 }}>
+              <p className="p_1 price georgia-bold-font">
+                {`Frete: R$ ${valorFrete},00`}
+              </p>
+            </div>
+          )}
 
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
