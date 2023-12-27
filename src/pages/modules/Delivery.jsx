@@ -125,7 +125,7 @@ const DeliveryMenu = () => {
         : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
     }%0A*Sem taxas Inclusas*`;
     window.open(
-      `https://api.whatsapp.com/send?phone=5511989539505&text=${msg}`,
+      `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
     );
     setPedido([]);
