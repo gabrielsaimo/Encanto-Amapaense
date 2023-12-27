@@ -101,7 +101,6 @@ const DeliveryMenu = () => {
   const [pagamento, setPagamento] = useState(["Pix"]);
   const [troco, setTroco] = useState("");
   const [bairro, setBairro] = useState("");
-  console.log("🚀 ~ file: Delivery.jsx:104 ~ DeliveryMenu ~ bairro:", bairro)
   const [valorFrete, setValorFrete] = useState(0);
 
   const options = [
