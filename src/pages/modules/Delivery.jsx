@@ -542,7 +542,7 @@ const DeliveryMenu = () => {
             <label>Nome* </label>
             <Input
               placeholder="Nome Completo"
-              onBlur={(e) => setNome(e.target.value)}
+              onChange={(e) => setNome(e.target.value)}
             />
           </div>
           <div style={{ marginBottom: 10 }}>
@@ -569,13 +569,13 @@ const DeliveryMenu = () => {
           <div style={{ marginBottom: 10, display: "flex" }}>
             <Input
               placeholder="Endereço"
-              onBlur={(e) => setEndereco(e.target.value)}
+              onChange={(e) => setEndereco(e.target.value)}
             />
             <Input
               placeholder="Numero"
               style={{ width: 100 }}
               type="number"
-              onBlur={(e) => setNumero(e.target.value)}
+              onChange={(e) => setNumero(e.target.value)}
             />
           </div>
           <div style={{ marginBottom: 10 }}>
