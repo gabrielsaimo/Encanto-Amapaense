@@ -66,7 +66,7 @@ const CollapseMenu = () => {
             effect="fade"
             dotPosition="bottom"
             style={{
-              width: "80vw",
+              width: "45vw",
               maxWidth: 300,
               minWidth: "100px",
               color: "#fff",
@@ -76,7 +76,7 @@ const CollapseMenu = () => {
               .filter((img1) => img1.idreq && img1.idreq === id)
               .map((img1, index) => (
                 <Suspense key={index} fallback={<Spin />}>
-                  <div style={{ width: "80vw", maxWidth: 300 }}>
+                  <div style={{ width: "45vw", maxWidth: 300 }}>
                     <LazyLoadedImage
                       src={atob(img1.imagem)}
                       key={index}

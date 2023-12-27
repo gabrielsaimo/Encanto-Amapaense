@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Affix, Button, FloatButton, Input, Modal, Space, Spin } from "antd";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -9,10 +9,8 @@ import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
-const CollapseMenu = lazy(() => import("./modules/Collapse"));
-function App() {
-  const { idCompany } = useParams();
-  console.log("🚀 ~ file: App.jsx:14 ~ App ~ idCompany:", idCompany);
+const DeliveryMenu = lazy(() => import("./modules/Delivery"));
+function AppDelivery() {
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -65,7 +63,7 @@ function App() {
       </div>
 
       <Suspense fallback={<Spin />}>
-        <CollapseMenu />
+        <DeliveryMenu />
       </Suspense>
 
       <Space direction="vertical" style={{ margin: "10px 0" }}></Space>
@@ -146,4 +144,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppDelivery;
