@@ -640,22 +640,25 @@ const DeliveryMenu = () => {
             }}
           >
             <label>Bairro* </label>
-            <label style={{ paddingRight: 70 }}>Frete</label>
+            <label style={{ paddingRight: 50 }}>Frete</label>
           </div>
           <div
             style={{
               marginBottom: 10,
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
             }}
           >
             <Select
               defaultValue="Selecione"
-              style={{ width: 200 }}
+              style={{ width: "100%" }}
               onChange={handleChangeBairro}
               options={bairros}
             />
             <Input
               placeholder="Frete R$"
-              style={{ width: 100, marginLeft: 10 }}
+              style={{ width: 100 }}
               value={"R$ " + valorFrete + ",00"}
               disabled
             />
