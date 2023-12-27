@@ -46,6 +46,45 @@ function formatarTelefone(valor) {
   return apenasDigitos;
 }
 
+const bairros = [
+  { value: 0, label: "Alvorada", price: 18 },
+
+  { value: 1, label: "Araxá", price: 12 },
+  { value: 2, label: "Beirol", price: 12 },
+  { value: 3, label: "Boné Azul", price: 20 },
+  { value: 4, label: "Brasil Novo", price: 25 },
+  { value: 5, label: "Buritizal", price: 12 },
+  { value: 6, label: "Cabralzinho", price: 20 },
+  { value: 7, label: "Central", price: 12 },
+  { value: 8, label: "Cidade Nova", price: 15 },
+  { value: 9, label: "Congós", price: 15 },
+  { value: 10, label: "Infraero I e II", price: 20 },
+  { value: 1, label: "Jardim Felicidade", price: 20 },
+  { value: 12, label: "Jardim Marco Zero", price: 12 },
+  { value: 13, label: "Jesus de Nazaré", price: 15 },
+  { value: 14, label: "Muca", price: 12 },
+  { value: 15, label: "Novo Buritizal", price: 12 },
+  { value: 16, label: "Nova Esperança", price: 15 },
+  { value: 17, label: "Pacoval", price: 15 },
+  { value: 18, label: "Perpétuo Socorro", price: 15 },
+  { value: 19, label: "Santa Inês", price: 10 },
+  { value: 20, label: "Santa Rita", price: 15 },
+  { value: 21, label: "São Lázaro", price: 15 },
+  { value: 22, label: "Trem", price: 12 },
+  { value: 23, label: "Universidade", price: 15 },
+  { value: 24, label: "Açaí", price: 20 },
+  { value: 25, label: "Fazendinha", price: 22 },
+  { value: 26, label: "Ipê", price: 20 },
+  { value: 27, label: "Jardim Equatorial", price: 12 },
+  { value: 28, label: "Jardim Felicidade II", price: 20 },
+  { value: 29, label: "Marabaixo", price: 20 },
+  { value: 30, label: "Morada das Palmeiras", price: 25 },
+  { value: 31, label: "Novo Horizonte", price: 20 },
+  { value: 32, label: "Pedrinhas", price: 12 },
+  { value: 33, label: "Renascer", price: 18 },
+  { value: 34, label: "Outro", price: 0 },
+];
+
 const DeliveryMenu = () => {
   const [cardapio, setCardapio] = useState([]);
   const [cardapioCategory, setCardapioCategory] = useState([]);
@@ -61,6 +100,8 @@ const DeliveryMenu = () => {
   const [observacao, setObservacao] = useState("");
   const [pagamento, setPagamento] = useState(["Pix"]);
   const [troco, setTroco] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [valorFrete, setValorFrete] = useState(0);
 
   const options = [
     {
@@ -103,6 +144,10 @@ const DeliveryMenu = () => {
     console.log(`Selected: ${value}`);
     setPagamento(value);
   };
+  const handleChangeBairro = (value, all) => {
+    setBairro(all.label);
+    setValorFrete(all.price);
+  };
 
   useEffect(() => {
     if (cardapio.length === 0) {
@@ -114,7 +159,7 @@ const DeliveryMenu = () => {
   }, [cardapio]);
 
   const sendMsm = () => {
-    const msg = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
+    const msg = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
       .join(", ")}%0ATotal: R$ ${
       pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
@@ -123,7 +168,12 @@ const DeliveryMenu = () => {
             .toFixed(2)
             .replace(".", ",")
         : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
-    }%0A*Sem taxas Inclusas*`;
+    }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${
+      Number(valorFrete) +
+      Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
+    },00*${
+      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
+    }`;
     window.open(
       `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
@@ -138,8 +188,11 @@ const DeliveryMenu = () => {
     setObservacao("");
     setPagamento(["Pix"]);
     setTroco("");
+    setBairro("");
     setVisible(false);
     setOpen(false);
+    setValorFrete(0);
+    window.location.reload();
   };
 
   const addPedido = (item) => {
@@ -532,7 +585,7 @@ const DeliveryMenu = () => {
         disabled={pedido.length === 0}
         confirmLoading={false}
         okButtonProps={
-          nome && endereco && numero && pagamento.length > 0
+          nome && endereco && numero && bairro && pagamento.length > 0
             ? { disabled: false }
             : { disabled: true }
         }
@@ -576,6 +629,35 @@ const DeliveryMenu = () => {
               style={{ width: 100 }}
               type="number"
               onChange={(e) => setNumero(e.target.value)}
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: 10,
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <label>Bairro* </label>
+            <label style={{ paddingRight: 70 }}>Frete</label>
+          </div>
+          <div
+            style={{
+              marginBottom: 10,
+            }}
+          >
+            <Select
+              defaultValue="Selecione"
+              style={{ width: 200 }}
+              onChange={handleChangeBairro}
+              options={bairros}
+            />
+            <Input
+              placeholder="Frete R$"
+              style={{ width: 100, marginLeft: 10 }}
+              value={"R$ " + valorFrete + ",00"}
+              disabled
             />
           </div>
           <div style={{ marginBottom: 10 }}>
