@@ -1,5 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useMemo, lazy, Suspense } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  lazy,
+  Suspense,
+  useCallback,
+} from "react";
 import {
   Collapse,
   Carousel,
@@ -74,11 +81,11 @@ const DeliveryMenu = () => {
     },
   ];
 
-  function handleTelefoneChange(event) {
+  const handleTelefoneChange = useCallback((event) => {
     const valor = event.target.value;
     const telefoneFormatado = formatarTelefone(valor);
     setTelefone(telefoneFormatado);
-  }
+  }, []);
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -88,6 +95,7 @@ const DeliveryMenu = () => {
   };
 
   const onFinalizar = () => {
+    console.log("Finalizar");
     setOpen(false);
     setVisible(true);
   };
@@ -266,94 +274,6 @@ const DeliveryMenu = () => {
       const key = item1.name;
       return (
         <div key={key}>
-          <Drawer
-            title="Carrinho"
-            placement={"left"}
-            width={"100%"}
-            onClose={onClose}
-            open={open}
-          >
-            <div style={{ overflow: "auto", height: "75vh" }}>
-              {pedido.map((item, index) => (
-                <div key={index}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      border: "1px solid #ccc",
-                      borderRadius: 10,
-                      padding: 10,
-                      marginBottom: 10,
-                      marginRight: 10,
-                    }}
-                  >
-                    <div>
-                      <p className="p_1 name georgia-font">{item.name}</p>
-                    </div>
-                    <div>
-                      <p className="p_1 price georgia-bold-font">
-                        {`${item.qtd}x R$ ${
-                          item.price % 1 !== 0
-                            ? item.price.replace(".", ",")
-                            : item.price + ",00"
-                        } = R$ ${
-                          (item.price * item.qtd) % 1 !== 0
-                            ? (item.price * item.qtd)
-                                .toFixed(2)
-                                .replace(".", ",")
-                            : item.price * item.qtd + ",00"
-                        }`}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <p className="p_1 price georgia-bold-font">Total</p>
-
-              <p className="p_1 price georgia-bold-font">
-                {`R$ ${
-                  pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) %
-                    1 !==
-                  0
-                    ? pedido
-                        .reduce((acc, item) => acc + item.price * item.qtd, 0)
-                        .toFixed(2)
-                        .replace(".", ",")
-                    : pedido.reduce(
-                        (acc, item) => acc + item.price * item.qtd,
-                        0
-                      ) + ",00"
-                } + taxas`}
-              </p>
-            </div>
-
-            <div>
-              <Button
-                type="primary"
-                onClick={() => onFinalizar()}
-                disabled={pedido.length === 0}
-                style={{
-                  width: 300,
-                  marginTop: 20,
-                  backgroundColor: "green",
-                  borderColor: "green",
-                  position: "fixed",
-                  bottom: 10,
-                }}
-              >
-                Finalizar Pedido
-              </Button>
-            </div>
-          </Drawer>
           <Affix
             offsetTop={10}
             style={{
@@ -505,115 +425,204 @@ const DeliveryMenu = () => {
               </Panel>
             </Collapse>
           </Suspense>
-          <Modal
-            open={visible}
-            closable={true}
-            okText="Enviar"
-            cancelText="Cancelar"
-            onOk={() => sendMsm()}
-            onCancel={() => setVisible(false)}
-            disabled={pedido.length === 0}
-            confirmLoading={false}
-            okButtonProps={
-              nome && endereco && numero && pagamento.length > 0
-                ? { disabled: false }
-                : { disabled: true }
-            }
-          >
-            <Card title="Finalização de Pedido">
-              <div style={{ marginBottom: 10 }}>
-                <label>Nome* </label>
-                <Input
-                  placeholder="Nome Completo"
-                  onBlur={(e) => setNome(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Telefone Aletenativo </label>
-                <Input
-                  placeholder="Telefone"
-                  value={telefone}
-                  maxLength={15} // Tamanho máximo considerando a máscara
-                  onChange={handleTelefoneChange}
-                />
-              </div>
-              <div
-                style={{
-                  marginBottom: 10,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <label>Endereço*</label>
-                <label style={{ paddingRight: 25 }}>Numero* </label>
-              </div>
-              <div style={{ marginBottom: 10, display: "flex" }}>
-                <Input
-                  placeholder="Endereço"
-                  onBlur={(e) => setEndereco(e.target.value)}
-                />
-                <Input
-                  placeholder="Numero"
-                  style={{ width: 100 }}
-                  type="number"
-                  onBlur={(e) => setNumero(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Complemento </label>
-                <Input
-                  placeholder="Complemento"
-                  onBlur={(e) => setComplemento(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Referencia </label>
-                <Input
-                  placeholder="Referencia"
-                  onBlur={(e) => setReferencia(e.target.value)}
-                />
-              </div>
-              <div
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <label>Observação </label>
-                <TextArea
-                  placeholder="Observação"
-                  onBlur={(e) => setObservacao(e.target.value)}
-                />
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <label>Formas de Pagamento* </label>
-                <Select
-                  mode="multiple"
-                  size={"large"}
-                  defaultValue="Pix"
-                  onChange={handleChange}
-                  style={{
-                    width: 200,
-                  }}
-                  options={options}
-                />
-              </div>
-              <div>
-                <label>Troco </label>
-                <Input
-                  placeholder="Troco"
-                  style={{ width: 100 }}
-                  onBlur={(e) => setTroco(e.target.value)}
-                />
-              </div>
-            </Card>
-          </Modal>
         </div>
       );
     });
   };
 
-  return <div style={{ margin: 5 }}>{renderCardapioItems()}</div>;
+  return (
+    <div style={{ margin: 5 }}>
+      {renderCardapioItems()}
+      <Drawer
+        title="Carrinho"
+        placement={"left"}
+        width={"100%"}
+        onClose={onClose}
+        open={open}
+      >
+        <div style={{ overflow: "auto", height: "75vh" }}>
+          {pedido.map((item, index) => (
+            <div key={index}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  border: "1px solid #ccc",
+                  borderRadius: 10,
+                  padding: 10,
+                  marginBottom: 10,
+                  marginRight: 10,
+                }}
+              >
+                <div>
+                  <p className="p_1 name georgia-font">{item.name}</p>
+                </div>
+                <div>
+                  <p className="p_1 price georgia-bold-font">
+                    {`${item.qtd}x R$ ${
+                      item.price % 1 !== 0
+                        ? item.price.replace(".", ",")
+                        : item.price + ",00"
+                    } = R$ ${
+                      (item.price * item.qtd) % 1 !== 0
+                        ? (item.price * item.qtd).toFixed(2).replace(".", ",")
+                        : item.price * item.qtd + ",00"
+                    }`}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <p className="p_1 price georgia-bold-font">Total</p>
+
+          <p className="p_1 price georgia-bold-font">
+            {`R$ ${
+              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) %
+                1 !==
+              0
+                ? pedido
+                    .reduce((acc, item) => acc + item.price * item.qtd, 0)
+                    .toFixed(2)
+                    .replace(".", ",")
+                : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+                  ",00"
+            } + taxas`}
+          </p>
+        </div>
+
+        <div>
+          <Button
+            type="primary"
+            onClick={onFinalizar}
+            disabled={pedido.length === 0}
+            style={{
+              width: 300,
+              marginTop: 20,
+              backgroundColor: "green",
+              borderColor: "green",
+              position: "fixed",
+              bottom: 10,
+            }}
+          >
+            Finalizar Pedido
+          </Button>
+        </div>
+      </Drawer>
+      <Modal
+        open={visible}
+        closable={true}
+        okText="Enviar"
+        cancelText="Cancelar"
+        onOk={() => sendMsm()}
+        onCancel={() => setVisible(false)}
+        disabled={pedido.length === 0}
+        confirmLoading={false}
+        okButtonProps={
+          nome && endereco && numero && pagamento.length > 0
+            ? { disabled: false }
+            : { disabled: true }
+        }
+      >
+        <Card title="Finalização de Pedido">
+          <div style={{ marginBottom: 10 }}>
+            <label>Nome* </label>
+            <Input
+              placeholder="Nome Completo"
+              onBlur={(e) => setNome(e.target.value)}
+            />
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            <label>Telefone Aletenativo </label>
+            <Input
+              placeholder="Telefone"
+              value={telefone}
+              type="tel"
+              maxLength={15} // Tamanho máximo considerando a máscara
+              onChange={handleTelefoneChange}
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: 10,
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <label>Endereço*</label>
+            <label style={{ paddingRight: 25 }}>Numero* </label>
+          </div>
+          <div style={{ marginBottom: 10, display: "flex" }}>
+            <Input
+              placeholder="Endereço"
+              onBlur={(e) => setEndereco(e.target.value)}
+            />
+            <Input
+              placeholder="Numero"
+              style={{ width: 100 }}
+              type="number"
+              onBlur={(e) => setNumero(e.target.value)}
+            />
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            <label>Complemento </label>
+            <Input
+              placeholder="Complemento"
+              onBlur={(e) => setComplemento(e.target.value)}
+            />
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            <label>Referencia </label>
+            <Input
+              placeholder="Referencia"
+              onBlur={(e) => setReferencia(e.target.value)}
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: 10,
+            }}
+          >
+            <label>Observação </label>
+            <TextArea
+              placeholder="Observação"
+              onBlur={(e) => setObservacao(e.target.value)}
+            />
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            <label>Formas de Pagamento* </label>
+            <Select
+              mode="multiple"
+              size={"large"}
+              defaultValue="Pix"
+              onChange={handleChange}
+              style={{
+                width: 200,
+              }}
+              options={options}
+            />
+          </div>
+          <div>
+            <label>Troco </label>
+            <Input
+              placeholder="Troco"
+              style={{ width: 100 }}
+              onBlur={(e) => setTroco(e.target.value)}
+            />
+          </div>
+        </Card>
+      </Modal>
+    </div>
+  );
 };
 
 export default DeliveryMenu;
