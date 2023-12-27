@@ -31,10 +31,7 @@ const LazyLoadedImage = lazy(() =>
 );
 
 function formatarTelefone(valor) {
-  // Remove tudo que não é dígito
   const apenasDigitos = valor.replace(/[^\d]/g, "");
-
-  // Verifica se é um número de celular com DDD ou número fixo
   if (apenasDigitos.length === 11) {
     return apenasDigitos.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
   }
@@ -91,6 +88,7 @@ const DeliveryMenu = () => {
   };
 
   const onFinalizar = () => {
+    setOpen(false);
     setVisible(true);
   };
   const handleChange = (value) => {
@@ -271,7 +269,7 @@ const DeliveryMenu = () => {
           <Drawer
             title="Carrinho"
             placement={"left"}
-            width={350}
+            width={"100%"}
             onClose={onClose}
             open={open}
           >
@@ -368,7 +366,7 @@ const DeliveryMenu = () => {
             <Badge count={pedido.length}>
               <Avatar
                 shape="square"
-                size={100}
+                size={70}
                 style={{
                   backgroundColor: "green",
                   alignItems: "center",
@@ -377,7 +375,7 @@ const DeliveryMenu = () => {
                 onClick={showDrawer}
               >
                 <ShoppingCartOutlined
-                  style={{ fontSize: 60, width: 70, paddingTop: 20 }}
+                  style={{ fontSize: 50, width: 60, paddingTop: 10 }}
                 />
               </Avatar>
             </Badge>
@@ -462,7 +460,7 @@ const DeliveryMenu = () => {
                             <Button
                               className="btn"
                               style={{
-                                width: 50,
+                                width: 45,
                                 textAlign: "center",
                                 backgroundColor: "red",
                                 color: "#fff",
@@ -475,7 +473,7 @@ const DeliveryMenu = () => {
                             <Input
                               className="input"
                               style={{
-                                width: 50,
+                                width: 35,
                                 textAlign: "center",
                                 color: "#000",
                               }}
@@ -490,7 +488,7 @@ const DeliveryMenu = () => {
                             <Button
                               className="btn"
                               style={{
-                                width: 50,
+                                width: 45,
                                 textAlign: "center",
                                 backgroundColor: "green",
                                 color: "#fff",
