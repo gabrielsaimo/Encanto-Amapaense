@@ -359,64 +359,69 @@ const DeliveryMenu = () => {
                           <div
                             style={{
                               display: "flex",
+                              flexDirection: "column",
                               justifyContent: "end",
                               minWidth: "100%",
                               alignItems: "flex-end",
                             }}
                           >
-                            <p className="p_1 price georgia-bold-font">
-                              {`R$ ${
-                                categoria.price % 1 !== 0
-                                  ? categoria.price.replace(".", ",")
-                                  : categoria.price + ",00"
-                              }`}
-                            </p>
-                          </div>
-                          <div
-                            style={{
-                              display: Flex,
-                            }}
-                          >
-                            <Button
-                              className="btn"
-                              style={{
-                                width: 45,
-                                textAlign: "center",
-                                backgroundColor: "red",
-                                color: "#fff",
-                              }}
-                              onClick={() => removePedido(categoria)}
-                            >
-                              -
-                            </Button>
+                            <div>
+                              <p className="p_1 price georgia-bold-font">
+                                {`R$ ${
+                                  categoria.price % 1 !== 0
+                                    ? categoria.price.replace(".", ",")
+                                    : categoria.price + ",00"
+                                }`}
+                              </p>
+                            </div>
 
-                            <Input
-                              className="input"
+                            <div
                               style={{
-                                width: 35,
-                                textAlign: "center",
-                                color: "#000",
+                                display: Flex,
                               }}
-                              placeholder="Quantidade"
-                              value={
-                                pedido.find((item) => item.id === categoria.id)
-                                  ?.qtd || 0
-                              }
-                              disabled
-                            />
-
-                            <Button
-                              className="btn"
-                              style={{
-                                width: 45,
-                                textAlign: "center",
-                                backgroundColor: "green",
-                                color: "#fff",
-                              }}
-                              onClick={() => addPedido(categoria)}
                             >
-                              +
-                            </Button>
+                              <Button
+                                className="btn"
+                                style={{
+                                  width: 45,
+                                  textAlign: "center",
+                                  backgroundColor: "red",
+                                  color: "#fff",
+                                }}
+                                onClick={() => removePedido(categoria)}
+                              >
+                                -
+                              </Button>
+
+                              <Input
+                                className="input"
+                                style={{
+                                  width: 35,
+                                  textAlign: "center",
+                                  color: "#000",
+                                }}
+                                placeholder="Quantidade"
+                                value={
+                                  pedido.find(
+                                    (item) => item.id === categoria.id
+                                  )?.qtd || 0
+                                }
+                                disabled
+                              />
+
+                              <Button
+                                className="btn"
+                                style={{
+                                  width: 45,
+                                  textAlign: "center",
+                                  backgroundColor: "green",
+                                  color: "#fff",
+                                }}
+                                onClick={() => addPedido(categoria)}
+                              >
+                                +
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       </div>
