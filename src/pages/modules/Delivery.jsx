@@ -59,7 +59,7 @@ const bairros = [
   { value: 8, label: "Cidade Nova", price: 15 },
   { value: 9, label: "Congós", price: 15 },
   { value: 10, label: "Infraero I e II", price: 20 },
-  { value: 1, label: "Jardim Felicidade", price: 20 },
+  { value: 11, label: "Jardim Felicidade", price: 20 },
   { value: 12, label: "Jardim Marco Zero", price: 12 },
   { value: 13, label: "Jesus de Nazaré", price: 15 },
   { value: 14, label: "Muca", price: 12 },
@@ -101,6 +101,7 @@ const DeliveryMenu = () => {
   const [pagamento, setPagamento] = useState(["Pix"]);
   const [troco, setTroco] = useState("");
   const [bairro, setBairro] = useState("");
+  console.log("🚀 ~ file: Delivery.jsx:104 ~ DeliveryMenu ~ bairro:", bairro)
   const [valorFrete, setValorFrete] = useState(0);
 
   const options = [
