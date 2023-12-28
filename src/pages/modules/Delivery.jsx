@@ -188,7 +188,6 @@ const DeliveryMenu = () => {
         Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
       },00</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
     };
-    await postEmail(email);
 
     const msg = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
@@ -209,6 +208,7 @@ const DeliveryMenu = () => {
       `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
     );
+    await postEmail(email);
     setPedido([]);
     setNome("");
     setTelefone("");
@@ -359,32 +359,34 @@ const DeliveryMenu = () => {
       const key = item1.name;
       return (
         <div key={key}>
-          <Affix
-            offsetTop={10}
-            style={{
-              position: "fixed",
-              right: 10,
-              bottom: 130,
-              zIndex: 9,
-            }}
-          >
-            <Badge count={pedido.length}>
-              <Avatar
-                shape="square"
-                size={70}
-                style={{
-                  backgroundColor: "green",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-                onClick={showDrawer}
-              >
-                <ShoppingCartOutlined
-                  style={{ fontSize: 50, width: 60, paddingTop: 10 }}
-                />
-              </Avatar>
-            </Badge>
-          </Affix>
+          {pedido.length > 0 && (
+            <Affix
+              offsetTop={10}
+              style={{
+                position: "fixed",
+                right: 10,
+                bottom: 130,
+                zIndex: 9,
+              }}
+            >
+              <Badge count={pedido.length}>
+                <Avatar
+                  shape="square"
+                  size={70}
+                  style={{
+                    backgroundColor: "green",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                  onClick={showDrawer}
+                >
+                  <ShoppingCartOutlined
+                    style={{ fontSize: 50, width: 60, paddingTop: 10 }}
+                  />
+                </Avatar>
+              </Badge>
+            </Affix>
+          )}
           {renderSlides(index)}
           <Suspense fallback={<Spin />}>
             <Collapse

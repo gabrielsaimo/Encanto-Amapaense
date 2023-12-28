@@ -7,11 +7,12 @@ import Cozinha from "../pages/modules/Cozinha";
 import Bar from "../pages/modules/BarMan";
 import MenuDashboard from "../pages/modules/MenuDasboar";
 import AppDelivery from "../pages/AppDelivery";
+import Home from "../pages/modules/Home";
 
 export default function Rotas() {
   return (
     <Routes>
-      <Route exact path="/" element={<App />} />
+      <Route exact path="/" element={<Home />} />
       <Route path="/Dashboard" element={<MenuDashboard />} />
       <Route path="/Garçom" element={<Garçom />} />
       <Route path="/Cardapio" element={<App />} />
