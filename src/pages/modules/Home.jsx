@@ -78,7 +78,7 @@ function Home() {
             decoding="async"
           />
           <Button style={{ backgroundColor: "rgba(178, 125, 64, 1)" }}>
-            <Link to="/Delivery"> Delivery</Link>
+            <Link to="/Cardapio"> Cardapio</Link>
           </Button>
         </Card>
         <Card
@@ -107,7 +107,7 @@ function Home() {
             decoding="async"
           />
           <Button style={{ backgroundColor: "rgba(178, 125, 64, 1)" }}>
-            <Link to="/Cardapio"> Cardapio</Link>
+            <Link to="/Delivery"> Delivery</Link>
           </Button>
         </Card>
       </div>
