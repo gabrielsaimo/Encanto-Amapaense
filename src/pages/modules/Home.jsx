@@ -64,6 +64,7 @@ function Home() {
                 }
               : {
                   width: "40vw",
+                  marginTop: "100px",
                   background:
                     "linear-gradient( 90deg,rgba(178, 125, 64, 1) 0%,rgba(251, 247, 244, 1) 100%)",
                 }
@@ -93,6 +94,7 @@ function Home() {
                 }
               : {
                   width: "40vw",
+                  marginTop: "100px",
                   background:
                     "linear-gradient( 90deg,rgba(178, 125, 64, 1) 0%,rgba(251, 247, 244, 1) 100%)",
                 }
@@ -113,10 +115,10 @@ function Home() {
       </div>
 
       <FloatButton.BackTop />
-      <div style={{ height: 200 }} />
+      <div style={{ height: 120 }} />
 
       <Footer />
-      <div style={{ height: 30 }} />
+      <div style={{ height: 65 }} />
     </div>
   );
 }
