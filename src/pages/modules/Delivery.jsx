@@ -31,6 +31,7 @@ import SlidesBebidas from "./SlideBebidas";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
+import { postEmail } from "../../services/email.ws";
 
 const { Panel } = Collapse;
 const LazyLoadedImage = lazy(() =>
@@ -101,7 +102,13 @@ const DeliveryMenu = () => {
   const [troco, setTroco] = useState("");
   const [bairro, setBairro] = useState("");
   const [valorFrete, setValorFrete] = useState(0);
-
+  const [loading, setLoading] = useState(false);
+  const destinararios = [
+    "gabrielsaimo68@gmail.com",
+    "Josemaria023182@gmail.com",
+    "sraebarbossa@gmail.com",
+    "eu251213@mail.com",
+  ];
   const options = [
     {
       value: "Pix",
@@ -135,12 +142,10 @@ const DeliveryMenu = () => {
   };
 
   const onFinalizar = () => {
-    console.log("Finalizar");
     setOpen(false);
     setVisible(true);
   };
   const handleChange = (value) => {
-    console.log(`Selected: ${value}`);
     setPagamento(value);
   };
   const handleChangeBairro = (value, all) => {
@@ -157,7 +162,34 @@ const DeliveryMenu = () => {
     }
   }, [cardapio]);
 
-  const sendMsm = () => {
+  const sendMsm = async () => {
+    setLoading(true);
+    const email = {
+      destinatario: destinararios,
+      assunto: "Pedido Delivery",
+      corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Recebido</h1>
+      Nome: ${nome}<br/>Telefone: ${telefone}<br/>Endereço: ${endereco}<br/>Numero: ${numero}<br/>Bairro: ${bairro}<br/>Complemento: ${complemento}<br/>Referencia: ${referencia}
+      <br><br/>Pedido: ${pedido
+        .map(
+          (item) =>
+            `<h3 style="font-weight:bold">x${item.qtd} ${item.name}</h3/>`
+        )
+        .join("")}
+      <br/>Observação: ${observacao}<br/>Troco: ${troco}<br/>
+      Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
+        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+          ? pedido
+              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .toFixed(2)
+              .replace(".", ",")
+          : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
+      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total Pago:<p> R$ ${
+        Number(valorFrete) +
+        Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
+      },00</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+    };
+    await postEmail(email);
+
     const msg = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
       .join(", ")}%0ATotal: R$ ${
@@ -191,6 +223,7 @@ const DeliveryMenu = () => {
     setVisible(false);
     setOpen(false);
     setValorFrete(0);
+    setLoading(false);
     window.location.reload();
   };
 
@@ -578,9 +611,6 @@ const DeliveryMenu = () => {
       <Modal
         open={visible}
         closable={true}
-        okText="Enviar"
-        cancelText="Cancelar"
-        onOk={() => sendMsm()}
         onCancel={() => setVisible(false)}
         disabled={pedido.length === 0}
         confirmLoading={false}
@@ -589,6 +619,24 @@ const DeliveryMenu = () => {
             ? { disabled: false }
             : { disabled: true }
         }
+        footer={[
+          <Button
+            key="back"
+            onClick={() => setVisible(false)}
+            disabled={pedido.length === 0}
+          >
+            Cancelar
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            onClick={() => sendMsm()}
+            disabled={pedido.length === 0}
+            loading={loading}
+          >
+            Enviar
+          </Button>,
+        ]}
       >
         <Card title="Finalização de Pedido">
           <div style={{ marginBottom: 10 }}>
