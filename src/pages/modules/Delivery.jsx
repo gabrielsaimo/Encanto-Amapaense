@@ -21,6 +21,7 @@ import {
   Modal,
   Card,
   Select,
+  message,
 } from "antd";
 import { CaretRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import LazyLoad from "react-lazyload";
@@ -103,12 +104,12 @@ const DeliveryMenu = () => {
   const [bairro, setBairro] = useState("");
   const [valorFrete, setValorFrete] = useState(0);
   const [loading, setLoading] = useState(false);
-  const destinararios = [
-    "gabrielsaimo68@gmail.com",
-    "Josemaria023182@gmail.com",
-    "sraebarbossa@gmail.com",
-    "eu251213@mail.com",
-  ];
+  const [retirada, setRetirada] = useState("");
+  console.log(
+    (!nome === false && !endereco === false && numero.length === 0) ||
+      (retirada === "Delivery" && pagamento.length <= 0)
+  );
+  const destinararios = ["gabrielsaimo68@gmail.com"];
   const options = [
     {
       value: "Pix",
@@ -164,6 +165,20 @@ const DeliveryMenu = () => {
 
   const sendMsm = async () => {
     setLoading(true);
+
+    if (retirada === "Delivery") {
+      if (endereco.length < 4 || numero.length < 1 || bairro === "") {
+        message.error("Preencha corretamente os campos obrigatórios");
+        setLoading(false);
+        return;
+      }
+    } else if (retirada === "Local") {
+      if (nome.length < 4) {
+        message.error("Preencha corretamente os campos obrigatórios");
+        setLoading(false);
+        return;
+      }
+    }
     const email = {
       destinatario: destinararios,
       assunto: "Pedido Delivery",
@@ -189,7 +204,7 @@ const DeliveryMenu = () => {
       },00</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
     };
 
-    const msg = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
+    const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
       .join(", ")}%0ATotal: R$ ${
       pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
@@ -204,6 +219,21 @@ const DeliveryMenu = () => {
     },00*${
       bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
     }`;
+
+    const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%0A*Pedido:* %0A ${pedido
+      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .join(", ")}%0ATotal: R$ ${
+      pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+        ? pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+        : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
+    }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${
+      Number(valorFrete) +
+      Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
+    },00*${
+      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
+    }`;
+
+    const msg = retirada === "Delivery" ? msgDelivey : msgLocal;
     window.open(
       `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
@@ -359,60 +389,96 @@ const DeliveryMenu = () => {
       const key = item1.name;
       return (
         <div key={key}>
-          <Affix
-            style={{
-              position: "fixed",
-              top: 0,
-              zIndex: 6,
-              backgroundColor: "rgba(255, 255, 255, 0.15)",
-              borderRadius: 10,
-            }}
-          >
-            <div
+          {retirada === "Local" ? null : (
+            <Affix
               style={{
-                alignItems: "center",
-                padding: 5,
-                width: "95vw",
-                maxWidth: 450,
+                position: "fixed",
+                top: 0,
+                zIndex: 6,
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                borderRadius: 10,
               }}
             >
               <div
                 style={{
-                  display: "flex",
-
                   alignItems: "center",
                   padding: 5,
+                  width: "95vw",
+                  maxWidth: 450,
                 }}
               >
-                <div className="p_1 name georgia-font">
-                  Selecione seu Bairro
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: 5,
+                  }}
+                >
+                  {retirada === "" ? (
+                    <>
+                      <div className="p_1 name georgia-font">
+                        Retirar no local?
+                      </div>
+                      <Button
+                        style={{
+                          width: 100,
+                          marginLeft: 10,
+                          backgroundColor: "rgba(130, 255, 53)",
+                          borderColor: "rgba(178, 125, 64, 1)",
+                        }}
+                        onClick={() => setRetirada("Local")}
+                      >
+                        Sim
+                      </Button>
+                      <Button
+                        style={{
+                          width: 100,
+                          marginLeft: 10,
+                          backgroundColor: "rgba(255, 89, 89)",
+                          borderColor: "rgba(178, 125, 64, 1)",
+                        }}
+                        onClick={() => setRetirada("Delivery")}
+                      >
+                        Não
+                      </Button>
+                    </>
+                  ) : retirada === "Local" ? (
+                    () => setValorFrete(0)
+                  ) : retirada === "Delivery" ? (
+                    <>
+                      <div className="p_1 name georgia-font">
+                        Selecione seu Bairro
+                      </div>
+                      <Select
+                        defaultValue="Selecione"
+                        className="georgia-font"
+                        style={{ width: "100%", marginRight: 60 }}
+                        showSearch
+                        onChange={handleChangeBairro}
+                        options={bairros}
+                      />
+                    </>
+                  ) : null}
                 </div>
-                <Select
-                  defaultValue="Selecione"
-                  className="georgia-font"
-                  style={{ width: "100%", marginRight: 60 }}
-                  showSearch
-                  onChange={handleChangeBairro}
-                  options={bairros}
-                />
+                {bairro === "Outro" ? (
+                  <div
+                    className="p_1 name georgia-font"
+                    style={{ textAlign: "center" }}
+                  >
+                    {`Frete: Valor a Confirmar`}
+                  </div>
+                ) : bairro !== "" ? (
+                  <div
+                    className="p_1 name georgia-font"
+                    style={{ textAlign: "center" }}
+                  >
+                    {`Frete: R$ ${valorFrete},00`}
+                  </div>
+                ) : null}
               </div>
-              {bairro === "Outro" ? (
-                <div
-                  className="p_1 name georgia-font"
-                  style={{ textAlign: "center" }}
-                >
-                  {`Frete: Valor a Confirmar`}
-                </div>
-              ) : bairro !== "" ? (
-                <div
-                  className="p_1 name georgia-font"
-                  style={{ textAlign: "center" }}
-                >
-                  {`Frete: R$ ${valorFrete},00`}
-                </div>
-              ) : null}
-            </div>
-          </Affix>
+            </Affix>
+          )}
 
           {pedido.length > 0 && (
             <Affix
@@ -642,12 +708,14 @@ const DeliveryMenu = () => {
                     .replace(".", ",")
                 : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
                   ",00"
-            } + ${
+            }  ${
               bairro === "Outro"
-                ? "Frete"
+                ? "+ Frete"
                 : bairro !== ""
                 ? "Frete R$ " + valorFrete + ",00"
-                : 0
+                : retirada === "Local"
+                ? "+ Frete Grátis"
+                : "+ Frete"
             }
             `}
           </p>
@@ -662,7 +730,7 @@ const DeliveryMenu = () => {
           <p className="p_1 price georgia-bold-font">Sub Total</p>
           <p className="p_1 price georgia-bold-font">
             {`R$ ${
-              valorFrete !== 0
+              bairro !== "Outro"
                 ? Number(valorFrete) +
                   Number(
                     pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
@@ -702,24 +770,15 @@ const DeliveryMenu = () => {
         onCancel={() => setVisible(false)}
         disabled={pedido.length === 0}
         confirmLoading={false}
-        okButtonProps={
-          nome && endereco && numero && bairro && pagamento.length > 0
-            ? { disabled: false }
-            : { disabled: true }
-        }
         footer={[
-          <Button
-            key="back"
-            onClick={() => setVisible(false)}
-            disabled={pedido.length === 0}
-          >
+          <Button key="back" onClick={() => setVisible(false)}>
             Cancelar
           </Button>,
           <Button
             key="submit"
             type="primary"
             onClick={() => sendMsm()}
-            disabled={pedido.length === 0}
+            disabled={pagamento.length <= 0}
             loading={loading}
           >
             Enviar
@@ -744,70 +803,74 @@ const DeliveryMenu = () => {
               onChange={handleTelefoneChange}
             />
           </div>
-          <div
-            style={{
-              marginBottom: 10,
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <label>Endereço*</label>
-            <label style={{ paddingRight: 25 }}>Numero* </label>
-          </div>
-          <div style={{ marginBottom: 10, display: "flex" }}>
-            <Input
-              placeholder="Endereço"
-              onChange={(e) => setEndereco(e.target.value)}
-            />
-            <Input
-              placeholder="Numero"
-              style={{ width: 100 }}
-              type="number"
-              onChange={(e) => setNumero(e.target.value)}
-            />
-          </div>
-          <div
-            style={{
-              marginBottom: 10,
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <label>Bairro* </label>
-          </div>
-          <div
-            style={{
-              marginBottom: 10,
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Select
-              defaultValue="Selecione"
-              style={{ width: "100%" }}
-              showSearch
-              onChange={handleChangeBairro}
-              value={bairro}
-              options={bairros}
-            />
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <label>Complemento </label>
-            <Input
-              placeholder="Complemento"
-              onBlur={(e) => setComplemento(e.target.value)}
-            />
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <label>Referencia </label>
-            <Input
-              placeholder="Referencia"
-              onBlur={(e) => setReferencia(e.target.value)}
-            />
-          </div>
+          {retirada === "Delivery" ? (
+            <>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <label>Endereço*</label>
+                <label style={{ paddingRight: 25 }}>Numero* </label>
+              </div>
+              <div style={{ marginBottom: 10, display: "flex" }}>
+                <Input
+                  placeholder="Endereço"
+                  onChange={(e) => setEndereco(e.target.value)}
+                />
+                <Input
+                  placeholder="Numero"
+                  style={{ width: 100 }}
+                  type="number"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </div>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <label>Bairro* </label>
+              </div>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <Select
+                  defaultValue="Selecione"
+                  style={{ width: "100%" }}
+                  showSearch
+                  onChange={handleChangeBairro}
+                  value={bairro}
+                  options={bairros}
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Complemento </label>
+                <Input
+                  placeholder="Complemento"
+                  onBlur={(e) => setComplemento(e.target.value)}
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Referencia </label>
+                <Input
+                  placeholder="Referencia"
+                  onBlur={(e) => setReferencia(e.target.value)}
+                />
+              </div>
+            </>
+          ) : null}
           <div
             style={{
               marginBottom: 10,
