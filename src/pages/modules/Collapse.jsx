@@ -144,6 +144,8 @@ const CollapseMenu = () => {
               )}
               style={{
                 background: "transparent",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <Panel
@@ -154,6 +156,7 @@ const CollapseMenu = () => {
                   backgroundImage: `url(${require("../../assets/tinta.webp")}) `,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: 150,
+                  backgroundPosition: "center",
                   backgroundPositionX: "50%",
                   backgroundPositionY: -8,
                 }}

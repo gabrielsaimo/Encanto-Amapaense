@@ -3,6 +3,7 @@
   border-radius: 10px;
   margin: 2px 0 25px;
   padding: 5px;
+  max-width: 500px;
 }
 
 .flex {
@@ -65,4 +66,9 @@
 
 img.ant-image-img {
   border-radius: 10px;
+}
+
+.ant-collapse-content.ant-collapse-content-active {
+  display: flex;
+  justify-content: center;
 }
