@@ -359,6 +359,60 @@ const DeliveryMenu = () => {
       const key = item1.name;
       return (
         <div key={key}>
+          <Affix
+            style={{
+              position: "fixed",
+              top: 0,
+              zIndex: 6,
+              backgroundColor: "rgba(255, 255, 255, 0.15)",
+              borderRadius: 10,
+            }}
+          >
+            <div
+              style={{
+                alignItems: "center",
+                padding: 5,
+                width: "95vw",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+
+                  alignItems: "center",
+                  padding: 5,
+                }}
+              >
+                <div className="p_1 name georgia-font">
+                  Selecione seu Bairro
+                </div>
+                <Select
+                  defaultValue="Selecione"
+                  className="georgia-font"
+                  style={{ width: "100%", marginRight: 60 }}
+                  showSearch
+                  onChange={handleChangeBairro}
+                  options={bairros}
+                />
+              </div>
+              {bairro === "Outro" ? (
+                <div
+                  className="p_1 name georgia-font"
+                  style={{ textAlign: "center" }}
+                >
+                  {`Frete: Valor a Confirmar`}
+                </div>
+              ) : bairro !== "" ? (
+                <div
+                  className="p_1 name georgia-font"
+                  style={{ textAlign: "center" }}
+                >
+                  {`Frete: R$ ${valorFrete},00`}
+                </div>
+              ) : null}
+            </div>
+          </Affix>
+
           {pedido.length > 0 && (
             <Affix
               offsetTop={10}
@@ -532,7 +586,7 @@ const DeliveryMenu = () => {
         onClose={onClose}
         open={open}
       >
-        <div style={{ overflow: "auto", height: "75vh" }}>
+        <div style={{ overflow: "auto", height: "65vh" }}>
           {pedido.map((item, index) => (
             <div key={index}>
               <div
@@ -587,7 +641,27 @@ const DeliveryMenu = () => {
                     .replace(".", ",")
                 : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
                   ",00"
-            } + taxas`}
+            } + Frete R$ ${
+              bairro === "Outro" ? null : bairro !== "" ? valorFrete + ",00" : 0
+            }
+            `}
+          </p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <p className="p_1 price georgia-bold-font">Sub Total</p>
+          <p className="p_1 price georgia-bold-font">
+            {`R$ ${
+              Number(valorFrete) +
+              Number(
+                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              )
+            },00`}
           </p>
         </div>
 
@@ -654,7 +728,7 @@ const DeliveryMenu = () => {
               placeholder="Telefone"
               value={telefone}
               type="tel"
-              maxLength={15} // Tamanho máximo considerando a máscara
+              maxLength={15}
               onChange={handleTelefoneChange}
             />
           </div>
@@ -704,6 +778,7 @@ const DeliveryMenu = () => {
               style={{ width: "100%" }}
               showSearch
               onChange={handleChangeBairro}
+              value={bairro}
               options={bairros}
             />
           </div>
