@@ -619,7 +619,7 @@ const DeliveryMenu = () => {
                               >
                                 <div>
                                   <p className="p_1 name georgia-font">
-                                    {categoria.name}
+                                    {categoria.name + "**Meia**"}
                                   </p>
                                 </div>
                                 <div className="flex">
