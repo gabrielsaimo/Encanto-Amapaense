@@ -222,7 +222,7 @@ const DeliveryMenu = () => {
       },00</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
     };
 
-    const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
+    const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A *Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
       .join(", ")} ${meiaporcao
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
@@ -251,7 +251,7 @@ const DeliveryMenu = () => {
       bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
     }`;
 
-    const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%0A*Pedido:* %0A ${pedido
+    const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%*O Pedido Sera Retirado No Local*%0A*Pedido:* %0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
       .join(", ")}%0A${meiaporcao
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
