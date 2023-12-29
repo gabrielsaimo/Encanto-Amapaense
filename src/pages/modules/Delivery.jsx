@@ -106,6 +106,7 @@ const DeliveryMenu = () => {
   const [valorFrete, setValorFrete] = useState(0);
   const [loading, setLoading] = useState(false);
   const [retirada, setRetirada] = useState("");
+  const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
   const destinararios = [
     "gabrielsaimo68@gmail.com",
     "Josemaria023182@gmail.com",
@@ -503,51 +504,17 @@ const DeliveryMenu = () => {
                     padding: 5,
                   }}
                 >
-                  {retirada === "" && bairro === "" ? (
-                    <>
-                      <div className="p_1 name georgia-font">
-                        Retirar no local?
-                      </div>
-                      <Button
-                        style={{
-                          width: 100,
-                          marginLeft: 10,
-                          backgroundColor: "rgba(130, 255, 53)",
-                          borderColor: "rgba(178, 125, 64, 1)",
-                        }}
-                        onClick={() => setRetirada("Local")}
-                      >
-                        Sim
-                      </Button>
-                      <Button
-                        style={{
-                          width: 100,
-                          marginLeft: 10,
-                          backgroundColor: "rgba(255, 89, 89)",
-                          borderColor: "rgba(178, 125, 64, 1)",
-                        }}
-                        onClick={() => setRetirada("Delivery")}
-                      >
-                        Não
-                      </Button>
-                    </>
-                  ) : retirada === "Local" ? (
-                    () => setValorFrete(0)
-                  ) : retirada === "Delivery" ? (
-                    <>
-                      <div className="p_1 name georgia-font">
-                        Selecione seu Bairro
-                      </div>
-                      <Select
-                        defaultValue="Selecione"
-                        className="georgia-font"
-                        style={{ width: "100%", marginRight: 60 }}
-                        showSearch
-                        onChange={handleChangeBairro}
-                        options={bairros}
-                      />
-                    </>
-                  ) : null}
+                  <div className="p_1 name georgia-font">
+                    Selecione seu Bairro
+                  </div>
+                  <Select
+                    defaultValue="Selecione"
+                    className="georgia-font"
+                    style={{ width: "100%", marginRight: 60 }}
+                    showSearch
+                    onChange={handleChangeBairro}
+                    options={bairros}
+                  />
                 </div>
                 {bairro === "Outro" ? (
                   <div
@@ -1100,7 +1067,7 @@ const DeliveryMenu = () => {
           <Button
             type="primary"
             onClick={onFinalizar}
-            disabled={(pedido.length <= 0) && (meiaporcao.length <= 0)}
+            disabled={pedido.length <= 0 && meiaporcao.length <= 0}
             style={{
               minWidth: 300,
               width: "88vw",
@@ -1368,6 +1335,42 @@ const DeliveryMenu = () => {
             </p>
           </div>
         </Card>
+      </Modal>
+      <Modal
+        open={visibleMetodoEntrega}
+        closable={false}
+        footer={[
+          <div style={{ textAlign: "center" }}>
+            <Button
+              key="back"
+              type="dashed"
+              onClick={() => [
+                setVisibleMetodoEntrega(false),
+                setRetirada("Local"),
+              ]}
+            >
+              Pegar no Local
+            </Button>
+            <Button
+              key="submit"
+              type="primary"
+              onClick={() => [
+                setVisibleMetodoEntrega(false),
+                setRetirada("Delivery"),
+              ]}
+            >
+              Delivery
+            </Button>
+          </div>,
+        ]}
+        disabled={pedido.length === 0}
+        confirmLoading={false}
+      >
+        <div>
+          <div style={{ marginBottom: 10, textAlign: "center" }}>
+            <h1>Forma de Entrega* </h1>
+          </div>
+        </div>
       </Modal>
     </div>
   );
