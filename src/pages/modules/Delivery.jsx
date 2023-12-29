@@ -503,7 +503,7 @@ const DeliveryMenu = () => {
                     padding: 5,
                   }}
                 >
-                  {retirada === "" ? (
+                  {retirada === "" && bairro === "" ? (
                     <>
                       <div className="p_1 name georgia-font">
                         Retirar no local?
@@ -568,7 +568,7 @@ const DeliveryMenu = () => {
             </Affix>
           )}
 
-          {(pedido.length > 0) | (meiaporcao.length > 0) && (
+          {(pedido.length > 0) | (meiaporcao.length > 0) ? (
             <Affix
               offsetTop={10}
               style={{
@@ -595,7 +595,7 @@ const DeliveryMenu = () => {
                 </Avatar>
               </Badge>
             </Affix>
-          )}
+          ) : null}
           {renderSlides(index)}
           <Suspense fallback={<Spin />}>
             <Collapse
@@ -669,9 +669,12 @@ const DeliveryMenu = () => {
                                   <p className="p_1 price georgia-bold-font">
                                     {`R$ ${
                                       categoria.price % 1 !== 0
-                                        ? categoria.price.replace(".", ",") *
-                                          0.65
-                                        : categoria.price * 0.65 + ",00"
+                                        ? (categoria.price * 0.65)
+                                            .toFixed(2)
+                                            .replace(".", ",")
+                                        : (categoria.price * 0.65)
+                                            .toFixed(2)
+                                            .replace(".", ",")
                                     }`}
                                   </p>
                                 </div>
@@ -993,9 +996,9 @@ const DeliveryMenu = () => {
                   </div>
                   <div>
                     <p className="p_1 price georgia-bold-font">
-                      {`${item.qtd}x R$ ${
-                        item.price % 1 !== 0 ? item.price : item.price + ",00"
-                      } = R$ ${
+                      {`${item.qtd}x R$ ${item.price
+                        .toFixed(2)
+                        .replace(".", ",")} = R$ ${
                         (item.price * item.qtd) % 1 !== 0
                           ? (item.price * item.qtd).toFixed(2).replace(".", ",")
                           : item.price * item.qtd + ",00"
@@ -1097,7 +1100,7 @@ const DeliveryMenu = () => {
           <Button
             type="primary"
             onClick={onFinalizar}
-            disabled={pedido.length === 0}
+            disabled={(pedido.length <= 0) && (meiaporcao.length <= 0)}
             style={{
               minWidth: 300,
               width: "88vw",
@@ -1218,7 +1221,74 @@ const DeliveryMenu = () => {
                 />
               </div>
             </>
-          ) : null}
+          ) : retirada === "Local" ? null : (
+            <>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <label>Endereço*</label>
+                <label style={{ paddingRight: 25 }}>Numero* </label>
+              </div>
+              <div style={{ marginBottom: 10, display: "flex" }}>
+                <Input
+                  placeholder="Endereço"
+                  onChange={(e) => setEndereco(e.target.value)}
+                />
+                <Input
+                  placeholder="Numero"
+                  style={{ width: 100 }}
+                  type="number"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </div>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <label>Bairro* </label>
+              </div>
+              <div
+                style={{
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <Select
+                  defaultValue="Selecione"
+                  style={{ width: "100%" }}
+                  showSearch
+                  onChange={handleChangeBairro}
+                  value={bairro}
+                  options={bairros}
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Complemento </label>
+                <Input
+                  placeholder="Complemento"
+                  onBlur={(e) => setComplemento(e.target.value)}
+                />
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <label>Referencia </label>
+                <Input
+                  placeholder="Referencia"
+                  onBlur={(e) => setReferencia(e.target.value)}
+                />
+              </div>
+            </>
+          )}
           <div
             style={{
               marginBottom: 10,
