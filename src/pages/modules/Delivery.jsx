@@ -111,7 +111,7 @@ const DeliveryMenu = () => {
     "gabrielsaimo68@gmail.com",
     "Josemaria023182@gmail.com",
     "sraebarbossa@gmail.com",
-    "eu251213@mail.com",
+    "eu251213@gmail.com",
   ];
   const options = [
     {
