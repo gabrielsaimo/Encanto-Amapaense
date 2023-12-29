@@ -216,10 +216,15 @@ const DeliveryMenu = () => {
             )
               .toFixed(2)
               .replace(".", ",")
-      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total Pago:<p> R$ ${
+      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total Pago:<p> R$ ${(
         Number(valorFrete) +
-        Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
-      },00</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+        Number(
+          pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+            meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+        )
+      ).toFixed(
+        2
+      )}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
     };
 
     const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A *Pedido:* %0A ${pedido
