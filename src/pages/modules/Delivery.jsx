@@ -200,23 +200,7 @@ const DeliveryMenu = () => {
         .join("")}
         
       Troco: ${troco}<br/>
-      Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
-          ? pedido
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
-              .toFixed(2)
-              .replace(".", ",") +
-            meiaporcao
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
-              .toFixed(2)
-              .replace(".", ",")
-          : (
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
-            )
-              .toFixed(2)
-              .replace(".", ",")
-      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total Pago:<p> R$ ${(
+      Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/></p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total:<p> R$ ${(
         Number(valorFrete) +
         Number(
           pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
