@@ -20,6 +20,7 @@ import {
   Carousel,
   Tag,
   Typography,
+  Switch,
 } from "antd";
 import "firebase/database";
 import ImgCrop from "antd-img-crop";
@@ -46,7 +47,7 @@ import { getCategoty } from "../../services/category.ws";
 
 const { Option } = Select;
 export default function Dashboard({ atualizar, user }) {
-  const userDate = user[0];
+  const userDate = user;
   const [fileList, setFileList] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [modalNewAction, setModalNewAction] = useState(false);
@@ -58,6 +59,7 @@ export default function Dashboard({ atualizar, user }) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [sub, setSub] = useState("");
+  const [meia, setMeia] = useState(false);
   const [imgByte, setImgByte] = useState("");
   const [active, setActive] = useState(true);
   const [category, setCategory] = useState(null);
@@ -219,6 +221,7 @@ export default function Dashboard({ atualizar, user }) {
     setPrice(task.price);
     setDescription(task.description);
     setSub(task.sub);
+    setMeia(task.meia);
     setActive(task.active);
     setImgByte(task.img);
     setCategory(task.category);
@@ -236,6 +239,7 @@ export default function Dashboard({ atualizar, user }) {
         price,
         description,
         sub,
+        meia,
         active,
         imagem: imgByte,
         category,
@@ -250,6 +254,7 @@ export default function Dashboard({ atualizar, user }) {
         price,
         description,
         sub,
+        meia,
         active,
         imagem: imgByte,
         category,
@@ -274,6 +279,7 @@ export default function Dashboard({ atualizar, user }) {
     setDescription("");
     setTotalImg(0);
     setSub("");
+    setMeia(false);
     setActive(true);
     setCategory(null);
     setImgModal(null);
@@ -759,6 +765,17 @@ export default function Dashboard({ atualizar, user }) {
                   Não
                 </Option>
               </Select>
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Meia Porção
+              </Typography.Title>
+              <Switch
+                value={meia}
+                checkedChildren="Sim"
+                unCheckedChildren="Não"
+                onChange={(value) => setMeia(value)}
+              />
             </div>
 
             <div style={{ display: "flex", alignItems: "baseline" }}>

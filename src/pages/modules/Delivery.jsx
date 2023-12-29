@@ -92,6 +92,7 @@ const DeliveryMenu = () => {
   const [imgSrc, setImgSrc] = useState([]);
   const [visible, setVisible] = useState(false);
   const [pedido, setPedido] = useState([]);
+  const [meiaporcao, setMeiaporcao] = useState([]);
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [endereco, setEndereco] = useState("");
@@ -105,10 +106,6 @@ const DeliveryMenu = () => {
   const [valorFrete, setValorFrete] = useState(0);
   const [loading, setLoading] = useState(false);
   const [retirada, setRetirada] = useState("");
-  console.log(
-    (!nome === false && !endereco === false && numero.length === 0) ||
-      (retirada === "Delivery" && pagamento.length <= 0)
-  );
   const destinararios = [
     "gabrielsaimo68@gmail.com",
     "Josemaria023182@gmail.com",
@@ -194,15 +191,30 @@ const DeliveryMenu = () => {
           (item) =>
             `<h3 style="font-weight:bold">x${item.qtd} ${item.name}</h3/>`
         )
+        .join("")} ${meiaporcao
+        .map(
+          (item) =>
+            `<h3 style="font-weight:bold">x${item.qtd} ${item.name}</h3/>`
+        )
         .join("")}
-      <br/>Observação: ${observacao}<br/>Troco: ${troco}<br/>
+        
+      Troco: ${troco}<br/>
       Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
         pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
           ? pedido
               .reduce((acc, item) => acc + item.price * item.qtd, 0)
               .toFixed(2)
+              .replace(".", ",") +
+            meiaporcao
+              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .toFixed(2)
               .replace(".", ",")
-          : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
+          : (
+              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+            )
+              .toFixed(2)
+              .replace(".", ",")
       }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total Pago:<p> R$ ${
         Number(valorFrete) +
         Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
@@ -211,31 +223,58 @@ const DeliveryMenu = () => {
 
     const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
-      .join(", ")}%0ATotal: R$ ${
-      pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
-        ? pedido
-            .reduce((acc, item) => acc + item.price * item.qtd, 0)
-            .toFixed(2)
-            .replace(".", ",")
-        : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
-    }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${
+      .join(", ")} ${meiaporcao
+      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .join(", ")}
+      %0ATotal: R$ ${
+        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+          ? pedido
+              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .toFixed(2)
+              .replace(".", ",") +
+            meiaporcao
+              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .toFixed(2)
+              .replace(".", ",")
+          : (
+              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+            ).toFixed(2)
+      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
       Number(valorFrete) +
-      Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
-    },00*${
+      Number(
+        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+          meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+      )
+    ).toFixed(2)}*${
       bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
     }`;
 
     const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%0A*Pedido:* %0A ${pedido
       .map((item) => `x${item.qtd} *${item.name}* %0A`)
-      .join(", ")}%0ATotal: R$ ${
-      pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
-        ? pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
-        : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) + ",00"
-    }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${
+      .join(", ")}%0A${meiaporcao
+      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .join(", ")}
+      %0ATotal: R$ ${
+        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+          ? (
+              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+            )
+              .toFixed(2)
+              .replace(".", ",")
+          : (
+              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+            ).toFixed(2)
+      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
       Number(valorFrete) +
-      Number(pedido.reduce((acc, item) => acc + item.price * item.qtd, 0))
-    },00*${
-      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
+      Number(
+        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+          meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+      )
+    ).toFixed(2)}*${
+      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar o valor do Frete*" : ""
     }`;
 
     const msg = retirada === "Delivery" ? msgDelivey : msgLocal;
@@ -243,6 +282,9 @@ const DeliveryMenu = () => {
       `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
     );
+    setOpen(false);
+    setVisible(false);
+    setLoading(false);
     await postEmail(email);
     setPedido([]);
     setNome("");
@@ -255,42 +297,83 @@ const DeliveryMenu = () => {
     setPagamento(["Pix"]);
     setTroco("");
     setBairro("");
-    setVisible(false);
-    setOpen(false);
     setValorFrete(0);
-    setLoading(false);
     window.location.reload();
   };
 
-  const addPedido = (item) => {
+  const addPedido = (item, type) => {
+    const meiapor = {
+      id: item.id,
+      name: item.name + "***Meia***",
+      price: Number(item.price * 0.65),
+      category: item.category,
+      description: item.description,
+      meia: false,
+      sub: item.sub,
+      active: item.active,
+      ids: item.ids,
+    };
     const pedidoItem = pedido.find((item1) => item1.id === item.id);
+    const meiaItem = meiaporcao.find((item1) => item1.id === meiapor.id);
+    if (type === "meia") {
+      if (meiaItem) {
+        meiaItem.qtd += 1;
+        setMeiaporcao([...meiaporcao]);
+      }
+    }
     if (pedidoItem) {
       pedidoItem.qtd += 1;
       setPedido([...pedido]);
+    }
+
+    if (type === "meia") {
+      if (!meiaItem) {
+        setMeiaporcao([...meiaporcao, { ...meiapor, qtd: 1 }]);
+      }
     } else {
       setPedido([...pedido, { ...item, qtd: 1 }]);
     }
   };
 
-  const removePedido = (item) => {
+  const removePedido = (item, type) => {
     const pedidoItem = pedido.find((item1) => item1.id === item.id);
+    const meiaItem = meiaporcao.find((item1) => item1.id === item.id);
+    if (type === "meia") {
+      if (meiaItem) {
+        if (meiaItem.qtd <= 0) {
+          meiaItem.qtd = 0;
+          meiaporcao.splice(meiaporcao.indexOf(meiaItem), 1);
+          setMeiaporcao([...meiaporcao]);
+          return;
+        }
 
-    if (pedidoItem) {
-      if (pedidoItem.qtd <= 0) {
-        pedidoItem.qtd = 0;
-        pedido.splice(pedido.indexOf(pedidoItem), 1);
-        setPedido([...pedido]);
-        return;
+        meiaItem.qtd -= 1;
+        if (meiaItem.qtd === 0) {
+          meiaporcao.splice(meiaporcao.indexOf(meiaItem), 1);
+        }
+
+        setMeiaporcao([...meiaporcao]);
+      } else {
+        setMeiaporcao([...meiaporcao, { ...item, qtd: 1 }]);
       }
-
-      pedidoItem.qtd -= 1;
-      if (pedidoItem.qtd === 0) {
-        pedido.splice(pedido.indexOf(pedidoItem), 1);
-      }
-
-      setPedido([...pedido]);
     } else {
-      setPedido([...pedido, { ...item, qtd: 1 }]);
+      if (pedidoItem) {
+        if (pedidoItem.qtd <= 0) {
+          pedidoItem.qtd = 0;
+          pedido.splice(pedido.indexOf(pedidoItem), 1);
+          setPedido([...pedido]);
+          return;
+        }
+
+        pedidoItem.qtd -= 1;
+        if (pedidoItem.qtd === 0) {
+          pedido.splice(pedido.indexOf(pedidoItem), 1);
+        }
+
+        setPedido([...pedido]);
+      } else {
+        setPedido([...pedido, { ...item, qtd: 1 }]);
+      }
     }
   };
 
@@ -485,7 +568,7 @@ const DeliveryMenu = () => {
             </Affix>
           )}
 
-          {pedido.length > 0 && (
+          {(pedido.length > 0) | (meiaporcao.length > 0) && (
             <Affix
               offsetTop={10}
               style={{
@@ -495,7 +578,7 @@ const DeliveryMenu = () => {
                 zIndex: 9,
               }}
             >
-              <Badge count={pedido.length}>
+              <Badge count={pedido.length + meiaporcao.length}>
                 <Avatar
                   shape="square"
                   size={70}
@@ -548,98 +631,298 @@ const DeliveryMenu = () => {
                     (categoria) =>
                       categoria.category === item1.name && categoria.active
                   )
-                  .map((categoria, idx) => (
-                    <div key={idx} className="border">
-                      <div style={{ display: "flex" }}>
-                        {categoria.ids &&
-                          memoizedImgSrc.map((img1, index) =>
-                            renderImageCarousel(img1, index, categoria.id)
-                          )}
+                  .map((categoria, idx) =>
+                    categoria.meia === true ? (
+                      <>
+                        <div key={idx} className="border">
+                          <div style={{ display: "flex" }}>
+                            {categoria.ids &&
+                              memoizedImgSrc.map((img1, index) =>
+                                renderImageCarousel(img1, index, categoria.id)
+                              )}
 
-                        <div className="flex">
-                          <div style={{ width: "100%", display: "contents" }}>
-                            <div>
-                              <p className="p_1 name georgia-font">
-                                {categoria.name}
-                              </p>
-                            </div>
                             <div className="flex">
-                              <div className="sub">
-                                {categoria.sub} {categoria.description}
+                              <div
+                                style={{ width: "100%", display: "contents" }}
+                              >
+                                <div>
+                                  <p className="p_1 name georgia-font">
+                                    {categoria.name}
+                                  </p>
+                                </div>
+                                <div className="flex">
+                                  <div className="sub">
+                                    {categoria.sub} {categoria.description}
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "end",
+                                  minWidth: "100%",
+                                  alignItems: "flex-end",
+                                }}
+                              >
+                                <div>
+                                  <p className="p_1 price georgia-bold-font">
+                                    {`R$ ${
+                                      categoria.price % 1 !== 0
+                                        ? categoria.price.replace(".", ",") *
+                                          0.65
+                                        : categoria.price * 0.65 + ",00"
+                                    }`}
+                                  </p>
+                                </div>
+
+                                <div
+                                  style={{
+                                    display: Flex,
+                                  }}
+                                >
+                                  <Button
+                                    className="btn"
+                                    style={{
+                                      width: 45,
+                                      textAlign: "center",
+                                      backgroundColor: "red",
+                                      color: "#fff",
+                                    }}
+                                    onClick={() =>
+                                      removePedido(categoria, "meia")
+                                    }
+                                  >
+                                    -
+                                  </Button>
+
+                                  <Input
+                                    className="input"
+                                    style={{
+                                      width: 35,
+                                      textAlign: "center",
+                                      color: "#000",
+                                    }}
+                                    placeholder="Quantidade"
+                                    value={
+                                      meiaporcao.find(
+                                        (item) => item.id === categoria.id
+                                      )?.qtd || 0
+                                    }
+                                    disabled
+                                  />
+
+                                  <Button
+                                    className="btn"
+                                    style={{
+                                      width: 45,
+                                      textAlign: "center",
+                                      backgroundColor: "green",
+                                      color: "#fff",
+                                    }}
+                                    onClick={() => addPedido(categoria, "meia")}
+                                  >
+                                    +
+                                  </Button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "end",
-                              minWidth: "100%",
-                              alignItems: "flex-end",
-                            }}
-                          >
-                            <div>
-                              <p className="p_1 price georgia-bold-font">
-                                {`R$ ${
-                                  categoria.price % 1 !== 0
-                                    ? categoria.price.replace(".", ",")
-                                    : categoria.price + ",00"
-                                }`}
-                              </p>
-                            </div>
+                        </div>
+                        <div key={idx} className="border">
+                          <div style={{ display: "flex" }}>
+                            {categoria.ids &&
+                              memoizedImgSrc.map((img1, index) =>
+                                renderImageCarousel(img1, index, categoria.id)
+                              )}
 
+                            <div className="flex">
+                              <div
+                                style={{ width: "100%", display: "contents" }}
+                              >
+                                <div>
+                                  <p className="p_1 name georgia-font">
+                                    {categoria.name}
+                                  </p>
+                                </div>
+                                <div className="flex">
+                                  <div className="sub">
+                                    {categoria.sub} {categoria.description}
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "end",
+                                  minWidth: "100%",
+                                  alignItems: "flex-end",
+                                }}
+                              >
+                                <div>
+                                  <p className="p_1 price georgia-bold-font">
+                                    {`R$ ${
+                                      categoria.price % 1 !== 0
+                                        ? categoria.price.replace(".", ",")
+                                        : categoria.price + ",00"
+                                    }`}
+                                  </p>
+                                </div>
+
+                                <div
+                                  style={{
+                                    display: Flex,
+                                  }}
+                                >
+                                  <Button
+                                    className="btn"
+                                    style={{
+                                      width: 45,
+                                      textAlign: "center",
+                                      backgroundColor: "red",
+                                      color: "#fff",
+                                    }}
+                                    onClick={() =>
+                                      removePedido(categoria, "inteira")
+                                    }
+                                  >
+                                    -
+                                  </Button>
+
+                                  <Input
+                                    className="input"
+                                    style={{
+                                      width: 35,
+                                      textAlign: "center",
+                                      color: "#000",
+                                    }}
+                                    placeholder="Quantidade"
+                                    value={
+                                      pedido.find(
+                                        (item) => item.id === categoria.id
+                                      )?.qtd || 0
+                                    }
+                                    disabled
+                                  />
+
+                                  <Button
+                                    className="btn"
+                                    style={{
+                                      width: 45,
+                                      textAlign: "center",
+                                      backgroundColor: "green",
+                                      color: "#fff",
+                                    }}
+                                    onClick={() =>
+                                      addPedido(categoria, "inteira")
+                                    }
+                                  >
+                                    +
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <div key={idx} className="border">
+                        <div style={{ display: "flex" }}>
+                          {categoria.ids &&
+                            memoizedImgSrc.map((img1, index) =>
+                              renderImageCarousel(img1, index, categoria.id)
+                            )}
+
+                          <div className="flex">
+                            <div style={{ width: "100%", display: "contents" }}>
+                              <div>
+                                <p className="p_1 name georgia-font">
+                                  {categoria.name}
+                                </p>
+                              </div>
+                              <div className="flex">
+                                <div className="sub">
+                                  {categoria.sub} {categoria.description}
+                                </div>
+                              </div>
+                            </div>
                             <div
                               style={{
-                                display: Flex,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "end",
+                                minWidth: "100%",
+                                alignItems: "flex-end",
                               }}
                             >
-                              <Button
-                                className="btn"
-                                style={{
-                                  width: 45,
-                                  textAlign: "center",
-                                  backgroundColor: "red",
-                                  color: "#fff",
-                                }}
-                                onClick={() => removePedido(categoria)}
-                              >
-                                -
-                              </Button>
+                              <div>
+                                <p className="p_1 price georgia-bold-font">
+                                  {`R$ ${
+                                    categoria.price % 1 !== 0
+                                      ? categoria.price.replace(".", ",")
+                                      : categoria.price + ",00"
+                                  }`}
+                                </p>
+                              </div>
 
-                              <Input
-                                className="input"
+                              <div
                                 style={{
-                                  width: 35,
-                                  textAlign: "center",
-                                  color: "#000",
+                                  display: Flex,
                                 }}
-                                placeholder="Quantidade"
-                                value={
-                                  pedido.find(
-                                    (item) => item.id === categoria.id
-                                  )?.qtd || 0
-                                }
-                                disabled
-                              />
-
-                              <Button
-                                className="btn"
-                                style={{
-                                  width: 45,
-                                  textAlign: "center",
-                                  backgroundColor: "green",
-                                  color: "#fff",
-                                }}
-                                onClick={() => addPedido(categoria)}
                               >
-                                +
-                              </Button>
+                                <Button
+                                  className="btn"
+                                  style={{
+                                    width: 45,
+                                    textAlign: "center",
+                                    backgroundColor: "red",
+                                    color: "#fff",
+                                  }}
+                                  onClick={() =>
+                                    removePedido(categoria, "inteira")
+                                  }
+                                >
+                                  -
+                                </Button>
+
+                                <Input
+                                  className="input"
+                                  style={{
+                                    width: 35,
+                                    textAlign: "center",
+                                    color: "#000",
+                                  }}
+                                  placeholder="Quantidade"
+                                  value={
+                                    pedido.find(
+                                      (item) => item.id === categoria.id
+                                    )?.qtd || 0
+                                  }
+                                  disabled
+                                />
+
+                                <Button
+                                  className="btn"
+                                  style={{
+                                    width: 45,
+                                    textAlign: "center",
+                                    backgroundColor: "green",
+                                    color: "#fff",
+                                  }}
+                                  onClick={() =>
+                                    addPedido(categoria, "inteira")
+                                  }
+                                >
+                                  +
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
               </Panel>
             </Collapse>
           </Suspense>
@@ -679,9 +962,7 @@ const DeliveryMenu = () => {
                 <div>
                   <p className="p_1 price georgia-bold-font">
                     {`${item.qtd}x R$ ${
-                      item.price % 1 !== 0
-                        ? item.price.replace(".", ",")
-                        : item.price + ",00"
+                      item.price % 1 !== 0 ? item.price : item.price + ",00"
                     } = R$ ${
                       (item.price * item.qtd) % 1 !== 0
                         ? (item.price * item.qtd).toFixed(2).replace(".", ",")
@@ -692,7 +973,41 @@ const DeliveryMenu = () => {
               </div>
             </div>
           ))}
+          <div style={{ overflow: "auto" }}>
+            {meiaporcao.map((item, index) => (
+              <div key={index}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    border: "1px solid #ccc",
+                    borderRadius: 10,
+                    padding: 10,
+                    marginBottom: 10,
+                    marginRight: 10,
+                  }}
+                >
+                  <div>
+                    <p className="p_1 name georgia-font">{item.name}</p>
+                  </div>
+                  <div>
+                    <p className="p_1 price georgia-bold-font">
+                      {`${item.qtd}x R$ ${
+                        item.price % 1 !== 0 ? item.price : item.price + ",00"
+                      } = R$ ${
+                        (item.price * item.qtd) % 1 !== 0
+                          ? (item.price * item.qtd).toFixed(2).replace(".", ",")
+                          : item.price * item.qtd + ",00"
+                      }`}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
         <div
           style={{
             display: "flex",
@@ -706,13 +1021,24 @@ const DeliveryMenu = () => {
             {`R$ ${
               pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) %
                 1 !==
-              0
+                0 &&
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0) %
+                1 !==
+                0
                 ? pedido
                     .reduce((acc, item) => acc + item.price * item.qtd, 0)
                     .toFixed(2)
                     .replace(".", ",")
-                : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-                  ",00"
+                : (
+                    pedido.reduce(
+                      (acc, item) => acc + item.price * item.qtd,
+                      0
+                    ) +
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qtd,
+                      0
+                    )
+                  ).toFixed(2)
             }  ${
               bairro === "Outro"
                 ? "+ Frete"
@@ -736,16 +1062,33 @@ const DeliveryMenu = () => {
           <p className="p_1 price georgia-bold-font">
             {`R$ ${
               bairro !== "Outro"
-                ? Number(valorFrete) +
-                  Number(
-                    pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
-                  ) +
-                  ",00"
-                : Number(
-                    pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
-                  ) +
-                  ",00" +
-                  " + Frete"
+                ? (
+                    Number(valorFrete) +
+                    Number(
+                      pedido.reduce(
+                        (acc, item) => acc + item.price * item.qtd,
+                        0
+                      )
+                    ) +
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qtd,
+                      0
+                    )
+                  ).toFixed(2)
+                : (
+                    Number(
+                      pedido.reduce(
+                        (acc, item) => acc + item.price * item.qtd,
+                        0
+                      )
+                    ) +
+                      (meiaporcao.reduce(
+                        (acc, item) => acc + item.price * item.qtd,
+                        0
+                      ) %
+                        1) !==
+                    0
+                  ).toFixed(2) + " + Frete"
             }`}
           </p>
         </div>
@@ -912,8 +1255,14 @@ const DeliveryMenu = () => {
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
               {`Total: R$ ${Number(
-                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
-              )},00`}
+                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+                  meiaporcao.reduce(
+                    (acc, item) => acc + item.price * item.qtd,
+                    0
+                  )
+              )
+                .toFixed(2)
+                .replace(".", ",")}`}
             </p>
           </div>
           {bairro === "Outro" ? (
@@ -932,12 +1281,20 @@ const DeliveryMenu = () => {
 
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
-              {`Total Geral: R$ ${
+              {`Total Geral: R$ ${(
                 Number(valorFrete) +
                 Number(
                   pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+                ) +
+                Number(
+                  meiaporcao.reduce(
+                    (acc, item) => acc + item.price * item.qtd,
+                    0
+                  )
                 )
-              },00`}
+              )
+                .toFixed(2)
+                .replace(".", ",")}`}
             </p>
           </div>
         </Card>

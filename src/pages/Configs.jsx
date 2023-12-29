@@ -84,14 +84,14 @@ export default function Config() {
     const cachedData = localStorage.getItem("dateUser");
     if (cachedData) {
       setDateUser(JSON.parse(cachedData));
-      setUserNome(JSON.parse(cachedData)[0].name);
+      setUserNome(JSON.parse(cachedData).name);
       setUserCategoria(JSON.parse(cachedData)[0].categoria);
-      if (JSON.parse(cachedData)[0].active === false) {
+      if (JSON.parse(cachedData).active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData)[0].categoria === "ADM" ||
-        JSON.parse(cachedData)[0].categoria === "Gerência"
+        JSON.parse(cachedData).categoria === "ADM" ||
+        JSON.parse(cachedData).categoria === "Gerência"
       ) {
         setAcessable(true);
       } else {

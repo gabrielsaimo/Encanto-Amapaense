@@ -263,13 +263,13 @@ export default function Cozinha() {
   const getCachedDateUser = () => {
     const cachedData = localStorage.getItem("dateUser");
     if (cachedData) {
-      setUserNome(JSON.parse(cachedData)[0].name);
-      if (JSON.parse(cachedData)[0].active === false) {
+      setUserNome(JSON.parse(cachedData).name);
+      if (JSON.parse(cachedData).active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData)[0].categoria === "ADM" ||
-        JSON.parse(cachedData)[0].categoria === "Cozinha"
+        JSON.parse(cachedData).categoria === "ADM" ||
+        JSON.parse(cachedData).categoria === "Cozinha"
       ) {
         setAcessable(true);
       } else {
