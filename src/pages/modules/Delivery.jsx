@@ -641,8 +641,12 @@ const DeliveryMenu = () => {
                     .replace(".", ",")
                 : pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
                   ",00"
-            } + Frete R$ ${
-              bairro === "Outro" ? null : bairro !== "" ? valorFrete + ",00" : 0
+            } + ${
+              bairro === "Outro"
+                ? "Frete"
+                : bairro !== ""
+                ? "Frete R$ " + valorFrete + ",00"
+                : 0
             }
             `}
           </p>
@@ -657,11 +661,18 @@ const DeliveryMenu = () => {
           <p className="p_1 price georgia-bold-font">Sub Total</p>
           <p className="p_1 price georgia-bold-font">
             {`R$ ${
-              Number(valorFrete) +
-              Number(
-                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
-              )
-            },00`}
+              valorFrete !== 0
+                ? Number(valorFrete) +
+                  Number(
+                    pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+                  ) +
+                  ",00"
+                : Number(
+                    pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+                  ) +
+                  ",00" +
+                  " + Frete"
+            }`}
           </p>
         </div>
 
