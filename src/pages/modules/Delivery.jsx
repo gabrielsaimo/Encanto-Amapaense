@@ -109,7 +109,12 @@ const DeliveryMenu = () => {
     (!nome === false && !endereco === false && numero.length === 0) ||
       (retirada === "Delivery" && pagamento.length <= 0)
   );
-  const destinararios = ["gabrielsaimo68@gmail.com"];
+  const destinararios = [
+    "gabrielsaimo68@gmail.com",
+    "Josemaria023182@gmail.com",
+    "sraebarbossa@gmail.com",
+    "eu251213@mail.com",
+  ];
   const options = [
     {
       value: "Pix",
