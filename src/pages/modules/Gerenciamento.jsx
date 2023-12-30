@@ -90,7 +90,7 @@ const Gerenciamento = () => {
     };
     await putEmail(body);
     setLoadingEmail(false);
-    setVisibleEmail(false);
+    clean();
     message.success("Atualizado com sucesso");
   };
 
@@ -139,6 +139,10 @@ const Gerenciamento = () => {
   const clean = () => {
     setName("");
     setPrice(0);
+    setNameEmail("");
+    setMail("");
+    setType("");
+    setVisibleEmail(false);
     setVisible(false);
     setIdset(null);
   };
@@ -317,7 +321,12 @@ const Gerenciamento = () => {
           </Button>
         </div>
       </Modal>
-      <Modal title="Novo Email" footer={false} open={visibleEmail}>
+      <Modal
+        title="Novo Email"
+        footer={false}
+        open={visibleEmail}
+        onCancel={() => clean()}
+      >
         <div
           style={{
             width: "95%",
