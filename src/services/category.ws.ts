@@ -1,14 +1,10 @@
-import axios, { AxiosResponse } from "axios";
-
+import { AxiosResponse } from "axios";
+import { api } from "./api.config";
 interface category {
   id: number;
   name: string;
   active: boolean;
 }
-
-const api = axios.create({
-  baseURL: "https://encanto-backend.vercel.app/",
-});
 
 const handleResponse = (response: AxiosResponse) => response.data;
 

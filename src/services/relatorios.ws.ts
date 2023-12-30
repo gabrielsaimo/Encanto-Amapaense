@@ -1,8 +1,4 @@
-import axios from "axios";
-const api = axios.create({
-  baseURL: "https://encanto-backend.vercel.app/",
-  // baseURL: "http://localhost:3000/",
-});
+import { api } from "./api.config";
 
 export const getRelatorios_vendas = async (data: any): Promise<any[]> => {
   const response = await api.get<any>("pedido/relatorio/vendas", {

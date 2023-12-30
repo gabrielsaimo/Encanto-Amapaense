@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import {
   BookOutlined,
+  DingtalkOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuOutlined,
@@ -26,6 +27,7 @@ import { getUser } from "../../services/user.ws";
 import Pedidos from "./Pedidos";
 import Users from "./Users";
 import { useParams } from "react-router-dom";
+import Gerenciamento from "./Gerenciamento";
 const { Header, Sider, Content } = Layout;
 
 const MenuDashboard = () => {
@@ -72,6 +74,7 @@ const MenuDashboard = () => {
       3: <Menssagem atualizar={true} user={dateUser} />,
       4: <Pedidos atualizar={true} user={dateUser} />,
       5: <Users atualizar={true} user={dateUser} />,
+      6: <Gerenciamento atualizar={null} user={dateUser} />,
     }),
     [dateUser]
   );
@@ -201,6 +204,23 @@ const MenuDashboard = () => {
             },
             {
               key: "2",
+              icon: <DingtalkOutlined />,
+              disabled: false,
+              label: "Gerenciamanto",
+              // eslint-disable-next-line no-dupe-keys
+              disabled:
+                UserCategoria === "Gerente"
+                  ? false
+                  : UserCategoria === "ADM"
+                  ? false
+                  : true,
+              onClick: () => {
+                setTela(6);
+                setCollapsed(true);
+              },
+            },
+            {
+              key: "3",
               icon: <PieChartOutlined />,
               label: "Relatorios",
               disabled: UserCategoria === "ADM" ? false : true,
@@ -210,7 +230,7 @@ const MenuDashboard = () => {
               },
             },
             {
-              key: "3",
+              key: "4",
               icon: <MessageOutlined />,
               label: "Mensagens",
               onClick: () => {
@@ -219,7 +239,7 @@ const MenuDashboard = () => {
               },
             },
             {
-              key: "4",
+              key: "5",
               icon: <TagOutlined />,
               label: "Pedidos",
               onClick: () => {
@@ -228,7 +248,7 @@ const MenuDashboard = () => {
               },
             },
             {
-              key: "5",
+              key: "6",
               icon: <UserOutlined />,
               disabled: UserCategoria === "ADM" ? false : true,
               label: "Usuários",
@@ -238,7 +258,7 @@ const MenuDashboard = () => {
               },
             },
             {
-              key: "6",
+              key: "7",
               icon: <LogoutOutlined />,
               label: "Sair",
               onClick: () => {
@@ -283,7 +303,11 @@ const MenuDashboard = () => {
               ? "Mensagens"
               : tela === 4
               ? "Pedidos"
-              : "Usuários"}
+              : tela === 5
+              ? "Usuários"
+              : tela === 6
+              ? "Gerenciamento"
+              : ""}
           </Typography.Title>
         </Header>
         <Content

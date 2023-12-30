@@ -1,7 +1,4 @@
-import axios from "axios";
-const api = axios.create({
-  baseURL: "https://encanto-backend.vercel.app/",
-});
+import { api } from "./api.config";
 
 interface pagamentos {
   id: number;

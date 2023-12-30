@@ -1,9 +1,4 @@
-import axios from "axios";
-//! Inativo
-const api = axios.create({
-  baseURL: "https://encanto-backend.vercel.app/",
-});
-
+import { api } from "./api.config";
 interface User {
   id: number;
   name: string;

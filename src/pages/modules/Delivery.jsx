@@ -25,7 +25,6 @@ import {
 } from "antd";
 import {
   CaretRightOutlined,
-  MailOutlined,
   ShoppingCartOutlined,
   WhatsAppOutlined,
 } from "@ant-design/icons";
@@ -35,6 +34,7 @@ import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
+import { getBairros, getEmail } from "../../services/gerenciamento.ws";
 import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
@@ -52,44 +52,6 @@ function formatarTelefone(valor) {
 
   return apenasDigitos;
 }
-
-const bairros = [
-  { value: "Alvorada", label: "Alvorada", price: 18 },
-  { value: "Açaí", label: "Açaí", price: 20 },
-  { value: "Araxá", label: "Araxá", price: 12 },
-  { value: "Beirol", label: "Beirol", price: 12 },
-  { value: "Boné Azul", label: "Boné Azul", price: 20 },
-  { value: "Brasil Novo", label: "Brasil Novo", price: 25 },
-  { value: "Buritizal", label: "Buritizal", price: 12 },
-  { value: "Cabralzinho", label: "Cabralzinho", price: 20 },
-  { value: "Central", label: "Central", price: 12 },
-  { value: "Cidade Nova", label: "Cidade Nova", price: 15 },
-  { value: "Congós", label: "Congós", price: 15 },
-  { value: "Infraero I e II", label: "Infraero I e II", price: 20 },
-  { value: "Ipê", label: "Ipê", price: 20 },
-  { value: "Jardim Equatorial", label: "Jardim Equatorial", price: 12 },
-  { value: "Jardim Felicidade", label: "Jardim Felicidade", price: 20 },
-  { value: "Jardim Felicidade II", label: "Jardim Felicidade II", price: 20 },
-  { value: "Jardim Marco Zero", label: "Jardim Marco Zero", price: 12 },
-  { value: "Jesus de Nazaré", label: "Jesus de Nazaré", price: 15 },
-  { value: "Marabaixo", label: "Marabaixo", price: 20 },
-  { value: "Fazendinha", label: "Fazendinha", price: 22 },
-  { value: "Morada das Palmeiras", label: "Morada das Palmeiras", price: 25 },
-  { value: "Muca", label: "Muca", price: 12 },
-  { value: "Novo Buritizal", label: "Novo Buritizal", price: 12 },
-  { value: "Novo Horizonte", label: "Novo Horizonte", price: 20 },
-  { value: "Nova Esperança", label: "Nova Esperança", price: 15 },
-  { value: "Pacoval", label: "Pacoval", price: 15 },
-  { value: "Perpétuo Socorro", label: "Perpétuo Socorro", price: 15 },
-  { value: "Pedrinhas", label: "Pedrinhas", price: 12 },
-  { value: "Renascer", label: "Renascer", price: 18 },
-  { value: "Santa Inês", label: "Santa Inês", price: 10 },
-  { value: "Santa Rita", label: "Santa Rita", price: 15 },
-  { value: "Sao Lázaro", label: "São Lázaro", price: 15 },
-  { value: "Trem", label: "Trem", price: 12 },
-  { value: "Universidade", label: "Universidade", price: 15 },
-  { value: "Outro", label: "Outro", price: 0 },
-];
 
 const DeliveryMenu = () => {
   const [cardapio, setCardapio] = useState([]);
@@ -111,13 +73,13 @@ const DeliveryMenu = () => {
   const [valorFrete, setValorFrete] = useState(0);
   const [loading, setLoading] = useState(false);
   const [retirada, setRetirada] = useState("");
+  const [bairros, setBairros2] = useState([]);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
-  const destinararios = [
-    "gabrielsaimo68@gmail.com",
-    "Josemaria023182@gmail.com",
-    "sraebarbossa@gmail.com",
-    "eu251213@gmail.com",
-  ];
+  const [destinararios, setDestinararios] = useState([]);
+  console.log(
+    "🚀 ~ file: Delivery.jsx:79 ~ DeliveryMenu ~ destinararios:",
+    destinararios
+  );
   const options = [
     {
       value: "Pix",
@@ -165,6 +127,8 @@ const DeliveryMenu = () => {
   useEffect(() => {
     if (cardapio.length === 0) {
       getCardapios();
+      getBairro();
+      getEmails();
     }
     if (cardapioCategory.length === 0) {
       getCardapioCategory();
@@ -388,6 +352,18 @@ const DeliveryMenu = () => {
     }
   };
 
+  const getBairro = async () => {
+    const bairrosCollection = await getBairros();
+    setBairros2(bairrosCollection);
+  };
+
+  const getEmails = async () => {
+    const emails = await getEmail();
+    emails.map((item) => {
+      return setDestinararios((prev) => [...prev, item.mail]);
+    });
+  };
+
   const getCardapios = async () => {
     const cardapioCollection = await getCardapio();
     setCardapio(cardapioCollection);
@@ -523,8 +499,18 @@ const DeliveryMenu = () => {
                     style={{ width: "100%", marginRight: 60 }}
                     showSearch
                     onChange={handleChangeBairro}
-                    options={bairros}
-                  />
+                  >
+                    {bairros.map((item, index) => (
+                      <Select.Option
+                        key={index}
+                        value={item.name}
+                        label={item.name}
+                        price={item.price}
+                      >
+                        {item.name}
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </div>
                 {bairro === "Outro" ? (
                   <div
@@ -1207,8 +1193,18 @@ const DeliveryMenu = () => {
                   showSearch
                   onChange={handleChangeBairro}
                   value={bairro}
-                  options={bairros}
-                />
+                >
+                  {bairros.map((item, index) => (
+                    <Select.Option
+                      key={index}
+                      value={item.name}
+                      label={item.name}
+                      price={item.price}
+                    >
+                      {item.name}
+                    </Select.Option>
+                  ))}
+                </Select>
               </div>
               <div style={{ marginBottom: 10 }}>
                 <label>Complemento </label>

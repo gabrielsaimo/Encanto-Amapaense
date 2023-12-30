@@ -1,11 +1,4 @@
-import axios from "axios";
-const api = axios.create({
-  baseURL: "https://encanto-backend.vercel.app/",
-  // baseURL: "http://localhost:3000/",
-});
-const api2 = axios.create({
-  baseURL: "http://192.168.12.11:3020/",
-});
+import { api, api2 } from "./api.config";
 
 interface pedido {
   id: number;
