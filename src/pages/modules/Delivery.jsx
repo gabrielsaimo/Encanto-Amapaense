@@ -498,6 +498,7 @@ const DeliveryMenu = () => {
                     className="georgia-font"
                     style={{ width: "100%", marginRight: 60 }}
                     showSearch
+                    value={bairro}
                     onChange={handleChangeBairro}
                   >
                     {bairros.map((item, index) => (
