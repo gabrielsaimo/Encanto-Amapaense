@@ -107,7 +107,7 @@ const Gerenciamento = () => {
     };
     await putBairros(body);
     setLoading(false);
-    setVisible(false);
+    clean();
   };
 
   const postBairro = async () => {
@@ -119,7 +119,7 @@ const Gerenciamento = () => {
     };
     await postBairros(body);
     setLoading(false);
-    setVisible(false);
+    clean();
   };
 
   const deleteBairro = async (id) => {
