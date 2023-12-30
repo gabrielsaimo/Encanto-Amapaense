@@ -145,7 +145,7 @@ const Gerenciamento = () => {
 
   const columnsBairro = [
     {
-      title: "id",
+      title: "Id",
       dataIndex: "id",
       key: "id",
     },
@@ -153,11 +153,13 @@ const Gerenciamento = () => {
       title: "Nome",
       dataIndex: "name",
       key: "name",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
       title: "Preço",
       dataIndex: "price",
       key: "price",
+      sorter: (a, b) => a.price - b.price,
     },
     {
       title: "Ações",
@@ -204,7 +206,7 @@ const Gerenciamento = () => {
 
   const columnsEmail = [
     {
-      title: "id",
+      title: "Id",
       dataIndex: "id",
       key: "id",
     },
@@ -212,6 +214,7 @@ const Gerenciamento = () => {
       title: "Nome",
       dataIndex: "name",
       key: "name",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
       title: "Email",
