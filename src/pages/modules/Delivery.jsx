@@ -23,7 +23,12 @@ import {
   Select,
   message,
 } from "antd";
-import { CaretRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  CaretRightOutlined,
+  MailOutlined,
+  ShoppingCartOutlined,
+  WhatsAppOutlined,
+} from "@ant-design/icons";
 import LazyLoad from "react-lazyload";
 import "../../css/Collapse.css";
 import SlidesPrincipal from "./SlidePrincipal";
@@ -1094,18 +1099,45 @@ const DeliveryMenu = () => {
         disabled={pedido.length === 0}
         confirmLoading={false}
         footer={[
-          <Button key="back" onClick={() => setVisible(false)}>
-            Cancelar
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            onClick={() => sendMsm()}
-            disabled={pagamento.length <= 0}
-            loading={loading}
-          >
-            Enviar
-          </Button>,
+          <div style={{ display: "flex" }}>
+            <Button
+              key="back"
+              onClick={() => setVisible(false)}
+              style={{
+                backgroundColor: "rgb(255 35 35)",
+                color: "#fff",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+                width: "20vw",
+                fontSize: 20,
+                height: 50,
+                fontWeight: "bold",
+              }}
+            >
+              Cancelar
+            </Button>
+            <Button
+              key="submit"
+              icon={[<WhatsAppOutlined style={{ fontSize: 30 }} />]}
+              style={{
+                backgroundColor: "#52c41a",
+                color: "#fff",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+                width: "20vw",
+                fontSize: 20,
+                height: 50,
+                fontWeight: "bold",
+              }}
+              onClick={() => sendMsm()}
+              disabled={pagamento.length <= 0}
+              loading={loading}
+            >
+              Enviar
+            </Button>
+          </div>,
         ]}
       >
         <Card title="Finalização de Pedido">
