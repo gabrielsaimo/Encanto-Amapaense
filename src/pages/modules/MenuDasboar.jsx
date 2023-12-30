@@ -112,20 +112,16 @@ const MenuDashboard = () => {
   };
   const getCachedDateUser = () => {
     const cachedData = localStorage.getItem("dateUser");
-    if (cachedData) {
+    if (JSON.parse(cachedData)[0].name) {
       setDateUser(JSON.parse(cachedData));
-      console.log(
-        "🚀 ~ file: MenuDasboar.jsx:117 ~ getCachedDateUser ~ cachedData:",
-        JSON.parse(cachedData).name
-      );
-      setUserNome(JSON.parse(cachedData).name);
-      setUserCategoria(JSON.parse(cachedData).categoria);
-      if (JSON.parse(cachedData).active === false) {
+      setUserNome(JSON.parse(cachedData)[0].name);
+      setUserCategoria(JSON.parse(cachedData)[0].categoria);
+      if (JSON.parse(cachedData)[0].active === false) {
         alert("Usuário desativado");
         setAcessable(false);
       } else if (
-        JSON.parse(cachedData).categoria === "ADM" ||
-        JSON.parse(cachedData).categoria === "Gerência"
+        JSON.parse(cachedData)[0].categoria === "ADM" ||
+        JSON.parse(cachedData)[0].categoria === "Gerência"
       ) {
         setAcessable(true);
       } else {
