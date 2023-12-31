@@ -24,7 +24,12 @@ import {
   getPedidosDelivery,
 } from "../../services/gerenciamento.ws";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { getPedidos } from "../../services/Pedidos.ws";
+import {
+  getPedidos,
+  postPedidosStatus,
+  postPedidostatus,
+  veryfyStatusPedidos,
+} from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment";
 
@@ -172,27 +177,58 @@ const Gerenciamento = () => {
     setIdset(null);
   };
 
-  const StatusPedido = async (data, status, pedido) => {
-    const dataPedido = {
-      id: data.id,
-      status: status,
-      acepted_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
-      acepted_at: new Date(),
-      update_at: new Date(),
-      update_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
-    };
-    console.log(
-      "🚀 ~ file: Gerenciamento.jsx:184 ~ StatusPedido ~ dataPedido:",
-      dataPedido
-    );
-
-    /*  await postPedidostatus(dataPedido);
-
-    const returnVerify = await veryfyStatusPedidos(pedido.pedidos);
-    if (returnVerify.length === 1) {
-      StatusPedidoFinal(pedido.id, status);
+  const StatusPedidoFinal = async (id, status) => {
+    if (status === "Cancelado") {
+      const destinararios = [
+        "gabrielsaimo68@gmail.com",
+        "Josemaria023182@gmail.com",
+        "sraebarbossa@gmail.com",
+      ];
+      const email = {
+        destinatario: destinararios,
+        assunto: "Pedido Cancelado",
+        corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Cancelamento</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Cancelado</h1><p>Cancelado por: ${
+          JSON.parse(localStorage.getItem("dateUser"))[0].name
+        },</p><p>Pedido N° ${id} foi cancelado.</p><p>Motivo do cancelamento:</p><p>${"a"}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+      };
+      await postEmail(email).catch((err) => {
+        console.log(err);
+        return;
+      });
     }
-    getPedido();*/
+    if (status === "Em Preparo") {
+      const data = {
+        id: id,
+        status: status,
+        acepted_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
+        acepted_at: new Date(),
+        update_at: new Date(),
+        update_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
+      };
+      await postPedidosStatus(data);
+    } else {
+      const data = {
+        id: id,
+        status: status,
+        finished_by:
+          status === "Pronto" || status === "Cancelado"
+            ? JSON.parse(localStorage.getItem("dateUser"))[0].name
+            : null,
+        finished_at:
+          status === "Pronto" || status === "Cancelado" ? new Date() : null,
+        update_at: new Date(),
+        update_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
+        taxa: 0,
+      };
+      await postPedidosStatus(data);
+    }
+    getPedido();
+  };
+
+  const StatusPedido = async (data, status, pedido) => {
+    StatusPedidoFinal(pedido.id, status);
+
+    getPedido();
   };
 
   const columnsBairro = [
@@ -365,6 +401,46 @@ const Gerenciamento = () => {
                     }
                     text={pedido.status}
                   />
+                  <Button
+                    style={{
+                      marginLeft: 10,
+                      color: "#fff",
+                      backgroundColor:
+                        pedido.status === "Em Cancelamento"
+                          ? "red"
+                          : pedido.status === "Cancelado"
+                          ? "red"
+                          : pedido.status === "Pronto"
+                          ? "green"
+                          : pedido.status === "Em Preparo"
+                          ? "blue"
+                          : pedido.status === "Finalizado"
+                          ? "grey"
+                          : pedido.status === "Em Analize"
+                          ? "orange"
+                          : "green",
+                    }}
+                    disabled={pedido.status === "Finalizado" ? true : false}
+                    onClick={() =>
+                      StatusPedido(
+                        pedidos_Delivery,
+                        pedidos_Delivery.status === "Em Analize"
+                          ? "Em Preparo"
+                          : pedido.status === "Em Preparo"
+                          ? "Pronto"
+                          : "Finalizado",
+                        pedido
+                      )
+                    }
+                  >
+                    {pedido.status === "Em Analize"
+                      ? "Aceitar"
+                      : pedido.status === "Em Preparo"
+                      ? "Pronto"
+                      : pedido.status === "Pronto"
+                      ? "Finalizar"
+                      : "Finalizado"}
+                  </Button>
                 </Descriptions.Item>
                 {pedido.info !== null ? (
                   <>
@@ -374,19 +450,29 @@ const Gerenciamento = () => {
                     >
                       <div>{"Nome: " + JSON.parse(pedido.info).nome} </div>
                       <div>
-                        {"Telefone: " + JSON.parse(pedido.info).telefone}{" "}
+                        {"Telefone: " + JSON.parse(pedido.info).telefone}
                       </div>
-                      <div>
-                        {"Endereço: " + JSON.parse(pedido.info).endereco}{" "}
-                      </div>
-                      <div>{"Numero: " + JSON.parse(pedido.info).numero} </div>
-                      <div>{"Bairro: " + JSON.parse(pedido.info).bairro} </div>
-                      <div>
-                        {"Complemento: " + JSON.parse(pedido.info).complemento}{" "}
-                      </div>
-                      <div>
-                        {"Referencia: " + JSON.parse(pedido.info).referencia}
-                      </div>
+                      {JSON.parse(pedido.info).retirada === "Delivery" ? (
+                        <>
+                          <div>
+                            {"Endereço: " + JSON.parse(pedido.info).endereco}
+                          </div>
+                          <div>
+                            {"Numero: " + JSON.parse(pedido.info).numero}
+                          </div>
+                          <div>
+                            {"Bairro: " + JSON.parse(pedido.info).bairro}
+                          </div>
+                          <div>
+                            {"Complemento: " +
+                              JSON.parse(pedido.info).complemento}
+                          </div>
+                          <div>
+                            {"Referencia: " +
+                              JSON.parse(pedido.info).referencia}
+                          </div>
+                        </>
+                      ) : null}
                     </Descriptions.Item>
                     <Descriptions.Item label="Pagamentos" span={1}>
                       <div>
@@ -407,51 +493,6 @@ const Gerenciamento = () => {
                             {pedidos_Delivery.qdt > 0 ? (
                               <p>
                                 x{pedidos_Delivery.qdt} {pedidos_Delivery.item}
-                                {pedidos_Delivery.categoria !== "Bebidas" &&
-                                pedidos_Delivery.categoria !==
-                                  "Sucos exóticos" &&
-                                pedidos_Delivery.categoria !== "Drinks" &&
-                                pedidos_Delivery.categoria !== "Cerveja" ? (
-                                  pedidos_Delivery.status !== "Cancelado" &&
-                                  pedidos_Delivery.status !== "Finalizado" &&
-                                  pedidos_Delivery.status !==
-                                    "Em Cancelamento" &&
-                                  pedidos_Delivery.status !== "Pronto" ? (
-                                    <Button
-                                      onClick={() => {
-                                        StatusPedido(
-                                          pedidos_Delivery,
-                                          pedidos_Delivery.status ===
-                                            "Em Analize"
-                                            ? "Em Preparo"
-                                            : pedido.status === "Em Preparo"
-                                            ? "Pronto"
-                                            : "Finalizado",
-                                          pedido
-                                        );
-                                      }}
-                                      type="primary"
-                                      style={{
-                                        marginLeft: 10,
-                                        backgroundColor:
-                                          pedidos_Delivery.status ===
-                                          "Em Analize"
-                                            ? "orange"
-                                            : pedidos_Delivery.status ===
-                                              "Em Preparo"
-                                            ? "green"
-                                            : "purple",
-                                      }}
-                                    >
-                                      {pedidos_Delivery.status === "Em Analize"
-                                        ? "Em Preparo"
-                                        : pedidos_Delivery.status ===
-                                          "Em Preparo"
-                                        ? "Pronto"
-                                        : null}
-                                    </Button>
-                                  ) : null
-                                ) : null}
                                 {pedidos_Delivery.status ===
                                 "Em Cancelamento" ? (
                                   <Button

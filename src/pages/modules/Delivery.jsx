@@ -132,6 +132,7 @@ const DeliveryMenu = () => {
       setRandom(Math.floor(Math.random() * 700070007));
       getCardapios();
       getBairro();
+
       getEmails();
     }
     if (cardapioCategory.length === 0) {
@@ -416,9 +417,13 @@ const DeliveryMenu = () => {
 
   const getEmails = async () => {
     const emails = await getEmail();
-    emails.map((item) => {
-      return setDestinararios((prev) => [...prev, item.mail]);
-    });
+    try {
+      emails.map((item) => {
+        return setDestinararios((prev) => [...prev, item.mail]);
+      });
+    } catch (e) {
+      console.log("Erro", e);
+    }
   };
 
   const getCardapios = async () => {
