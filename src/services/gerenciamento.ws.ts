@@ -3,6 +3,21 @@ import { api } from "./api.config";
 
 const handleResponse = (response: AxiosResponse) => response.data;
 
+export const getPedidosDelivery = async (): Promise<any[]> => {
+  const response = await api.get<any[]>("/gerenciamento/pedidos-delivery");
+  return handleResponse(response);
+};
+
+export const postPedidosDelivery = async (data: any): Promise<any> => {
+  const response = await api.post<any>("/gerenciamento/pedidos-delivery", data);
+  return handleResponse(response);
+};
+
+export const putPedidos_uniDelivery = async (data: any): Promise<any> => {
+  const response = await api.put<any>("pedido/pedidos/Delivery", data);
+  return handleResponse(response);
+};
+
 export const getBairros = async (): Promise<any[]> => {
   const response = await api.get<any[]>("/gerenciamento/bairros");
   return handleResponse(response);

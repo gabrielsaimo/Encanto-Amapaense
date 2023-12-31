@@ -34,10 +34,15 @@ import SlidesPrincipal from "./SlidePrincipal";
 import SlidesSobemesas from "./SlideSobremesas";
 import SlidesBebidas from "./SlideBebidas";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
-import { getBairros, getEmail } from "../../services/gerenciamento.ws";
+import {
+  getBairros,
+  getEmail,
+  putPedidos_uniDelivery,
+} from "../../services/gerenciamento.ws";
 import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
+import { putPedidos } from "../../services/Pedidos.ws";
 
 const { Panel } = Collapse;
 const LazyLoadedImage = lazy(() =>
@@ -59,6 +64,7 @@ const DeliveryMenu = () => {
   const [imgSrc, setImgSrc] = useState([]);
   const [visible, setVisible] = useState(false);
   const [pedido, setPedido] = useState([]);
+  console.log("🚀 ~ file: Delivery.jsx:67 ~ DeliveryMenu ~ pedido:", pedido);
   const [meiaporcao, setMeiaporcao] = useState([]);
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -69,17 +75,14 @@ const DeliveryMenu = () => {
   const [observacao, setObservacao] = useState("");
   const [pagamento, setPagamento] = useState(["Pix"]);
   const [troco, setTroco] = useState("");
-  const [bairro, setBairro] = useState("");
+  const [bairro, setBairro] = useState("Selecione");
   const [valorFrete, setValorFrete] = useState(0);
   const [loading, setLoading] = useState(false);
   const [retirada, setRetirada] = useState("");
   const [bairros, setBairros2] = useState([]);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
   const [destinararios, setDestinararios] = useState([]);
-  console.log(
-    "🚀 ~ file: Delivery.jsx:79 ~ DeliveryMenu ~ destinararios:",
-    destinararios
-  );
+  const [random, setRandom] = useState(0);
   const options = [
     {
       value: "Pix",
@@ -126,6 +129,7 @@ const DeliveryMenu = () => {
 
   useEffect(() => {
     if (cardapio.length === 0) {
+      setRandom(Math.floor(Math.random() * 700070007));
       getCardapios();
       getBairro();
       getEmails();
@@ -135,7 +139,28 @@ const DeliveryMenu = () => {
     }
   }, [cardapio]);
 
+  async function putPedi_UniDelivery() {
+    for (let i = 0; i < pedido.length; i++) {
+      await putPedidos_uniDelivery(pedido[i]);
+    }
+  }
+
   const sendMsm = async () => {
+    await putPedidos({
+      id: random,
+      created_at: new Date(),
+      mesa: 0,
+      pedidos: random,
+      obs: observacao,
+      id_mesa: 0,
+      status: "Em Analize",
+      valor: Number(
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+          meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+      ),
+      type: "Delivery",
+    });
+    await putPedi_UniDelivery();
     setLoading(true);
 
     if (retirada === "Delivery") {
@@ -159,37 +184,37 @@ const DeliveryMenu = () => {
       <br><br/>Pedido: ${pedido
         .map(
           (item) =>
-            `<h3 style="font-weight:bold">x${item.qtd} ${item.name}</h3/>`
+            `<h3 style="font-weight:bold">x${item.qdt} ${item.name}</h3/>`
         )
         .join("")} ${meiaporcao
         .map(
           (item) =>
-            `<h3 style="font-weight:bold">x${item.qtd} ${item.name}</h3/>`
+            `<h3 style="font-weight:bold">x${item.qdt} ${item.name}</h3/>`
         )
         .join("")}
         
       Troco: ${troco}<br/>
       Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
           ? pedido
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .reduce((acc, item) => acc + item.price * item.qdt, 0)
               .toFixed(2)
               .replace(".", ",") +
             meiaporcao
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .reduce((acc, item) => acc + item.price * item.qdt, 0)
               .toFixed(2)
               .replace(".", ",")
           : (
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             )
               .toFixed(2)
               .replace(".", ",")
       }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total:<p> R$ ${(
         Number(valorFrete) +
         Number(
-          pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-            meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
         )
       ).toFixed(
         2
@@ -197,56 +222,56 @@ const DeliveryMenu = () => {
     };
 
     const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A *Pedido:* %0A ${pedido
-      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .map((item) => `x${item.qdt} *${item.name}* %0A`)
       .join(", ")} ${meiaporcao
-      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .map((item) => `x${item.qdt} *${item.name}* %0A`)
       .join(", ")}
       %0ATotal: R$ ${
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
           ? pedido
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .reduce((acc, item) => acc + item.price * item.qdt, 0)
               .toFixed(2)
               .replace(".", ",") +
             meiaporcao
-              .reduce((acc, item) => acc + item.price * item.qtd, 0)
+              .reduce((acc, item) => acc + item.price * item.qdt, 0)
               .toFixed(2)
               .replace(".", ",")
           : (
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             ).toFixed(2)
       }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
       Number(valorFrete) +
       Number(
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-          meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+          meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       )
     ).toFixed(2)}*${
       bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
     }`;
 
     const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%*O Pedido Sera Retirado No Local*%0A*Pedido:* %0A*Pedido:* %0A ${pedido
-      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .map((item) => `x${item.qdt} *${item.name}* %0A`)
       .join(", ")}%0A${meiaporcao
-      .map((item) => `x${item.qtd} *${item.name}* %0A`)
+      .map((item) => `x${item.qdt} *${item.name}* %0A`)
       .join(", ")}
       %0ATotal: R$ ${
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) % 1 !== 0
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
           ? (
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             )
               .toFixed(2)
               .replace(".", ",")
           : (
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             ).toFixed(2)
       }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
       Number(valorFrete) +
       Number(
-        pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
-          meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0)
+        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+          meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       )
     ).toFixed(2)}*${
       bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar o valor do Frete*" : ""
@@ -278,35 +303,58 @@ const DeliveryMenu = () => {
 
   const addPedido = (item, type) => {
     const meiapor = {
+      iditem: item.id,
       id: item.id,
       name: item.name + "***Meia***",
+      item: item.item + "***Meia***",
       price: Number(item.price * 0.65),
+      valor: Number(item.price * 0.65),
       category: item.category,
       description: item.description,
+      status: "Em Analize",
+      created_at: new Date(),
       meia: false,
       sub: item.sub,
       active: item.active,
-      ids: item.ids,
+      idpedido: random,
+    };
+    const Inteirapor = {
+      iditem: item.id,
+      id: item.id,
+      name: item.name,
+      item: item.name,
+      price: item.price,
+      valor: item.price,
+      category: item.category,
+      description: item.description,
+      status: "Em Analize",
+      created_at: new Date(),
+      meia: false,
+      sub: item.sub,
+      active: item.active,
+      idpedido: random,
     };
     const pedidoItem = pedido.find((item1) => item1.id === item.id);
-    const meiaItem = meiaporcao.find((item1) => item1.id === meiapor.id);
+    const meiaItem = meiaporcao.find((item1) => item1.id === meiapor.iditem);
     if (type === "meia") {
       if (meiaItem) {
-        meiaItem.qtd += 1;
+        meiaItem.qdt += 1;
         setMeiaporcao([...meiaporcao]);
       }
     }
     if (pedidoItem) {
-      pedidoItem.qtd += 1;
+      pedidoItem.qdt += 1;
       setPedido([...pedido]);
     }
 
     if (type === "meia") {
       if (!meiaItem) {
-        setMeiaporcao([...meiaporcao, { ...meiapor, qtd: 1 }]);
+        setMeiaporcao([...meiaporcao, { ...meiapor, qdt: 1 }]);
       }
     } else {
-      setPedido([...pedido, { ...item, qtd: 1 }]);
+      if (!pedidoItem) {
+        setPedido([...pedido, { ...Inteirapor, qdt: 1 }]);
+      }
     }
   };
 
@@ -315,39 +363,39 @@ const DeliveryMenu = () => {
     const meiaItem = meiaporcao.find((item1) => item1.id === item.id);
     if (type === "meia") {
       if (meiaItem) {
-        if (meiaItem.qtd <= 0) {
-          meiaItem.qtd = 0;
+        if (meiaItem.qdt <= 0) {
+          meiaItem.qdt = 0;
           meiaporcao.splice(meiaporcao.indexOf(meiaItem), 1);
           setMeiaporcao([...meiaporcao]);
           return;
         }
 
-        meiaItem.qtd -= 1;
-        if (meiaItem.qtd === 0) {
+        meiaItem.qdt -= 1;
+        if (meiaItem.qdt === 0) {
           meiaporcao.splice(meiaporcao.indexOf(meiaItem), 1);
         }
 
         setMeiaporcao([...meiaporcao]);
       } else {
-        setMeiaporcao([...meiaporcao, { ...item, qtd: 1 }]);
+        setMeiaporcao([...meiaporcao, { ...item, qdt: 1 }]);
       }
     } else {
       if (pedidoItem) {
-        if (pedidoItem.qtd <= 0) {
-          pedidoItem.qtd = 0;
+        if (pedidoItem.qdt <= 0) {
+          pedidoItem.qdt = 0;
           pedido.splice(pedido.indexOf(pedidoItem), 1);
           setPedido([...pedido]);
           return;
         }
 
-        pedidoItem.qtd -= 1;
-        if (pedidoItem.qtd === 0) {
+        pedidoItem.qdt -= 1;
+        if (pedidoItem.qdt === 0) {
           pedido.splice(pedido.indexOf(pedidoItem), 1);
         }
 
         setPedido([...pedido]);
       } else {
-        setPedido([...pedido, { ...item, qtd: 1 }]);
+        setPedido([...pedido, { ...item, qdt: 1 }]);
       }
     }
   };
@@ -674,7 +722,7 @@ const DeliveryMenu = () => {
                                     value={
                                       meiaporcao.find(
                                         (item) => item.id === categoria.id
-                                      )?.qtd || 0
+                                      )?.qdt || 0
                                     }
                                     disabled
                                   />
@@ -768,7 +816,7 @@ const DeliveryMenu = () => {
                                     value={
                                       pedido.find(
                                         (item) => item.id === categoria.id
-                                      )?.qtd || 0
+                                      )?.qdt || 0
                                     }
                                     disabled
                                   />
@@ -864,7 +912,7 @@ const DeliveryMenu = () => {
                                   value={
                                     pedido.find(
                                       (item) => item.id === categoria.id
-                                    )?.qtd || 0
+                                    )?.qdt || 0
                                   }
                                   disabled
                                 />
@@ -928,12 +976,12 @@ const DeliveryMenu = () => {
                 </div>
                 <div>
                   <p className="p_1 price georgia-bold-font">
-                    {`${item.qtd}x R$ ${
+                    {`${item.qdt}x R$ ${
                       item.price % 1 !== 0 ? item.price : item.price + ",00"
                     } = R$ ${
-                      (item.price * item.qtd) % 1 !== 0
-                        ? (item.price * item.qtd).toFixed(2).replace(".", ",")
-                        : item.price * item.qtd + ",00"
+                      (item.price * item.qdt) % 1 !== 0
+                        ? (item.price * item.qdt).toFixed(2).replace(".", ",")
+                        : item.price * item.qdt + ",00"
                     }`}
                   </p>
                 </div>
@@ -960,12 +1008,12 @@ const DeliveryMenu = () => {
                   </div>
                   <div>
                     <p className="p_1 price georgia-bold-font">
-                      {`${item.qtd}x R$ ${item.price
+                      {`${item.qdt}x R$ ${item.price
                         .toFixed(2)
                         .replace(".", ",")} = R$ ${
-                        (item.price * item.qtd) % 1 !== 0
-                          ? (item.price * item.qtd).toFixed(2).replace(".", ",")
-                          : item.price * item.qtd + ",00"
+                        (item.price * item.qdt) % 1 !== 0
+                          ? (item.price * item.qdt).toFixed(2).replace(".", ",")
+                          : item.price * item.qdt + ",00"
                       }`}
                     </p>
                   </div>
@@ -986,23 +1034,23 @@ const DeliveryMenu = () => {
 
           <p className="p_1 price georgia-bold-font">
             {`R$ ${
-              pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) %
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) %
                 1 !==
                 0 &&
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qtd, 0) %
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0) %
                 1 !==
                 0
                 ? pedido
-                    .reduce((acc, item) => acc + item.price * item.qtd, 0)
+                    .reduce((acc, item) => acc + item.price * item.qdt, 0)
                     .toFixed(2)
                     .replace(".", ",")
                 : (
                     pedido.reduce(
-                      (acc, item) => acc + item.price * item.qtd,
+                      (acc, item) => acc + item.price * item.qdt,
                       0
                     ) +
                     meiaporcao.reduce(
-                      (acc, item) => acc + item.price * item.qtd,
+                      (acc, item) => acc + item.price * item.qdt,
                       0
                     )
                   ).toFixed(2)
@@ -1033,24 +1081,24 @@ const DeliveryMenu = () => {
                     Number(valorFrete) +
                     Number(
                       pedido.reduce(
-                        (acc, item) => acc + item.price * item.qtd,
+                        (acc, item) => acc + item.price * item.qdt,
                         0
                       )
                     ) +
                     meiaporcao.reduce(
-                      (acc, item) => acc + item.price * item.qtd,
+                      (acc, item) => acc + item.price * item.qdt,
                       0
                     )
                   ).toFixed(2)
                 : (
                     Number(
                       pedido.reduce(
-                        (acc, item) => acc + item.price * item.qtd,
+                        (acc, item) => acc + item.price * item.qdt,
                         0
                       )
                     ) +
                       (meiaporcao.reduce(
-                        (acc, item) => acc + item.price * item.qtd,
+                        (acc, item) => acc + item.price * item.qdt,
                         0
                       ) %
                         1) !==
@@ -1271,8 +1319,18 @@ const DeliveryMenu = () => {
                   showSearch
                   onChange={handleChangeBairro}
                   value={bairro}
-                  options={bairros}
-                />
+                >
+                  {bairros.map((item, index) => (
+                    <Select.Option
+                      key={index}
+                      value={item.name}
+                      label={item.name}
+                      price={item.price}
+                    >
+                      {item.name}
+                    </Select.Option>
+                  ))}
+                </Select>
               </div>
               <div style={{ marginBottom: 10 }}>
                 <label>Complemento </label>
@@ -1326,9 +1384,9 @@ const DeliveryMenu = () => {
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
               {`Total: R$ ${Number(
-                pedido.reduce((acc, item) => acc + item.price * item.qtd, 0) +
+                pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
                   meiaporcao.reduce(
-                    (acc, item) => acc + item.price * item.qtd,
+                    (acc, item) => acc + item.price * item.qdt,
                     0
                   )
               )
@@ -1355,11 +1413,11 @@ const DeliveryMenu = () => {
               {`Total Geral: R$ ${(
                 Number(valorFrete) +
                 Number(
-                  pedido.reduce((acc, item) => acc + item.price * item.qtd, 0)
+                  pedido.reduce((acc, item) => acc + item.price * item.qdt, 0)
                 ) +
                 Number(
                   meiaporcao.reduce(
-                    (acc, item) => acc + item.price * item.qtd,
+                    (acc, item) => acc + item.price * item.qdt,
                     0
                   )
                 )
