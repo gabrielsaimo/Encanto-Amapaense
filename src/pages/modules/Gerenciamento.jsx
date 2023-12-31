@@ -1,11 +1,14 @@
 import {
+  Badge,
   Button,
+  Descriptions,
   Input,
   Modal,
   Popconfirm,
   Select,
   Space,
   Table,
+  Tabs,
   message,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -18,8 +21,12 @@ import {
   postEmail,
   putEmail,
   deleteEmail,
+  getPedidosDelivery,
 } from "../../services/gerenciamento.ws";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { getPedidos } from "../../services/Pedidos.ws";
+import { getCardapio } from "../../services/cardapio.ws";
+import moment from "moment";
 
 const Gerenciamento = () => {
   const [data, setData] = useState([]);
@@ -34,6 +41,24 @@ const Gerenciamento = () => {
   const [loading, setLoading] = useState(false);
   const [loadingEmail, setLoadingEmail] = useState(false);
   const [emails, setEmails] = useState([]);
+  const [pedido, setPedido] = useState([]);
+  const [pedidos_Delivery, setPedidos_Delivery] = useState([]);
+  const [cardapio, setCardapio] = useState([]);
+  useEffect(() => {
+    getPedido();
+    getCardapios();
+    getPedidos_Delivery();
+  }, []);
+
+  const getPedido = async () => {
+    const pedidos = await getPedidos();
+    setPedido(pedidos);
+  };
+  const getCardapios = async () => {
+    const cardapio = await getCardapio();
+    setCardapio(cardapio);
+  };
+
   useEffect(() => {
     getBairro();
   }, [loading === false]);
@@ -42,6 +67,10 @@ const Gerenciamento = () => {
     getEmails();
   }, [loadingEmail === false]);
 
+  async function getPedidos_Delivery() {
+    const pedidos = await getPedidosDelivery();
+    setPedidos_Delivery(pedidos);
+  }
   const getEmails = async () => {
     const response = await getEmail();
     if (response.length === 0) {
@@ -58,10 +87,6 @@ const Gerenciamento = () => {
   };
 
   const confirmDeleteEmail = async (text) => {
-    console.log(
-      "🚀 ~ file: Gerenciamento.jsx:59 ~ confirmDeleteEmail ~ text:",
-      text
-    );
     setLoadingEmail(true);
     await deleteEmail(text.id);
     setLoadingEmail(false);
@@ -145,6 +170,29 @@ const Gerenciamento = () => {
     setVisibleEmail(false);
     setVisible(false);
     setIdset(null);
+  };
+
+  const StatusPedido = async (data, status, pedido) => {
+    const dataPedido = {
+      id: data.id,
+      status: status,
+      acepted_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
+      acepted_at: new Date(),
+      update_at: new Date(),
+      update_by: JSON.parse(localStorage.getItem("dateUser"))[0].name,
+    };
+    console.log(
+      "🚀 ~ file: Gerenciamento.jsx:184 ~ StatusPedido ~ dataPedido:",
+      dataPedido
+    );
+
+    /*  await postPedidostatus(dataPedido);
+
+    const returnVerify = await veryfyStatusPedidos(pedido.pedidos);
+    if (returnVerify.length === 1) {
+      StatusPedidoFinal(pedido.id, status);
+    }
+    getPedido();*/
   };
 
   const columnsBairro = [
@@ -270,18 +318,200 @@ const Gerenciamento = () => {
       width: 200,
     },
   ];
+
+  const items = [
+    {
+      key: "1",
+      label: "Delivery",
+      children: (
+        <div>
+          {pedido.map((pedido) => (
+            <div style={{ marginBottom: 10 }}>
+              <Descriptions
+                bordered
+                style={{
+                  backgroundColor: "rgb(255, 255, 255)",
+                  borderRadius: 10,
+                }}
+                column={{
+                  xxl: 2,
+                  xl: 3,
+                  lg: 2,
+                  md: 2,
+                  sm: 1,
+                  xs: 1,
+                }}
+              >
+                <Descriptions.Item label="N° Pedido">
+                  {pedido.id}
+                </Descriptions.Item>
+                <Descriptions.Item label="Hora do pedido">
+                  {moment(pedido.created_at).format("HH:mm:ss")}
+                </Descriptions.Item>
+                <Descriptions.Item label="Status">
+                  <Badge
+                    status={
+                      pedido.status === "Em Analize"
+                        ? "warning"
+                        : pedido.status === "Cancelado"
+                        ? "error"
+                        : pedido.status === "Em Cancelamento"
+                        ? "error"
+                        : pedido.status === "Pronto"
+                        ? "success"
+                        : pedido.status === "Em Preparo"
+                        ? "processing"
+                        : "default"
+                    }
+                    text={pedido.status}
+                  />
+                </Descriptions.Item>
+                {pedido.info !== null ? (
+                  <>
+                    <Descriptions.Item
+                      label={"Tipo " + JSON.parse(pedido.info).retirada}
+                      span={1}
+                    >
+                      <div>{"Nome: " + JSON.parse(pedido.info).nome} </div>
+                      <div>
+                        {"Telefone: " + JSON.parse(pedido.info).telefone}{" "}
+                      </div>
+                      <div>
+                        {"Endereço: " + JSON.parse(pedido.info).endereco}{" "}
+                      </div>
+                      <div>{"Numero: " + JSON.parse(pedido.info).numero} </div>
+                      <div>{"Bairro: " + JSON.parse(pedido.info).bairro} </div>
+                      <div>
+                        {"Complemento: " + JSON.parse(pedido.info).complemento}{" "}
+                      </div>
+                      <div>
+                        {"Referencia: " + JSON.parse(pedido.info).referencia}
+                      </div>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Pagamentos" span={1}>
+                      <div>
+                        {"Pagamento: " + JSON.parse(pedido.info).pagamento}
+                      </div>
+                      <div> {"Frete: " + JSON.parse(pedido.info).frete}</div>
+                      <div>{"Total: " + JSON.parse(pedido.info).total}</div>
+                      <div>{"Troco: " + JSON.parse(pedido.info).troco}</div>
+                    </Descriptions.Item>
+                  </>
+                ) : null}
+                <Descriptions.Item label="Pedido" span={2}>
+                  {cardapio.length > 0 && pedidos_Delivery.length > 0 ? (
+                    pedidos_Delivery.map((pedidos_Delivery) => (
+                      <>
+                        {pedido.pedidos === pedidos_Delivery.idpedido ? (
+                          <>
+                            {pedidos_Delivery.qdt > 0 ? (
+                              <p>
+                                x{pedidos_Delivery.qdt} {pedidos_Delivery.item}
+                                {pedidos_Delivery.categoria !== "Bebidas" &&
+                                pedidos_Delivery.categoria !==
+                                  "Sucos exóticos" &&
+                                pedidos_Delivery.categoria !== "Drinks" &&
+                                pedidos_Delivery.categoria !== "Cerveja" ? (
+                                  pedidos_Delivery.status !== "Cancelado" &&
+                                  pedidos_Delivery.status !== "Finalizado" &&
+                                  pedidos_Delivery.status !==
+                                    "Em Cancelamento" &&
+                                  pedidos_Delivery.status !== "Pronto" ? (
+                                    <Button
+                                      onClick={() => {
+                                        StatusPedido(
+                                          pedidos_Delivery,
+                                          pedidos_Delivery.status ===
+                                            "Em Analize"
+                                            ? "Em Preparo"
+                                            : pedido.status === "Em Preparo"
+                                            ? "Pronto"
+                                            : "Finalizado",
+                                          pedido
+                                        );
+                                      }}
+                                      type="primary"
+                                      style={{
+                                        marginLeft: 10,
+                                        backgroundColor:
+                                          pedidos_Delivery.status ===
+                                          "Em Analize"
+                                            ? "orange"
+                                            : pedidos_Delivery.status ===
+                                              "Em Preparo"
+                                            ? "green"
+                                            : "purple",
+                                      }}
+                                    >
+                                      {pedidos_Delivery.status === "Em Analize"
+                                        ? "Em Preparo"
+                                        : pedidos_Delivery.status ===
+                                          "Em Preparo"
+                                        ? "Pronto"
+                                        : null}
+                                    </Button>
+                                  ) : null
+                                ) : null}
+                                {pedidos_Delivery.status ===
+                                "Em Cancelamento" ? (
+                                  <Button
+                                    style={{
+                                      marginLeft: 10,
+                                      backgroundColor: "red",
+                                    }}
+                                    type="primary"
+                                    onClick={() => {
+                                      // setIdPedido(pedido.id);
+                                      // setObsCancelamento(pedido.obs_cancel);
+                                      //  setModalCancelamento(true);
+                                    }}
+                                  >
+                                    Confimar?
+                                  </Button>
+                                ) : null}
+                              </p>
+                            ) : null}
+                          </>
+                        ) : null}
+                      </>
+                    ))
+                  ) : (
+                    <p>Carregando...</p>
+                  )}
+                </Descriptions.Item>
+
+                <Descriptions.Item label="Oberservação" span={1}>
+                  {pedido.obs}
+                </Descriptions.Item>
+              </Descriptions>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: "Configurações",
+      children: (
+        <div>
+          <h2>Preços por bairro</h2>
+          <Button type="primary" onClick={() => setVisible(true)}>
+            Novo
+          </Button>
+          <Table columns={columnsBairro} dataSource={data} />
+          <h2>Emails</h2>
+          <Button type="primary" onClick={() => setVisibleEmail(true)}>
+            Novo
+          </Button>
+          <Table columns={columnsEmail} dataSource={emails} />
+        </div>
+      ),
+    },
+  ];
   return (
     <div>
-      <h2>Preços por bairro</h2>
-      <Button type="primary" onClick={() => setVisible(true)}>
-        Novo
-      </Button>
-      <Table columns={columnsBairro} dataSource={data} />
-      <h2>Emails</h2>
-      <Button type="primary" onClick={() => setVisibleEmail(true)}>
-        Novo
-      </Button>
-      <Table columns={columnsEmail} dataSource={emails} />
+      <Tabs defaultActiveKey="1" type="card" items={items} />
+
       <Modal
         title={idset ? "Editar Bairro" : "Novo Bairro"}
         open={visible}

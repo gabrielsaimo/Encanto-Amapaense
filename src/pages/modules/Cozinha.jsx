@@ -179,10 +179,6 @@ export default function Cozinha() {
     await postPedidostatus(dataPedido);
 
     const returnVerify = await veryfyStatusPedidos(pedido.pedidos);
-    console.log(
-      "🚀 ~ file: Cozinha.jsx:180 ~ StatusPedido ~ returnVerify:",
-      returnVerify.length
-    );
     if (returnVerify.length === 1) {
       StatusPedidoFinal(pedido.id, status);
     }

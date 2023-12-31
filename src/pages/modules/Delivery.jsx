@@ -42,7 +42,7 @@ import {
 import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
-import { putPedidos } from "../../services/Pedidos.ws";
+import { getPedidos, putPedidos } from "../../services/Pedidos.ws";
 
 const { Panel } = Collapse;
 const LazyLoadedImage = lazy(() =>
@@ -159,6 +159,15 @@ const DeliveryMenu = () => {
           meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       ),
       type: "Delivery",
+      info: `{"retirada": "${retirada}","nome": "${nome}","telefone": "${telefone}","endereco": "${endereco}","numero": "${numero}","complemento": "${complemento}","referencia": "${referencia}","pagamento": "${pagamento}","troco": "${troco}","bairro": "${bairro}","frete": "${valorFrete}","total": "${(
+        Number(valorFrete) +
+        Number(
+          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+        )
+      )
+        .toFixed(2)
+        .replace(".", ",")}"}`,
     });
     await putPedi_UniDelivery();
     setLoading(true);
@@ -303,7 +312,7 @@ const DeliveryMenu = () => {
 
   const addPedido = (item, type) => {
     const meiapor = {
-      iditem: item.id,
+      iditem: random,
       id: item.id,
       name: item.name + "***Meia***",
       item: item.item + "***Meia***",
@@ -319,7 +328,7 @@ const DeliveryMenu = () => {
       idpedido: random,
     };
     const Inteirapor = {
-      iditem: item.id,
+      iditem: random,
       id: item.id,
       name: item.name,
       item: item.name,

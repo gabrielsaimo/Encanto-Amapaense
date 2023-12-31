@@ -4,7 +4,7 @@ import { api } from "./api.config";
 const handleResponse = (response: AxiosResponse) => response.data;
 
 export const getPedidosDelivery = async (): Promise<any[]> => {
-  const response = await api.get<any[]>("/gerenciamento/pedidos-delivery");
+  const response = await api.get<any[]>("/pedido/pedidos/Delivery");
   return handleResponse(response);
 };
 
