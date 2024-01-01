@@ -26,12 +26,10 @@ import Dashboard from "./Dasboard";
 import { getUser } from "../../services/user.ws";
 import Pedidos from "./Pedidos";
 import Users from "./Users";
-import { useParams } from "react-router-dom";
 import Gerenciamento from "./Gerenciamento";
 const { Header, Sider, Content } = Layout;
 
 const MenuDashboard = () => {
-  const { idCompany } = useParams();
   const [collapsed, setCollapsed] = useState(false);
   const [tela, setTela] = useState(1);
   const {
@@ -42,10 +40,6 @@ const MenuDashboard = () => {
   const [dateUser, setDateUser] = useState();
   const [acessable, setAcessable] = React.useState(false);
   const [userNome, setUserNome] = useState("");
-  console.log(
-    "🚀 ~ file: MenuDasboar.jsx:43 ~ MenuDashboard ~ userNome:",
-    userNome
-  );
   const [UserCategoria, setUserCategoria] = useState("");
   const [visible, setVisible] = React.useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -69,12 +63,12 @@ const MenuDashboard = () => {
 
   const cachedContent = useMemo(
     () => ({
-      1: <Dashboard atualizar={null} user={dateUser} />,
+      6: <Dashboard atualizar={null} user={dateUser} />,
       2: <Relatorios />,
       3: <Menssagem atualizar={true} user={dateUser} />,
       4: <Pedidos atualizar={true} user={dateUser} />,
       5: <Users atualizar={true} user={dateUser} />,
-      6: <Gerenciamento atualizar={null} user={dateUser} />,
+      1: <Gerenciamento atualizar={null} user={dateUser} />,
     }),
     [dateUser]
   );
@@ -186,10 +180,10 @@ const MenuDashboard = () => {
           style={{ height: "100%", borderRight: 0 }}
           items={[
             {
-              key: "1",
-              icon: <BookOutlined />,
+              key: "2",
+              icon: <DingtalkOutlined />,
               disabled: false,
-              label: "Cardápio",
+              label: "Gerenciamanto",
               // eslint-disable-next-line no-dupe-keys
               disabled:
                 UserCategoria === "Gerente"
@@ -203,10 +197,10 @@ const MenuDashboard = () => {
               },
             },
             {
-              key: "2",
-              icon: <DingtalkOutlined />,
+              key: "1",
+              icon: <BookOutlined />,
               disabled: false,
-              label: "Gerenciamanto",
+              label: "Cardápio",
               // eslint-disable-next-line no-dupe-keys
               disabled:
                 UserCategoria === "Gerente"
@@ -295,7 +289,7 @@ const MenuDashboard = () => {
               fontWeight: "bold",
             }}
           >
-            {tela === 1
+            {tela === 6
               ? "Cardápio"
               : tela === 2
               ? "Relatórios"
@@ -305,7 +299,7 @@ const MenuDashboard = () => {
               ? "Pedidos"
               : tela === 5
               ? "Usuários"
-              : tela === 6
+              : tela === 1
               ? "Gerenciamento"
               : ""}
           </Typography.Title>
