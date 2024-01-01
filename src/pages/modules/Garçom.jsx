@@ -148,7 +148,7 @@ export default function Garçom() {
     const titulo = "Pedido N°" + id + " " + "Cancelado";
     const notificacao = `Pedido Exluido por: ${userNome}`;
     const type = "danger";
-    atualizarMensagens(titulo, notificacao, type);
+    atualizarMensagens(titulo, notificacao, type, "Encanto Amapaense", "Local");
     setActive(!active);
     window.location.reload();
   };
@@ -160,16 +160,23 @@ export default function Garçom() {
     const titulo = "Item N°" + id + " " + "Cancelado";
     const notificacao = `Pedido Exluido por: ${userNome}`;
     const type = "danger";
-    atualizarMensagens(titulo, notificacao, type);
+    atualizarMensagens(titulo, notificacao, type, "Encanto Amapaense", "Local");
     setActive(!active);
     window.location.reload();
   };
-  async function atualizarMensagens(title, notification, type, company) {
+  async function atualizarMensagens(
+    title,
+    notification,
+    type,
+    company,
+    metodo
+  ) {
     const mensagens = {
       title,
       notification,
       type,
       company,
+      metodo,
     };
 
     await set(mensagensRef, mensagens)
@@ -369,7 +376,7 @@ export default function Garçom() {
     const titulo = " Pedido de Cancelamento";
     const notificacao = `por: ${userNome}`;
     const type = "danger";
-    atualizarMensagens(titulo, notificacao, type);
+    atualizarMensagens(titulo, notificacao, type, "Encanto Amapaense", "Local");
     await postPedidosStatus(data);
     setObsCancelamento("");
     setActive(!active);
@@ -518,7 +525,8 @@ export default function Garçom() {
     const notificacao = `Novo pedido na mesa ${mesa}`;
     const type = "success";
     const company = "Encanto Amapaense";
-    await atualizarMensagens(titulo, notificacao, type, company);
+    const metodo = "Local";
+    await atualizarMensagens(titulo, notificacao, type, company, metodo);
     /* await postNotification({
       title: "Novo Pedido N°" + random,
       notification: `Novo pedido na mesa ${mesa}`,

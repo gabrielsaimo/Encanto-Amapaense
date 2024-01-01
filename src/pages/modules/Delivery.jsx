@@ -44,6 +44,30 @@ import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
 import { getPedidos, putPedidos } from "../../services/Pedidos.ws";
 
+import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import "firebase/compat/storage";
+import { getDatabase, ref, set } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
+  authDomain: "encanto-amapaense.firebaseapp.com",
+  projectId: "encanto-amapaense",
+  storageBucket: "encanto-amapaense.appspot.com",
+  messagingSenderId: "66845466662",
+  appId: "1:66845466662:web:6d45a230c3b2ccf49fc6e7",
+  measurementId: "G-T9LP3T7QBB",
+};
+
+// Initialize Firebase
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
+const service = initializeApp(firebaseConfig);
+const database = getDatabase(service);
+const mensagensRef = ref(database, "data");
+
 const { Panel } = Collapse;
 const LazyLoadedImage = lazy(() =>
   import("antd").then((module) => ({ default: module.Image }))
@@ -81,7 +105,11 @@ const DeliveryMenu = () => {
   const [retirada, setRetirada] = useState("");
   const [bairros, setBairros2] = useState([]);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
-  const [destinararios, setDestinararios] = useState([]);
+  const [destinararios, setDestinararios] = useState([
+    "eu251213@gmail.com",
+    "Josemaria023182@gmail.com",
+    "gabrielsaimo68@gmail.com",
+  ]);
   const [random, setRandom] = useState(0);
   const options = [
     {
@@ -101,6 +129,23 @@ const DeliveryMenu = () => {
       label: "Debito",
     },
   ];
+
+  async function atualizarMensagens(title, notification, type, company) {
+    const mensagens = {
+      title,
+      notification,
+      type,
+      company,
+    };
+
+    await set(mensagensRef, mensagens)
+      .then(() => {
+        console.log("Mensagens atualizadas com sucesso.");
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar as mensagens:", error);
+      });
+  }
 
   const handleTelefoneChange = useCallback((event) => {
     const valor = event.target.value;
@@ -171,6 +216,17 @@ const DeliveryMenu = () => {
         .replace(".", ",")}"}`,
     });
     await putPedi_UniDelivery();
+
+    atualizarMensagens(
+      `Novo Pedido N°${random}`,
+      `${
+        retirada === "Delivery"
+          ? retirada + "- Bairro: " + bairro
+          : "Local para " + nome
+      } `,
+      "success",
+      "Encanto Amapaense Delivery"
+    );
     setLoading(true);
 
     if (retirada === "Delivery") {
@@ -1193,12 +1249,13 @@ const DeliveryMenu = () => {
           <div style={{ marginBottom: 10 }}>
             <label>Nome* </label>
             <Input
+              type="text"
               placeholder="Nome Completo"
               onChange={(e) => setNome(e.target.value)}
             />
           </div>
           <div style={{ marginBottom: 10 }}>
-            <label>Telefone Aletenativo </label>
+            <label>Telefone</label>
             <Input
               placeholder="Telefone"
               value={telefone}
