@@ -92,16 +92,22 @@ const Gerenciamento = () => {
     }
   };
 
-  const enviarNotificacao = (msg) => {
+  const enviarNotificacao = () => {
     if (permissao === "granted") {
-      new Notification(msg);
+      new Notification("Olá! Esta é uma notificação de exemplo.");
+    } else if (permissao === "default") {
+      alert(
+        "Você ainda não concedeu permissão para notificações. Por favor, conceda permissão e tente novamente."
+      );
     } else {
-      alert("Você precisa permitir notificações para enviar uma.");
+      alert(
+        "As notificações estão bloqueadas. Você pode permiti-las nas configurações do navegador."
+      );
     }
   };
 
   const openNotification = (placement, title, notifi, type) => {
-    enviarNotificacao(`${title} ${notifi}`);
+    enviarNotificacao();
     if (type === "success") {
       api.success({
         message: `${title}`,
