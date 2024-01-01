@@ -95,10 +95,6 @@ const Gerenciamento = () => {
   const enviarNotificacao = (msg) => {
     if (permissao === "granted") {
       new Notification(msg);
-    } else if (permissao === "default") {
-      alert(
-        "Você ainda não concedeu permissão para notificações. Por favor, conceda permissão e tente novamente."
-      );
     } else {
       new Notification(msg);
       alert(
@@ -692,7 +688,7 @@ const Gerenciamento = () => {
                           )
                         }
                       >
-                        Atualizar Cliente
+                        Cliente
                       </Button>
                     </Descriptions.Item>
                   </Descriptions>
