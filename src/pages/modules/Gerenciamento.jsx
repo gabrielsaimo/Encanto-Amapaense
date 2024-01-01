@@ -327,6 +327,7 @@ const Gerenciamento = () => {
     StatusPedidoFinal(pedido.id, status);
 
     getPedido();
+    getPedidos_Delivery();
   };
 
   const columnsBairro = [
@@ -703,7 +704,7 @@ const Gerenciamento = () => {
                       <Button
                         icon={<WhatsAppOutlined />}
                         style={{ backgroundColor: "green", color: "#fff" }}
-                        onClick={() =>
+                        onClick={() => [
                           window.open(
                             `https://api.whatsapp.com/send?phone=55${JSON.parse(
                               pedido.info
@@ -712,8 +713,15 @@ const Gerenciamento = () => {
                               .join("")}&text=Olá, ${
                               JSON.parse(pedido.info).nome
                             }. Seu pedido N° ${pedido.id} está ${pedido.status}`
-                          )
-                        }
+                          ),
+                          pedido.status === "Recusado"
+                            ? StatusPedido(
+                                pedidos_Delivery,
+                                "Cancelado",
+                                pedido
+                              )
+                            : null,
+                        ]}
                       >
                         Cliente
                       </Button>
