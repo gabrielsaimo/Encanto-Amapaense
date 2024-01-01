@@ -92,14 +92,15 @@ const Gerenciamento = () => {
     }
   };
 
-  const enviarNotificacao = () => {
+  const enviarNotificacao = (msg) => {
     if (permissao === "granted") {
-      new Notification("Olá! Esta é uma notificação de exemplo.");
+      new Notification(msg);
     } else if (permissao === "default") {
       alert(
         "Você ainda não concedeu permissão para notificações. Por favor, conceda permissão e tente novamente."
       );
     } else {
+      new Notification(msg);
       alert(
         "As notificações estão bloqueadas. Você pode permiti-las nas configurações do navegador."
       );
@@ -107,7 +108,7 @@ const Gerenciamento = () => {
   };
 
   const openNotification = (placement, title, notifi, type) => {
-    enviarNotificacao();
+    enviarNotificacao(`${title} - ${notifi}`);
     if (type === "success") {
       api.success({
         message: `${title}`,
@@ -457,7 +458,6 @@ const Gerenciamento = () => {
       label: "Delivery",
       children: (
         <div>
-          <Button onClick={() => enviarNotificacao()}>Notificação</Button>
           {pedido.map((pedido) => (
             <>
               {pedido.type === "Delivery" ? (
