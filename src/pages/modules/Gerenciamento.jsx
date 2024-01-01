@@ -34,7 +34,7 @@ import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment";
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
-import { get, getDatabase, onValue, ref, set } from "firebase/database";
+import { getDatabase, onValue, ref } from "firebase/database";
 import sound from "../../assets/notification.wav";
 import soundError from "../../assets/error.wav";
 
@@ -73,7 +73,35 @@ const Gerenciamento = () => {
   const [cardapio, setCardapio] = useState([]);
   const [api, contextHolder] = notification.useNotification();
 
+  const [permissao, setPermissao] = useState(Notification.permission);
+
+  const pedirPermissaoNotificacao = async () => {
+    if (!("Notification" in window)) {
+      console.error("Este browser não suporta notificações de Desktop");
+      return;
+    }
+    if (permissao === "granted") {
+      return;
+    } else {
+      try {
+        const permissaoResult = await Notification.requestPermission();
+        setPermissao(permissaoResult);
+      } catch (error) {
+        console.error("Erro ao solicitar permissão de notificação:", error);
+      }
+    }
+  };
+
+  const enviarNotificacao = (msg) => {
+    if (permissao === "granted") {
+      new Notification(msg);
+    } else {
+      alert("Você precisa permitir notificações para enviar uma.");
+    }
+  };
+
   const openNotification = (placement, title, notifi, type) => {
+    enviarNotificacao(`${title} ${notifi}`);
     if (type === "success") {
       api.success({
         message: `${title}`,
@@ -90,6 +118,7 @@ const Gerenciamento = () => {
   };
 
   useEffect(() => {
+    pedirPermissaoNotificacao();
     onValue(mensagensRef, (snapshot) => {
       const mensagens = snapshot.val();
       if (mensagens.company === "Encanto Amapaense Delivery") {
@@ -422,6 +451,7 @@ const Gerenciamento = () => {
       label: "Delivery",
       children: (
         <div>
+          <Button onClick={() => enviarNotificacao()}>Notificação</Button>
           {pedido.map((pedido) => (
             <>
               {pedido.type === "Delivery" ? (

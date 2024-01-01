@@ -42,7 +42,7 @@ import {
 import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
-import { getPedidos, putPedidos } from "../../services/Pedidos.ws";
+import { putPedidos } from "../../services/Pedidos.ws";
 
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
@@ -88,7 +88,6 @@ const DeliveryMenu = () => {
   const [imgSrc, setImgSrc] = useState([]);
   const [visible, setVisible] = useState(false);
   const [pedido, setPedido] = useState([]);
-  console.log("🚀 ~ file: Delivery.jsx:67 ~ DeliveryMenu ~ pedido:", pedido);
   const [meiaporcao, setMeiaporcao] = useState([]);
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
