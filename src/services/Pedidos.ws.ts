@@ -65,7 +65,6 @@ export const getStatusPedido = async (id: number): Promise<any[]> => {
 };
 
 export const putPedidos = async (data: pedido): Promise<pedido> => {
-  console.log("🚀 ~ file: Pedidos.ws.ts:68 ~ putPedidos ~ data:", data)
   const response = await api.put<pedido>("/pedido", data);
   return response.data;
 };

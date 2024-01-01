@@ -513,9 +513,14 @@ const Gerenciamento = () => {
                               ? "grey"
                               : pedido.status === "Em Analize"
                               ? "orange"
-                              : "green",
+                              : "grey",
                         }}
-                        disabled={pedido.status === "Finalizado" ? true : false}
+                        disabled={
+                          pedido.status === "Finalizado" ||
+                          pedido.status === "Recusado"
+                            ? true
+                            : false
+                        }
                         onClick={() =>
                           StatusPedido(
                             pedidos_Delivery,
@@ -532,7 +537,7 @@ const Gerenciamento = () => {
                                 ? "Finalizado"
                                 : pedido.status === "Em Cancelamento"
                                 ? "Cancelado"
-                                : null
+                                : "Recusado"
                               : JSON.parse(pedido.info).retirada === "Local"
                               ? pedido.status === "Em Analize"
                                 ? "Em Preparo"
@@ -546,13 +551,12 @@ const Gerenciamento = () => {
                                 ? "Cancelado"
                                 : pedido.status === "Em Cancelamento"
                                 ? "Cancelado"
-                                : null
-                              : null,
+                                : "Recusado"
+                              : "Recusado",
                             pedido
                           )
                         }
                       >
-                        <>{console.log("type", pedido.type)}</>
                         {JSON.parse(pedido.info).retirada === "Delivery"
                           ? pedido.status === "Em Analize"
                             ? "Aceitar"
@@ -566,7 +570,7 @@ const Gerenciamento = () => {
                             ? "Finalizado"
                             : pedido.status === "Finalizado"
                             ? "Finalizado"
-                            : null
+                            : "Recusado"
                           : JSON.parse(pedido.info).retirada === "Local"
                           ? pedido.status === "Em Analize"
                             ? "Aceitar"
@@ -580,9 +584,27 @@ const Gerenciamento = () => {
                             ? "Cancelado"
                             : pedido.status === "Em Cancelamento"
                             ? "Cancelado"
-                            : null
-                          : null}
+                            : "Recusado"
+                          : "Recusado"}
                       </Button>
+                      {pedido.status === "Em Analize" ? (
+                        <Button
+                          style={{
+                            marginLeft: 10,
+                            color: "#fff",
+                            backgroundColor:
+                              pedido.status === "Em Analize" ? "red" : "red",
+                          }}
+                          disabled={
+                            pedido.status === "Finalizado" ? true : false
+                          }
+                          onClick={() =>
+                            StatusPedido(pedidos_Delivery, "Recusado", pedido)
+                          }
+                        >
+                          Recusar
+                        </Button>
+                      ) : null}
                     </Descriptions.Item>
                     {pedido.info !== null ? (
                       <>

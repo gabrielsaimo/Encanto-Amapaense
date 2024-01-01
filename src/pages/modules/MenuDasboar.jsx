@@ -112,7 +112,7 @@ const MenuDashboard = () => {
 
     if (JSON.parse(cachedData)) {
       setDateUser(JSON.parse(cachedData));
-      setUserNome(JSON.parse(cachedData)[0]?.name);
+      setUserNome(JSON.parse(cachedData)[0].name);
       setUserCategoria(JSON.parse(cachedData)[0].categoria);
       if (JSON.parse(cachedData)[0].active === false) {
         alert("Usuário desativado");
