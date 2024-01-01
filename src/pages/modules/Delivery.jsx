@@ -129,12 +129,13 @@ const DeliveryMenu = () => {
     },
   ];
 
-  async function atualizarMensagens(title, notification, type, company) {
+  async function atualizarMensagens(title, notification, type, company, date) {
     const mensagens = {
       title,
       notification,
       type,
       company,
+      date,
     };
 
     await set(mensagensRef, mensagens)
@@ -224,7 +225,8 @@ const DeliveryMenu = () => {
           : "Local para " + nome
       } `,
       "success",
-      "Encanto Amapaense Delivery"
+      "Encanto Amapaense Delivery",
+      new Date().toLocaleString()
     );
     setLoading(true);
 
@@ -474,7 +476,9 @@ const DeliveryMenu = () => {
     const emails = await getEmail();
     try {
       emails.map((item) => {
-        return setDestinararios((prev) => [...prev, item.mail]);
+        if (item.type.split(",").includes("Delivery")) {
+          return setDestinararios((prev) => [...prev, item.mail]);
+        }
       });
     } catch (e) {
       console.log("Erro", e);

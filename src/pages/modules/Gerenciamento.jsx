@@ -93,13 +93,11 @@ const Gerenciamento = () => {
   };
 
   const enviarNotificacao = (msg) => {
-    if (permissao === "granted") {
-      new Notification(msg);
+    if (permissao !== "granted") {
+      pedirPermissaoNotificacao();
+      return;
     } else {
       new Notification(msg);
-      alert(
-        "As notificações estão bloqueadas. Você pode permiti-las nas configurações do navegador."
-      );
     }
   };
 
@@ -124,7 +122,14 @@ const Gerenciamento = () => {
     pedirPermissaoNotificacao();
     onValue(mensagensRef, (snapshot) => {
       const mensagens = snapshot.val();
-      if (mensagens.company === "Encanto Amapaense Delivery") {
+      let dataMensagem = moment(mensagens.date);
+      let agora = moment();
+      let diferenca = agora.diff(dataMensagem, "minutes");
+
+      if (
+        mensagens.company === "Encanto Amapaense Delivery" &&
+        diferenca <= 5
+      ) {
         openNotification(
           "topRight",
           mensagens.title,
