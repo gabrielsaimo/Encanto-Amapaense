@@ -349,6 +349,10 @@ const DeliveryMenu = () => {
       `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
       "_blank"
     );
+    window.open(
+      `https://encanto-amapaense.vercel.app/MeuPedido/${random}`,
+      "_blank"
+    );
     setOpen(false);
     setVisible(false);
     setLoading(false);
@@ -481,6 +485,7 @@ const DeliveryMenu = () => {
         }
       });
     } catch (e) {
+      getEmails();
       console.log("Erro", e);
     }
   };

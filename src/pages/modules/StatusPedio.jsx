@@ -154,6 +154,7 @@ const StatusPedido = () => {
               <b className="card-text" style={{ color: "green" }}>
                 Valor Total: R$ {JSON.parse(item.info).total}
               </b>
+              <Divider />
             </div>
           ))}
         </div>
