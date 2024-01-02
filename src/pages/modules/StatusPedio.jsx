@@ -87,6 +87,10 @@ const StatusPedido = () => {
   };
 
   useEffect(() => {
+    verificarStatusPedido();
+  }, []);
+
+  useEffect(() => {
     onValue(mensagensRef, (snapshot) => {
       const data = snapshot.val();
       let dataMensagem = moment(data.date);
