@@ -34,7 +34,7 @@ import { getCardapio } from "../../services/cardapio.ws";
 import moment from "moment";
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import sound from "../../assets/notification.wav";
 import soundError from "../../assets/error.wav";
 
@@ -71,8 +71,8 @@ const Gerenciamento = () => {
   const [pedido, setPedido] = useState([]);
   const [pedidos_Delivery, setPedidos_Delivery] = useState([]);
   const [cardapio, setCardapio] = useState([]);
-  const [api, contextHolder] = notification.useNotification();
 
+  const [api, contextHolder] = notification.useNotification();
   const [permissao, setPermissao] = useState(Notification.permission);
 
   const pedirPermissaoNotificacao = async () => {
@@ -146,6 +146,34 @@ const Gerenciamento = () => {
       }
     });
   }, []);
+
+  async function atualizarMensagens(
+    title,
+    notification,
+    type,
+    company,
+    date,
+    valor,
+    status
+  ) {
+    const mensagens = {
+      title,
+      notification,
+      type,
+      company,
+      date,
+      valor,
+      status,
+    };
+
+    await set(mensagensRef, mensagens)
+      .then(() => {
+        console.log("Mensagens atualizadas com sucesso.");
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar as mensagens:", error);
+      });
+  }
 
   useEffect(() => {
     getPedido();
@@ -324,6 +352,15 @@ const Gerenciamento = () => {
   };
 
   const StatusPedido = async (data, status, pedido) => {
+    await atualizarMensagens(
+      "Pedido Atualizado",
+      pedido.id,
+      "success",
+      "Encanto Amapaense Cliente",
+      new Date().toLocaleString(),
+      pedido.valor,
+      status
+    );
     StatusPedidoFinal(pedido.id, status);
 
     getPedido();

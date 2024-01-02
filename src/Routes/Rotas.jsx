@@ -8,6 +8,7 @@ import Bar from "../pages/modules/BarMan";
 import MenuDashboard from "../pages/modules/MenuDasboar";
 import AppDelivery from "../pages/AppDelivery";
 import Home from "../pages/modules/Home";
+import StatusPedido from "../pages/modules/StatusPedio";
 
 export default function Rotas() {
   return (
@@ -22,6 +23,7 @@ export default function Rotas() {
       <Route path="/Bar" element={<Bar />}>
         "Bar"
       </Route>
+      <Route path="/MeuPedido/:idpedido" element={<StatusPedido />} />
     </Routes>
   );
 }
