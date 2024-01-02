@@ -781,7 +781,16 @@ const DeliveryMenu = () => {
                                       removePedido(categoria, "meia")
                                     }
                                   >
-                                    -
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "0px",
+                                      }}
+                                    >
+                                      -
+                                    </div>
                                   </Button>
 
                                   <Input
@@ -810,7 +819,16 @@ const DeliveryMenu = () => {
                                     }}
                                     onClick={() => addPedido(categoria, "meia")}
                                   >
-                                    +
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "0px",
+                                      }}
+                                    >
+                                      +
+                                    </div>
                                   </Button>
                                 </div>
                               </div>
@@ -875,7 +893,16 @@ const DeliveryMenu = () => {
                                       removePedido(categoria, "inteira")
                                     }
                                   >
-                                    -
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "0px",
+                                      }}
+                                    >
+                                      -
+                                    </div>
                                   </Button>
 
                                   <Input
@@ -906,7 +933,16 @@ const DeliveryMenu = () => {
                                       addPedido(categoria, "inteira")
                                     }
                                   >
-                                    +
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "0px",
+                                      }}
+                                    >
+                                      +
+                                    </div>
                                   </Button>
                                 </div>
                               </div>
@@ -971,7 +1007,16 @@ const DeliveryMenu = () => {
                                     removePedido(categoria, "inteira")
                                   }
                                 >
-                                  -
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      height: "0px",
+                                    }}
+                                  >
+                                    -
+                                  </div>
                                 </Button>
 
                                 <Input
@@ -996,13 +1041,23 @@ const DeliveryMenu = () => {
                                     width: 45,
                                     textAlign: "center",
                                     backgroundColor: "green",
+                                    alignItems: "center",
                                     color: "#fff",
                                   }}
                                   onClick={() =>
                                     addPedido(categoria, "inteira")
                                   }
                                 >
-                                  +
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      height: "0px",
+                                    }}
+                                  >
+                                    +
+                                  </div>
                                 </Button>
                               </div>
                             </div>
