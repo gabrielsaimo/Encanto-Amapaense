@@ -187,7 +187,20 @@ const DeliveryMenu = () => {
 
   async function putPedi_UniDelivery() {
     for (let i = 0; i < pedido.length; i++) {
-      await putPedidos_uniDelivery(pedido[i]);
+      const body = {
+        iditem: pedido[i].id,
+        id: Math.floor(Math.random() * 700070007),
+        name: pedido[i].name,
+        item: pedido[i].item,
+        qdt: pedido[i].qdt,
+        valor: pedido[i].valor,
+        category: pedido[i].category,
+        description: pedido[i].description,
+        status: "Em Analize",
+        created_at: new Date(),
+        idpedido: random,
+      };
+      await putPedidos_uniDelivery(body);
     }
   }
 
