@@ -4,7 +4,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import { getAnalytics } from "firebase/analytics";
 import "firebase/compat/storage";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
   authDomain: "encanto-amapaense.firebaseapp.com",

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, lazy, Suspense } from "react";
-import { Carousel, Image } from "antd";
+import { Carousel } from "antd";
 import "../../css/Slide.css";
 import { storage } from "../../services/firebase.ws";
 

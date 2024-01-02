@@ -7,6 +7,8 @@ import { notification } from "antd";
 import { useParams } from "react-router-dom";
 import "../../css/StatusPedido.css";
 import moment from "moment";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getStatusPedido } from "../../services/Pedidos.ws";
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
   authDomain: "encanto-amapaense.firebaseapp.com",
@@ -17,18 +19,18 @@ const firebaseConfig = {
   measurementId: "G-T9LP3T7QBB",
 };
 
-// Initialize Firebase
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 const service = initializeApp(firebaseConfig);
 const database = getDatabase(service);
 const mensagensRef = ref(database, "data");
+
 const StatusPedido = () => {
   const { idpedido } = useParams();
   const [api, contextHolder] = notification.useNotification();
   const [permissao, setPermissao] = useState(Notification.permission);
-  const [data, setData] = useState([]);
+  const [pedido, setPedido] = useState([]);
 
   const pedirPermissaoNotificacao = async () => {
     if (!("Notification" in window)) {
@@ -45,6 +47,17 @@ const StatusPedido = () => {
         console.error("Erro ao solicitar permissão de notificação:", error);
       }
     }
+  };
+
+  const verificarEstatusPedido = async () => {
+    const resp = await getStatusPedido(idpedido);
+    if (resp.length === 0) {
+      setPedido([]);
+    } else {
+      setPedido(resp);
+    }
+
+    return resp;
   };
 
   const enviarNotificacao = (msg) => {
@@ -74,6 +87,7 @@ const StatusPedido = () => {
   };
 
   useEffect(() => {
+    verificarEstatusPedido();
     onValue(mensagensRef, (snapshot) => {
       const data = snapshot.val();
       let dataMensagem = moment(data.date);
@@ -85,7 +99,6 @@ const StatusPedido = () => {
         diferenca <= 5 &&
         data.notification === Number(idpedido)
       ) {
-        setData(data);
         openNotification(
           "topRight",
           data.title,
@@ -98,19 +111,43 @@ const StatusPedido = () => {
   }, []);
 
   return (
-    <div>
-      {contextHolder}
-      <h1 style={{ textAlign: "center" }}>Meu Pedido</h1>
+    <div
+      style={{
+        display: "flex",
 
-      <div className="card">
-        <div className="card-body" style={{ textAlign: "center" }}>
-          <h5 className="card-title">Pedido N°{idpedido}</h5>
-          <p className="card-text">Status: {data.status}</p>
-          <p className="card-text">
-            Valor: R$ {Number(data.valor).toFixed(2).replace(".", ",")}
-          </p>
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      {contextHolder}
+      <LazyLoadImage
+        src={require("../../assets/logo.webp")}
+        className="logo"
+        style={{ marginTop: 30 }}
+        alt="logo"
+        decoding="async"
+        loading="eager"
+      />
+      <h1 style={{ textAlign: "center" }}>Meu Pedido</h1>
+      {pedido.length > 0 ? (
+        <div className="card">
+          {pedido.map((item, index) => (
+            <div className="card-body" style={{ textAlign: "center" }}>
+              <h5 className="card-title">Pedido N°{idpedido}</h5>
+              <p className="card-text">Status: {item.status}</p>
+              <p className="card-text">
+                Valor: R$ {Number(item.valor).toFixed(2).replace(".", ",")}
+              </p>
+            </div>
+          ))}
         </div>
-      </div>
+      ) : (
+        <div className="card">
+          <div className="card-body" style={{ textAlign: "center" }}>
+            <h5 className="card-title">Pedido Não Encontrado</h5>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
