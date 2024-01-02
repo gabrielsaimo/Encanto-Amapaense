@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import { getDatabase, onValue, ref } from "firebase/database";
 
-import { notification } from "antd";
+import { Divider, notification } from "antd";
 import { useParams } from "react-router-dom";
 import "../../css/StatusPedido.css";
 import moment from "moment";
@@ -49,7 +49,7 @@ const StatusPedido = () => {
     }
   };
 
-  const verificarEstatusPedido = async () => {
+  const verificarStatusPedido = async () => {
     const resp = await getStatusPedido(idpedido);
     if (resp.length === 0) {
       setPedido([]);
@@ -87,7 +87,6 @@ const StatusPedido = () => {
   };
 
   useEffect(() => {
-    verificarEstatusPedido();
     onValue(mensagensRef, (snapshot) => {
       const data = snapshot.val();
       let dataMensagem = moment(data.date);
@@ -106,6 +105,10 @@ const StatusPedido = () => {
           data.type,
           data.pedido
         );
+
+        setTimeout(() => {
+          verificarStatusPedido();
+        }, 1000);
       }
     });
   }, []);
@@ -123,7 +126,7 @@ const StatusPedido = () => {
       <LazyLoadImage
         src={require("../../assets/logo.webp")}
         className="logo"
-        style={{ marginTop: 30 }}
+        style={{ marginTop: 30, maxWidth: 300, maxHeight: 300 }}
         alt="logo"
         decoding="async"
         loading="eager"
@@ -134,10 +137,19 @@ const StatusPedido = () => {
           {pedido.map((item, index) => (
             <div className="card-body" style={{ textAlign: "center" }}>
               <h5 className="card-title">Pedido N°{idpedido}</h5>
-              <p className="card-text">Status: {item.status}</p>
+              <Divider />
+              <b className="card-text" style={{ color: "Red" }}>
+                Status: {item.status}
+              </b>
+              <Divider />
               <p className="card-text">
-                Valor: R$ {Number(item.valor).toFixed(2).replace(".", ",")}
+                Frete: R$
+                {JSON.parse(item.info).frete}
               </p>
+              <p className="card-text">Valor Pedido: R$ {item.valor}</p>
+              <b className="card-text" style={{ color: "green" }}>
+                Valor Total: R$ {JSON.parse(item.info).total}
+              </b>
             </div>
           ))}
         </div>
