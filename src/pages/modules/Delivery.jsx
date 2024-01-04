@@ -359,7 +359,7 @@ const DeliveryMenu = () => {
 
     const msg = retirada === "Delivery" ? msgDelivey : msgLocal;
     window.open(
-      `https://api.whatsapp.com/send?phone=5596984030350&text=${msg}`,
+      `https://api.whatsapp.com/send?phone=5596981234391&text=${msg}`,
       "_blank"
     );
     window.open(
