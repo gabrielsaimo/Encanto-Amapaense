@@ -534,8 +534,7 @@ const Gerenciamento = () => {
       render: (text, record) => (
         <Input
           type="phone"
-          placeholder="Telefone"
-          value={telefone}
+          placeholder={telefone}
           onChange={(e) => changephone(e)}
         />
       ),
