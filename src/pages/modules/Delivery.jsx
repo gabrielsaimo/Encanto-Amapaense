@@ -105,7 +105,6 @@ const DeliveryMenu = () => {
   const [retirada, setRetirada] = useState("");
   const [bairros, setBairros2] = useState([]);
   const [dados, setDados] = useState([]);
-  console.log("🚀 ~ DeliveryMenu ~ dados:", dados.phone);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
   const [destinararios, setDestinararios] = useState([
     "eu251213@gmail.com",

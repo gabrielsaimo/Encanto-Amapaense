@@ -23,6 +23,8 @@ import {
   putEmail,
   deleteEmail,
   getPedidosDelivery,
+  getDados,
+  postDados,
 } from "../../services/gerenciamento.ws";
 import {
   DeleteOutlined,
@@ -57,6 +59,7 @@ const database = getDatabase(service);
 const mensagensRef = ref(database, "data");
 const Gerenciamento = () => {
   const [data, setData] = useState([]);
+  console.log("🚀 ~ Gerenciamento ~ data:", data);
   const [visible, setVisible] = useState(false);
   const [visibleEmail, setVisibleEmail] = useState(false);
   const [idset, setIdset] = useState(null);
@@ -71,7 +74,9 @@ const Gerenciamento = () => {
   const [pedido, setPedido] = useState([]);
   const [pedidos_Delivery, setPedidos_Delivery] = useState([]);
   const [cardapio, setCardapio] = useState([]);
-
+  const [dados, setDados] = useState([]);
+  console.log("🚀 ~ Gerenciamento ~ dados:", dados);
+  const [telefone, setTelefone] = useState(null);
   const [api, contextHolder] = notification.useNotification();
   const [permissao, setPermissao] = useState(Notification.permission);
 
@@ -98,6 +103,13 @@ const Gerenciamento = () => {
       return;
     } else {
       new Notification(msg);
+    }
+  };
+
+  const changephone = (num) => {
+    console.log("🚀 ~ changephone ~ num:", num);
+    if (num.length === 11) {
+      postDado(num);
     }
   };
 
@@ -191,6 +203,7 @@ const Gerenciamento = () => {
   };
 
   useEffect(() => {
+    getDado();
     getBairro();
   }, [loading === false]);
 
@@ -252,8 +265,24 @@ const Gerenciamento = () => {
 
   const getBairro = async () => {
     const response = await getBairros();
+    //   console.log("🚀 ~ getBairro ~ response:", response);
     setData(response);
   };
+  const getDado = async () => {
+    const dados = await getDados();
+    console.log("🚀 ~ getDado ~ dados:", dados);
+    setDados(dados);
+    setTelefone(dados[0].phone);
+  };
+
+  const postDado = async (num) => {
+    const body = {
+      phone: num,
+      id: 1,
+    };
+    await postDados(body);
+  };
+
   const putBairro = async () => {
     setLoading(true);
     const body = {
@@ -486,6 +515,34 @@ const Gerenciamento = () => {
             </Button>
           </Popconfirm>
         </div>
+      ),
+      width: 200,
+    },
+  ];
+
+  const tableDados = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Filial",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a, b) => a.name.length - b.name.length,
+    },
+    {
+      title: "Telefone",
+      dataIndex: "phone",
+      key: "phone",
+      render: (text, record) => (
+        <Input
+          type="phone"
+          placeholder="Telefone"
+          value={telefone}
+          onChange={(e) => changephone(e)}
+        />
       ),
       width: 200,
     },
@@ -776,6 +833,8 @@ const Gerenciamento = () => {
       label: "Configurações",
       children: (
         <div>
+          <h2>Dados</h2>
+          <Table columns={tableDados} dataSource={dados} />
           <h2>Preços por bairro</h2>
           <Button type="primary" onClick={() => setVisible(true)}>
             Novo

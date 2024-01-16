@@ -60,3 +60,8 @@ export const getDados = async (): Promise<void> => {
   const response = await api.get("/gerenciamento/dados");
   return handleResponse(response);
 };
+
+export const postDados = async (dados: any): Promise<void> => {
+  const response = await api.post("/gerenciamento/dados", dados);
+  return handleResponse(response);
+};
