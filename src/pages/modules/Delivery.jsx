@@ -36,6 +36,7 @@ import SlidesBebidas from "./SlideBebidas";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import {
   getBairros,
+  getDados,
   getEmail,
   putPedidos_uniDelivery,
 } from "../../services/gerenciamento.ws";
@@ -103,6 +104,8 @@ const DeliveryMenu = () => {
   const [loading, setLoading] = useState(false);
   const [retirada, setRetirada] = useState("");
   const [bairros, setBairros2] = useState([]);
+  const [dados, setDados] = useState([]);
+  console.log("🚀 ~ DeliveryMenu ~ dados:", dados.phone);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
   const [destinararios, setDestinararios] = useState([
     "eu251213@gmail.com",
@@ -184,6 +187,10 @@ const DeliveryMenu = () => {
       getCardapioCategory();
     }
   }, [cardapio]);
+
+  useEffect(() => {
+    getDado();
+  }, []);
 
   async function putPedi_UniDelivery() {
     for (let i = 0; i < pedido.length; i++) {
@@ -359,7 +366,9 @@ const DeliveryMenu = () => {
 
     const msg = retirada === "Delivery" ? msgDelivey : msgLocal;
     window.open(
-      `https://api.whatsapp.com/send?phone=5596981234391&text=${msg}`,
+      `https://api.whatsapp.com/send?phone=55${Number(
+        dados.phone
+      )}&text=${msg}`,
       "_blank"
     );
     window.open(
@@ -487,6 +496,11 @@ const DeliveryMenu = () => {
   const getBairro = async () => {
     const bairrosCollection = await getBairros();
     setBairros2(bairrosCollection);
+  };
+
+  const getDado = async () => {
+    const dados = await getDados();
+    setDados(dados[0]);
   };
 
   const getEmails = async () => {
@@ -1585,6 +1599,7 @@ const DeliveryMenu = () => {
             <Button
               key="back"
               type="dashed"
+              style={{ marginRight: 20 }}
               onClick={() => [
                 setVisibleMetodoEntrega(false),
                 setRetirada("Local"),

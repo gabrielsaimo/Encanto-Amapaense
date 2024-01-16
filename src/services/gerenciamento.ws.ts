@@ -55,3 +55,8 @@ export const putEmail = async (data: any): Promise<any> => {
 export const deleteEmail = async (id: number): Promise<void> => {
   await api.delete(`/gerenciamento/email/${id}`);
 };
+
+export const getDados = async (): Promise<void> => {
+  const response = await api.get("/gerenciamento/dados");
+  return handleResponse(response);
+};
