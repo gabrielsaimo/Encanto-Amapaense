@@ -67,7 +67,7 @@ const Gerenciamento = () => {
   const [nameEmail, setNameEmail] = useState("");
   const [mail, setMail] = useState("");
   const [type, setType] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [loadingEmail, setLoadingEmail] = useState(false);
   const [emails, setEmails] = useState([]);
   const [pedido, setPedido] = useState([]);
@@ -105,6 +105,7 @@ const Gerenciamento = () => {
   };
 
   const changephone = (num) => {
+    setTelefone(num);
     if (num.length === 11) {
       postDado(num);
     }
@@ -185,6 +186,7 @@ const Gerenciamento = () => {
   }
 
   useEffect(() => {
+    getDado();
     getPedido();
     getCardapios();
     getPedidos_Delivery();
@@ -200,7 +202,6 @@ const Gerenciamento = () => {
   };
 
   useEffect(() => {
-    getDado();
     getBairro();
   }, [loading === false]);
 
@@ -264,6 +265,7 @@ const Gerenciamento = () => {
     const response = await getBairros();
     setData(response);
   };
+
   const getDado = async () => {
     const dados = await getDados();
     setDados(dados);
@@ -531,11 +533,13 @@ const Gerenciamento = () => {
       title: "Telefone",
       dataIndex: "phone",
       key: "phone",
-      render: (text, record) => (
+      render: () => (
         <Input
           type="phone"
-          placeholder={telefone}
-          onChange={(e) => changephone(e)}
+          maxLength={11}
+          placeholder="Telefone"
+          value={telefone}
+          onChange={(e) => changephone(e.target.value)}
         />
       ),
       width: 200,
@@ -827,8 +831,12 @@ const Gerenciamento = () => {
       label: "Configurações",
       children: (
         <div>
-          <h2>Dados</h2>
-          <Table columns={tableDados} dataSource={dados} />
+          {dados.length === 0 ? null : (
+            <>
+              <h2>Dados</h2>
+              <Table columns={tableDados} dataSource={dados} />
+            </>
+          )}
           <h2>Preços por bairro</h2>
           <Button type="primary" onClick={() => setVisible(true)}>
             Novo
