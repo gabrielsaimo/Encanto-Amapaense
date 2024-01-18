@@ -65,7 +65,7 @@ export default function Dashboard({ atualizar, user }) {
   const [category, setCategory] = useState(null);
   const [actionCardapio, setActionCardapio] = useState(true);
   const [cardapioCategory, setCardapioCategory] = useState([]);
-  const [type, setType] = useState([]);
+  const [type, setType] = useState("");
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [modalCategory, setModalCategory] = useState(false);
@@ -223,6 +223,7 @@ export default function Dashboard({ atualizar, user }) {
     setDescription(task.description);
     setSub(task.sub);
     setMeia(task.meia);
+    setType(task.type);
     setActive(task.active);
     setImgByte(task.img);
     setCategory(task.category);
@@ -283,6 +284,7 @@ export default function Dashboard({ atualizar, user }) {
     setTotalImg(0);
     setSub("");
     setMeia(false);
+    setType("");
     setActive(true);
     setCategory(null);
     setImgModal(null);
@@ -789,7 +791,9 @@ export default function Dashboard({ atualizar, user }) {
                 mode="multiple"
                 style={{ width: "100%", margin: "10px 0" }}
                 placeholder="Selecione"
-                onChange={(e) => setType(e)}
+                value={type.split(",") || ""}
+                showSearch
+                onChange={(e) => setType(e.join(","))}
               >
                 <Select.Option value="Delivery">Delivery</Select.Option>
                 <Select.Option value="Cardapio">Cardapio</Select.Option>
