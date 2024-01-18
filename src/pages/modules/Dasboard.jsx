@@ -782,7 +782,7 @@ export default function Dashboard({ atualizar, user }) {
             </div>
 
             <div style={{ display: "flex", alignItems: "baseline" }}>
-              <Typography.Title level={5} style={{ width: 150 }}>
+              <Typography.Title level={5} style={{ width: 108 }}>
                 Systema
               </Typography.Title>
               <Select
