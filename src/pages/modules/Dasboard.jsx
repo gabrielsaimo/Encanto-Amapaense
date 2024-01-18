@@ -273,7 +273,14 @@ export default function Dashboard({ atualizar, user }) {
   }
 
   function disableSave() {
-    return !name || !price || active === "" || active === null || !category;
+    return (
+      !name ||
+      !price ||
+      active === "" ||
+      active === null ||
+      !category ||
+      type.length === 0
+    );
   }
   function clearSelecteds() {
     setSelectedTaskId(null);
