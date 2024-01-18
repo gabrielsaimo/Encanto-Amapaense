@@ -748,7 +748,8 @@ const DeliveryMenu = () => {
                       categoria.category === item1.name && categoria.active
                   )
                   .map((categoria, idx) =>
-                    categoria.meia === true ? (
+                    categoria.meia === true &&
+                    categoria.type.includes("Delivery") ? (
                       <>
                         <div key={idx} className="border">
                           <div style={{ display: "flex" }}>
@@ -981,7 +982,7 @@ const DeliveryMenu = () => {
                           </div>
                         </div>
                       </>
-                    ) : (
+                    ) : categoria.type.includes("Delivery") ? (
                       <div key={idx} className="border">
                         <div style={{ display: "flex" }}>
                           {categoria.ids &&
@@ -1095,7 +1096,7 @@ const DeliveryMenu = () => {
                           </div>
                         </div>
                       </div>
-                    )
+                    ) : null
                   )}
               </Panel>
             </Collapse>
