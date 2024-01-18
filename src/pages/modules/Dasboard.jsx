@@ -787,6 +787,7 @@ export default function Dashboard({ atualizar, user }) {
               </Typography.Title>
               <Select
                 mode="multiple"
+                style={{ width: "100%", margin: "10px 0" }}
                 placeholder="Selecione"
                 onChange={(e) => setType(e)}
               >
