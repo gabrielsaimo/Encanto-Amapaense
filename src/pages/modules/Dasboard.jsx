@@ -269,7 +269,7 @@ export default function Dashboard({ atualizar, user }) {
     }
     setActionCardapio(!actionCardapio);
     closeModal();
-    window.location.reload();
+    getCardapio();
   }
 
   function disableSave() {
