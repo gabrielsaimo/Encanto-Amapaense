@@ -146,6 +146,7 @@ const CollapseMenu = () => {
                 background: "transparent",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <Panel
@@ -167,47 +168,49 @@ const CollapseMenu = () => {
                     (categoria) =>
                       categoria.category === item1.name && categoria.active
                   )
-                  .map((categoria, idx) => (
-                    <div key={idx} className="border">
-                      <div style={{ display: "flex" }}>
-                        {categoria.ids &&
-                          memoizedImgSrc.map((img1, index) =>
-                            renderImageCarousel(img1, index, categoria.id)
-                          )}
+                  .map((categoria, idx) =>
+                    categoria.type.includes("Cardapio") ? (
+                      <div key={idx} className="border">
+                        <div style={{ display: "flex" }}>
+                          {categoria.ids &&
+                            memoizedImgSrc.map((img1, index) =>
+                              renderImageCarousel(img1, index, categoria.id)
+                            )}
 
-                        <div className="flex">
-                          <div style={{ width: "100%", display: "contents" }}>
-                            <div>
-                              <p className="p_1 name georgia-font">
-                                {categoria.name}
-                              </p>
-                            </div>
-                            <div className="flex">
-                              <div className="sub">
-                                {categoria.sub} {categoria.description}
+                          <div className="flex">
+                            <div style={{ width: "100%", display: "contents" }}>
+                              <div>
+                                <p className="p_1 name georgia-font">
+                                  {categoria.name}
+                                </p>
+                              </div>
+                              <div className="flex">
+                                <div className="sub">
+                                  {categoria.sub} {categoria.description}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "end",
-                              minWidth: "100%",
-                              alignItems: "flex-end",
-                            }}
-                          >
-                            <p className="p_1 price georgia-bold-font">
-                              {`R$ ${
-                                categoria.price % 1 !== 0
-                                  ? categoria.price.replace(".", ",")
-                                  : categoria.price + ",00"
-                              }`}
-                            </p>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "end",
+                                minWidth: "100%",
+                                alignItems: "flex-end",
+                              }}
+                            >
+                              <p className="p_1 price georgia-bold-font">
+                                {`R$ ${
+                                  categoria.price % 1 !== 0
+                                    ? categoria.price.replace(".", ",")
+                                    : categoria.price + ",00"
+                                }`}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ) : null
+                  )}
               </Panel>
             </Collapse>
           </Suspense>
