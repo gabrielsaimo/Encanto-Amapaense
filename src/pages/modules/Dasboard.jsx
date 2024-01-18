@@ -65,6 +65,7 @@ export default function Dashboard({ atualizar, user }) {
   const [category, setCategory] = useState(null);
   const [actionCardapio, setActionCardapio] = useState(true);
   const [cardapioCategory, setCardapioCategory] = useState([]);
+  const [type, setType] = useState([]);
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [modalCategory, setModalCategory] = useState(false);
@@ -240,6 +241,7 @@ export default function Dashboard({ atualizar, user }) {
         description,
         sub,
         meia,
+        type,
         active,
         imagem: imgByte,
         category,
@@ -255,6 +257,7 @@ export default function Dashboard({ atualizar, user }) {
         description,
         sub,
         meia,
+        type,
         active,
         imagem: imgByte,
         category,
@@ -776,6 +779,21 @@ export default function Dashboard({ atualizar, user }) {
                 unCheckedChildren="Não"
                 onChange={(value) => setMeia(value)}
               />
+            </div>
+
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <Typography.Title level={5} style={{ width: 150 }}>
+                Systema
+              </Typography.Title>
+              <Select
+                mode="multiple"
+                placeholder="Selecione"
+                onChange={(e) => setType(e)}
+              >
+                <Select.Option value="Delivery">Delivery</Select.Option>
+                <Select.Option value="Cardapio">Cardapio</Select.Option>
+                <Select.Option value="Estoque">Estoque</Select.Option>
+              </Select>
             </div>
 
             <div style={{ display: "flex", alignItems: "baseline" }}>
