@@ -32,7 +32,13 @@ const SlidesBebidas = () => {
   return (
     <div id={"part-12"} style={{ margin: 5 }}>
       <Suspense fallback={<div>Carregando...</div>}>
-        <Carousel showArrows={true} autoplay={true} autoplaySpeed={2000}>
+        <Carousel
+          showArrows={true}
+          autoplay={true}
+          autoplaySpeed={2000}
+          effect="fade"
+          dotPosition="bottom"
+        >
           {files.map((item, index) => (
             <div key={index}>
               <LazyLoadedImage

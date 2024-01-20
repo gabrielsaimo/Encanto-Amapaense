@@ -24,7 +24,13 @@ const SlidesSobemesas = () => {
 
   return (
     <div id={"part-11"} style={{ margin: 5 }}>
-      <Carousel showArrows={true} autoplay={true} autoplaySpeed={2000}>
+      <Carousel
+        showArrows={true}
+        autoplay={true}
+        autoplaySpeed={2000}
+        effect="fade"
+        dotPosition="bottom"
+      >
         {files.map((item, index) => (
           <div key={index}>
             <Image
