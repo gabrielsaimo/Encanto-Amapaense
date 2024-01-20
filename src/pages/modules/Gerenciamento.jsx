@@ -607,14 +607,14 @@ const Gerenciamento = () => {
                               ? "green"
                               : pedido.status === "Em Preparo"
                               ? "blue"
-                              : pedido.status === "Finalizado"
+                              : pedido.status === "Concluido"
                               ? "grey"
                               : pedido.status === "Em Analize"
                               ? "orange"
                               : "grey",
                         }}
                         disabled={
-                          pedido.status === "Finalizado" ||
+                          pedido.status === "Concluido" ||
                           pedido.status === "Recusado"
                             ? true
                             : false
@@ -632,7 +632,7 @@ const Gerenciamento = () => {
                                 : pedido.status === "Aguardando Entregador"
                                 ? "A Caminho"
                                 : pedido.status === "A Caminho"
-                                ? "Finalizado"
+                                ? "Concluido"
                                 : pedido.status === "Em Cancelamento"
                                 ? "Cancelado"
                                 : "Recusado"
@@ -642,9 +642,9 @@ const Gerenciamento = () => {
                                 : pedido.status === "Em Preparo"
                                 ? "Pronto"
                                 : pedido.status === "Pronto"
-                                ? "Finalizado"
-                                : pedido.status === "Finalizado"
-                                ? "Finalizado"
+                                ? "Concluido"
+                                : pedido.status === "Concluido"
+                                ? "Concluido"
                                 : pedido.status === "Cancelado"
                                 ? "Cancelado"
                                 : pedido.status === "Em Cancelamento"
@@ -665,9 +665,9 @@ const Gerenciamento = () => {
                             : pedido.status === "Aguardando Entregador"
                             ? "A Caminho"
                             : pedido.status === "A Caminho"
-                            ? "Finalizado"
-                            : pedido.status === "Finalizado"
-                            ? "Finalizado"
+                            ? "Concluido"
+                            : pedido.status === "Concluido"
+                            ? "Concluido"
                             : "Recusado"
                           : JSON.parse(pedido.info).retirada === "Local"
                           ? pedido.status === "Em Analize"
@@ -675,9 +675,9 @@ const Gerenciamento = () => {
                             : pedido.status === "Em Preparo"
                             ? "Pronto"
                             : pedido.status === "Pronto"
-                            ? "Finalizado"
-                            : pedido.status === "Finalizado"
-                            ? "Finalizado"
+                            ? "Concluido"
+                            : pedido.status === "Concluido"
+                            ? "Concluido"
                             : pedido.status === "Cancelado"
                             ? "Cancelado"
                             : pedido.status === "Em Cancelamento"
@@ -694,7 +694,7 @@ const Gerenciamento = () => {
                               pedido.status === "Em Analize" ? "red" : "red",
                           }}
                           disabled={
-                            pedido.status === "Finalizado" ? true : false
+                            pedido.status === "Concluido" ? true : false
                           }
                           onClick={() =>
                             StatusPedido(pedidos_Delivery, "Recusado", pedido)
