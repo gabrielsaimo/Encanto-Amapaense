@@ -884,7 +884,7 @@ const Gerenciamento = () => {
             type="number"
             placeholder="R$ 0,00"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(Number(e.target.value))}
           />
           <Button
             type="primary"
