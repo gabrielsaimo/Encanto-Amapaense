@@ -72,3 +72,14 @@ img.ant-image-img {
   display: flex;
   justify-content: center;
 }
+
+.cardapio-item {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: opacity 1.5s, transform 1.5s ease-in-out;
+}
+
+.cardapio-item.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
