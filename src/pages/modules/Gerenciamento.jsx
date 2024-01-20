@@ -551,7 +551,7 @@ const Gerenciamento = () => {
       key: "1",
       label: "Delivery",
       children: (
-        <div style={{ height: "100vh" }}>
+        <div style={{ minHeight: "100vh" }}>
           {pedido.map((pedido) => (
             <>
               {pedido.type === "Delivery" ? (
