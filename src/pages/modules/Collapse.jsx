@@ -114,11 +114,10 @@ const CollapseMenu = () => {
         <div key={key}>
           <SlideRenderer index={index} />
           <CardapioItem
-            categoryName={item.name}
+            categoryName={key}
             categoryStyle={panelStyle}
             item={cardapio.filter(
-              (categoria) =>
-                categoria.category === item.name && categoria.active
+              (categoria) => categoria.category === key && categoria.active
             )}
             memoizedImgSrc={memoizedImgSrc}
             renderImageCarousel={renderImageCarousel}
