@@ -586,31 +586,6 @@ const DeliveryMenu = () => {
       </div>
     );
 
-  const renderSlides = useMemo(() => {
-    return (index) => {
-      if (index === 0) {
-        return (
-          <Suspense fallback={<Spin />}>
-            <SlidesPrincipal />
-          </Suspense>
-        );
-      } else if (index === 11) {
-        return (
-          <Suspense fallback={<Spin />}>
-            <SlidesSobemesas />
-          </Suspense>
-        );
-      } else if (index === 15) {
-        return (
-          <Suspense fallback={<Spin />}>
-            <SlidesBebidas />
-          </Suspense>
-        );
-      }
-      return null;
-    };
-  }, []);
-
   const renderCardapioItems = () => {
     return cardapioCategory.map((item1, index) => {
       const key = item1.name;
@@ -712,7 +687,7 @@ const DeliveryMenu = () => {
               </Badge>
             </Affix>
           ) : null}
-          {renderSlides(index)}
+          <renderSlides index={index} />
           <Suspense fallback={<Spin />}>
             <Collapse
               bordered={false}

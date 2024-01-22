@@ -2,6 +2,7 @@ import React from "react";
 import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useInView } from "react-intersection-observer";
+import RenderImageCarousel from "./RenderImageCarousel";
 
 const { Panel } = Collapse;
 
@@ -10,7 +11,6 @@ const CardapioItem = ({
   categoryStyle,
   item,
   memoizedImgSrc,
-  renderImageCarousel,
 }) => {
   const [ref, inView] = useInView({
     triggerOnce: true, // Só dispara uma vez quando o item entra na tela
@@ -55,7 +55,7 @@ const CardapioItem = ({
                 <div style={{ display: "flex" }}>
                   {categoria.ids &&
                     memoizedImgSrc.map((img1, index) =>
-                      renderImageCarousel(img1, index, categoria.id)
+                      RenderImageCarousel(img1, index, categoria.id)
                     )}
 
                   <div className="flex">

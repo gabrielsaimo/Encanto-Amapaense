@@ -39,15 +39,4 @@ Default.args = {
       url: "https://via.placeholder.com/150",
     },
   ],
-  renderImageCarousel: (img1, index, id) => (
-    <div key={index} className="flex">
-      <img
-        className="img"
-        key={index}
-        src={img1.url}
-        alt="img"
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
-  ),
 };
