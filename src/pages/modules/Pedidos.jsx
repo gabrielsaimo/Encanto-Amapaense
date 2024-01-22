@@ -49,7 +49,6 @@ export default function Pedidos(atualizar) {
       data_inicial: init + " 00:00:00.000",
       data_final: fin + " 23:59:59.000",
     };
-    console.log("🚀 ~ file: Pedidos.jsx:52 ~ constgetPedido_data= ~ body:", body)
     const pedidos = await getPedidosData(body);
     setPedido(pedidos);
   };

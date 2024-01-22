@@ -290,7 +290,6 @@ export default function Bar() {
   };
 
   const StatusPedido = async (data, status) => {
-    console.log("🚀 ~ file: BarMan.jsx:293 ~ StatusPedido ~ data:", data);
     const dataPedido = {
       id: data.id,
       status: status,
@@ -412,8 +411,7 @@ export default function Bar() {
   return (
     <Card
       style={{
-        backgroundImage:
-          "url(https://images2.alphacoders.com/553/553717.jpg)",
+        backgroundImage: "url(https://images2.alphacoders.com/553/553717.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -448,8 +446,7 @@ export default function Bar() {
           </div>
         </Modal>
       ) : (
-        <Card style={{ backgroundColor: "rgba(255,255,255,0.8)" }}
-        >
+        <Card style={{ backgroundColor: "rgba(255,255,255,0.8)" }}>
           {userNome}
           {contextHolder}
           <div style={{ float: "right" }}>

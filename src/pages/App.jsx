@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Affix, Button, FloatButton, Input, Modal, Space, Spin } from "antd";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -11,8 +11,6 @@ import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 function App() {
-  const { idCompany } = useParams();
-  console.log("🚀 ~ file: App.jsx:14 ~ App ~ idCompany:", idCompany);
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
