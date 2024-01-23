@@ -105,24 +105,8 @@ const DeliveryMenu = () => {
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
   const [destinararios, setDestinararios] = useState([]);
   const [random, setRandom] = useState(0);
-  const options = [
-    {
-      value: "Pix",
-      label: "Pix",
-    },
-    {
-      value: "Dinheiro",
-      label: "Dinheiro",
-    },
-    {
-      value: "Credito",
-      label: "Credito",
-    },
-    {
-      value: "Debito",
-      label: "Debito",
-    },
-  ];
+  const OPTIONS = ["Pix", "Dinheiro", "Credito", "Debito"];
+  const filteredOptions = OPTIONS.filter((o) => !pagamento.includes(o));
 
   async function atualizarMensagens(title, notification, type, company, date) {
     const mensagens = {
@@ -162,6 +146,7 @@ const DeliveryMenu = () => {
   const handleChange = (value) => {
     setPagamento(value);
   };
+  
   const handleChangeBairro = (value, all) => {
     setBairro(all.label);
     setValorFrete(Number(all.price));
@@ -1511,7 +1496,10 @@ const DeliveryMenu = () => {
               style={{
                 width: 200,
               }}
-              options={options}
+              options={filteredOptions.map((item) => ({
+                value: item,
+                label: item,
+              }))}
             />
           </div>
           {pagamento.includes("Dinheiro") && (

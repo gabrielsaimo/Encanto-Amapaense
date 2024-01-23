@@ -575,7 +575,20 @@ const Gerenciamento = () => {
                       {pedido.id}
                     </Descriptions.Item>
                     <Descriptions.Item label="Hora do pedido">
-                      {moment(pedido.created_at).format("HH:mm:ss")}
+                      {moment(pedido.created_at).format(
+                        "DD/MM/YYYY HH:mm:ss"
+                      ) ===
+                      moment(pedido.created_at).format("DD/MM/YYYY HH:mm:ss")
+                        ? "Hoje" + moment(pedido.created_at).format(" HH:mm:ss")
+                        : pedido.created_at ===
+                          moment(pedido.created_at)
+                            .subtract(1, "days")
+                            .format("DD/MM/YYYY HH:mm:ss")
+                        ? "Ontem" +
+                          moment(pedido.created_at).format(" HH:mm:ss")
+                        : moment(pedido.created_at).format(
+                            "DD/MM/YYYY HH:mm:ss"
+                          )}
                     </Descriptions.Item>
                     <Descriptions.Item label="Status">
                       <Badge
