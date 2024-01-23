@@ -30,9 +30,6 @@ import {
 } from "@ant-design/icons";
 import LazyLoad from "react-lazyload";
 import "../../css/Collapse.css";
-import SlidesPrincipal from "./SlidePrincipal";
-import SlidesSobemesas from "./SlideSobremesas";
-import SlidesBebidas from "./SlideBebidas";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import {
   getBairros,
@@ -106,11 +103,7 @@ const DeliveryMenu = () => {
   const [bairros, setBairros2] = useState([]);
   const [dados, setDados] = useState([]);
   const [visibleMetodoEntrega, setVisibleMetodoEntrega] = useState(true);
-  const [destinararios, setDestinararios] = useState([
-    "eu251213@gmail.com",
-    "Josemaria023182@gmail.com",
-    "gabrielsaimo68@gmail.com",
-  ]);
+  const [destinararios, setDestinararios] = useState([]);
   const [random, setRandom] = useState(0);
   const options = [
     {
@@ -171,7 +164,7 @@ const DeliveryMenu = () => {
   };
   const handleChangeBairro = (value, all) => {
     setBairro(all.label);
-    setValorFrete(all.price);
+    setValorFrete(Number(all.price));
   };
 
   useEffect(() => {
@@ -333,7 +326,9 @@ const DeliveryMenu = () => {
           meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       )
     ).toFixed(2)}*${
-      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*" : ""
+      bairro === "Outro" || bairro === "Selecione"
+        ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*"
+        : ""
     }`;
 
     const msgLocal = `Nome: ${nome}%0ATelefone: ${telefone}%0A%0A%*O Pedido Sera Retirado No Local*%0A*Pedido:* %0A*Pedido:* %0A ${pedido
@@ -360,7 +355,9 @@ const DeliveryMenu = () => {
           meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       )
     ).toFixed(2)}*${
-      bairro === "Outro" ? "%0A%0A%0A*Vamos Verificar o valor do Frete*" : ""
+      bairro === "Outro" || bairro === "Selecione"
+        ? "%0A%0A%0A*Vamos Verificar o valor do Frete*"
+        : ""
     }`;
 
     const msg = retirada === "Delivery" ? msgDelivey : msgLocal;
@@ -1189,15 +1186,23 @@ const DeliveryMenu = () => {
                       0
                     )
                   ).toFixed(2)
-            }  ${
-              bairro === "Outro"
-                ? "+ Frete"
-                : bairro !== ""
-                ? "Frete R$ " + valorFrete + ",00"
-                : retirada === "Local"
-                ? "+ Frete Grátis"
-                : "+ Frete"
-            }
+            } 
+            `}
+          </p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <p className="p_1 price georgia-bold-font">Frete</p>
+
+          <p className="p_1 price georgia-bold-font">
+            {valorFrete === 0
+              ? "*A Calcular*"
+              : `R$ ${valorFrete.toFixed(2)} 
             `}
           </p>
         </div>
@@ -1232,13 +1237,12 @@ const DeliveryMenu = () => {
                         0
                       )
                     ) +
-                      (meiaporcao.reduce(
-                        (acc, item) => acc + item.price * item.qdt,
-                        0
-                      ) %
-                        1) !==
-                    0
-                  ).toFixed(2) + " + Frete"
+                    (meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qdt,
+                      0
+                    ) %
+                      1)
+                  ).toFixed(2) + " + Frete*"
             }`}
           </p>
         </div>
@@ -1510,14 +1514,20 @@ const DeliveryMenu = () => {
               options={options}
             />
           </div>
-          <div>
-            <label>Troco </label>
-            <Input
-              placeholder="Troco"
-              style={{ width: 100 }}
-              onBlur={(e) => setTroco(e.target.value)}
-            />
-          </div>
+          {pagamento.includes("Dinheiro") && (
+            <div>
+              <label>Troco* </label>
+              <div>
+                <Input
+                  placeholder="Troco"
+                  type="number"
+                  maxLength={3}
+                  style={{ width: 100 }}
+                  onBlur={(e) => setTroco(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
 
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">

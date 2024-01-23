@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useMemo } from "react";
-import { Carousel, Spin } from "antd";
 
 import "../../css/Collapse.css";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
