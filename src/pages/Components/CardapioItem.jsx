@@ -17,8 +17,6 @@ const CardapioItem = ({
     rootMargin: "0px 0px -100px 0px", // Margem de visibilidade
   });
 
-  const isEven = item.length % 2 === 0; // Verifica se a quantidade de itens é par
-
   return (
     <div ref={ref} className={`cardapio-item ${inView ? "slide-in" : ""}`}>
       <Collapse
@@ -46,19 +44,15 @@ const CardapioItem = ({
             const animationDirection = isLeftToRight
               ? "slide-in-left"
               : "slide-in-right";
-
             return categoria.type.includes("Cardapio") ? (
-              <div
-                key={idx}
-                className={`border ${inView ? animationDirection : ""}`}
-              >
+              <div key={idx} className={`border`}>
                 <div style={{ display: "flex" }}>
                   {categoria.ids &&
                     memoizedImgSrc.map((img1, index) =>
                       RenderImageCarousel(img1, index, categoria.id)
                     )}
 
-                  <div className="flex">
+                  <div className={`flex ${inView ? animationDirection : ""}`}>
                     <div style={{ width: "100%", display: "contents" }}>
                       <div>
                         <p className="p_1 name georgia-font">
