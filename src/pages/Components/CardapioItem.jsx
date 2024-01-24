@@ -3,6 +3,7 @@ import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useInView } from "react-intersection-observer";
 import RenderImageCarousel from "./RenderImageCarousel";
+import currency_BRL from "./CurrencyBRL";
 
 const { Panel } = Collapse;
 
@@ -74,11 +75,7 @@ const CardapioItem = ({
                       }}
                     >
                       <p className="p_1 price georgia-bold-font">
-                        {`R$ ${
-                          categoria.price % 1 !== 0
-                            ? categoria.price.replace(".", ",")
-                            : categoria.price + ",00"
-                        }`}
+                        {`R$ ${currency_BRL(categoria.price)}`}
                       </p>
                     </div>
                   </div>

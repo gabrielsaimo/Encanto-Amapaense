@@ -47,6 +47,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import "firebase/compat/storage";
 import { getDatabase, ref, set } from "firebase/database";
+import currency_BRL from "../Components/CurrencyBRL";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
@@ -146,7 +147,7 @@ const DeliveryMenu = () => {
   const handleChange = (value) => {
     setPagamento(value);
   };
-  
+
   const handleChangeBairro = (value, all) => {
     setBairro(all.label);
     setValorFrete(Number(all.price));
@@ -202,15 +203,13 @@ const DeliveryMenu = () => {
           meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
       ),
       type: "Delivery",
-      info: `{"retirada": "${retirada}","nome": "${nome}","telefone": "${telefone}","endereco": "${endereco}","numero": "${numero}","complemento": "${complemento}","referencia": "${referencia}","pagamento": "${pagamento}","troco": "${troco}","bairro": "${bairro}","frete": "${valorFrete}","total": "${(
+      info: `{"retirada": "${retirada}","nome": "${nome}","telefone": "${telefone}","endereco": "${endereco}","numero": "${numero}","complemento": "${complemento}","referencia": "${referencia}","pagamento": "${pagamento}","troco": "${troco}","bairro": "${bairro}","frete": "${valorFrete}","total": "${currency_BRL(
         Number(valorFrete) +
-        Number(
-          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-        )
-      )
-        .toFixed(2)
-        .replace(".", ",")}"}`,
+          Number(
+            pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+          )
+      )}"}`,
     });
     await putPedi_UniDelivery();
 
@@ -260,28 +259,20 @@ const DeliveryMenu = () => {
       Troco: ${troco}<br/>
       Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
         pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
-          ? pedido
-              .reduce((acc, item) => acc + item.price * item.qdt, 0)
-              .toFixed(2)
-              .replace(".", ",") +
-            meiaporcao
-              .reduce((acc, item) => acc + item.price * item.qdt, 0)
-              .toFixed(2)
-              .replace(".", ",")
-          : (
+          ? currency_BRL(
               pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             )
-              .toFixed(2)
-              .replace(".", ",")
-      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total:<p> R$ ${(
+          : currency_BRL(
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+            )
+      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total:<p> R$ ${currency_BRL(
         Number(valorFrete) +
-        Number(
-          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-        )
-      ).toFixed(
-        2
+          Number(
+            pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+          )
       )}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
     };
 
@@ -292,25 +283,21 @@ const DeliveryMenu = () => {
       .join(", ")}
       %0ATotal: R$ ${
         pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
-          ? pedido
-              .reduce((acc, item) => acc + item.price * item.qdt, 0)
-              .toFixed(2)
-              .replace(".", ",") +
-            meiaporcao
-              .reduce((acc, item) => acc + item.price * item.qdt, 0)
-              .toFixed(2)
-              .replace(".", ",")
-          : (
+          ? currency_BRL(
               pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-            ).toFixed(2)
-      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+            )
+          : currency_BRL(
+              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+            )
+      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${currency_BRL(
       Number(valorFrete) +
-      Number(
-        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-          meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-      )
-    ).toFixed(2)}*${
+        Number(
+          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+        )
+    )}*${
       bairro === "Outro" || bairro === "Selecione"
         ? "%0A%0A%0A*Vamos Verificar  o valor do Frete*"
         : ""
@@ -323,23 +310,21 @@ const DeliveryMenu = () => {
       .join(", ")}
       %0ATotal: R$ ${
         pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
-          ? (
+          ? currency_BRL(
               pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
             )
-              .toFixed(2)
-              .replace(".", ",")
-          : (
+          : currency_BRL(
               pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-            ).toFixed(2)
-      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${(
+                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+            )
+      }%0AFrete: *R$ ${valorFrete},00*%0ATotal Geral: *R$ ${currency_BRL(
       Number(valorFrete) +
-      Number(
-        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-          meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-      )
-    ).toFixed(2)}*${
+        Number(
+          pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+            meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
+        )
+    )}*${
       bairro === "Outro" || bairro === "Selecione"
         ? "%0A%0A%0A*Vamos Verificar o valor do Frete*"
         : ""
@@ -743,12 +728,8 @@ const DeliveryMenu = () => {
                                   <p className="p_1 price georgia-bold-font">
                                     {`R$ ${
                                       categoria.price % 1 !== 0
-                                        ? (categoria.price * 0.65)
-                                            .toFixed(2)
-                                            .replace(".", ",")
-                                        : (categoria.price * 0.65)
-                                            .toFixed(2)
-                                            .replace(".", ",")
+                                        ? currency_BRL(categoria.price * 0.65)
+                                        : currency_BRL(categoria.price * 0.65)
                                     }`}
                                   </p>
                                 </div>
@@ -857,11 +838,7 @@ const DeliveryMenu = () => {
                               >
                                 <div>
                                   <p className="p_1 price georgia-bold-font">
-                                    {`R$ ${
-                                      categoria.price % 1 !== 0
-                                        ? categoria.price.replace(".", ",")
-                                        : categoria.price + ",00"
-                                    }`}
+                                    {`R$ ${currency_BRL(categoria.price)}`}
                                   </p>
                                 </div>
 
@@ -971,11 +948,7 @@ const DeliveryMenu = () => {
                             >
                               <div>
                                 <p className="p_1 price georgia-bold-font">
-                                  {`R$ ${
-                                    categoria.price % 1 !== 0
-                                      ? categoria.price.replace(".", ",")
-                                      : categoria.price + ",00"
-                                  }`}
+                                  {`R$ ${currency_BRL(categoria.price)}`}
                                 </p>
                               </div>
 
@@ -1094,11 +1067,13 @@ const DeliveryMenu = () => {
                 <div>
                   <p className="p_1 price georgia-bold-font">
                     {`${item.qdt}x R$ ${
-                      item.price % 1 !== 0 ? item.price : item.price + ",00"
+                      item.price % 1 !== 0
+                        ? currency_BRL(item.price)
+                        : currency_BRL(item.price)
                     } = R$ ${
                       (item.price * item.qdt) % 1 !== 0
-                        ? (item.price * item.qdt).toFixed(2).replace(".", ",")
-                        : item.price * item.qdt + ",00"
+                        ? currency_BRL(item.price * item.qdt)
+                        : currency_BRL(item.price * item.qdt)
                     }`}
                   </p>
                 </div>
@@ -1125,12 +1100,10 @@ const DeliveryMenu = () => {
                   </div>
                   <div>
                     <p className="p_1 price georgia-bold-font">
-                      {`${item.qdt}x R$ ${item.price
-                        .toFixed(2)
-                        .replace(".", ",")} = R$ ${
+                      {`${item.qdt}x R$ ${currency_BRL(item.price)} = R$ ${
                         (item.price * item.qdt) % 1 !== 0
-                          ? (item.price * item.qdt).toFixed(2).replace(".", ",")
-                          : item.price * item.qdt + ",00"
+                          ? currency_BRL(item.price * item.qdt)
+                          : currency_BRL(item.price * item.qdt)
                       }`}
                     </p>
                   </div>
@@ -1157,20 +1130,19 @@ const DeliveryMenu = () => {
               meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0) %
                 1 !==
                 0
-                ? pedido
-                    .reduce((acc, item) => acc + item.price * item.qdt, 0)
-                    .toFixed(2)
-                    .replace(".", ",")
-                : (
+                ? currency_BRL(
+                    pedido.reduce((acc, item) => acc + item.price * item.qdt, 0)
+                  )
+                : currency_BRL(
                     pedido.reduce(
                       (acc, item) => acc + item.price * item.qdt,
                       0
                     ) +
-                    meiaporcao.reduce(
-                      (acc, item) => acc + item.price * item.qdt,
-                      0
-                    )
-                  ).toFixed(2)
+                      meiaporcao.reduce(
+                        (acc, item) => acc + item.price * item.qdt,
+                        0
+                      )
+                  )
             } 
             `}
           </p>
@@ -1187,7 +1159,7 @@ const DeliveryMenu = () => {
           <p className="p_1 price georgia-bold-font">
             {valorFrete === 0
               ? "*A Calcular*"
-              : `R$ ${valorFrete.toFixed(2)} 
+              : `R$ ${currency_BRL(valorFrete)} 
             `}
           </p>
         </div>
@@ -1202,32 +1174,32 @@ const DeliveryMenu = () => {
           <p className="p_1 price georgia-bold-font">
             {`R$ ${
               bairro !== "Outro"
-                ? (
+                ? currency_BRL(
                     Number(valorFrete) +
+                      Number(
+                        pedido.reduce(
+                          (acc, item) => acc + item.price * item.qdt,
+                          0
+                        )
+                      ) +
+                      meiaporcao.reduce(
+                        (acc, item) => acc + item.price * item.qdt,
+                        0
+                      )
+                  )
+                : currency_BRL(
                     Number(
                       pedido.reduce(
                         (acc, item) => acc + item.price * item.qdt,
                         0
                       )
                     ) +
-                    meiaporcao.reduce(
-                      (acc, item) => acc + item.price * item.qdt,
-                      0
-                    )
-                  ).toFixed(2)
-                : (
-                    Number(
-                      pedido.reduce(
+                      (meiaporcao.reduce(
                         (acc, item) => acc + item.price * item.qdt,
                         0
-                      )
-                    ) +
-                    (meiaporcao.reduce(
-                      (acc, item) => acc + item.price * item.qdt,
-                      0
-                    ) %
-                      1)
-                  ).toFixed(2) + " + Frete*"
+                      ) %
+                        1)
+                  ) + " + Frete*"
             }`}
           </p>
         </div>
@@ -1519,15 +1491,15 @@ const DeliveryMenu = () => {
 
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
-              {`Total: R$ ${Number(
-                pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-                  meiaporcao.reduce(
-                    (acc, item) => acc + item.price * item.qdt,
-                    0
-                  )
-              )
-                .toFixed(2)
-                .replace(".", ",")}`}
+              {`Total: R$ ${currency_BRL(
+                Number(
+                  pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qdt,
+                      0
+                    )
+                )
+              )}`}
             </p>
           </div>
           {bairro === "Outro" ? (
@@ -1546,20 +1518,18 @@ const DeliveryMenu = () => {
 
           <div style={{ marginTop: 10 }}>
             <p className="p_1 price georgia-bold-font">
-              {`Total Geral: R$ ${(
+              {`Total Geral: R$ ${currency_BRL(
                 Number(valorFrete) +
-                Number(
-                  pedido.reduce((acc, item) => acc + item.price * item.qdt, 0)
-                ) +
-                Number(
-                  meiaporcao.reduce(
-                    (acc, item) => acc + item.price * item.qdt,
-                    0
+                  Number(
+                    pedido.reduce((acc, item) => acc + item.price * item.qdt, 0)
+                  ) +
+                  Number(
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qdt,
+                      0
+                    )
                   )
-                )
-              )
-                .toFixed(2)
-                .replace(".", ",")}`}
+              )}`}
             </p>
           </div>
         </Card>

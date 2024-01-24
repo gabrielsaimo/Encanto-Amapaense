@@ -44,6 +44,7 @@ import {
   putCardapio,
 } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
+import currency_BRL from "../Components/CurrencyBRL";
 
 const { Option } = Select;
 export default function Dashboard({ atualizar, user }) {
@@ -600,7 +601,7 @@ export default function Dashboard({ atualizar, user }) {
                 >
                   {item.active ? "Ativo" : "Desativado"}
                 </Tag>
-                <p>Preço: R$ {Number(item.price).toFixed(2)}</p>
+                <p>Preço: R$ {currency_BRL(Number(item.price))}</p>
                 <p>Descrição: </p>
                 {item.description}
                 <p>Sub Descrição: {item.sub}</p>

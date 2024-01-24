@@ -23,6 +23,7 @@ import {
 
 import { getUsers } from "../../services/user.ws";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import currency_BRL from "../Components/CurrencyBRL";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [dataGrafico, setDataGrafico] = useState([]);
@@ -208,7 +209,7 @@ export default function Relatorios(atualizar) {
       render: (text) => (
         <span>
           {text.split(",").map((item, i) => {
-            return <div key={i}>{"R$ " + Number(item).toFixed(2)}</div>;
+            return <div key={i}>{"R$ " + currency_BRL(Number(item))}</div>;
           })}
         </span>
       ),
@@ -220,10 +221,10 @@ export default function Relatorios(atualizar) {
       render: (text) => (
         <span>
           {Number(text).toFixed(2) !== "0.00" ? (
-            <div>{"R$ " + Number(text).toFixed(2)}</div>
+            <div>{"R$ " + currency_BRL(Number(text))}</div>
           ) : (
             <div style={{ color: "red" }}>
-              {"R$ " + Number(text).toFixed(2)}
+              {"R$ " + currency_BRL(Number(text))}
             </div>
           )}
         </span>
@@ -235,7 +236,7 @@ export default function Relatorios(atualizar) {
       key: "total_pago",
       fixed: "right",
       width: 200,
-      render: (text) => <span>R$ {Number(text).toFixed(2)}</span>,
+      render: (text) => <span>R$ {currency_BRL(Number(text))}</span>,
     },
   ];
 
@@ -522,7 +523,7 @@ export default function Relatorios(atualizar) {
                               <span
                                 style={{ fontWeight: "bold", color: "red" }}
                               >
-                                R$ -{descontoCortesia.toFixed(2)}
+                                R$ -{currency_BRL(descontoCortesia)}
                               </span>
                             </Tooltip>
                           </Table.Summary.Cell>
@@ -541,10 +542,12 @@ export default function Relatorios(atualizar) {
                                 style={{ fontWeight: "bold", color: "green" }}
                               >
                                 R${" "}
-                                {Number(
-                                  Number(valorTotal).toFixed(2) -
-                                    Number(descontoCortesia).toFixed(2)
-                                ).toFixed(2)}
+                                {currency_BRL(
+                                  Number(
+                                    Number(valorTotal).toFixed(2) -
+                                      Number(descontoCortesia).toFixed(2)
+                                  )
+                                )}
                               </span>
                             </Tooltip>
                           </Table.Summary.Cell>
