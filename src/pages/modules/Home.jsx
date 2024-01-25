@@ -27,7 +27,14 @@ function Home() {
           <div className="App-header-content-button">
             <Link to="/Cardapio">
               <Button
-                style={{ backgroundColor: "#00a758", color: "#753d00" }}
+                style={{
+                  backgroundColor: "#00a758",
+                  color: "#753d00",
+                  width: "70vw",
+                  maxWidth: 400,
+                  height: "11vh",
+                  fontSize: "6vh",
+                }}
                 shape="round"
                 icon={<BookOutlined />}
                 size={isMobile ? "large" : "middle"}
@@ -40,7 +47,14 @@ function Home() {
           <div className="App-header-content-button">
             <Link to="/Delivery">
               <Button
-                style={{ backgroundColor: "#753d00", color: "#00a758" }}
+                style={{
+                  backgroundColor: "#753d00",
+                  color: "#00a758",
+                  width: "70vw",
+                  maxWidth: 400,
+                  height: "11vh",
+                  fontSize: "6vh",
+                }}
                 shape="round"
                 icon={<ShoppingOutlined />}
                 size={isMobile ? "large" : "middle"}
