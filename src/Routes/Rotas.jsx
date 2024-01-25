@@ -17,12 +17,10 @@ export default function Rotas() {
       <Route path="/Dashboard" element={<MenuDashboard />} />
       <Route path="/Garçom" element={<Garçom />} />
       <Route path="/Cardapio" element={<App />} />
-      <Route parh="*">"404 - Not Found"</Route>
+      <Route parh="/*">"404 - Not Found"</Route>
       <Route path="/Cozinha" element={<Cozinha />} />
       <Route path="/Delivery" element={<AppDelivery />} />
-      <Route path="/Bar" element={<Bar />}>
-        "Bar"
-      </Route>
+      <Route path="/Bar" element={<Bar />} />
       <Route path="/MeuPedido/:idpedido" element={<StatusPedido />} />
     </Routes>
   );

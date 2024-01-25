@@ -766,7 +766,7 @@ const DeliveryMenu = () => {
                                   <Input
                                     className="input"
                                     style={{
-                                      width: 35,
+                                      width: 45,
                                       textAlign: "center",
                                       color: "#000",
                                     }}
@@ -874,7 +874,7 @@ const DeliveryMenu = () => {
                                   <Input
                                     className="input"
                                     style={{
-                                      width: 35,
+                                      width: 45,
                                       textAlign: "center",
                                       color: "#000",
                                     }}
@@ -984,7 +984,7 @@ const DeliveryMenu = () => {
                                 <Input
                                   className="input"
                                   style={{
-                                    width: 35,
+                                    width: 45,
                                     textAlign: "center",
                                     color: "#000",
                                   }}
@@ -1046,7 +1046,7 @@ const DeliveryMenu = () => {
         onClose={onClose}
         open={open}
       >
-        <div style={{ overflow: "auto", height: "65vh" }}>
+        <div style={{ overflow: "auto", height: "60vh" }}>
           {pedido.map((item, index) => (
             <div key={index}>
               <div
@@ -1066,15 +1066,9 @@ const DeliveryMenu = () => {
                 </div>
                 <div>
                   <p className="p_1 price georgia-bold-font">
-                    {`${item.qdt}x R$ ${
-                      item.price % 1 !== 0
-                        ? currency_BRL(item.price)
-                        : currency_BRL(item.price)
-                    } = R$ ${
-                      (item.price * item.qdt) % 1 !== 0
-                        ? currency_BRL(item.price * item.qdt)
-                        : currency_BRL(item.price * item.qdt)
-                    }`}
+                    {`${item.qdt}x R$ ${currency_BRL(
+                      item.price
+                    )} = R$ ${currency_BRL(item.price * item.qdt)}`}
                   </p>
                 </div>
               </div>
@@ -1100,11 +1094,9 @@ const DeliveryMenu = () => {
                   </div>
                   <div>
                     <p className="p_1 price georgia-bold-font">
-                      {`${item.qdt}x R$ ${currency_BRL(item.price)} = R$ ${
-                        (item.price * item.qdt) % 1 !== 0
-                          ? currency_BRL(item.price * item.qdt)
-                          : currency_BRL(item.price * item.qdt)
-                      }`}
+                      {`${item.qdt}x R$ ${currency_BRL(
+                        item.price
+                      )} = R$ ${currency_BRL(item.price * item.qdt)}`}
                     </p>
                   </div>
                 </div>

@@ -26,7 +26,69 @@ if (firebase.apps.length === 0) {
 const service = initializeApp(firebaseConfig);
 const database = getDatabase(service);
 const mensagensRef = ref(database, "data");
+const styles = {
+  cardBody: {
+    textAlign: "center",
+  },
+  cardText: {
+    color: "green",
+  },
+  container: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  logo: {
+    marginTop: 30,
+    maxWidth: 300,
+    maxHeight: 300,
+  },
+  title: {
+    textAlign: "center",
+  },
+};
 
+const PedidoEncontrado = ({ pedido }) => {
+  return (
+    <div className="card">
+      <div className="card-body" style={{ textAlign: "center" }}>
+        <h5 className="card-title">Pedido N°{pedido[0].id}</h5>
+        <Divider />
+        <b className="card-text" style={{ color: "Red" }}>
+          Status: {pedido[0].status}
+        </b>
+        <Divider />
+        {pedido.map((item, index) => (
+          <div key={index}>
+            <b className="card-text">
+              {item.qdt}x {item.item}
+            </b>
+          </div>
+        ))}
+        <Divider />
+        <p className="card-text">
+          Frete: R$
+          {currency_BRL(Number(JSON.parse(pedido[0].info)?.frete))}
+        </p>
+        <p className="card-text">
+          Valor Pedido: R$ {currency_BRL(pedido[0].valor)}
+        </p>
+        <b className="card-text" style={{ color: "green" }}>
+          Valor Total: R$ {JSON.parse(pedido[0].info).total}
+        </b>
+        <Divider />
+      </div>
+    </div>
+  );
+};
+
+const PedidoNaoEncontrado = () => (
+  <div className="card">
+    <div className="card-body" style={styles.cardBody}>
+      <h5 className="card-title">Pedido Não Encontrado</h5>
+    </div>
+  </div>
+);
 const StatusPedido = () => {
   const { idpedido } = useParams();
   const [api, contextHolder] = notification.useNotification();
@@ -128,48 +190,16 @@ const StatusPedido = () => {
       <LazyLoadImage
         src={require("../../assets/logo.webp")}
         className="logo"
-        style={{ marginTop: 30, maxWidth: 300, maxHeight: 300 }}
+        style={styles.logo}
         alt="logo"
         decoding="async"
         loading="eager"
       />
-      <h1 style={{ textAlign: "center" }}>Meu Pedido</h1>
+      <h1 style={styles.title}>Meu Pedido</h1>
       {pedido.length > 0 ? (
-        <div className="card">
-          <div className="card-body" style={{ textAlign: "center" }}>
-            <h5 className="card-title">Pedido N°{idpedido}</h5>
-            <Divider />
-            <b className="card-text" style={{ color: "Red" }}>
-              Status: {pedido[0].status}
-            </b>
-            <Divider />
-            {pedido.map((item, index) => (
-              <div key={index}>
-                <b className="card-text">
-                  {item.qdt}x {item.item}
-                </b>
-              </div>
-            ))}
-            <Divider />
-            <p className="card-text">
-              Frete: R$
-              {currency_BRL(Number(JSON.parse(pedido[0].info)?.frete))}
-            </p>
-            <p className="card-text">
-              Valor Pedido: R$ {currency_BRL(pedido[0].valor)}
-            </p>
-            <b className="card-text" style={{ color: "green" }}>
-              Valor Total: R$ {JSON.parse(pedido[0].info).total}
-            </b>
-            <Divider />
-          </div>
-        </div>
+        <PedidoEncontrado pedido={pedido} />
       ) : (
-        <div className="card">
-          <div className="card-body" style={{ textAlign: "center" }}>
-            <h5 className="card-title">Pedido Não Encontrado</h5>
-          </div>
-        </div>
+        <PedidoNaoEncontrado />
       )}
     </div>
   );

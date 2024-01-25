@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useMemo } from "react";
-
 import "../../css/Collapse.css";
 import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
@@ -12,21 +11,23 @@ const CollapseMenu = () => {
   const [imgSrc, setImgSrc] = useState([]);
 
   useEffect(() => {
+    const fetchCardapios = async () => {
+      const cardapios = await getCardapio();
+      setCardapio(cardapios);
+    };
+
+    const fetchCardapioCategory = async () => {
+      const category = await getCategoty();
+      setCardapioCategory(category);
+    };
+
     if (cardapio.length === 0) {
-      getCardapios();
+      fetchCardapios();
     }
     if (cardapioCategory.length === 0) {
-      getCardapioCategory();
+      fetchCardapioCategory();
     }
   }, [cardapio]);
-
-  const getCardapios = async () => {
-    setCardapio(await getCardapio());
-  };
-
-  const getCardapioCategory = async () => {
-    setCardapioCategory(await getCategoty());
-  };
 
   const memoizedImgSrc = useMemo(() => {
     if (cardapio.length > 0 && imgSrc.length === 0) {
