@@ -7,6 +7,7 @@ interface Cardapio {
   price: string;
   description: string;
   active: boolean;
+  highlight: boolean;
   category: string;
 }
 

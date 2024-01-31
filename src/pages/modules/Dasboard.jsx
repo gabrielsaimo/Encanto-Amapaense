@@ -61,6 +61,7 @@ export default function Dashboard({ atualizar, user }) {
   const [description, setDescription] = useState("");
   const [sub, setSub] = useState("");
   const [meia, setMeia] = useState(false);
+  const [highlight, setHighlight] = useState(false);
   const [imgByte, setImgByte] = useState("");
   const [active, setActive] = useState(true);
   const [category, setCategory] = useState(null);
@@ -224,6 +225,7 @@ export default function Dashboard({ atualizar, user }) {
     setDescription(task.description);
     setSub(task.sub);
     setMeia(task.meia);
+    setHighlight(task.highlight);
     setType(task.type);
     setActive(task.active);
     setImgByte(task.img);
@@ -246,6 +248,7 @@ export default function Dashboard({ atualizar, user }) {
         type,
         active,
         imagem: imgByte,
+        highlight,
         category,
         update_at: new Date(),
         update_by: userDate.name,
@@ -262,6 +265,7 @@ export default function Dashboard({ atualizar, user }) {
         type,
         active,
         imagem: imgByte,
+        highlight,
         category,
         update_at: new Date(),
         update_by: userDate.name,
@@ -292,6 +296,7 @@ export default function Dashboard({ atualizar, user }) {
     setTotalImg(0);
     setSub("");
     setMeia(false);
+    setHighlight(false);
     setType("");
     setActive(true);
     setCategory(null);
@@ -372,6 +377,18 @@ export default function Dashboard({ atualizar, user }) {
             {img1.map((img, index) => renderImageCarousel(img, index, text.id))}
           </div>
         ));
+      },
+    },
+    {
+      title: "Destaque",
+      dataIndex: "highlight",
+      key: "highlight",
+      render: (_, text) => {
+        return (
+          <Tag color={text.highlight ? "green" : "red"}>
+            {text.highlight ? "Sim" : "Não"}
+          </Tag>
+        );
       },
     },
     {
@@ -720,19 +737,7 @@ export default function Dashboard({ atualizar, user }) {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div style={{ display: "flex", alignItems: "baseline" }}>
-              <Typography.Title level={5} style={{ width: 150 }}>
-                Preço
-              </Typography.Title>
-              <Input
-                style={{ width: "100%", margin: "10px 0" }}
-                size="large"
-                placeholder="Preço"
-                type="number"
-                value={price !== "" ? price : undefined}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
+
             <div style={{ display: "flex", alignItems: "baseline" }}>
               <Typography.Title level={5} style={{ width: 150 }}>
                 Descrição
@@ -757,38 +762,67 @@ export default function Dashboard({ atualizar, user }) {
                 onChange={(e) => setSub(e.target.value)}
               />
             </div>
-            <div style={{ display: "flex", alignItems: "baseline" }}>
-              <Typography.Title level={5} style={{ width: 150 }}>
-                Ativo?
-              </Typography.Title>
-              <Select
-                style={{ width: "100%", margin: "10px 0" }}
-                size="large"
-                dropdownMatchSelectWidth={false}
-                showSearch
-                placeholder="Ativo"
-                optionFilterProp="children"
-                onChange={(value) => setActive(value)}
-                value={active}
-              >
-                <Option key={1} value={true}>
-                  Sim
-                </Option>
-                <Option key={2} value={false}>
-                  Não
-                </Option>
-              </Select>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div style={{ display: "flex", alignItems: "baseline" }}>
+                <Typography.Title level={5} style={{ width: 100 }}>
+                  Preço
+                </Typography.Title>
+                <Input
+                  style={{ width: 100, margin: "10px 0" }}
+                  size="large"
+                  placeholder="Preço"
+                  type="number"
+                  value={price !== "" ? price : undefined}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline" }}>
+                <Typography.Title level={5} style={{ width: 100 }}>
+                  Ativo?
+                </Typography.Title>
+                <Select
+                  style={{ width: "100%", margin: "10px 0" }}
+                  size="large"
+                  dropdownMatchSelectWidth={false}
+                  showSearch
+                  placeholder="Ativo"
+                  optionFilterProp="children"
+                  onChange={(value) => setActive(value)}
+                  value={active}
+                >
+                  <Option key={1} value={true}>
+                    Sim
+                  </Option>
+                  <Option key={2} value={false}>
+                    Não
+                  </Option>
+                </Select>
+              </div>
             </div>
-            <div style={{ display: "flex", alignItems: "baseline" }}>
-              <Typography.Title level={5} style={{ width: 150 }}>
-                Meia Porção
-              </Typography.Title>
-              <Switch
-                value={meia}
-                checkedChildren="Sim"
-                unCheckedChildren="Não"
-                onChange={(value) => setMeia(value)}
-              />
+
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "baseline" }}>
+                <Typography.Title level={5} style={{ width: 100 }}>
+                  Meia Porção
+                </Typography.Title>
+                <Switch
+                  value={meia}
+                  checkedChildren="Sim"
+                  unCheckedChildren="Não"
+                  onChange={(value) => setMeia(value)}
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline" }}>
+                <Typography.Title level={5} style={{ width: 100 }}>
+                  Destaque
+                </Typography.Title>
+                <Switch
+                  value={highlight}
+                  checkedChildren="Sim"
+                  unCheckedChildren="Não"
+                  onChange={(value) => setHighlight(value)}
+                />
+              </div>
             </div>
 
             <div style={{ display: "flex", alignItems: "baseline" }}>

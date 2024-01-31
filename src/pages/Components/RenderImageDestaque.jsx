@@ -6,8 +6,8 @@ const LazyLoadedImage = lazy(() =>
   import("antd").then((module) => ({ default: module.Image }))
 );
 
-const RenderImageCarousel = (img, index, id) =>
-  img[0].idreq === id && (
+const RenderImageDestaque = (img, index, id) =>
+  img[0].idreq === id ? (
     <div className="img" key={index} style={{ zIndex: 5 }}>
       <LazyLoad key={index} height={200} offset={100}>
         <Image.PreviewGroup>
@@ -20,7 +20,7 @@ const RenderImageCarousel = (img, index, id) =>
             effect="fade"
             dotPosition="bottom"
             style={{
-              width: "45vw",
+              width: 200,
               maxWidth: 300,
               minWidth: "100px",
               color: "#fff",
@@ -30,7 +30,7 @@ const RenderImageCarousel = (img, index, id) =>
               .filter((img1) => img1.idreq && img1.idreq === id)
               .map((img1, index) => (
                 <Suspense key={index} fallback={<Spin />}>
-                  <div style={{ width: "45vw", maxWidth: 300 }}>
+                  <div style={{ width: 200, maxWidth: 300 }}>
                     <LazyLoadedImage
                       src={atob(img1.imagem)}
                       key={index}
@@ -52,6 +52,6 @@ const RenderImageCarousel = (img, index, id) =>
         </Image.PreviewGroup>
       </LazyLoad>
     </div>
-  );
+  ) : null;
 
-export default RenderImageCarousel;
+export default RenderImageDestaque;
