@@ -31,8 +31,8 @@ const Destaque = () => {
           }
           scrollRef.current.scrollLeft += scrollDirectionRef.current;
         }
-      }, 5);
-    }, 4000);
+      }, 15);
+    }, 8000);
   };
   useEffect(() => {
     fetchCardapios();
