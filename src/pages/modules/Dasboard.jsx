@@ -30,6 +30,8 @@ import {
   PlusOutlined,
   FilterOutlined,
   SearchOutlined,
+  StarFilled,
+  StarOutlined,
 } from "@ant-design/icons";
 import Category from "./Category";
 import LazyLoad from "react-lazyload";
@@ -347,6 +349,9 @@ export default function Dashboard({ atualizar, user }) {
       title: "Preço",
       dataIndex: "price",
       key: "price",
+      render: (_, text) => {
+        return <p>{currency_BRL(Number(text.price))}</p>;
+      },
     },
     {
       title: "Descrição",
@@ -362,8 +367,13 @@ export default function Dashboard({ atualizar, user }) {
       title: "Ativo",
       dataIndex: "active",
       key: "active",
+      sorter: { compare: (a, b) => a.active - b.active },
       render: (_, text) => {
-        return <p>{text.active ? "Sim" : "Não"}</p>;
+        return (
+          <Tag color={text.active ? "green" : "red"}>
+            {text.active ? "Ativo" : "Desativado"}
+          </Tag>
+        );
       },
     },
     {
@@ -383,10 +393,11 @@ export default function Dashboard({ atualizar, user }) {
       title: "Destaque",
       dataIndex: "highlight",
       key: "highlight",
+      sorter: { compare: (a, b) => a.highlight - b.highlight },
       render: (_, text) => {
         return (
-          <Tag color={text.highlight ? "green" : "red"}>
-            {text.highlight ? "Sim" : "Não"}
+          <Tag color={text.highlight ? "gold" : "grey"}>
+            {text.highlight ? <StarFilled /> : <StarOutlined />}
           </Tag>
         );
       },
