@@ -31,7 +31,7 @@ const Destaque = () => {
   }, [destaques, imgSrc]);
 
   return (
-    <>
+    <div style={{ width: "100vw" }}>
       <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
         Destaques
       </div>
@@ -44,7 +44,6 @@ const Destaque = () => {
           scrollbarWidth: "none",
           msOverflowStyle: "none",
           marginTop: 20,
-          justifyContent: "center",
         }}
       >
         {destaques
@@ -84,7 +83,7 @@ const Destaque = () => {
             );
           })}
       </div>
-    </>
+    </div>
   );
 };
 
