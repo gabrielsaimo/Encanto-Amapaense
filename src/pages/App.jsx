@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useState, useEffect, Suspense, lazy, useCallback } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Affix, Button, FloatButton, Input, Modal, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
@@ -10,26 +10,39 @@ import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
+
+const fundo = require("../assets/fundo.webp");
+const logo = require("../assets/logo.webp");
+
 function App() {
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
   const [pedidos, setPedidos] = useState([]);
+
   useEffect(() => {
     if (contar > 10 && contar < 15) {
       setVisible2(true);
     }
   }, [contar]);
 
-  const handleLogoClick = async () => {
-    setContar(contar + 1);
-  };
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = logo;
+    document.head.appendChild(link);
+  }, []);
 
-  const getMesas = (e) => {
+  const handleLogoClick = useCallback(() => {
+    setContar(contar + 1);
+  }, [contar]);
+
+  const getMesas = useCallback((e) => {
     setPedidos([]);
     if (e === "") return;
     getPedidos(e);
-  };
+  }, []);
 
   async function getPedidos(e) {
     const data = await getStatusPedidos(e);
@@ -39,19 +52,19 @@ function App() {
   return (
     <div className="App background_fundo">
       <LazyLoadImage
-        src={require("../assets/fundo.webp")}
+        src={fundo}
         className="fundo"
         alt="fundo"
         decoding="async"
         loading="eager"
       />
       <LazyLoadImage
-        src={require("../assets/logo.webp")}
+        src={logo}
         className="logo"
         alt="logo-principal"
         loading="eager"
         decoding="async"
-        onClick={() => handleLogoClick()}
+        onClick={handleLogoClick}
       />
       <div style={{ display: "flex" }}>
         <Affix

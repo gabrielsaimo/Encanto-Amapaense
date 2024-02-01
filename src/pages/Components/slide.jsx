@@ -2,12 +2,12 @@ import React, { Suspense } from "react";
 import { Spin } from "antd";
 import Destaque from "./SlideDestaque";
 
-const SlidesPrincipal = React.lazy(() => import("../modules/SlidePrincipal"));
+//const SlidesPrincipal = React.lazy(() => import("../modules/SlidePrincipal"));
 const SlidesSobemesas = React.lazy(() => import("../modules/SlideSobremesas"));
 const SlidesBebidas = React.lazy(() => import("../modules/SlideBebidas"));
 
 const componentMap = {
-  0: SlidesPrincipal,
+  // 0: SlidesPrincipal,
   11: SlidesSobemesas,
   15: SlidesBebidas,
 };
