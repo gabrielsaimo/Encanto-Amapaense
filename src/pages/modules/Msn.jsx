@@ -56,7 +56,7 @@ export default function Msn() {
           >
             <Divider />
             <Input
-              placeholder="seu nome"
+              placeholder="Seu Nome"
               onChange={(e) => {
                 setName(e.target.value);
               }}

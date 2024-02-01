@@ -39,6 +39,7 @@ const RenderImageCarousel = (img, index, id) =>
                         color: "#fff",
                         minWidth: "100px",
                         minHeight: 300,
+                        objectFit: "cover",
                       }}
                       alt="img"
                       objectFit="cover"
