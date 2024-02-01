@@ -1,32 +1,26 @@
 import React, { Suspense } from "react";
 import { Spin } from "antd";
-import SlidesPrincipal from "../modules/SlidePrincipal";
-import SlidesSobemesas from "../modules/SlideSobremesas";
-import SlidesBebidas from "../modules/SlideBebidas";
 import Destaque from "./SlideDestaque";
 
+const SlidesPrincipal = React.lazy(() => import("../modules/SlidePrincipal"));
+const SlidesSobemesas = React.lazy(() => import("../modules/SlideSobremesas"));
+const SlidesBebidas = React.lazy(() => import("../modules/SlideBebidas"));
+
+const componentMap = {
+  0: SlidesPrincipal,
+  11: SlidesSobemesas,
+  15: SlidesBebidas,
+};
+
 const SlideRenderer = ({ index }) => {
-  if (index === 0) {
-    return (
-      <Suspense fallback={<Spin />}>
-        <SlidesPrincipal />
-        <Destaque />
-      </Suspense>
-    );
-  } else if (index === 11) {
-    return (
-      <Suspense fallback={<Spin />}>
-        <SlidesSobemesas />
-      </Suspense>
-    );
-  } else if (index === 15) {
-    return (
-      <Suspense fallback={<Spin />}>
-        <SlidesBebidas />
-      </Suspense>
-    );
-  }
-  return null;
+  const Component = componentMap[index];
+
+  return (
+    <Suspense fallback={<Spin />}>
+      {Component && <Component />}
+      {index === 0 && <Destaque />}
+    </Suspense>
+  );
 };
 
 export default SlideRenderer;
