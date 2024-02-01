@@ -1,23 +1,25 @@
-import { Card, Image } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import { getCardapio, getImgCardapio } from "../../services/cardapio.ws";
+import {
+  destaques as destaq,
+  getImgCardapio,
+} from "../../services/cardapio.ws";
 import RenderImageDestaque from "./RenderImageDestaque";
 import currency_BRL from "./CurrencyBRL";
 const Destaque = () => {
-  const [cardapio, setCardapio] = useState([]);
+  const [destaques, setDestaques] = useState([]);
   const [imgSrc, setImgSrc] = useState([]);
   useEffect(() => {
     fetchCardapios();
   }, []);
   const fetchCardapios = async () => {
-    const cardapios = await getCardapio();
-    setCardapio(cardapios);
+    const destaques = await destaq();
+    setDestaques(destaques);
   };
 
   const memoizedImgSrc = useMemo(() => {
-    if (cardapio.length > 0 && imgSrc.length === 0) {
+    if (destaques.length > 0 && imgSrc.length === 0) {
       const images = [];
-      cardapio.forEach(async (item) => {
+      destaques.forEach(async (item) => {
         if (!item.ids) return;
         const img = await getImgCardapio(item.id, item.ids);
         setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
@@ -26,7 +28,7 @@ const Destaque = () => {
       return images;
     }
     return imgSrc;
-  }, [cardapio, imgSrc]);
+  }, [destaques, imgSrc]);
 
   return (
     <>
@@ -45,7 +47,7 @@ const Destaque = () => {
           justifyContent: "center",
         }}
       >
-        {cardapio
+        {destaques
           .filter((item, index) => item.highlight)
           .map((item, index) => {
             return (

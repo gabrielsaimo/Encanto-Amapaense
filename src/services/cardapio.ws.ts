@@ -29,6 +29,11 @@ export const deleteCardapio = async (data: Cardapio): Promise<void> => {
   await api.delete<Cardapio>(`/cardapio/${data.id}`);
 };
 
+export const destaques = async (): Promise<Cardapio[]> => {
+  const response = await api.get<Cardapio[]>("/cardapio/destaques");
+  return response.data;
+};
+
 export const imgCardapio = async (data: any): Promise<any> => {
   const response = await api.post<any>("/cardapio/imagemsub", data);
   return response.data;
