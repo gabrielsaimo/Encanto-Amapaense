@@ -68,7 +68,7 @@ const Destaque = () => {
         }
         scrollRef.current.scrollLeft += scrollDirectionRef.current;
       }
-    }, 5);
+    }, 15);
 
     return () => {
       clearInterval(scrollIntervalRef.current);
