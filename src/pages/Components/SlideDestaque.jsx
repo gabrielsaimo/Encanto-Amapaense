@@ -76,60 +76,64 @@ const Destaque = () => {
   }, []);
 
   return (
-    <div>
-      <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
-        Destaques
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          overflowX: "auto",
-          overflowY: "hidden",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          marginTop: 20,
-        }}
-        onClick={handleClick}
-        ref={scrollRef}
-      >
-        {destaques
-          .filter((item, index) => item.highlight)
-          .map((item, index) => {
-            return (
-              <div
-                style={{
-                  width: 200,
-                  height: 400,
-                  color: "#FFF",
-                  fontWeight: "bold",
-                  marginInline: 10,
-                }}
-              >
-                <div
-                  style={{ position: "relative", zIndex: 0, height: "350px" }}
-                >
-                  {memoizedImgSrc.map((img1, index) =>
-                    RenderImageDestaque(img1, index, item.id)
-                  )}
-                </div>
+    <div
+      style={{ textAlign: "center", justifyContent: "center", display: "flex" }}
+    >
+      <div style={{ maxWidth: 550, width: "100%" }}>
+        <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
+          Destaques
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            overflowX: "auto",
+            overflowY: "hidden",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            marginTop: 20,
+          }}
+          onClick={handleClick}
+          ref={scrollRef}
+        >
+          {destaques
+            .filter((item, index) => item.highlight)
+            .map((item, index) => {
+              return (
                 <div
                   style={{
-                    position: "relative",
-                    zIndex: 99,
-                    marginTop: -50,
-                    backgroundColor: "rgba(0,0,0,0.5)",
-                    borderRadius: "0px 0px 10px 10px",
+                    width: 200,
+                    height: 400,
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    marginInline: 10,
                   }}
                 >
-                  <div style={{ fontSize: "1em", fontWeight: "bold" }}>
-                    {item.name}
+                  <div
+                    style={{ position: "relative", zIndex: 0, height: "350px" }}
+                  >
+                    {memoizedImgSrc.map((img1, index) =>
+                      RenderImageDestaque(img1, index, item.id)
+                    )}
                   </div>
-                  <div>{currency_BRL(item.price)}</div>
+                  <div
+                    style={{
+                      position: "relative",
+                      zIndex: 99,
+                      marginTop: -50,
+                      backgroundColor: "rgba(0,0,0,0.5)",
+                      borderRadius: "0px 0px 10px 10px",
+                    }}
+                  >
+                    <div style={{ fontSize: "1em", fontWeight: "bold" }}>
+                      {item.name}
+                    </div>
+                    <div>{currency_BRL(item.price)}</div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </div>
   );
