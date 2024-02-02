@@ -76,7 +76,7 @@ const Destaque = () => {
   }, []);
 
   return (
-    <div style={{ width: "100vw" }}>
+    <div>
       <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
         Destaques
       </div>
