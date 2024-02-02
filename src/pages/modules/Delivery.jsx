@@ -239,41 +239,154 @@ const DeliveryMenu = () => {
         return;
       }
     }
+
     const email = {
       destinatario: destinararios,
       assunto: "Pedido Delivery",
-      corpo: `<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Email de Finalização de Pedido</title><style>body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5;}.container{max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}h1{color:#333;margin-top:0;}p{margin-bottom:20px;}.signature{margin-top:40px;font-style:italic;color:#888;}</style></head><body><div class='container'><h1>Pedido Recebido</h1>
-      Nome: ${nome}<br/>Telefone: ${telefone}<br/>Endereço: ${endereco}<br/>Numero: ${numero}<br/>Bairro: ${bairro}<br/>Complemento: ${complemento}<br/>Referencia: ${referencia}
-      <br><br/>Pedido: ${pedido
-        .map(
-          (item) =>
-            `<h3 style="font-weight:bold">x${item.qdt} ${item.name}</h3/>`
-        )
-        .join("")} ${meiaporcao
-        .map(
-          (item) =>
-            `<h3 style="font-weight:bold">x${item.qdt} ${item.name}</h3/>`
-        )
-        .join("")}
-        
-      Troco: ${troco}<br/>
-      Observação:<p>${observacao}</p>Metodos de Pagamento:<p> ${pagamento}</p><br/><br/>Valor Pedidos:<p> R$ ${
-        pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !== 0
-          ? currency_BRL(
-              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-            )
-          : currency_BRL(
-              pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-                meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-            )
-      }</p>Frete:<p> R$ ${valorFrete} </p><br/>Valor Total:<p> R$ ${currency_BRL(
-        Number(valorFrete) +
-          Number(
-            pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
-              meiaporcao.reduce((acc, item) => acc + item.price * item.qdt, 0)
-          )
-      )}</p><br><br/><p>Atenciosamente,</p><p><em>Encando Amapaense</em></p></div></body></html>`,
+      corpo: `<!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset='UTF-8'>
+        <title>Email de Finalização de Pedido</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+          }
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+          h1 {
+            color: #333;
+            margin-top: 0;
+          }
+          p {
+            margin-bottom: 20px;
+          }
+          .signature {
+            margin-top: 40px;
+            font-style: italic;
+            color: #888;
+          }
+          .info {
+            font-weight: bold;
+            color: #444;
+          }
+          .total {
+            font-size: 1.2em;
+            color: #333;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #4CAF50;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        <div class='container'>
+          <h1 style="color: #4CAF50;">Pedido Recebido</h1>
+          <table>
+            <tr>
+              <th>Nome</th>
+              <td>${nome}</td>
+            </tr>
+            <tr>
+              <th>Telefone</th>
+              <td>${telefone}</td>
+            </tr>
+            <tr>
+              <th>Endereço</th>
+              <td>${endereco}</td>
+            </tr>
+            <tr>
+              <th>Numero</th>
+              <td>${numero}</td>
+            </tr>
+            <tr>
+              <th>Bairro</th>
+              <td>${bairro !== "Selecione" ? bairro : ""}</td>
+            </tr>
+            <tr>
+              <th>Complemento</th>
+              <td>${complemento}</td>
+            </tr>
+            <tr>
+              <th>Referencia</th>
+              <td>${referencia}</td>
+            </tr>
+          </table>
+          <h2 style="color: #4CAF50;">Pedido:</h2>
+          <table>
+            <tr>
+              
+              <th>Qtd</th>
+              <th>Item</th>
+            </tr>
+            ${pedido
+              .map(
+                (item) => `<tr><td>x${item.qdt}</td><td>${item.name}</td></tr>`
+              )
+              .join("")}
+            ${meiaporcao
+              .map(
+                (item) => `<tr><td>x${item.qdt}</td><td>${item.name}</td></tr>`
+              )
+              .join("")}
+          </table>
+          <p class="info">Troco: ${troco}</p>
+          <p class="info">Observação: ${observacao}</p>
+          <p class="info">Metodos de Pagamento: ${pagamento}</p>
+          <p class="info">Valor Pedidos: R$ ${
+            pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) % 1 !==
+            0
+              ? currency_BRL(
+                  pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qdt,
+                      0
+                    )
+                )
+              : currency_BRL(
+                  pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                    meiaporcao.reduce(
+                      (acc, item) => acc + item.price * item.qdt,
+                      0
+                    )
+                )
+          }</p>
+          <p class="info">Frete: R$ ${valorFrete}</p>
+          <p class="total">Valor Total: R$ ${currency_BRL(
+            Number(valorFrete) +
+              Number(
+                pedido.reduce((acc, item) => acc + item.price * item.qdt, 0) +
+                  meiaporcao.reduce(
+                    (acc, item) => acc + item.price * item.qdt,
+                    0
+                  )
+              )
+          )}</p>
+          <p>Atenciosamente,</p>
+          <p class="signature">Encando Amapaense</p>
+        </div>
+      </body>
+      </html>`,
     };
 
     const msgDelivey = `Nome: ${nome}%0ATelefone: ${telefone}%0AEndereço: ${endereco}%0ANumero: ${numero}%0ABairro: ${bairro}%0AComplemento: ${complemento}%0AReferencia: ${referencia}%0AObservação: *${observacao}*%0APagamento: *${pagamento}*%0ATroco: ${troco}%0A%0A%0A *Pedido:* %0A ${pedido
