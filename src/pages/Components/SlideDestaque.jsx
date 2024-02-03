@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useState,
-  useRef,
-  useCallback,
-} from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import {
   destaques as destaq,
   getImgCardapio,
@@ -97,8 +91,8 @@ const Destaque = () => {
           ref={scrollRef}
         >
           {destaques
-            .filter((item, index) => item.highlight)
-            .map((item, index) => {
+            .filter((item) => item.highlight)
+            .map((item) => {
               return (
                 <div
                   style={{
@@ -121,6 +115,7 @@ const Destaque = () => {
                       position: "relative",
                       zIndex: 99,
                       marginTop: -50,
+                      padding: "10px",
                       backgroundColor: "rgba(0,0,0,0.5)",
                       borderRadius: "0px 0px 10px 10px",
                     }}
