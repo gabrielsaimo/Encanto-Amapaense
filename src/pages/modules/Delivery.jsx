@@ -458,7 +458,7 @@ const DeliveryMenu = () => {
     setVisible(false);
     setLoading(false);
     await postEmail(email);
-    await PutClientes();
+    //  await PutClientes();
     setPedido([]);
     setNome("");
     setTelefone("");
