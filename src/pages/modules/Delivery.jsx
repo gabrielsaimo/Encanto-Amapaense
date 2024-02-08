@@ -41,7 +41,7 @@ import { getCategoty } from "../../services/category.ws";
 import TextArea from "antd/es/input/TextArea";
 import { postEmail } from "../../services/email.ws";
 import { putPedidos } from "../../services/Pedidos.ws";
-
+import { putClientes } from "../../services/Cleintes.ws";
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
@@ -458,6 +458,7 @@ const DeliveryMenu = () => {
     setVisible(false);
     setLoading(false);
     await postEmail(email);
+    await PutClientes();
     setPedido([]);
     setNome("");
     setTelefone("");
@@ -580,6 +581,16 @@ const DeliveryMenu = () => {
   const getDado = async () => {
     const dados = await getDados();
     setDados(dados[0]);
+  };
+
+  const PutClientes = async () => {
+    const body = {
+      name: nome,
+      phone: telefone.replace(/[^\d]/g, ""),
+      category: "Cliente",
+      active: true,
+    };
+    await putClientes(body);
   };
 
   const getEmails = async () => {
