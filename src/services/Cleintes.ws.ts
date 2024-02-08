@@ -18,3 +18,8 @@ export const putClientes = async (
   const response = await api.put<CleintesInterface>("/cliente", data);
   return response.data;
 };
+
+export const ValidatePhone = async (phone: string): Promise<boolean> => {
+  const response = await api.get<boolean>(`/cliente/validar/${phone}`);
+  return response.data;
+};
