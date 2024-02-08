@@ -600,6 +600,7 @@ const DeliveryMenu = () => {
         if (item.type.split(",").includes("Delivery")) {
           return setDestinararios((prev) => [...prev, item.mail]);
         }
+        return null;
       });
     } catch (e) {
       getEmails();
