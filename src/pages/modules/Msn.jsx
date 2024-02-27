@@ -3,6 +3,7 @@ import { Button, Card, Divider, Input, message, Modal, Select } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
+import { i18n } from "../Translate/i18n";
 
 export default function Msn() {
   const [ok, setOk] = React.useState(false);
@@ -39,7 +40,7 @@ export default function Msn() {
             backgroundColor: "transparent",
           }}
         >
-          <h3>Relate aqui como foi sua experiência!</h3>
+          <h3>{i18n.t("Relate_sua_experiência")}</h3>
           <Button
             style={{ width: 200, height: 60 }}
             onClick={() => setVisible(true)}

@@ -230,7 +230,7 @@ const messages = {
       Cerveja: "Cerveza",
       "Sucos exóticos": "Jugos Exóticos",
       "bebidas alcolicas": "Bebidas Alcohólicas",
-
+      Relate_sua_experiência: "Cuenta tu experiencia",
       changeLanguage: "Cambiar idioma",
       english: "Inglés",
       portuguese: "Portugués",
