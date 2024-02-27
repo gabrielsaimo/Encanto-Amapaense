@@ -30,7 +30,7 @@ function Home() {
         <div
           style={{ textAlign: "center", display: "flex", alignItems: "center" }}
         >
-          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />
           <Divider type="vertical" />
           {i18n.t("spanish")}
         </div>
@@ -42,7 +42,7 @@ function Home() {
         <div
           style={{ textAlign: "center", display: "flex", alignItems: "center" }}
         >
-          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />
           <Divider type="vertical" />
           {i18n.t("english")}
         </div>
@@ -54,7 +54,7 @@ function Home() {
         <div
           style={{ textAlign: "center", display: "flex", alignItems: "center" }}
         >
-          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />
           <Divider type="vertical" />
           {i18n.t("french")}
         </div>
