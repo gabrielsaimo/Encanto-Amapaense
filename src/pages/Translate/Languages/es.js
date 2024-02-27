@@ -182,6 +182,8 @@ const messages = {
       "(+ 1 real adicional de leite)": "(+ R$ 1 adicional de leche)",
       "(+ 5 reais adicional de leite)": "(+ R$ 5 adicionales de leche)",
       "(1,2 litros)": "(1,2 litros)",
+      "(Acomp. Arroz. Saladada de maionese, Tropeiro, Tucupi)":
+        "(Acompañado con Arroz, Ensalada de Mayonesa, Tropeiro, Tucupi)",
       "Limão taiti, couve, gengibre e açúcar":
         "Limón tahití, col, jengibre y azúcar",
       "Suco de laranja, limão e abacaxi, beterraba e açúcar branco ":

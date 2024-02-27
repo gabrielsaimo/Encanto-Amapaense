@@ -178,6 +178,8 @@ const messages = {
       "(+ 1 real adicional de leite)": "(+ R$ 1 additional of milk)",
       "(+ 5 reais adicional de leite)": "(+ R$ 5 additional of milk)",
       "(1,2 litros)": "(1.2 liters)",
+      "(Acomp. Arroz. Saladada de maionese, Tropeiro, Tucupi)":
+        "(Served with Rice, Mayonnaise Salad, Tropeiro, Tucupi)",
       "Limão taiti, couve, gengibre e açúcar":
         "Tahiti lemon, cabbage, ginger and sugar",
       "Suco de laranja, limão e abacaxi, beterraba e açúcar branco ":

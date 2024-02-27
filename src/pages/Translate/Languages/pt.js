@@ -2,7 +2,7 @@ const messages = {
   pt: {
     translations: {
       menu: "Cardápio",
-      delivery: "delivery1",
+      delivery: "delivery",
       highlights: "Destaques",
       Relate_sua_experiência: "Relate sua experiência",
       changeLanguage: "Mudar idioma",
