@@ -4,6 +4,7 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import { useInView } from "react-intersection-observer";
 import RenderImageCarousel from "./RenderImageCarousel";
 import currency_BRL from "./CurrencyBRL";
+import { i18n } from "../Translate/i18n";
 
 const { Panel } = Collapse;
 
@@ -38,7 +39,11 @@ const CardapioItem = ({
           justifyContent: "center",
         }}
       >
-        <Panel id={categoryName} style={categoryStyle} header={categoryName}>
+        <Panel
+          id={categoryName}
+          style={categoryStyle}
+          header={i18n.t(categoryName)}
+        >
           {item.map((categoria, idx) => {
             const isEven = item.length % 2 === 0;
             const isLeftToRight = isEven ? idx % 2 === 0 : idx % 2 !== 0;
@@ -57,12 +62,13 @@ const CardapioItem = ({
                     <div style={{ width: "100%", display: "contents" }}>
                       <div>
                         <p className="p_1 name georgia-font">
-                          {categoria.name}
+                          {i18n.t(categoria.name)}
                         </p>
                       </div>
                       <div className="flex">
                         <div className="sub">
-                          {categoria.sub} {categoria.description}
+                          {i18n.t(categoria.sub)}
+                          {i18n.t(categoria.description)}
                         </div>
                       </div>
                     </div>
@@ -75,7 +81,7 @@ const CardapioItem = ({
                       }}
                     >
                       <p className="p_1 price georgia-bold-font">
-                        {`R$ ${currency_BRL(categoria.price)}`}
+                        {`${currency_BRL(categoria.price)}`}
                       </p>
                     </div>
                   </div>

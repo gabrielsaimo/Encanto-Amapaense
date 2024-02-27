@@ -5,6 +5,7 @@ import {
 } from "../../services/cardapio.ws";
 import RenderImageDestaque from "./RenderImageDestaque";
 import currency_BRL from "./CurrencyBRL";
+import { i18n } from "../Translate/i18n";
 
 const Destaque = () => {
   const [destaques, setDestaques] = useState([]);
@@ -75,7 +76,7 @@ const Destaque = () => {
     >
       <div style={{ maxWidth: 550, width: "100%" }}>
         <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
-          Destaques
+          {i18n.t("highlights")}
         </div>
         <div
           style={{
@@ -121,7 +122,7 @@ const Destaque = () => {
                     }}
                   >
                     <div style={{ fontSize: "1em", fontWeight: "bold" }}>
-                      {item.name}
+                      {i18n.t(item.name)}
                     </div>
                     <div>{currency_BRL(item.price)}</div>
                   </div>

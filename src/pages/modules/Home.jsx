@@ -1,11 +1,67 @@
+import React from "react";
 import ResizeListener from "../Components/ResizeListener";
 import BackgroundImage from "../Components/BackgroundImage";
 import { Link } from "react-router-dom";
-import { Button, Divider } from "antd";
+import { Button, Divider, Modal, Radio } from "antd";
 import { BookOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { i18n } from "../Translate/i18n";
+import { FlagIcon } from "react-flag-kit";
 
 function Home() {
   const isMobile = ResizeListener();
+  const [language] = React.useState(localStorage.getItem("i18nextLng"));
+  const [onevisitend, setOneVisitEnd] = React.useState(false);
+
+  const options = [
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="BR" size={20} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("portuguese")}
+        </div>
+      ),
+      value: "pt-BR",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("spanish")}
+        </div>
+      ),
+      value: "es-ES",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("english")}
+        </div>
+      ),
+      value: "en-US",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("french")}
+        </div>
+      ),
+      value: "fr-FR",
+    },
+  ];
 
   const buttonStyle = {
     width: "80vw",
@@ -54,11 +110,33 @@ function Home() {
           />
         </div>
         <Divider />
+        <Button
+          shape="round"
+          onClick={() => setOneVisitEnd(true)}
+          size={isMobile ? "large" : "large"}
+          style={{
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            margin: "auto",
+            height: "8vh",
+          }}
+        >
+          <FlagIcon
+            code={language.substring(3, 5)}
+            style={{ borderRadius: "100%" }}
+            size={50}
+          />
+          <Divider type="vertical" />
+          {i18n.t("changeLanguage")}
+        </Button>
+
+        <Divider />
         {renderButton(
           "/Cardapio",
           styles.button1,
           <BookOutlined />,
-          "Cardápio"
+          i18n.t("menu")
         )}
         <Divider />
         {renderButton(
@@ -69,6 +147,22 @@ function Home() {
         )}
         <Divider />
       </div>
+      <Modal
+        open={onevisitend}
+        footer={null}
+        closable={true}
+        onCancel={() => setOneVisitEnd(false)}
+      >
+        <Radio.Group
+          options={options}
+          onChange={(value) => [
+            localStorage.setItem("i18nextLng", value.target.value),
+            i18n.changeLanguage(value.target.value),
+            window.location.reload(),
+          ]}
+          optionType="button"
+        />
+      </Modal>
     </div>
   );
 }

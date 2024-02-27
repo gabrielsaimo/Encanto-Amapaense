@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Anchor, Button, Drawer, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { getCategoty } from "../../services/category.ws";
+import { i18n } from "../Translate/i18n";
 const Menu = () => {
   const [cardapioCategory, setCardapioCategory] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
@@ -48,7 +49,7 @@ const Menu = () => {
             items={cardapioCategory.map((item, index) => ({
               href: `#${item.name}`,
               key: `${index}`,
-              title: `${item.name}`,
+              title: `${i18n.t(item.name)}`,
             }))}
           />
         </Drawer>

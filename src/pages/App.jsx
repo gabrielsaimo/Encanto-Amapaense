@@ -1,24 +1,90 @@
 import React, { useState, useEffect, Suspense, lazy, useCallback } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Affix, Button, FloatButton, Input, Modal, Space, Spin } from "antd";
+import {
+  Affix,
+  Button,
+  Divider,
+  FloatButton,
+  Input,
+  Modal,
+  Radio,
+  Space,
+  Spin,
+} from "antd";
 import { Link } from "react-router-dom";
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FlagIcon } from "react-flag-kit";
 
 import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
+import ModalTranslation from "./Components/ModalTranslation";
+import { i18n } from "./Translate/i18n";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 
 const fundo = require("../assets/fundo.webp");
 const logo = require("../assets/logo.webp");
 
 function App() {
+  const [language] = React.useState(localStorage.getItem("i18nextLng"));
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
   const [pedidos, setPedidos] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
+
+  const options = [
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="BR" size={20} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("portuguese")}
+        </div>
+      ),
+      value: "pt-BR",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("spanish")}
+        </div>
+      ),
+      value: "es-ES",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("english")}
+        </div>
+      ),
+      value: "en-US",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <Divider type="vertical" />
+          {i18n.t("french")}
+        </div>
+      ),
+      value: "fr-FR",
+    },
+  ];
 
   useEffect(() => {
     if (contar > 10 && contar < 15) {
@@ -74,11 +140,22 @@ function App() {
           <Menu />
         </Affix>
       </div>
-
+      <div style={{ display: "flex" }}>
+        <Affix
+          offsetTop={10}
+          style={{ position: "fixed", right: 100, top: 10, zIndex: 9 }}
+        >
+          <FlagIcon
+            code={language.substring(3, 5)}
+            style={{ borderRadius: "100%" }}
+            size={50}
+            onClick={() => setModalAberto(true)}
+          />
+        </Affix>
+      </div>
       <Suspense fallback={<Spin />}>
         <CollapseMenu />
       </Suspense>
-
       <Space direction="vertical" style={{ margin: "10px 0" }}></Space>
       <Modal open={visible2} footer={null} closable={true} width={150}>
         <Space direction="vertical">
@@ -153,6 +230,23 @@ function App() {
       <Msn />
       <Footer />
       <div style={{ height: 30 }} />
+      <Modal
+        open={modalAberto}
+        footer={null}
+        closable={true}
+        onCancel={() => setModalAberto(false)}
+      >
+        <Radio.Group
+          options={options}
+          onChange={(value) => [
+            localStorage.setItem("i18nextLng", value.target.value),
+            i18n.changeLanguage(value.target.value),
+            window.location.reload(),
+          ]}
+          optionType="button"
+        />
+      </Modal>
+      ;
     </div>
   );
 }
