@@ -96,18 +96,6 @@ function App() {
       ),
       value: "fr-FR",
     },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="DE" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("german")}
-        </div>
-      ),
-      value: "de-DE",
-    },
   ];
   console.log("🚀 ~ App ~ options:", options);
 
