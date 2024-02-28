@@ -20,7 +20,6 @@ import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
-import ModalTranslation from "./Components/ModalTranslation";
 import { i18n } from "./Translate/i18n";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 
@@ -53,19 +52,7 @@ function App() {
         <div
           style={{ textAlign: "center", display: "flex", alignItems: "center" }}
         >
-          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />{" "}
-          <Divider type="vertical" />
-          {i18n.t("spanish")}
-        </div>
-      ),
-      value: "es-ES",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />
           <Divider type="vertical" />
           {i18n.t("english")}
         </div>
@@ -77,14 +64,52 @@ function App() {
         <div
           style={{ textAlign: "center", display: "flex", alignItems: "center" }}
         >
-          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />{" "}
+          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("spanish")}
+        </div>
+      ),
+      value: "es-ES",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="DE" size={20} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("german")}
+        </div>
+      ),
+      value: "de-DE",
+    },
+
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />
           <Divider type="vertical" />
           {i18n.t("french")}
         </div>
       ),
       value: "fr-FR",
     },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="DE" size={20} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("german")}
+        </div>
+      ),
+      value: "de-DE",
+    },
   ];
+  console.log("🚀 ~ App ~ options:", options);
 
   useEffect(() => {
     if (contar > 10 && contar < 15) {

@@ -10,6 +10,7 @@ const messages = {
       portuguese: "Português",
       spanish: "Espanhol",
       french: "Francês",
+      german: "Alemão",
     },
   },
 };

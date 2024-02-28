@@ -95,6 +95,7 @@ const messages = {
       "Filé kids": "Kids Fillet",
       "Frango kids": "Kids Chicken",
       "Peixe kids": "Kids Fish",
+
       Mouse: "Mouse",
       "Banana flambada c sorvete": "Flambéed Banana with Ice Cream",
       Açaí: "Açaí",
@@ -230,12 +231,25 @@ const messages = {
       "Sucos exóticos": "Exotic Juices",
       "bebidas alcolicas": "Alcoholic Beverages",
 
+      Mensagem: "Message",
+      Motivo: "Reason",
+      "Seu Nome": "Your Name",
+      Enviar: "Send",
+      Cancelar: "Cancel",
+
+      Dúvida: "Doubt",
+      Susgestão: "Suggestion",
+      Reclamação: "Complaint",
+      Elogio: "Compliment",
+      Outros: "Others",
+
       Relate_sua_experiência: "Tell us about your experience",
       changeLanguage: "Change language",
       english: "English",
       portuguese: "Portuguese",
       spanish: "Spanish",
       french: "French",
+      german: "German",
     },
   },
 };

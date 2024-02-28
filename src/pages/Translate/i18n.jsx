@@ -17,4 +17,4 @@ i18n.use(LanguageDetector).init({
   },
 });
 
-export {i18n};
+export { i18n };

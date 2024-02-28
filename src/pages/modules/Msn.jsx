@@ -48,35 +48,36 @@ export default function Msn() {
             <MessageOutlined />
           </Button>
           <Modal
-            title="Mensagem"
+            title={i18n.t("Mensagem")}
             open={visible}
             onOk={handleSave}
             onCancel={() => setVisible(false)}
-            okText="Enviar"
-            cancelText="Cancelar"
+            okText={i18n.t("Enviar")}
+            cancelText={i18n.t("Cancelar")}
           >
             <Divider />
             <Input
-              placeholder="Seu Nome"
+              placeholder={i18n.t("Seu Nome")}
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
             <Divider />
             <Select
-              placeholder="Selecione o Motivo"
+              placeholder={i18n.t("Motivo")}
               aria-required
+              style={{ width: 200 }}
               onChange={(e) => setMotivo(e)}
             >
               {motivos.map((motivo, index) => (
                 <Select.Option key={index} value={motivo}>
-                  {motivo}
+                  {i18n.t(motivo)}
                 </Select.Option>
               ))}
             </Select>
             <Divider />
             <Input.TextArea
-              placeholder="Mensagem"
+              placeholder={i18n.t("Mensagem")}
               required
               onChange={(e) => {
                 setMensagem(e.target.value);
@@ -96,7 +97,7 @@ export default function Msn() {
             marginRight: "auto",
           }}
         >
-          Obrigado pelo seu Seu feedback!
+          {i18n.t("Mensagem enviada com sucesso")}
         </Card>
       )}
     </>

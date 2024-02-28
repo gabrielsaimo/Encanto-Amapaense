@@ -221,6 +221,18 @@ const messages = {
       "Mix de frutas, creme de leite, leite condensado e vodka":
         "Mélange de fruits, crème, lait concentré et vodka",
 
+      Mensagem: "Message",
+      Motivo: "Raison",
+      "Seu Nome": "Votre Nom",
+      Enviar: "Envoyer",
+      Cancelar: "Annuler",
+
+      Dúvida: "Doute",
+      Susgestão: "Suggestion",
+      Reclamação: "Réclamation",
+      Elogio: "Compliment",
+      Outros: "Autres",
+
       Entradas: "Entrées",
       "Mujicas e Caldos": "Ragoûts et Bouillons",
       "Peixe ao Molho": "Poisson avec Sauce",
@@ -241,6 +253,7 @@ const messages = {
       portuguese: "Portugais",
       spanish: "Espagnol",
       french: "Français",
+      german: "Allemand",
     },
   },
 };
