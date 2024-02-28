@@ -8,7 +8,13 @@ export default function BackgroundImage() {
       src={backgroundImage}
       effect="blur"
       alt="background"
-      style={{ width: "98vw", zIndex: 0, position: "relative", top: 0 }}
+      style={{
+        width: "98vw",
+        zIndex: 0,
+        position: "relative",
+        top: 0,
+        maxHeight: "300px",
+      }}
     />
   );
 }
