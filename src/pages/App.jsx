@@ -130,19 +130,19 @@ function App() {
   return (
     <div className="App background_fundo">
       <LazyLoadImage
+        src={fundo}
+        className="fundo"
+        alt="fundo"
+        decoding="async"
+        loading="eager"
+      />
+      <LazyLoadImage
         src={logo}
         className="logo"
         alt="logo-principal"
         loading="eager"
         decoding="async"
         onClick={handleLogoClick}
-      />
-      <LazyLoadImage
-        src={fundo}
-        className="fundo"
-        alt="fundo"
-        decoding="async"
-        loading="eager"
       />
       <div style={{ display: "flex" }}>
         <Affix
