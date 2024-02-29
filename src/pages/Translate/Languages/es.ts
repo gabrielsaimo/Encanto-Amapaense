@@ -62,7 +62,7 @@ const messages = {
       "Camarão Tropical": "Camarón Tropical",
       "Risoto de cantarão Rosa": "Risotto de Camarón Rosa",
       "Camarão na Moranga": "Camarón en Calabaza",
-      "Filé Grehado": "Filete a la Parrilla",
+      "Filé Grelhado": "Filete a la Parrilla",
       "Filé c/ fritas": "Filete con Papas Fritas",
       "Filé à Parmegiana": "Filete a la Parmesana",
       "Filé à Rolê": "Filete Relleno",

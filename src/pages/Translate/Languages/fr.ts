@@ -2,7 +2,7 @@ const messages = {
   fr: {
     translations: {
       menu: "Menu",
-      delivery: "livraison",
+      delivery: "Livraison",
       highlights: "Points forts",
       "Camarão no Bafo": "Crevettes à la Vapeur",
       "Batata ou Macaxeira": "Frites ou Manioc",
@@ -61,7 +61,7 @@ const messages = {
       "Camarão Tropical": "Crevettes Tropicales",
       "Risoto de cantarão Rosa": "Risotto aux Crevettes Roses",
       "Camarão na Moranga": "Crevettes dans la Citrouille",
-      "Filé Grehado": "Filet Grillé",
+      "Filé Grelhado": "Filet Grillé",
       "Filé c/ fritas": "Filet avec Frites",
       "Filé à Parmegiana": "Filet à la Parmesan",
       "Filé à Rolê": "Filet Roulé",
@@ -221,7 +221,7 @@ const messages = {
       "Mix de frutas, creme de leite, leite condensado e vodka":
         "Mélange de fruits, crème, lait concentré et vodka",
 
-      Mensagem: "Message",
+      Mensagem: "Messages",
       Motivo: "Raison",
       "Seu Nome": "Votre Nom",
       Enviar: "Envoyer",
@@ -240,7 +240,7 @@ const messages = {
       Carnes: "Viandes",
       Frango: "Poulet",
       Moquecas: "Moquecas",
-      Caldeiradas: "Ragoûts de Poissons",
+      Caldeiradas: "Ragoût de Poisson",
       "Porções Extras": "Extra Portions",
       Sobremesas: "Desserts",
       Bebidas: "Boissons",

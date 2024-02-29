@@ -59,7 +59,7 @@ const messages = {
       "Camarão Tropical": "Tropische Garnelen",
       "Risoto de cantarão Rosa": "Risotto mit rosa Garnelen",
       "Camarão na Moranga": "Garnelen in Kürbis",
-      "Filé Grehado": "Gegrilltes Filet",
+      "Filé Grelhado": "Gegrilltes Filet",
       "Filé c/ fritas": "Filet mit Pommes",
       "Filé à Parmegiana": "Filet à Parmegiana",
       "Filé à Rolê": "Filet à Rolê",

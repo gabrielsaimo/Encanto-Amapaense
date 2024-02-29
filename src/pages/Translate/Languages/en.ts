@@ -59,7 +59,7 @@ const messages = {
       "Camarão Tropical": "Tropical Shrimp",
       "Risoto de cantarão Rosa": "Pink Shrimp Risotto",
       "Camarão na Moranga": "Shrimp in Pumpkin",
-      "Filé Grehado": "Grilled Fillet",
+      "Filé Grelhado": "Grilled Fillet",
       "Filé c/ fritas": "Fillet with Fries",
       "Filé à Parmegiana": "Parmegiana Fillet",
       "Filé à Rolê": "Rolled Fillet",
