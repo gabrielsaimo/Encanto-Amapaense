@@ -4,7 +4,6 @@ import {
   ConfigProvider,
   DatePicker,
   Descriptions,
-  Select,
   notification,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -14,7 +13,6 @@ import {
   getPedidosData,
 } from "../../services/Pedidos.ws";
 import { getCardapio } from "../../services/cardapio.ws";
-import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
 import moment from "moment/moment";
@@ -26,12 +24,9 @@ export default function Pedidos(atualizar) {
     hora + ":" + data.getMinutes() + ":" + data.getSeconds();
 
   const [pedidos, setPedido] = useState([]);
-  const [count, setCount] = useState(0);
   const [cardapio, setCardapio] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const [pedidoss, setPedidos] = useState([]);
-  const [dataInicio, setDataInicio] = useState(null);
-  const [dataFim, setdataFim] = useState(null);
   const openNotification = (placement, title, notifi) => {
     api.info({
       message: `${title}`,
@@ -88,8 +83,6 @@ export default function Pedidos(atualizar) {
   };
 
   async function datas(e) {
-    setDataInicio(null);
-    setdataFim(null);
     if (e) {
       const originalDate1 = new Date(e[0]);
       const originalDate2 = new Date(e[1]);
@@ -110,9 +103,6 @@ export default function Pedidos(atualizar) {
         .getDate()
         .toString()
         .padStart(2, "0")}`;
-
-      setDataInicio(formattedDate1);
-      setdataFim(formattedDate2);
       getPedido_data(formattedDate1, formattedDate2);
     }
   }
