@@ -7,11 +7,13 @@ import "../src/css/index.css";
 import reportWebVitals from "./reportWebVitals";
 import { sendToVercelAnalytics } from "./vitals";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Analytics />
     <Routes />
+    <SpeedInsights />
   </BrowserRouter>
 );
 
