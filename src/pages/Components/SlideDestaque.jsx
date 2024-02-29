@@ -6,13 +6,14 @@ import {
 import RenderImageDestaque from "./RenderImageDestaque";
 import currency_BRL from "./CurrencyBRL";
 import { i18n } from "../Translate/i18n";
-
+import { Spin } from "antd";
 const Destaque = () => {
   const [destaques, setDestaques] = useState([]);
   const [imgSrc, setImgSrc] = useState([]);
   const scrollRef = useRef();
   const scrollIntervalRef = useRef();
   const scrollDirectionRef = useRef(1);
+  const [isLoading, setIsLoading] = useState(true);
   const handleClick = () => {
     clearInterval(scrollIntervalRef.current);
     setTimeout(() => {
@@ -49,6 +50,9 @@ const Destaque = () => {
       });
       return images;
     }
+    setInterval(() => {
+      setIsLoading(false);
+    }, 1000);
     return imgSrc;
   }, [destaques, imgSrc]);
 
@@ -69,7 +73,9 @@ const Destaque = () => {
       clearInterval(scrollIntervalRef.current);
     };
   }, []);
-
+  if (isLoading) {
+    return <Spin />;
+  }
   return (
     <div
       style={{ textAlign: "center", justifyContent: "center", display: "flex" }}
