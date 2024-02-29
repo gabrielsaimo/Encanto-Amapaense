@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Spin } from "antd";
 
-//const SlidesPrincipal = React.lazy(() => import("../modules/SlidePrincipal"));
 const SlidesSobemesas = React.lazy(() => import("../modules/SlideSobremesas"));
 const SlidesBebidas = React.lazy(() => import("../modules/SlideBebidas"));
 const Destaque = React.lazy(() => import("./SlideDestaque"));
