@@ -60,10 +60,8 @@ const Destaque = () => {
     scrollIntervalRef.current = setInterval(() => {
       if (scrollRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        if (scrollLeft + clientWidth >= scrollWidth) {
-          scrollDirectionRef.current = -1; // Mude a direção para a esquerda
-        } else if (scrollLeft === 0) {
-          scrollDirectionRef.current = 1; // Mude a direção para a direita
+        if (scrollLeft + clientWidth >= scrollWidth - 200) {
+          setDestaques((prevDestaques) => [...prevDestaques, ...destaques]); // Adiciona mais cards
         }
         scrollRef.current.scrollLeft += scrollDirectionRef.current;
       }
@@ -99,7 +97,8 @@ const Destaque = () => {
         >
           {destaques
             .filter((item) => item.highlight)
-            .map((item) => {
+
+            .map((item, index) => {
               return (
                 <div
                   style={{

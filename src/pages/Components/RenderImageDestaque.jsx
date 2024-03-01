@@ -33,6 +33,7 @@ const RenderImageDestaque = (img, index, id) =>
           <Carousel
             autoplay={true}
             autoplaySpeed={2000}
+            infinite={true}
             showArrows={true}
             Swiping={true}
             draggable={true}
