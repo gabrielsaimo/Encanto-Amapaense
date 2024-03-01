@@ -27,7 +27,9 @@ const fundo = require("../assets/fundo.webp");
 const logo = require("../assets/logo.webp");
 
 function App() {
-  const [language] = React.useState(localStorage.getItem("i18nextLng"));
+  const [language, setLanguage] = React.useState(
+    localStorage.getItem("i18nextLng")
+  );
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -253,7 +255,8 @@ function App() {
           onChange={(value) => [
             localStorage.setItem("i18nextLng", value.target.value),
             i18n.changeLanguage(value.target.value),
-            window.location.reload(),
+            setModalAberto(false),
+            setLanguage(value.target.value),
           ]}
           optionType="button"
         />

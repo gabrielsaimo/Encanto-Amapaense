@@ -9,7 +9,9 @@ import { FlagIcon } from "react-flag-kit";
 
 function Home() {
   const isMobile = ResizeListener();
-  const [language] = React.useState(localStorage.getItem("i18nextLng"));
+  const [language, setLanguade] = React.useState(
+    localStorage.getItem("i18nextLng")
+  );
   const [onevisitend, setOneVisitEnd] = React.useState(false);
 
   const options = [
@@ -171,7 +173,8 @@ function Home() {
           onChange={(value) => [
             localStorage.setItem("i18nextLng", value.target.value),
             i18n.changeLanguage(value.target.value),
-            window.location.reload(),
+            setOneVisitEnd(false),
+            setLanguade(value.target.value),
           ]}
           optionType="button"
         />
