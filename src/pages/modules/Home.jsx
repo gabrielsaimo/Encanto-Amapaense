@@ -6,77 +6,24 @@ import { Button, Divider, Modal, Radio } from "antd";
 import { BookOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { i18n } from "../Translate/i18n";
 import { FlagIcon } from "react-flag-kit";
+import DrawerTranslate from "../Components/DrawerTranslate";
 
 function Home() {
   const isMobile = ResizeListener();
-  const [language, setLanguade] = React.useState(
+  const [language, setLanguage] = React.useState(
     localStorage.getItem("i18nextLng")
   );
   const [onevisitend, setOneVisitEnd] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
-  const options = [
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="BR" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("portuguese")}
-        </div>
-      ),
-      value: "pt-BR",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("english")}
-        </div>
-      ),
-      value: "en-US",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("spanish")}
-        </div>
-      ),
-      value: "es-ES",
-    },
+  const openDrawer = () => {
+    setIsDrawerOpen(true);
+  };
 
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("french")}
-        </div>
-      ),
-      value: "fr-FR",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="DE" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("german")}
-        </div>
-      ),
-      value: "de-DE",
-    },
-  ];
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+    setLanguage(localStorage.getItem("i18nextLng"));
+  };
 
   const buttonStyle = {
     width: "80vw",
@@ -127,7 +74,7 @@ function Home() {
         <Divider />
         <Button
           shape="round"
-          onClick={() => setOneVisitEnd(true)}
+          onClick={() => openDrawer()}
           size={isMobile ? "large" : "large"}
           style={{
             textAlign: "center",
@@ -162,23 +109,8 @@ function Home() {
         )}
         <Divider />
       </div>
-      <Modal
-        open={onevisitend}
-        footer={null}
-        closable={true}
-        onCancel={() => setOneVisitEnd(false)}
-      >
-        <Radio.Group
-          options={options}
-          onChange={(value) => [
-            localStorage.setItem("i18nextLng", value.target.value),
-            i18n.changeLanguage(value.target.value),
-            setOneVisitEnd(false),
-            setLanguade(value.target.value),
-          ]}
-          optionType="button"
-        />
-      </Modal>
+
+      <DrawerTranslate open={isDrawerOpen} close={closeDrawer} />
     </div>
   );
 }

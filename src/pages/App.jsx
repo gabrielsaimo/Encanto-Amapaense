@@ -21,6 +21,7 @@ import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
 import { i18n } from "./Translate/i18n";
+import DrawerTranslate from "./Components/DrawerTranslate";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 
 const fundo = require("../assets/fundo.webp");
@@ -34,71 +35,17 @@ function App() {
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
   const [pedidos, setPedidos] = useState([]);
-  const [modalAberto, setModalAberto] = useState(false);
 
-  const options = [
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="BR" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("portuguese")}
-        </div>
-      ),
-      value: "pt-BR",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="US" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("english")}
-        </div>
-      ),
-      value: "en-US",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="ES" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("spanish")}
-        </div>
-      ),
-      value: "es-ES",
-    },
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="DE" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("german")}
-        </div>
-      ),
-      value: "de-DE",
-    },
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-    {
-      label: (
-        <div
-          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
-        >
-          <FlagIcon code="FR" size={20} style={{ borderRadius: "100%" }} />
-          <Divider type="vertical" />
-          {i18n.t("french")}
-        </div>
-      ),
-      value: "fr-FR",
-    },
-  ];
+  const openDrawer = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+    setLanguage(localStorage.getItem("i18nextLng"));
+  };
 
   useEffect(() => {
     if (contar > 10 && contar < 15) {
@@ -157,13 +104,13 @@ function App() {
       <div style={{ display: "flex" }}>
         <Affix
           offsetTop={10}
-          style={{ position: "fixed", right: 100, top: 10, zIndex: 9 }}
+          style={{ position: "fixed", right: 15, top: 80, zIndex: 9 }}
         >
           <FlagIcon
             code={language.substring(3, 5)}
             style={{ borderRadius: "100%" }}
             size={50}
-            onClick={() => setModalAberto(true)}
+            onClick={() => openDrawer()}
           />
         </Affix>
       </div>
@@ -244,24 +191,8 @@ function App() {
       <Msn />
       <Footer />
       <div style={{ height: 30 }} />
-      <Modal
-        open={modalAberto}
-        footer={null}
-        closable={true}
-        onCancel={() => setModalAberto(false)}
-      >
-        <Radio.Group
-          options={options}
-          onChange={(value) => [
-            localStorage.setItem("i18nextLng", value.target.value),
-            i18n.changeLanguage(value.target.value),
-            setModalAberto(false),
-            setLanguage(value.target.value),
-          ]}
-          optionType="button"
-        />
-      </Modal>
-      ;
+
+      <DrawerTranslate open={isDrawerOpen} close={closeDrawer} />
     </div>
   );
 }
