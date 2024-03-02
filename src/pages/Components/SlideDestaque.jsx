@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useState,
-  useRef,
-  useCallback,
-} from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
   destaques as destaq,
   getImgCardapio,
@@ -20,23 +14,6 @@ const Destaque = () => {
   const scrollIntervalRef = useRef();
   const scrollDirectionRef = useRef(1);
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleClick = () => {
-    clearInterval(scrollIntervalRef.current);
-    setTimeout(() => {
-      scrollIntervalRef.current = setInterval(() => {
-        if (scrollRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-          if (scrollLeft + clientWidth >= scrollWidth) {
-            scrollDirectionRef.current = -1; // Mude a direção para a esquerda
-          } else if (scrollLeft === 0) {
-            scrollDirectionRef.current = 1; // Mude a direção para a direita
-          }
-          scrollRef.current.scrollLeft += scrollDirectionRef.current;
-        }
-      }, 15);
-    }, 8000);
-  };
 
   const fetchCardapios = useCallback(async () => {
     const destaques = await destaq();
@@ -73,7 +50,7 @@ const Destaque = () => {
         }
         scrollRef.current.scrollLeft += scrollDirectionRef.current;
       }
-    }, 15);
+    }, 20);
 
     return () => {
       clearInterval(scrollIntervalRef.current);
@@ -90,6 +67,7 @@ const Destaque = () => {
         <div style={{ fontSize: 25, fontWeight: "bold", color: "#fff" }}>
           {i18n.t("highlights")}
         </div>
+
         <div
           style={{
             display: "flex",
@@ -100,12 +78,10 @@ const Destaque = () => {
             msOverflowStyle: "none",
             marginTop: 20,
           }}
-          onClick={handleClick}
           ref={scrollRef}
         >
           {destaques
             .filter((item) => item.highlight)
-
             .map((item, index) => {
               return (
                 <div
@@ -118,7 +94,11 @@ const Destaque = () => {
                   }}
                 >
                   <div
-                    style={{ position: "relative", zIndex: 0, height: "350px" }}
+                    style={{
+                      position: "relative",
+                      zIndex: 0,
+                      height: "350px",
+                    }}
                   >
                     {imgSrc.map((img1, index) =>
                       RenderImageDestaque(img1, index, item.id)

@@ -29,7 +29,7 @@ const RenderImageDestaque = (img, index, id) =>
   img[0].idreq === id ? (
     <div className="img" style={{ zIndex: 5 }}>
       <LazyLoad height={200} offset={100}>
-        <Image.PreviewGroup>
+        <Image.PreviewGroup preview={false}>
           <Carousel
             autoplay={true}
             autoplaySpeed={2000}
@@ -47,6 +47,7 @@ const RenderImageDestaque = (img, index, id) =>
                 <Suspense fallback={<Spin />}>
                   <div style={divStyle}>
                     <LazyLoadedImage
+                      preview={false}
                       src={atob(img1.imagem)}
                       style={imageStyle}
                       alt="img"
