@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
 import {
   destaques as destaq,
   getImgCardapio,
@@ -14,6 +20,7 @@ const Destaque = () => {
   const scrollIntervalRef = useRef();
   const scrollDirectionRef = useRef(1);
   const [isLoading, setIsLoading] = useState(true);
+
   const handleClick = () => {
     clearInterval(scrollIntervalRef.current);
     setTimeout(() => {
@@ -30,38 +37,39 @@ const Destaque = () => {
       }, 15);
     }, 8000);
   };
-  useEffect(() => {
-    fetchCardapios();
-  }, []);
 
-  const fetchCardapios = async () => {
+  const fetchCardapios = useCallback(async () => {
     const destaques = await destaq();
     setDestaques(destaques);
-  };
+  }, []);
 
-  const memoizedImgSrc = useMemo(() => {
+  useEffect(() => {
+    fetchCardapios();
+  }, [fetchCardapios]);
+
+  const fetchImages = useCallback(async () => {
     if (destaques.length > 0 && imgSrc.length === 0) {
-      const images = [];
-      destaques.forEach(async (item) => {
-        if (!item.ids) return;
-        const img = await getImgCardapio(item.id, item.ids);
-        setImgSrc((prevImgSrc) => [...prevImgSrc, img]);
-        images.push(img);
-      });
-      return images;
-    }
-    setInterval(() => {
+      const images = await Promise.all(
+        destaques.map(async (item) => {
+          if (!item.ids) return;
+          return await getImgCardapio(item.id, item.ids);
+        })
+      );
+      setImgSrc((prevImgSrc) => [...prevImgSrc, ...images]);
       setIsLoading(false);
-    }, 1000);
-    return imgSrc;
+    }
   }, [destaques, imgSrc]);
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
 
   useEffect(() => {
     scrollIntervalRef.current = setInterval(() => {
       if (scrollRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
         if (scrollLeft + clientWidth >= scrollWidth - 200) {
-          setDestaques((prevDestaques) => [...prevDestaques, ...destaques]); // Adiciona mais cards
+          setDestaques((prevDestaques) => [...prevDestaques, ...destaques]);
         }
         scrollRef.current.scrollLeft += scrollDirectionRef.current;
       }
@@ -70,7 +78,7 @@ const Destaque = () => {
     return () => {
       clearInterval(scrollIntervalRef.current);
     };
-  }, []);
+  }, [destaques]);
   if (isLoading) {
     return <Spin />;
   }
@@ -112,7 +120,7 @@ const Destaque = () => {
                   <div
                     style={{ position: "relative", zIndex: 0, height: "350px" }}
                   >
-                    {memoizedImgSrc.map((img1, index) =>
+                    {imgSrc.map((img1, index) =>
                       RenderImageDestaque(img1, index, item.id)
                     )}
                   </div>
@@ -140,4 +148,4 @@ const Destaque = () => {
   );
 };
 
-export default Destaque;
+export default React.memo(Destaque);
