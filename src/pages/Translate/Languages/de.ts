@@ -214,7 +214,7 @@ const messages = {
         "Ananas, Zitrone, Minze und Sagatiba",
       "Mix de frutas, creme de leite, leite condensado e vodka":
         "Fruchtcocktail, Sahne, Kondensmilch und Wodka",
-
+      "(Camarão Regional / Caranguejo)": "(Regionale Garnelen / Krabben)",
       Entradas: "Vorspeisen",
       "Mujicas e Caldos": "Mujicas und Suppen",
       "Peixe ao Molho": "Fisch in Soße",

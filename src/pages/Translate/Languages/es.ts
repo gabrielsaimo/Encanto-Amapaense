@@ -217,7 +217,7 @@ const messages = {
       "Abacaxi, limão, hortelã e sagatiba": "Piña, limón, menta y sagatiba",
       "Mix de frutas, creme de leite, leite condensado e vodka":
         "Mezcla de frutas, crema, leche condensada y vodka",
-
+      "(Camarão Regional / Caranguejo)": "(Camarón Regional / Cangrejo)",
       Mensagem: "Mensaje",
       Motivo: "Motivo",
       "Seu Nome": "Tu Nombre",

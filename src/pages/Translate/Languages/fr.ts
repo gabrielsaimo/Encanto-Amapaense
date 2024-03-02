@@ -220,7 +220,7 @@ const messages = {
         "Ananas, citron, menthe et sagatiba",
       "Mix de frutas, creme de leite, leite condensado e vodka":
         "Mélange de fruits, crème, lait concentré et vodka",
-
+      "(Camarão Regional / Caranguejo)": "(Crevettes Régionales / Crabe)",
       Mensagem: "Messages",
       Motivo: "Raison",
       "Seu Nome": "Votre Nom",
