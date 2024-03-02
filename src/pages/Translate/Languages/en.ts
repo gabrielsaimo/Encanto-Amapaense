@@ -8,10 +8,10 @@ const messages = {
       "Batata ou Macaxeira": "French Fries or Cassava",
       "Camarão Pitú no bafo": "Steamed Shrimp with Pitu",
       "Camarão Pitú na chapa": "Grilled Shrimp with Pitu",
-      "Comarão rosa empanado": "Breaded Pink Shrimp",
+      "Comarão rosa empanado": "Crumbed Pink Shrimp",
       "Camarão Rosa crocante": "Crispy Pink Shrimp",
       "Camarão Rosa ao alho e óleo": "Pink Shrimp with Garlic and Oil",
-      "Isca de peixe à milanesa": "Breaded Fish Fillet",
+      "Isca de peixe à milanesa": "Crumbed Fish Fillet",
       "Isca de peixe": "Fish Fillet",
       "Isca de filé c/ fritas": "Fillet Strips with Fries",
       "Isca de maminha c/ macaxeira": "Maminha Strips with Cassava",
@@ -49,9 +49,9 @@ const messages = {
       "Peixe pai-d'égua": "Pai-d'égua Fish",
       "Encanto Regional": "Regional Encanto",
       "Sabor do Norte": "Taste of the North",
-      "Camarão Regional empanado": "Breaded Regional Shrimp",
+      "Camarão Regional empanado": "Crumbed Regional Shrimp",
       "Camarão Rosa ao molho branco": "Pink Shrimp with White Sauce",
-      "Camarão Rosa empanado": "Breaded Pink Shrimp",
+      "Camarão Rosa empanado": "Crumbed Pink Shrimp",
       "Camarão Encanto": "Encanto Shrimp",
       "Camarão Pitú ao alho e óleo": "Shrimp with Garlic and Oil",
       "Estrogonofe de camarão rosa": "Pink Shrimp Stroganoff",
@@ -118,6 +118,7 @@ const messages = {
       "Cerpinha Export Long Neck": "Cerpinha Export Long Neck",
       "Suco meio do mundo": "Middle of the World Juice",
       "Suco doce desejo": "Sweet Desire Juice",
+      "(Camarão Regional / Caranguejo)": "(Regional Shrimp / Crab)",
       "Gin tônico": "Gin Tonic",
       Marguerita: "Marguerita",
       Caipirinha: "Caipirinha",
@@ -128,7 +129,7 @@ const messages = {
         "(Served with Rice, Mashed Potatoes, Farofa, Tucupi)",
       "(c/ camarão rosa)": "(with pink shrimp)",
       "(Acomp. Banna a Milanesa, Arroz, Salada de maionese. Farofa, Tucupi)":
-        "(Served with Breaded Banana, Rice, Mayonnaise Salad, Farofa, Tucupi)",
+        "(Served with Crumbed Banana, Rice, Mayonnaise Salad, Farofa, Tucupi)",
       "(com Camarão Regional / Caranguejo)": "(with Regional Shrimp / Crab)",
       "(Acomp. Arroz à grega, Purê, Farofa, Tucupi)":
         "(Served with Greek Rice, Mashed Potatoes, Farofa, Tucupi)",
@@ -143,16 +144,16 @@ const messages = {
         "(Served with Pará Rice, Vegetables, Mashed Potatoes, Farofa, Tucupi)",
       "(com Camarão Rosa)": "(with Pink Shrimp)",
       "(Acomp. Arroz Paraense, Abacaxi a milanesa, Purê, Farofa de camarào, Tucupi)":
-        "(Served with Pará Rice, Breaded Pineapple, Mashed Potatoes, Shrimp Farofa, Tucupi)",
+        "(Served with Pará Rice, Crumbed Pineapple, Mashed Potatoes, Shrimp Farofa, Tucupi)",
       "(Acomp. Arroz Paraense, Purê, Farofa e Banana)":
         "(Served with Pará Rice, Mashed Potatoes, Farofa and Banana)",
       "(camarão empanado /patinha de caranguejo empanado)":
-        "(breaded shrimp / breaded crab claw)",
+        "(Crumbed shrimp / Crumbed crab claw)",
       "(Acomp. Arroz Baião, legumes Refogados, Farofa, salada de maionese, Tucupi)":
         "(Served with Baião Rice, Sautéed Vegetables, Farofa, Mayonnaise Salad, Tucupi)",
       "(Acomp. Arroz Baiào, legumes, salada de maionese, farofa de camarão, Tucupi)":
         "(Served with Baião Rice, Vegetables, Mayonnaise Salad, Shrimp Farofa, Tucupi)",
-      "(Empanado na Castanha)": "(Breaded in Chestnut)",
+      "(Empanado na Castanha)": "(Crumbed in Chestnut)",
       "(Acomp. Arroz Farofa de ovo)": "(Served with Rice and Egg Farofa)",
       "(Acomp. arroz, puré, farofa de ovo, tucupi)":
         "(Served with rice, mashed potatoes, egg farofa, tucupi)",
