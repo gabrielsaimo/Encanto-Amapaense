@@ -148,4 +148,4 @@ const Destaque = () => {
   );
 };
 
-export default React.memo(Destaque);
+export default Destaque;
