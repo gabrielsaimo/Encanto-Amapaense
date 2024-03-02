@@ -1,16 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy, useCallback } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import {
-  Affix,
-  Button,
-  Divider,
-  FloatButton,
-  Input,
-  Modal,
-  Radio,
-  Space,
-  Spin,
-} from "antd";
+import { Affix, Button, FloatButton, Input, Modal, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import "../css/App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -20,8 +10,9 @@ import Menu from "./modules/BottonMenu";
 import Msn from "./modules/Msn";
 import Footer from "./modules/footer";
 import { getStatusPedidos } from "../services/Pedidos.ws";
-import { i18n } from "./Translate/i18n";
 import DrawerTranslate from "./Components/DrawerTranslate";
+import { i18n } from "./Translate/i18n";
+import BannerAlert from "./Components/BannerAlert";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 
 const fundo = require("../assets/fundo.webp");
@@ -93,6 +84,10 @@ function App() {
         decoding="async"
         onClick={handleLogoClick}
       />
+
+      {new Date().getHours() >= 22 || new Date().getHours() <= 11 ? (
+        <BannerAlert type="warning" message={i18n.t("bannerAlert")} />
+      ) : null}
       <div style={{ display: "flex" }}>
         <Affix
           offsetTop={10}
@@ -191,7 +186,6 @@ function App() {
       <Msn />
       <Footer />
       <div style={{ height: 30 }} />
-
       <DrawerTranslate open={isDrawerOpen} close={closeDrawer} />
     </div>
   );
