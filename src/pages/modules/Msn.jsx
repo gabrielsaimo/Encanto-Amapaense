@@ -4,6 +4,7 @@ import { MessageOutlined } from "@ant-design/icons";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { service } from "../../services/firebase.ws";
 import { i18n } from "../Translate/i18n";
+import { HappyProvider } from "@ant-design/happy-work-theme";
 
 export default function Msn() {
   const [ok, setOk] = React.useState(false);
@@ -41,12 +42,15 @@ export default function Msn() {
           }}
         >
           <h3>{i18n.t("Relate_sua_experiência")}</h3>
-          <Button
-            style={{ width: 200, height: 60 }}
-            onClick={() => setVisible(true)}
-          >
-            <MessageOutlined />
-          </Button>
+          <HappyProvider>
+            <Button
+              style={{ width: 200, height: 60 }}
+              onClick={() => setVisible(true)}
+            >
+              <MessageOutlined />
+            </Button>
+          </HappyProvider>
+
           <Modal
             title={i18n.t("Mensagem")}
             open={visible}

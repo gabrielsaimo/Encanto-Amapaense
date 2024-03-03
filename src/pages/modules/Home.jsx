@@ -2,18 +2,18 @@ import React from "react";
 import ResizeListener from "../Components/ResizeListener";
 import BackgroundImage from "../Components/BackgroundImage";
 import { Link } from "react-router-dom";
-import { Button, Divider, Modal, Radio } from "antd";
+import { Button, Divider } from "antd";
 import { BookOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { i18n } from "../Translate/i18n";
 import { FlagIcon } from "react-flag-kit";
 import DrawerTranslate from "../Components/DrawerTranslate";
+import { HappyProvider } from "@ant-design/happy-work-theme";
 
 function Home() {
   const isMobile = ResizeListener();
   const [language, setLanguage] = React.useState(
     localStorage.getItem("i18nextLng")
   );
-  const [onevisitend, setOneVisitEnd] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const openDrawer = () => {
@@ -72,27 +72,28 @@ function Home() {
           />
         </div>
         <Divider />
-        <Button
-          shape="round"
-          onClick={() => openDrawer()}
-          size={isMobile ? "large" : "large"}
-          style={{
-            textAlign: "center",
-            display: "flex",
-            alignItems: "center",
-            margin: "auto",
-            height: "8vh",
-          }}
-        >
-          <FlagIcon
-            code={language.substring(3, 5)}
-            style={{ borderRadius: "100%" }}
-            size={50}
-          />
-          <Divider type="vertical" />
-          {i18n.t("changeLanguage")}
-        </Button>
-
+        <HappyProvider>
+          <Button
+            shape="round"
+            onClick={() => openDrawer()}
+            size={isMobile ? "large" : "large"}
+            style={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              margin: "auto",
+              height: "8vh",
+            }}
+          >
+            <FlagIcon
+              code={language.substring(3, 5)}
+              style={{ borderRadius: "100%" }}
+              size={50}
+            />
+            <Divider type="vertical" />
+            {i18n.t("changeLanguage")}
+          </Button>
+        </HappyProvider>
         <Divider />
         {renderButton(
           "/Cardapio",
