@@ -9,6 +9,7 @@ import MenuDashboard from "../pages/modules/MenuDasboar";
 import AppDelivery from "../pages/AppDelivery";
 import Home from "../pages/modules/Home";
 import StatusPedido from "../pages/modules/StatusPedio";
+import Error404 from "../pages/modules/Error404";
 
 export default function Rotas() {
   return (
@@ -17,7 +18,8 @@ export default function Rotas() {
       <Route path="/Dashboard" element={<MenuDashboard />} />
       <Route path="/Garçom" element={<Garçom />} />
       <Route path="/Cardapio" element={<App />} />
-      <Route parh="/*">"404 - Not Found"</Route>
+      <Route path="/*" element={<Error404 />}></Route>
+      <Route path="*" element={<Error404 />}></Route>
       <Route path="/Cozinha" element={<Cozinha />} />
       <Route path="/Delivery" element={<AppDelivery />} />
       <Route path="/Bar" element={<Bar />} />
