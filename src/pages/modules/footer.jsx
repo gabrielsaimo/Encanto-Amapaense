@@ -11,7 +11,7 @@ const Footer = () => {
         marginTop: 20,
       }}
     >
-      <p>Copyrights © 2023 SAIMO </p>
+      <p>Copyrights © 2024 SAIMO </p>
       <div style={{ width: 10 }} />
       <img src={logo} alt="img" width={40} height={40} style={{ borderRadius: 50 }} />
     </div>
