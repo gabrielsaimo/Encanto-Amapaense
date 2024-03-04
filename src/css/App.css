@@ -58,6 +58,16 @@
   z-index: 1;
   position: relative;
 }
+
+.logohome {
+  width: 90%;
+  max-width: 600px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 100px;
+  z-index: 1;
+  position: relative;
+}
 .fundo {
   height: 160px;
   width: 100%;

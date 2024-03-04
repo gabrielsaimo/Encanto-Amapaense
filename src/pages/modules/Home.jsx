@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import ResizeListener from "../Components/ResizeListener";
 import BackgroundImage from "../Components/BackgroundImage";
 import { Link } from "react-router-dom";
@@ -8,74 +8,77 @@ import { i18n } from "../Translate/i18n";
 import { FlagIcon } from "react-flag-kit";
 import DrawerTranslate from "../Components/DrawerTranslate";
 import { HappyProvider } from "@ant-design/happy-work-theme";
+import logo from "../../assets/logo.webp";
 
 function Home() {
   const isMobile = ResizeListener();
-  const [language, setLanguage] = React.useState(
-    localStorage.getItem("i18nextLng")
-  );
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [language, setLanguage] = useState(localStorage.getItem("i18nextLng"));
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const openDrawer = () => {
+  const openDrawer = useCallback(() => {
     setIsDrawerOpen(true);
-  };
+  }, []);
 
-  const closeDrawer = () => {
+  const closeDrawer = useCallback(() => {
     setIsDrawerOpen(false);
     setLanguage(localStorage.getItem("i18nextLng"));
-  };
+  }, []);
 
-  const buttonStyle = {
-    width: "80vw",
-    maxWidth: 400,
-    height: "11vh",
-    fontSize: "6vh",
-  };
+  const buttonStyle = useMemo(
+    () => ({
+      width: "80vw",
+      maxWidth: 400,
+      height: "11vh",
+      fontSize: "6vh",
+    }),
+    []
+  );
 
-  const styles = {
-    button1: {
-      ...buttonStyle,
-      backgroundColor: "#00a758",
-      color: "#753d00",
-    },
-    button2: {
-      ...buttonStyle,
-      backgroundColor: "#753d00",
-      color: "#00a758",
-    },
-  };
+  const styles = useMemo(
+    () => ({
+      button1: {
+        ...buttonStyle,
+        backgroundColor: "#00a758",
+        color: "#753d00",
+      },
+      button2: {
+        ...buttonStyle,
+        backgroundColor: "#753d00",
+        color: "#00a758",
+      },
+    }),
+    [buttonStyle]
+  );
 
-  const renderButton = (link, style, icon, text) => (
-    <div className="App-header-content-button">
-      <Link to={link}>
-        <Button
-          style={style}
-          shape="round"
-          icon={icon}
-          size={isMobile ? "large" : "middle"}
-        >
-          <b>{text}</b>
-        </Button>
-      </Link>
-    </div>
+  const renderButton = useCallback(
+    (link, style, icon, text) => (
+      <div className="App-header-content-button">
+        <Link to={link}>
+          <Button
+            style={style}
+            shape="round"
+            icon={icon}
+            size={isMobile ? "large" : "middle"}
+          >
+            <b>{text}</b>
+          </Button>
+        </Link>
+      </div>
+    ),
+    [isMobile]
   );
 
   return (
     <div className="App background_fundo">
       <div className="App-header-content">
         <div className="App-header-content-logo">
-          <BackgroundImage />
-          <img
-            src={require("../../assets/logo.webp")}
-            className="logo"
-            alt="logo"
-          />
+          <img src={logo} className="logohome" alt="logo" />
         </div>
         <Divider />
         <HappyProvider>
           <Button
             shape="round"
-            onClick={() => openDrawer()}
+            onClick={openDrawer}
             size={isMobile ? "large" : "large"}
             style={{
               textAlign: "center",
@@ -116,4 +119,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default React.memo(Home);
