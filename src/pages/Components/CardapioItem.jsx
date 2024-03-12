@@ -87,7 +87,7 @@ const CardapioItem = ({
                         color="linear-gradient(
                           90deg,
                           rgba(178, 125, 64, 1) 0%,
-                          rgb(247, 251, 244) 100%
+                          rgba(178, 125, 64, 1) 100%
                         )"
                         title={
                           <>
