@@ -6,6 +6,8 @@ import RenderImageCarousel from "./RenderImageCarousel";
 import { i18n } from "../Translate/i18n";
 
 import { currency_EUR, currency_USD, currency_BRL } from "./Currency";
+const idioma = localStorage.getItem("i18nextLng");
+
 const moedas = JSON.parse(localStorage.getItem("moedas"));
 
 const { Panel } = Collapse;
@@ -90,26 +92,30 @@ const CardapioItem = ({
                           rgba(178, 125, 64, 1) 100%
                         )"
                         title={
-                          <>
-                            <p className="p_1 price georgia-bold-font">
-                              USD:{" ≅ "}
-                              {`${currency_USD(
-                                categoria.price / Number(moedas.usd)
-                              )}`}
-                            </p>
+                          idioma !== "pt-BR" && (
+                            <>
+                              <p className="p_1 price georgia-bold-font">
+                                USD:{" ≅ "}
+                                {`${currency_USD(
+                                  categoria.price / Number(moedas.usd)
+                                )}`}
+                              </p>
 
-                            <p className="p_1 price georgia-bold-font">
-                              AUD:{" ≅ "}
-                              {`${currency_USD(
-                                categoria.price / Number(moedas.aud)
-                              )}`}
-                            </p>
+                              <p className="p_1 price georgia-bold-font">
+                                AUD:{" ≅ "}
+                                {`${currency_USD(
+                                  categoria.price / Number(moedas.aud)
+                                )}`}
+                              </p>
 
-                            <p className="p_1 price georgia-bold-font">
-                              EUR:{" ≅ "}
-                              {`${currency_EUR(categoria.price / moedas.eur)}`}
-                            </p>
-                          </>
+                              <p className="p_1 price georgia-bold-font">
+                                EUR:{" ≅ "}
+                                {`${currency_EUR(
+                                  categoria.price / moedas.eur
+                                )}`}
+                              </p>
+                            </>
+                          )
                         }
                       >
                         <p className="p_1 price georgia-bold-font">
