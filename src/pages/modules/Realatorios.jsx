@@ -23,7 +23,7 @@ import {
 
 import { getUsers } from "../../services/user.ws";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-import currency_BRL from "../Components/CurrencyBRL";
+import { currency_BRL } from "../Components/Currency";
 export default function Relatorios(atualizar) {
   const [data, setData] = useState([]);
   const [dataGrafico, setDataGrafico] = useState([]);

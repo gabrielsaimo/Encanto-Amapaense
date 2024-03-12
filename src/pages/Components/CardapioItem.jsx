@@ -1,10 +1,12 @@
 import React from "react";
-import { Collapse } from "antd";
+import { Collapse, Tooltip } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useInView } from "react-intersection-observer";
 import RenderImageCarousel from "./RenderImageCarousel";
-import currency_BRL from "./CurrencyBRL";
 import { i18n } from "../Translate/i18n";
+
+import { currency_EUR, currency_USD, currency_BRL } from "./Currency";
+const moedas = JSON.parse(localStorage.getItem("moedas"));
 
 const { Panel } = Collapse;
 
@@ -80,9 +82,40 @@ const CardapioItem = ({
                         alignItems: "flex-end",
                       }}
                     >
-                      <p className="p_1 price georgia-bold-font">
-                        {`${currency_BRL(categoria.price)}`}
-                      </p>
+                      <Tooltip
+                        placement="top"
+                        color="linear-gradient(
+                          90deg,
+                          rgba(178, 125, 64, 1) 0%,
+                          rgb(247, 251, 244) 100%
+                        )"
+                        title={
+                          <>
+                            <p className="p_1 price georgia-bold-font">
+                              USD:{" "}
+                              {`${currency_USD(
+                                categoria.price / Number(moedas.usd)
+                              )}`}
+                            </p>
+
+                            <p className="p_1 price georgia-bold-font">
+                              AUD:{" "}
+                              {`${currency_USD(
+                                categoria.price / Number(moedas.aud)
+                              )}`}
+                            </p>
+
+                            <p className="p_1 price georgia-bold-font">
+                              EUR:{" "}
+                              {`${currency_EUR(categoria.price / moedas.eur)}`}
+                            </p>
+                          </>
+                        }
+                      >
+                        <p className="p_1 price georgia-bold-font">
+                          {`${currency_BRL(categoria.price)}`}
+                        </p>
+                      </Tooltip>
                     </div>
                   </div>
                 </div>

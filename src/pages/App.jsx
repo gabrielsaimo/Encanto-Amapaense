@@ -13,6 +13,7 @@ import { getStatusPedidos } from "../services/Pedidos.ws";
 import DrawerTranslate from "./Components/DrawerTranslate";
 import { i18n } from "./Translate/i18n";
 import BannerAlert from "./Components/BannerAlert";
+import { getMoedas } from "../services/Moedas.ws";
 const CollapseMenu = lazy(() => import("./modules/Collapse"));
 
 const fundo = require("../assets/fundo.webp");
@@ -45,6 +46,15 @@ function App() {
   }, [contar]);
 
   useEffect(() => {
+    getMoedas().then((_moedas) => {
+      const moedas = {
+        usd: _moedas.USDBRL?.bid,
+        eur: _moedas.EURBRL?.bid,
+        aud: _moedas.AUDBRL?.bid,
+      };
+      localStorage.setItem("moedas", JSON.stringify(moedas));
+    });
+
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";

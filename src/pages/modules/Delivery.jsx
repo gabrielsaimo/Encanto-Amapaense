@@ -47,7 +47,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import "firebase/compat/storage";
 import { getDatabase, ref, set } from "firebase/database";
-import currency_BRL from "../Components/CurrencyBRL";
+import { currency_BRL } from "../Components/Currency";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",

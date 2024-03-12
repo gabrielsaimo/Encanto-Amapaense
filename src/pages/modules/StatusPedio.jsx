@@ -9,7 +9,7 @@ import "../../css/StatusPedido.css";
 import moment from "moment";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getStatusPedido } from "../../services/Pedidos.ws";
-import currency_BRL from "../Components/CurrencyBRL";
+import { currency_BRL } from "../Components/Currency";
 const firebaseConfig = {
   apiKey: "AIzaSyDHuslm5iZZGtOk3ChXKXoIGpQQQI4UaUQ",
   authDomain: "encanto-amapaense.firebaseapp.com",

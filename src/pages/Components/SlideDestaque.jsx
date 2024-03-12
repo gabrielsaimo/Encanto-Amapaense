@@ -4,7 +4,7 @@ import {
   getImgCardapio,
 } from "../../services/cardapio.ws";
 import RenderImageDestaque from "./RenderImageDestaque";
-import currency_BRL from "./CurrencyBRL";
+import { currency_BRL } from "./Currency";
 import { i18n } from "../Translate/i18n";
 import { Spin } from "antd";
 const Destaque = () => {

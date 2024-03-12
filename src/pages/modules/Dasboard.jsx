@@ -46,7 +46,7 @@ import {
   putCardapio,
 } from "../../services/cardapio.ws";
 import { getCategoty } from "../../services/category.ws";
-import currency_BRL from "../Components/CurrencyBRL";
+import { currency_BRL } from "../Components/Currency";
 
 const { Option } = Select;
 export default function Dashboard({ atualizar, user }) {
