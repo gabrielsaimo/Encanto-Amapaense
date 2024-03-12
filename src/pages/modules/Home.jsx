@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import ResizeListener from "../Components/ResizeListener";
 import BackgroundImage from "../Components/BackgroundImage";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { FlagIcon } from "react-flag-kit";
 import DrawerTranslate from "../Components/DrawerTranslate";
 import { HappyProvider } from "@ant-design/happy-work-theme";
 import logo from "../../assets/logo.webp";
+import { getMoedas } from "../../services/Moedas.ws";
 
 function Home() {
   const isMobile = ResizeListener();
@@ -49,6 +50,21 @@ function Home() {
     }),
     [buttonStyle]
   );
+
+  useEffect(() => {
+    moedas();
+  }, []);
+
+  async function moedas() {
+    await getMoedas().then((_moedas) => {
+      const moedas = {
+        usd: _moedas.USDBRL?.bid,
+        eur: _moedas.EURBRL?.bid,
+        aud: _moedas.AUDBRL?.bid,
+      };
+      localStorage.setItem("moedas", JSON.stringify(moedas));
+    });
+  }
 
   const renderButton = useCallback(
     (link, style, icon, text) => (
