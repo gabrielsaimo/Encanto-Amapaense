@@ -92,21 +92,21 @@ const CardapioItem = ({
                         title={
                           <>
                             <p className="p_1 price georgia-bold-font">
-                              USD:{" "}
+                              USD:{" ≅ "}
                               {`${currency_USD(
                                 categoria.price / Number(moedas.usd)
                               )}`}
                             </p>
 
                             <p className="p_1 price georgia-bold-font">
-                              AUD:{" "}
+                              AUD:{" ≅ "}
                               {`${currency_USD(
                                 categoria.price / Number(moedas.aud)
                               )}`}
                             </p>
 
                             <p className="p_1 price georgia-bold-font">
-                              EUR:{" "}
+                              EUR:{" ≅ "}
                               {`${currency_EUR(categoria.price / moedas.eur)}`}
                             </p>
                           </>
