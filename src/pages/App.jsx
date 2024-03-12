@@ -22,6 +22,7 @@ function App() {
   const [language, setLanguage] = React.useState(
     localStorage.getItem("i18nextLng")
   );
+  const moedas = JSON.parse(localStorage.getItem("moedas"));
   const [visible2, setVisible2] = useState(false);
   const [contar, setContar] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -45,6 +46,9 @@ function App() {
   }, [contar]);
 
   useEffect(() => {
+    if (moedas === null) {
+      window.location.href = "/";
+    }
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";
