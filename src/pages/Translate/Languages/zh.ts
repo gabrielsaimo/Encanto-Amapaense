@@ -1,6 +1,6 @@
 const messages = {
   zh: {
-    transtalion: {
+    translations: {
       menu: "菜单",
       delivery: "交货",
       highlights: "亮点",
