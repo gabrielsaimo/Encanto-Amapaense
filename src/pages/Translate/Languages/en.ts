@@ -253,7 +253,7 @@ const messages = {
       french: "French",
       german: "German",
       hindi: "Indian",
-      chinese: "Mandarin",
+      chinese: "Chinese",
     },
   },
 };
