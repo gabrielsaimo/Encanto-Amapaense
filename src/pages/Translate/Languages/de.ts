@@ -4,7 +4,7 @@ const messages = {
       menu: "Speisekarte",
       delivery: "Lieferung",
       highlights: "Highlights",
-
+      bannerAlert: "Wir sind von 11 bis 23 Uhr geöffnet",
       "Camarão no Bafo": "Gedämpfte Garnelen",
       "Batata ou Macaxeira": "Kartoffel oder Maniok",
       "Camarão Pitú no bafo": "Gedämpfte Garnelen mit Pitu",
@@ -249,6 +249,8 @@ const messages = {
       spanish: "Spanisch",
       french: "Französisch",
       german: "Deutsch",
+      hindi: "Indisch",
+      chinese: "Chinesisch",
     },
   },
 };

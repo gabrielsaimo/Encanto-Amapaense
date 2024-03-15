@@ -66,6 +66,30 @@ const DrawerTranslate = ({ open, close }) => {
       ),
       value: "fr-FR",
     },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="IN" size={40} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("hindi")}
+        </div>
+      ),
+      value: "hi-IN",
+    },
+    {
+      label: (
+        <div
+          style={{ textAlign: "center", display: "flex", alignItems: "center" }}
+        >
+          <FlagIcon code="CN" size={40} style={{ borderRadius: "100%" }} />
+          <Divider type="vertical" />
+          {i18n.t("chinese")}
+        </div>
+      ),
+      value: "zh-CN",
+    },
   ];
   const [language, setLanguage] = React.useState(
     localStorage.getItem("i18nextLng")

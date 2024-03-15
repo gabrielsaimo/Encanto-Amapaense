@@ -4,6 +4,7 @@ const messages = {
       menu: "Menu",
       delivery: "delivery",
       highlights: "Highlights",
+      bannerAlert: "We operate from 11am to 11pm",
       "Camarão no Bafo": "Steamed Shrimp",
       "Batata ou Macaxeira": "French Fries or Cassava",
       "Camarão Pitú no bafo": "Steamed Shrimp with Pitu",
@@ -251,6 +252,8 @@ const messages = {
       spanish: "Spanish",
       french: "French",
       german: "German",
+      hindi: "Indian",
+      chinese: "Mandarin",
     },
   },
 };

@@ -4,6 +4,7 @@ const messages = {
       menu: "Menu",
       delivery: "Livraison",
       highlights: "Points forts",
+      bannerAlert: "Nous fonctionnons de 11h à 23h",
       "Camarão no Bafo": "Crevettes à la Vapeur",
       "Batata ou Macaxeira": "Frites ou Manioc",
       "Camarão Pitú no bafo": "Crevettes à la Vapeur avec Pitu",
@@ -254,6 +255,8 @@ const messages = {
       spanish: "Espagnol",
       french: "Français",
       german: "Allemand",
+      hindi: "Indien",
+      chinese: "Chinois",
     },
   },
 };

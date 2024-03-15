@@ -4,6 +4,7 @@ const messages = {
       menu: "Menú",
       delivery: "entrega",
       highlights: "Destacados",
+      bannerAlert: "Operamos de 11 a 23 horas",
       "Camarão no Bafo": "Camarón al Vapor",
       "Batata ou Macaxeira": "Papas Fritas o Yuca",
       "Camarão Pitú no bafo": "Camarón al Vapor con Pitu",
@@ -251,6 +252,8 @@ const messages = {
       spanish: "Español",
       french: "Francés",
       german: "Alemán",
+      hindi: "Indio",
+      chinese: "Chino",
     },
   },
 };

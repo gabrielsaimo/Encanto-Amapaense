@@ -12,6 +12,8 @@ const messages = {
       spanish: "Espanhol",
       french: "Francês",
       german: "Alemão",
+      hindi: "Hindi",
+      chinese: "Chinês",
     },
   },
 };
