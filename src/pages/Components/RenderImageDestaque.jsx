@@ -46,6 +46,25 @@ const RenderImageDestaque = (img, index, id) =>
               .map((img1) => (
                 <Suspense fallback={<Spin />}>
                   <div style={divStyle}>
+                    <p
+                      className="name georgia-font"
+                      style={{
+                        backgroundColor: "#FFFFFFce",
+                        width: 40,
+                        textAlign: "center",
+                        height: 20,
+                        fontSize: 12,
+                        padding: 5,
+                        borderRadius: 10,
+                        fontWeight: "bold",
+                        position: "absolute",
+                        top: 10,
+                        right: 10,
+                        zIndex: 99,
+                      }}
+                    >
+                      N° {img1.idreq}
+                    </p>
                     <LazyLoadedImage
                       preview={false}
                       src={atob(img1.imagem)}

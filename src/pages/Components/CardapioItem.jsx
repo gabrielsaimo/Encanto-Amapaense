@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, Tooltip } from "antd";
+import { Collapse, Flex, Tooltip } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useInView } from "react-intersection-observer";
 import RenderImageCarousel from "./RenderImageCarousel";
