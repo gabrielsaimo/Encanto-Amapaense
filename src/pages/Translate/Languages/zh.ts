@@ -242,7 +242,7 @@ const messages = {
       spanish: "西班牙语",
       french: "法语",
       german: "德语",
-      indian: "印地语",
+      hindi: "印地语",
       chinese: "中文",
     },
   },
