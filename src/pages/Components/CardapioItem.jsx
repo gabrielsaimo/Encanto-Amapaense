@@ -92,7 +92,7 @@ const CardapioItem = ({
                           rgba(178, 125, 64, 1) 100%
                         )"
                         title={
-                          idioma !== "pt-BR" && (
+                          idioma === "pt-BR" && (
                             <>
                               <p className="p_1 price georgia-bold-font">
                                 USD:{" ≅ "}
