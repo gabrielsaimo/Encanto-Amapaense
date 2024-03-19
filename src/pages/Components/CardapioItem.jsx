@@ -61,14 +61,28 @@ const CardapioItem = ({
                     memoizedImgSrc.map((img1, index) =>
                       RenderImageCarousel(img1, index, categoria.id)
                     )}
-
                   <div className={`flex ${inView ? animationDirection : ""}`}>
                     <div style={{ width: "100%", display: "contents" }}>
                       <div>
                         <p className="p_1 name georgia-font">
                           {i18n.t(categoria.name)}
+                          <p
+                            style={{
+                              backgroundColor: "#FFFFFF70",
+                              width: 40,
+                              textAlign: "center",
+                              height: 20,
+                              fontSize: 12,
+                              padding: 5,
+                              borderRadius: 10,
+                              fontWeight: "bold",
+                            }}
+                          >
+                            N° {categoria.id}
+                          </p>
                         </p>
                       </div>
+
                       <div className="flex">
                         <div className="sub">
                           {i18n.t(categoria.sub)}
