@@ -2,7 +2,11 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import ResizeListener from "../Components/ResizeListener";
 import { Link } from "react-router-dom";
 import { Button, Divider } from "antd";
-import { BookOutlined, ShoppingOutlined } from "@ant-design/icons";
+import {
+  BookOutlined,
+  FieldTimeOutlined,
+  ShoppingOutlined,
+} from "@ant-design/icons";
 import { i18n } from "../Translate/i18n";
 import { FlagIcon } from "react-flag-kit";
 import DrawerTranslate from "../Components/DrawerTranslate";
@@ -44,6 +48,11 @@ function Home() {
       button2: {
         ...buttonStyle,
         backgroundColor: "#753d00",
+        color: "#00a758",
+      },
+      button3: {
+        ...buttonStyle,
+        backgroundColor: "#FFF",
         color: "#00a758",
       },
     }),
@@ -125,6 +134,13 @@ function Home() {
           styles.button2,
           <ShoppingOutlined />,
           "Delivery"
+        )}
+        <Divider />
+        {renderButton(
+          "/Reserva",
+          styles.button3,
+          <FieldTimeOutlined />,
+          "Reservar"
         )}
         <Divider />
       </div>

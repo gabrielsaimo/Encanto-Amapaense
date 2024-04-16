@@ -10,7 +10,7 @@ import AppDelivery from "../pages/AppDelivery";
 import Home from "../pages/modules/Home";
 import StatusPedido from "../pages/modules/StatusPedio";
 import Error404 from "../pages/modules/Error404";
-
+import Reserva from "../pages/modules/Reserva";
 export default function Rotas() {
   return (
     <Routes>
@@ -22,6 +22,7 @@ export default function Rotas() {
       <Route path="*" element={<Error404 />}></Route>
       <Route path="/Cozinha" element={<Cozinha />} />
       <Route path="/Delivery" element={<AppDelivery />} />
+      <Route path="/Reserva" element={<Reserva />} />
       <Route path="/Bar" element={<Bar />} />
       <Route path="/MeuPedido/:idpedido" element={<StatusPedido />} />
     </Routes>
