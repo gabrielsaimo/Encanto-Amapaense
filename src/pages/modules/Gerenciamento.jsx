@@ -29,6 +29,7 @@ import {
 import {
   DeleteOutlined,
   EditOutlined,
+  RedoOutlined,
   WhatsAppOutlined,
 } from "@ant-design/icons";
 import { getPedidos, postPedidosStatus } from "../../services/Pedidos.ws";
@@ -77,6 +78,17 @@ const Gerenciamento = () => {
   const [telefone, setTelefone] = useState(null);
   const [api, contextHolder] = notification.useNotification();
   const [permissao, setPermissao] = useState(Notification.permission);
+
+  const [url, setUrl] = useState(
+    "https://gs-agendamentos.vercel.app/Reservations/3"
+  );
+
+  const refreshIframe = () => {
+    setUrl("");
+    setTimeout(() => {
+      setUrl("https://gs-agendamentos.vercel.app/Reservations/3");
+    }, 100);
+  };
 
   const pedirPermissaoNotificacao = async () => {
     if (!("Notification" in window)) {
@@ -860,6 +872,29 @@ const Gerenciamento = () => {
             Novo
           </Button>
           <Table columns={columnsEmail} dataSource={emails} />
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: "Resevas",
+      children: (
+        <div>
+          <Button onClick={refreshIframe}>
+            <RedoOutlined /> Atializar Reservas
+          </Button>
+          <h2>Reservas</h2>
+          <iframe
+            src={url}
+            style={{
+              border: 10,
+              width: "100%",
+              height: "80vh",
+              frameborder: 10,
+              scrolling: "no",
+            }}
+            title="Reservas"
+          />
         </div>
       ),
     },

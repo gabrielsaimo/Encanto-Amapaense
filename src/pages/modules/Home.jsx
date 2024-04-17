@@ -54,6 +54,7 @@ function Home() {
         ...buttonStyle,
         backgroundColor: "#FFF",
         color: "#00a758",
+        fontSize: "5vh",
       },
     }),
     [buttonStyle]
