@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "Menu",
       delivery: "delivery",
+      reservation: "Reservation",
       highlights: "Highlights",
       bannerAlert: "We operate from 11am to 11pm",
       "Camarão no Bafo": "Steamed Shrimp",

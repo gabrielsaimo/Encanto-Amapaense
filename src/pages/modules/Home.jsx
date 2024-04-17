@@ -133,14 +133,14 @@ function Home() {
           "/Delivery",
           styles.button2,
           <ShoppingOutlined />,
-          "Delivery"
+          i18n.t("delivery")
         )}
         <Divider />
         {renderButton(
           "/Reserva",
           styles.button3,
           <FieldTimeOutlined />,
-          "Reservar"
+          i18n.t("reservation")
         )}
         <Divider />
       </div>

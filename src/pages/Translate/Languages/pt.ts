@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "Cardápio",
       delivery: "delivery",
+      reservation: "Reserva",
       highlights: "Destaques",
       Relate_sua_experiência: "Relate sua experiência",
       bannerAlert: "Funcionamos das 11h às 23h",

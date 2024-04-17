@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "菜单",
       delivery: "交货",
+      reservation: "预约",
       highlights: "亮点",
       Relate_sua_experiência: "分享您的经验",
       bannerAlert: "我们的营业时间是上午11点至晚上11点",

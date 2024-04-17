@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "Speisekarte",
       delivery: "Lieferung",
+      reservation: "Reservierung",
       highlights: "Highlights",
       bannerAlert: "Wir sind von 11 bis 23 Uhr geöffnet",
       "Camarão no Bafo": "Gedämpfte Garnelen",

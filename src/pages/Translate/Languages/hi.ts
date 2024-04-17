@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "मेनू",
       delivery: "डिलीवरी",
+      reservation: "रिजर्वेशन",
       highlights: "हाइलाइट्स",
       bannerAlert: "हम 11 बजे से लेकर 11 बजे तक काम करते हैं",
       "Camarão no Bafo": "बाफ में झींगा",

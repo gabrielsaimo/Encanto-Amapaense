@@ -3,6 +3,7 @@ const messages = {
     translations: {
       menu: "Menú",
       delivery: "entrega",
+      reservation: "Reserva",
       highlights: "Destacados",
       bannerAlert: "Operamos de 11 a 23 horas",
       "Camarão no Bafo": "Camarón al Vapor",
