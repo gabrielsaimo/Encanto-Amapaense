@@ -225,13 +225,11 @@ const messages = {
       "Seu Nome": "Tu Nombre",
       Enviar: "Enviar",
       Cancelar: "Cancelar",
-
       Dúvida: "Duda",
       Susgestão: "Sugerencia",
       Reclamação: "Queja",
       Elogio: "Elogio",
       Outros: "Otros",
-
       Entradas: "Entradas",
       "Mujicas e Caldos": "Estofados y Caldos",
       "Peixe ao Molho": "Pescado con Salsa",
